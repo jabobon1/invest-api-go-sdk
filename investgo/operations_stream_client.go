@@ -3,8 +3,8 @@ package investgo
 import (
 	"context"
 
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
-	"github.com/russianinvestments/invest-api-go-sdk/retry"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
+	"github.com/jabobon1/invest-api-go-sdk/retry"
 	"google.golang.org/grpc"
 )
 

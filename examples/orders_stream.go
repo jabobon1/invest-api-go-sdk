@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/russianinvestments/invest-api-go-sdk/investgo"
+	"github.com/jabobon1/invest-api-go-sdk/investgo"
 )
 
 func main() {

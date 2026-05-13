@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/russianinvestments/invest-api-go-sdk/investgo"
+	"github.com/jabobon1/invest-api-go-sdk/investgo"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

@@ -1,4 +1,4 @@
-module github.com/russianinvestments/invest-api-go-sdk
+module github.com/jabobon1/invest-api-go-sdk
 
 go 1.20
 

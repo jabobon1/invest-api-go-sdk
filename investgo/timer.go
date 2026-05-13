@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
 )
 
 // Event - события, START - сигнал к запуску, STOP - сигнал к остановке

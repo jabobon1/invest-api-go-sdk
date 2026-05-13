@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
 )
 
 type UsersServiceClient struct {

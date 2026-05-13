@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
 )
 
 type SignalServiceClient struct {

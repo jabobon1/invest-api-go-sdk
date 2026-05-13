@@ -1,12 +1,12 @@
 # INVEST API Go SDK
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/russianinvestments/invest-api-go-sdk.svg)](https://pkg.go.dev/github.com/russianinvestments/invest-api-go-sdk)
+[![Go Reference](https://pkg.go.dev/badge/github.com/jabobon1/invest-api-go-sdk.svg)](https://pkg.go.dev/github.com/jabobon1/invest-api-go-sdk)
 
 SDK предназначен для упрощения работы с API Инвестиций.
 
 ## Начало работы
 
-    go get github.com/russianinvestments/invest-api-go-sdk
+    go get github.com/jabobon1/invest-api-go-sdk
 
 ### Где взять токен аутентификации?
 
@@ -30,7 +30,7 @@ SDK предназначен для упрощения работы с API Ин�
 
 #### 1. Клонирование репозитория
 
-    git clone https://github.com/russianinvestments/invest-api-go-sdk
+    git clone https://github.com/jabobon1/invest-api-go-sdk
 
 #### 2. Конфигурация SDK
 Перейдите в директорию с примерами
@@ -121,8 +121,8 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/russianinvestments/invest-api-go-sdk/investgo"
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
+	"github.com/jabobon1/invest-api-go-sdk/investgo"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
 	"go.uber.org/zap"
 )
 

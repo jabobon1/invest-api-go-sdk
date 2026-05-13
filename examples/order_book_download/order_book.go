@@ -11,10 +11,10 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/jabobon1/invest-api-go-sdk/investgo"
+	pb "github.com/jabobon1/invest-api-go-sdk/proto"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/russianinvestments/invest-api-go-sdk/investgo"
-	pb "github.com/russianinvestments/invest-api-go-sdk/proto"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
