@@ -17,11 +17,16 @@ type OrderStateStream struct {
 	cancel context.CancelFunc
 
 	states chan *pb.OrderStateStreamResponse_OrderState
+	pings  chan *pb.Ping
 }
 
 // OrderState - Метод возвращает канал для чтения информации о состоянии поручений
 func (s *OrderStateStream) OrderState() <-chan *pb.OrderStateStreamResponse_OrderState {
 	return s.states
+}
+
+func (s *OrderStateStream) Pings() <-chan *pb.Ping {
+	return s.pings
 }
 
 // Listen - метод начинает слушать стрим и отправлять информацию в канал, для получения канала: OrderState()
@@ -45,6 +50,10 @@ func (s *OrderStateStream) Listen() error {
 				switch resp.GetPayload().(type) {
 				case *pb.OrderStateStreamResponse_OrderState_:
 					s.states <- resp.GetOrderState()
+					s.pings <- resp.GetPing()
+				case *pb.OrderStateStreamResponse_Ping:
+					s.ordersClient.logger.Infof("Ping received")
+					s.pings <- resp.GetPing()
 				default:
 					s.ordersClient.logger.Infof("info from order state stream %v", resp.String())
 				}
@@ -60,6 +69,7 @@ func (s *OrderStateStream) restart(_ context.Context, attempt uint, err error) {
 func (s *OrderStateStream) shutdown() {
 	s.ordersClient.logger.Infof("close order state stream")
 	close(s.states)
+	close(s.pings)
 }
 
 // Stop - Завершение работы стрима

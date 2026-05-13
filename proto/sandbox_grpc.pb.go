@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -273,54 +274,68 @@ type SandboxServiceServer interface {
 }
 
 // UnimplementedSandboxServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSandboxServiceServer struct {
-}
+type UnimplementedSandboxServiceServer struct{}
 
 func (UnimplementedSandboxServiceServer) OpenSandboxAccount(context.Context, *OpenSandboxAccountRequest) (*OpenSandboxAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OpenSandboxAccount not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxAccounts not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) CloseSandboxAccount(context.Context, *CloseSandboxAccountRequest) (*CloseSandboxAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseSandboxAccount not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) PostSandboxOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSandboxOrder not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) PostSandboxOrderAsync(context.Context, *PostOrderAsyncRequest) (*PostOrderAsyncResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSandboxOrderAsync not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) ReplaceSandboxOrder(context.Context, *ReplaceOrderRequest) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplaceSandboxOrder not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxOrders not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) CancelSandboxOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelSandboxOrder not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxOrderState(context.Context, *GetOrderStateRequest) (*OrderState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxOrderState not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxPositions(context.Context, *PositionsRequest) (*PositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxPositions not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxOperations(context.Context, *OperationsRequest) (*OperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxOperations not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxOperationsByCursor(context.Context, *GetOperationsByCursorRequest) (*GetOperationsByCursorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxOperationsByCursor not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxPortfolio(context.Context, *PortfolioRequest) (*PortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxPortfolio not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) SandboxPayIn(context.Context, *SandboxPayInRequest) (*SandboxPayInResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SandboxPayIn not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxWithdrawLimits(context.Context, *WithdrawLimitsRequest) (*WithdrawLimitsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxWithdrawLimits not implemented")
 }
+
 func (UnimplementedSandboxServiceServer) GetSandboxMaxLots(context.Context, *GetMaxLotsRequest) (*GetMaxLotsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSandboxMaxLots not implemented")
 }

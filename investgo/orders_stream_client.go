@@ -46,6 +46,7 @@ func (o *OrdersStreamClient) OrderStateStream(accounts []string, pingDelayMills 
 		stream:       nil,
 		ordersClient: o,
 		states:       make(chan *pb.OrderStateStreamResponse_OrderState),
+		pings:        make(chan *pb.Ping),
 		ctx:          ctx,
 		cancel:       cancel,
 	}

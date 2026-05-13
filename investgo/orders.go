@@ -172,7 +172,8 @@ func (os *OrdersServiceClient) GetMaxLots(accountID, instrumentID string, price 
 
 // GetOrderPrice - Метод получения предварительной стоимости для лимитной заявки
 func (os *OrdersServiceClient) GetOrderPrice(accountID, instrumentID string, price *pb.Quotation,
-	direction pb.OrderDirection, quantity int64) (*GetOrderPriceResponse, error) {
+	direction pb.OrderDirection, quantity int64,
+) (*GetOrderPriceResponse, error) {
 	var header, trailer metadata.MD
 	resp, err := os.pbClient.GetOrderPrice(os.ctx, &pb.GetOrderPriceRequest{
 		AccountId:    accountID,

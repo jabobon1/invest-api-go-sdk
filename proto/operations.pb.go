@@ -7,12 +7,13 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,10 +27,10 @@ const (
 type OperationState int32
 
 const (
-	OperationState_OPERATION_STATE_UNSPECIFIED OperationState = 0 //Статус операции не определен.
-	OperationState_OPERATION_STATE_EXECUTED    OperationState = 1 //Исполнена частично или полностью.
-	OperationState_OPERATION_STATE_CANCELED    OperationState = 2 //Отменена.
-	OperationState_OPERATION_STATE_PROGRESS    OperationState = 3 //Исполняется.
+	OperationState_OPERATION_STATE_UNSPECIFIED OperationState = 0 // Статус операции не определен.
+	OperationState_OPERATION_STATE_EXECUTED    OperationState = 1 // Исполнена частично или полностью.
+	OperationState_OPERATION_STATE_CANCELED    OperationState = 2 // Отменена.
+	OperationState_OPERATION_STATE_PROGRESS    OperationState = 3 // Исполняется.
 )
 
 // Enum value maps for OperationState.
@@ -79,54 +80,54 @@ func (OperationState) EnumDescriptor() ([]byte, []int) {
 type OperationType int32
 
 const (
-	OperationType_OPERATION_TYPE_UNSPECIFIED                 OperationType = 0  //Тип операции не определен.
-	OperationType_OPERATION_TYPE_INPUT                       OperationType = 1  //Пополнение брокерского счета.
-	OperationType_OPERATION_TYPE_BOND_TAX                    OperationType = 2  //Удержание НДФЛ по купонам.
-	OperationType_OPERATION_TYPE_OUTPUT_SECURITIES           OperationType = 3  //Вывод ЦБ.
-	OperationType_OPERATION_TYPE_OVERNIGHT                   OperationType = 4  //Доход по сделке РЕПО овернайт.
-	OperationType_OPERATION_TYPE_TAX                         OperationType = 5  //Удержание налога.
-	OperationType_OPERATION_TYPE_BOND_REPAYMENT_FULL         OperationType = 6  //Полное погашение облигаций.
-	OperationType_OPERATION_TYPE_SELL_CARD                   OperationType = 7  //Продажа ЦБ с карты.
-	OperationType_OPERATION_TYPE_DIVIDEND_TAX                OperationType = 8  //Удержание налога по дивидендам.
-	OperationType_OPERATION_TYPE_OUTPUT                      OperationType = 9  //Вывод денежных средств.
-	OperationType_OPERATION_TYPE_BOND_REPAYMENT              OperationType = 10 //Частичное погашение облигаций.
-	OperationType_OPERATION_TYPE_TAX_CORRECTION              OperationType = 11 //Корректировка налога.
-	OperationType_OPERATION_TYPE_SERVICE_FEE                 OperationType = 12 //Удержание комиссии за обслуживание брокерского счета.
-	OperationType_OPERATION_TYPE_BENEFIT_TAX                 OperationType = 13 //Удержание налога за материальную выгоду.
-	OperationType_OPERATION_TYPE_MARGIN_FEE                  OperationType = 14 //Удержание комиссии за непокрытую позицию.
-	OperationType_OPERATION_TYPE_BUY                         OperationType = 15 //Покупка ЦБ.
-	OperationType_OPERATION_TYPE_BUY_CARD                    OperationType = 16 //Покупка ЦБ с карты.
-	OperationType_OPERATION_TYPE_INPUT_SECURITIES            OperationType = 17 //Перевод ценных бумаг из другого депозитария.
-	OperationType_OPERATION_TYPE_SELL_MARGIN                 OperationType = 18 //Продажа в результате Margin-call.
-	OperationType_OPERATION_TYPE_BROKER_FEE                  OperationType = 19 //Удержание комиссии за операцию.
-	OperationType_OPERATION_TYPE_BUY_MARGIN                  OperationType = 20 //Покупка в результате Margin-call.
-	OperationType_OPERATION_TYPE_DIVIDEND                    OperationType = 21 //Выплата дивидендов.
-	OperationType_OPERATION_TYPE_SELL                        OperationType = 22 //Продажа ЦБ.
-	OperationType_OPERATION_TYPE_COUPON                      OperationType = 23 //Выплата купонов.
-	OperationType_OPERATION_TYPE_SUCCESS_FEE                 OperationType = 24 //Удержание комиссии SuccessFee.
-	OperationType_OPERATION_TYPE_DIVIDEND_TRANSFER           OperationType = 25 //Передача дивидендного дохода.
-	OperationType_OPERATION_TYPE_ACCRUING_VARMARGIN          OperationType = 26 //Зачисление вариационной маржи.
-	OperationType_OPERATION_TYPE_WRITING_OFF_VARMARGIN       OperationType = 27 //Списание вариационной маржи.
-	OperationType_OPERATION_TYPE_DELIVERY_BUY                OperationType = 28 //Покупка в рамках экспирации фьючерсного контракта.
-	OperationType_OPERATION_TYPE_DELIVERY_SELL               OperationType = 29 //Продажа в рамках экспирации фьючерсного контракта.
-	OperationType_OPERATION_TYPE_TRACK_MFEE                  OperationType = 30 //Комиссия за управление по счету автоследования.
-	OperationType_OPERATION_TYPE_TRACK_PFEE                  OperationType = 31 //Комиссия за результат по счету автоследования.
-	OperationType_OPERATION_TYPE_TAX_PROGRESSIVE             OperationType = 32 //Удержание налога по ставке 15%.
-	OperationType_OPERATION_TYPE_BOND_TAX_PROGRESSIVE        OperationType = 33 //Удержание налога по купонам по ставке 15%.
-	OperationType_OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE    OperationType = 34 //Удержание налога по дивидендам по ставке 15%.
-	OperationType_OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE     OperationType = 35 //Удержание налога за материальную выгоду по ставке 15%.
-	OperationType_OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE  OperationType = 36 //Корректировка налога по ставке 15%.
-	OperationType_OPERATION_TYPE_TAX_REPO_PROGRESSIVE        OperationType = 37 //Удержание налога за возмещение по сделкам РЕПО по ставке 15%.
-	OperationType_OPERATION_TYPE_TAX_REPO                    OperationType = 38 //Удержание налога за возмещение по сделкам РЕПО.
-	OperationType_OPERATION_TYPE_TAX_REPO_HOLD               OperationType = 39 //Удержание налога по сделкам РЕПО.
-	OperationType_OPERATION_TYPE_TAX_REPO_REFUND             OperationType = 40 //Возврат налога по сделкам РЕПО.
-	OperationType_OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE   OperationType = 41 //Удержание налога по сделкам РЕПО по ставке 15%.
-	OperationType_OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE OperationType = 42 //Возврат налога по сделкам РЕПО по ставке 15%.
-	OperationType_OPERATION_TYPE_DIV_EXT                     OperationType = 43 //Выплата дивидендов на карту.
-	OperationType_OPERATION_TYPE_TAX_CORRECTION_COUPON       OperationType = 44 //Корректировка налога по купонам.
-	OperationType_OPERATION_TYPE_CASH_FEE                    OperationType = 45 //Комиссия за валютный остаток.
-	OperationType_OPERATION_TYPE_OUT_FEE                     OperationType = 46 //Комиссия за вывод валюты с брокерского счета.
-	OperationType_OPERATION_TYPE_OUT_STAMP_DUTY              OperationType = 47 //Гербовый сбор.
+	OperationType_OPERATION_TYPE_UNSPECIFIED                 OperationType = 0  // Тип операции не определен.
+	OperationType_OPERATION_TYPE_INPUT                       OperationType = 1  // Пополнение брокерского счета.
+	OperationType_OPERATION_TYPE_BOND_TAX                    OperationType = 2  // Удержание НДФЛ по купонам.
+	OperationType_OPERATION_TYPE_OUTPUT_SECURITIES           OperationType = 3  // Вывод ЦБ.
+	OperationType_OPERATION_TYPE_OVERNIGHT                   OperationType = 4  // Доход по сделке РЕПО овернайт.
+	OperationType_OPERATION_TYPE_TAX                         OperationType = 5  // Удержание налога.
+	OperationType_OPERATION_TYPE_BOND_REPAYMENT_FULL         OperationType = 6  // Полное погашение облигаций.
+	OperationType_OPERATION_TYPE_SELL_CARD                   OperationType = 7  // Продажа ЦБ с карты.
+	OperationType_OPERATION_TYPE_DIVIDEND_TAX                OperationType = 8  // Удержание налога по дивидендам.
+	OperationType_OPERATION_TYPE_OUTPUT                      OperationType = 9  // Вывод денежных средств.
+	OperationType_OPERATION_TYPE_BOND_REPAYMENT              OperationType = 10 // Частичное погашение облигаций.
+	OperationType_OPERATION_TYPE_TAX_CORRECTION              OperationType = 11 // Корректировка налога.
+	OperationType_OPERATION_TYPE_SERVICE_FEE                 OperationType = 12 // Удержание комиссии за обслуживание брокерского счета.
+	OperationType_OPERATION_TYPE_BENEFIT_TAX                 OperationType = 13 // Удержание налога за материальную выгоду.
+	OperationType_OPERATION_TYPE_MARGIN_FEE                  OperationType = 14 // Удержание комиссии за непокрытую позицию.
+	OperationType_OPERATION_TYPE_BUY                         OperationType = 15 // Покупка ЦБ.
+	OperationType_OPERATION_TYPE_BUY_CARD                    OperationType = 16 // Покупка ЦБ с карты.
+	OperationType_OPERATION_TYPE_INPUT_SECURITIES            OperationType = 17 // Перевод ценных бумаг из другого депозитария.
+	OperationType_OPERATION_TYPE_SELL_MARGIN                 OperationType = 18 // Продажа в результате Margin-call.
+	OperationType_OPERATION_TYPE_BROKER_FEE                  OperationType = 19 // Удержание комиссии за операцию.
+	OperationType_OPERATION_TYPE_BUY_MARGIN                  OperationType = 20 // Покупка в результате Margin-call.
+	OperationType_OPERATION_TYPE_DIVIDEND                    OperationType = 21 // Выплата дивидендов.
+	OperationType_OPERATION_TYPE_SELL                        OperationType = 22 // Продажа ЦБ.
+	OperationType_OPERATION_TYPE_COUPON                      OperationType = 23 // Выплата купонов.
+	OperationType_OPERATION_TYPE_SUCCESS_FEE                 OperationType = 24 // Удержание комиссии SuccessFee.
+	OperationType_OPERATION_TYPE_DIVIDEND_TRANSFER           OperationType = 25 // Передача дивидендного дохода.
+	OperationType_OPERATION_TYPE_ACCRUING_VARMARGIN          OperationType = 26 // Зачисление вариационной маржи.
+	OperationType_OPERATION_TYPE_WRITING_OFF_VARMARGIN       OperationType = 27 // Списание вариационной маржи.
+	OperationType_OPERATION_TYPE_DELIVERY_BUY                OperationType = 28 // Покупка в рамках экспирации фьючерсного контракта.
+	OperationType_OPERATION_TYPE_DELIVERY_SELL               OperationType = 29 // Продажа в рамках экспирации фьючерсного контракта.
+	OperationType_OPERATION_TYPE_TRACK_MFEE                  OperationType = 30 // Комиссия за управление по счету автоследования.
+	OperationType_OPERATION_TYPE_TRACK_PFEE                  OperationType = 31 // Комиссия за результат по счету автоследования.
+	OperationType_OPERATION_TYPE_TAX_PROGRESSIVE             OperationType = 32 // Удержание налога по ставке 15%.
+	OperationType_OPERATION_TYPE_BOND_TAX_PROGRESSIVE        OperationType = 33 // Удержание налога по купонам по ставке 15%.
+	OperationType_OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE    OperationType = 34 // Удержание налога по дивидендам по ставке 15%.
+	OperationType_OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE     OperationType = 35 // Удержание налога за материальную выгоду по ставке 15%.
+	OperationType_OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE  OperationType = 36 // Корректировка налога по ставке 15%.
+	OperationType_OPERATION_TYPE_TAX_REPO_PROGRESSIVE        OperationType = 37 // Удержание налога за возмещение по сделкам РЕПО по ставке 15%.
+	OperationType_OPERATION_TYPE_TAX_REPO                    OperationType = 38 // Удержание налога за возмещение по сделкам РЕПО.
+	OperationType_OPERATION_TYPE_TAX_REPO_HOLD               OperationType = 39 // Удержание налога по сделкам РЕПО.
+	OperationType_OPERATION_TYPE_TAX_REPO_REFUND             OperationType = 40 // Возврат налога по сделкам РЕПО.
+	OperationType_OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE   OperationType = 41 // Удержание налога по сделкам РЕПО по ставке 15%.
+	OperationType_OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE OperationType = 42 // Возврат налога по сделкам РЕПО по ставке 15%.
+	OperationType_OPERATION_TYPE_DIV_EXT                     OperationType = 43 // Выплата дивидендов на карту.
+	OperationType_OPERATION_TYPE_TAX_CORRECTION_COUPON       OperationType = 44 // Корректировка налога по купонам.
+	OperationType_OPERATION_TYPE_CASH_FEE                    OperationType = 45 // Комиссия за валютный остаток.
+	OperationType_OPERATION_TYPE_OUT_FEE                     OperationType = 46 // Комиссия за вывод валюты с брокерского счета.
+	OperationType_OPERATION_TYPE_OUT_STAMP_DUTY              OperationType = 47 // Гербовый сбор.
 	OperationType_OPERATION_TYPE_OUTPUT_SWIFT                OperationType = 50 //	SWIFT-перевод.
 	OperationType_OPERATION_TYPE_INPUT_SWIFT                 OperationType = 51 //	SWIFT-перевод.
 	OperationType_OPERATION_TYPE_OUTPUT_ACQUIRING            OperationType = 53 //  Перевод на карту.
@@ -309,10 +310,10 @@ func (OperationType) EnumDescriptor() ([]byte, []int) {
 type PortfolioSubscriptionStatus int32
 
 const (
-	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED       PortfolioSubscriptionStatus = 0 //Тип не определен.
-	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS           PortfolioSubscriptionStatus = 1 //Успешно.
-	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND PortfolioSubscriptionStatus = 2 //Счет не найден или недостаточно прав.
-	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR    PortfolioSubscriptionStatus = 3 //Произошла ошибка.
+	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED       PortfolioSubscriptionStatus = 0 // Тип не определен.
+	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS           PortfolioSubscriptionStatus = 1 // Успешно.
+	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND PortfolioSubscriptionStatus = 2 // Счет не найден или недостаточно прав.
+	PortfolioSubscriptionStatus_PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR    PortfolioSubscriptionStatus = 3 // Произошла ошибка.
 )
 
 // Enum value maps for PortfolioSubscriptionStatus.
@@ -362,10 +363,10 @@ func (PortfolioSubscriptionStatus) EnumDescriptor() ([]byte, []int) {
 type PositionsAccountSubscriptionStatus int32
 
 const (
-	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED       PositionsAccountSubscriptionStatus = 0 //Тип не определен.
-	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_SUCCESS           PositionsAccountSubscriptionStatus = 1 //Успешно.
-	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND PositionsAccountSubscriptionStatus = 2 //Счет не найден или недостаточно прав.
-	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR    PositionsAccountSubscriptionStatus = 3 //Произошла ошибка.
+	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED       PositionsAccountSubscriptionStatus = 0 // Тип не определен.
+	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_SUCCESS           PositionsAccountSubscriptionStatus = 1 // Успешно.
+	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND PositionsAccountSubscriptionStatus = 2 // Счет не найден или недостаточно прав.
+	PositionsAccountSubscriptionStatus_POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR    PositionsAccountSubscriptionStatus = 3 // Произошла ошибка.
 )
 
 // Enum value maps for PositionsAccountSubscriptionStatus.
@@ -414,9 +415,9 @@ func (PositionsAccountSubscriptionStatus) EnumDescriptor() ([]byte, []int) {
 type PortfolioRequest_CurrencyRequest int32
 
 const (
-	PortfolioRequest_RUB PortfolioRequest_CurrencyRequest = 0 //Рубли
-	PortfolioRequest_USD PortfolioRequest_CurrencyRequest = 1 //Доллары
-	PortfolioRequest_EUR PortfolioRequest_CurrencyRequest = 2 //Евро
+	PortfolioRequest_RUB PortfolioRequest_CurrencyRequest = 0 // Рубли
+	PortfolioRequest_USD PortfolioRequest_CurrencyRequest = 1 // Доллары
+	PortfolioRequest_EUR PortfolioRequest_CurrencyRequest = 2 // Евро
 )
 
 // Enum value maps for PortfolioRequest_CurrencyRequest.
@@ -466,11 +467,11 @@ type OperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                         //Идентификатор счета клиента.
-	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                              //Начало периода по UTC.
-	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                  //Окончание периода по UTC.
-	State     *OperationState        `protobuf:"varint,4,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState,oneof" json:"state,omitempty"` //Статус запрашиваемых операций.
-	Figi      *string                `protobuf:"bytes,5,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                              //FIGI-идентификатор инструмента для фильтрации.
+	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                         // Идентификатор счета клиента.
+	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                              // Начало периода по UTC.
+	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                  // Окончание периода по UTC.
+	State     *OperationState        `protobuf:"varint,4,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState,oneof" json:"state,omitempty"` // Статус запрашиваемых операций.
+	Figi      *string                `protobuf:"bytes,5,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                              // FIGI-идентификатор инструмента для фильтрации.
 }
 
 func (x *OperationsRequest) Reset() {
@@ -546,7 +547,7 @@ type OperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Operations []*Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"` //Массив операций.
+	Operations []*Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"` // Массив операций.
 }
 
 func (x *OperationsResponse) Reset() {
@@ -594,24 +595,24 @@ type Operation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                                                                       //Идентификатор операции.
-	ParentOperationId string                 `protobuf:"bytes,2,opt,name=parent_operation_id,json=parentOperationId,proto3" json:"parent_operation_id,omitempty"`                                              //Идентификатор родительской операции.
-	Currency          string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                           //Валюта операции.
-	Payment           *MoneyValue            `protobuf:"bytes,4,opt,name=payment,proto3" json:"payment,omitempty"`                                                                                             //Сумма операции.
-	Price             *MoneyValue            `protobuf:"bytes,5,opt,name=price,proto3" json:"price,omitempty"`                                                                                                 //Цена операции за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
-	State             OperationState         `protobuf:"varint,6,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState" json:"state,omitempty"`                                      //Статус операции.
-	Quantity          int64                  `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                          //Количество единиц инструмента.
-	QuantityRest      int64                  `protobuf:"varint,8,opt,name=quantity_rest,json=quantityRest,proto3" json:"quantity_rest,omitempty"`                                                              //Неисполненный остаток по сделке.
-	Figi              string                 `protobuf:"bytes,9,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                   //FIGI-идентификатор инструмента, связанного с операцией.
-	InstrumentType    string                 `protobuf:"bytes,10,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                        //Тип инструмента. Возможные значения: <br/><br/>`bond` — облигация; <br/>`share` — акция; <br/>`currency` — валюта; <br/>`etf` — фонд; <br/>`futures` — фьючерс.
-	Date              *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=date,proto3" json:"date,omitempty"`                                                                                                  //Дата и время операции в формате часовом поясе UTC.
-	Type              string                 `protobuf:"bytes,12,opt,name=type,proto3" json:"type,omitempty"`                                                                                                  //Текстовое описание типа операции.
-	OperationType     OperationType          `protobuf:"varint,13,opt,name=operation_type,json=operationType,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"operation_type,omitempty"` //Тип операции.
-	Trades            []*OperationTrade      `protobuf:"bytes,14,rep,name=trades,proto3" json:"trades,omitempty"`                                                                                              //Массив сделок.
-	AssetUid          string                 `protobuf:"bytes,16,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                          //Идентификатор актива
-	PositionUid       string                 `protobuf:"bytes,17,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                 //Уникальный идентификатор позиции.
-	InstrumentUid     string                 `protobuf:"bytes,18,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                           //Уникальный идентификатор инструмента.
-	ChildOperations   []*ChildOperationItem  `protobuf:"bytes,19,rep,name=child_operations,json=childOperations,proto3" json:"child_operations,omitempty"`                                                     //Массив дочерних операций.
+	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                                                                       // Идентификатор операции.
+	ParentOperationId string                 `protobuf:"bytes,2,opt,name=parent_operation_id,json=parentOperationId,proto3" json:"parent_operation_id,omitempty"`                                              // Идентификатор родительской операции.
+	Currency          string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                           // Валюта операции.
+	Payment           *MoneyValue            `protobuf:"bytes,4,opt,name=payment,proto3" json:"payment,omitempty"`                                                                                             // Сумма операции.
+	Price             *MoneyValue            `protobuf:"bytes,5,opt,name=price,proto3" json:"price,omitempty"`                                                                                                 // Цена операции за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
+	State             OperationState         `protobuf:"varint,6,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState" json:"state,omitempty"`                                      // Статус операции.
+	Quantity          int64                  `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                          // Количество единиц инструмента.
+	QuantityRest      int64                  `protobuf:"varint,8,opt,name=quantity_rest,json=quantityRest,proto3" json:"quantity_rest,omitempty"`                                                              // Неисполненный остаток по сделке.
+	Figi              string                 `protobuf:"bytes,9,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                   // FIGI-идентификатор инструмента, связанного с операцией.
+	InstrumentType    string                 `protobuf:"bytes,10,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                        // Тип инструмента. Возможные значения: <br/><br/>`bond` — облигация; <br/>`share` — акция; <br/>`currency` — валюта; <br/>`etf` — фонд; <br/>`futures` — фьючерс.
+	Date              *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=date,proto3" json:"date,omitempty"`                                                                                                  // Дата и время операции в формате часовом поясе UTC.
+	Type              string                 `protobuf:"bytes,12,opt,name=type,proto3" json:"type,omitempty"`                                                                                                  // Текстовое описание типа операции.
+	OperationType     OperationType          `protobuf:"varint,13,opt,name=operation_type,json=operationType,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"operation_type,omitempty"` // Тип операции.
+	Trades            []*OperationTrade      `protobuf:"bytes,14,rep,name=trades,proto3" json:"trades,omitempty"`                                                                                              // Массив сделок.
+	AssetUid          string                 `protobuf:"bytes,16,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                          // Идентификатор актива
+	PositionUid       string                 `protobuf:"bytes,17,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                 // Уникальный идентификатор позиции.
+	InstrumentUid     string                 `protobuf:"bytes,18,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                           // Уникальный идентификатор инструмента.
+	ChildOperations   []*ChildOperationItem  `protobuf:"bytes,19,rep,name=child_operations,json=childOperations,proto3" json:"child_operations,omitempty"`                                                     // Массив дочерних операций.
 }
 
 func (x *Operation) Reset() {
@@ -778,10 +779,10 @@ type OperationTrade struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TradeId  string                 `protobuf:"bytes,1,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`    //Идентификатор сделки.
-	DateTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"` //Дата и время сделки по UTC.
-	Quantity int64                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                //Количество инструментов.
-	Price    *MoneyValue            `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"`                       //Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
+	TradeId  string                 `protobuf:"bytes,1,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`    // Идентификатор сделки.
+	DateTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"` // Дата и время сделки по UTC.
+	Quantity int64                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                // Количество инструментов.
+	Price    *MoneyValue            `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"`                       // Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
 }
 
 func (x *OperationTrade) Reset() {
@@ -850,8 +851,8 @@ type PortfolioRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string                            `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                 //Идентификатор счета пользователя.
-	Currency  *PortfolioRequest_CurrencyRequest `protobuf:"varint,2,opt,name=currency,proto3,enum=tinkoff.public.invest.api.contract.v1.PortfolioRequest_CurrencyRequest,oneof" json:"currency,omitempty"` //Валюта, в которой нужно рассчитать портфель.
+	AccountId string                            `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                 // Идентификатор счета пользователя.
+	Currency  *PortfolioRequest_CurrencyRequest `protobuf:"varint,2,opt,name=currency,proto3,enum=tinkoff.public.invest.api.contract.v1.PortfolioRequest_CurrencyRequest,oneof" json:"currency,omitempty"` // Валюта, в которой нужно рассчитать портфель.
 }
 
 func (x *PortfolioRequest) Reset() {
@@ -906,20 +907,20 @@ type PortfolioResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TotalAmountShares     *MoneyValue                 `protobuf:"bytes,1,opt,name=total_amount_shares,json=totalAmountShares,proto3" json:"total_amount_shares,omitempty"`             //Общая стоимость акций в портфеле.
-	TotalAmountBonds      *MoneyValue                 `protobuf:"bytes,2,opt,name=total_amount_bonds,json=totalAmountBonds,proto3" json:"total_amount_bonds,omitempty"`                //Общая стоимость облигаций в портфеле.
-	TotalAmountEtf        *MoneyValue                 `protobuf:"bytes,3,opt,name=total_amount_etf,json=totalAmountEtf,proto3" json:"total_amount_etf,omitempty"`                      //Общая стоимость фондов в портфеле.
-	TotalAmountCurrencies *MoneyValue                 `protobuf:"bytes,4,opt,name=total_amount_currencies,json=totalAmountCurrencies,proto3" json:"total_amount_currencies,omitempty"` //Общая стоимость валют в портфеле.
-	TotalAmountFutures    *MoneyValue                 `protobuf:"bytes,5,opt,name=total_amount_futures,json=totalAmountFutures,proto3" json:"total_amount_futures,omitempty"`          //Общая стоимость фьючерсов в портфеле.
-	ExpectedYield         *Quotation                  `protobuf:"bytes,6,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                           //Текущая относительная доходность портфеля в %.
-	Positions             []*PortfolioPosition        `protobuf:"bytes,7,rep,name=positions,proto3" json:"positions,omitempty"`                                                        //Список позиций портфеля.
-	AccountId             string                      `protobuf:"bytes,8,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                       //Идентификатор счета пользователя.
-	TotalAmountOptions    *MoneyValue                 `protobuf:"bytes,9,opt,name=total_amount_options,json=totalAmountOptions,proto3" json:"total_amount_options,omitempty"`          //Общая стоимость опционов в портфеле.
-	TotalAmountSp         *MoneyValue                 `protobuf:"bytes,10,opt,name=total_amount_sp,json=totalAmountSp,proto3" json:"total_amount_sp,omitempty"`                        //Общая стоимость структурных нот в портфеле.
-	TotalAmountPortfolio  *MoneyValue                 `protobuf:"bytes,11,opt,name=total_amount_portfolio,json=totalAmountPortfolio,proto3" json:"total_amount_portfolio,omitempty"`   //Общая стоимость портфеля.
-	VirtualPositions      []*VirtualPortfolioPosition `protobuf:"bytes,12,rep,name=virtual_positions,json=virtualPositions,proto3" json:"virtual_positions,omitempty"`                 //Массив виртуальных позиций портфеля.
+	TotalAmountShares     *MoneyValue                 `protobuf:"bytes,1,opt,name=total_amount_shares,json=totalAmountShares,proto3" json:"total_amount_shares,omitempty"`             // Общая стоимость акций в портфеле.
+	TotalAmountBonds      *MoneyValue                 `protobuf:"bytes,2,opt,name=total_amount_bonds,json=totalAmountBonds,proto3" json:"total_amount_bonds,omitempty"`                // Общая стоимость облигаций в портфеле.
+	TotalAmountEtf        *MoneyValue                 `protobuf:"bytes,3,opt,name=total_amount_etf,json=totalAmountEtf,proto3" json:"total_amount_etf,omitempty"`                      // Общая стоимость фондов в портфеле.
+	TotalAmountCurrencies *MoneyValue                 `protobuf:"bytes,4,opt,name=total_amount_currencies,json=totalAmountCurrencies,proto3" json:"total_amount_currencies,omitempty"` // Общая стоимость валют в портфеле.
+	TotalAmountFutures    *MoneyValue                 `protobuf:"bytes,5,opt,name=total_amount_futures,json=totalAmountFutures,proto3" json:"total_amount_futures,omitempty"`          // Общая стоимость фьючерсов в портфеле.
+	ExpectedYield         *Quotation                  `protobuf:"bytes,6,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                           // Текущая относительная доходность портфеля в %.
+	Positions             []*PortfolioPosition        `protobuf:"bytes,7,rep,name=positions,proto3" json:"positions,omitempty"`                                                        // Список позиций портфеля.
+	AccountId             string                      `protobuf:"bytes,8,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                       // Идентификатор счета пользователя.
+	TotalAmountOptions    *MoneyValue                 `protobuf:"bytes,9,opt,name=total_amount_options,json=totalAmountOptions,proto3" json:"total_amount_options,omitempty"`          // Общая стоимость опционов в портфеле.
+	TotalAmountSp         *MoneyValue                 `protobuf:"bytes,10,opt,name=total_amount_sp,json=totalAmountSp,proto3" json:"total_amount_sp,omitempty"`                        // Общая стоимость структурных нот в портфеле.
+	TotalAmountPortfolio  *MoneyValue                 `protobuf:"bytes,11,opt,name=total_amount_portfolio,json=totalAmountPortfolio,proto3" json:"total_amount_portfolio,omitempty"`   // Общая стоимость портфеля.
+	VirtualPositions      []*VirtualPortfolioPosition `protobuf:"bytes,12,rep,name=virtual_positions,json=virtualPositions,proto3" json:"virtual_positions,omitempty"`                 // Массив виртуальных позиций портфеля.
 	DailyYield            *MoneyValue                 `protobuf:"bytes,15,opt,name=daily_yield,json=dailyYield,proto3" json:"daily_yield,omitempty"`                                   // Рассчитанная доходность портфеля за день в рублях.
-	DailyYieldRelative    *Quotation                  `protobuf:"bytes,16,opt,name=daily_yield_relative,json=dailyYieldRelative,proto3" json:"daily_yield_relative,omitempty"`         //Относительная доходность в день в %.
+	DailyYieldRelative    *Quotation                  `protobuf:"bytes,16,opt,name=daily_yield_relative,json=dailyYieldRelative,proto3" json:"daily_yield_relative,omitempty"`         // Относительная доходность в день в %.
 }
 
 func (x *PortfolioResponse) Reset() {
@@ -1058,7 +1059,7 @@ type PositionsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Идентификатор счета пользователя.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Идентификатор счета пользователя.
 }
 
 func (x *PositionsRequest) Reset() {
@@ -1106,13 +1107,13 @@ type PositionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Money                   []*MoneyValue          `protobuf:"bytes,1,rep,name=money,proto3" json:"money,omitempty"`                                                                         //Массив валютных позиций портфеля.
-	Blocked                 []*MoneyValue          `protobuf:"bytes,2,rep,name=blocked,proto3" json:"blocked,omitempty"`                                                                     //Массив заблокированных валютных позиций портфеля.
-	Securities              []*PositionsSecurities `protobuf:"bytes,3,rep,name=securities,proto3" json:"securities,omitempty"`                                                               //Список ценно-бумажных позиций портфеля.
-	LimitsLoadingInProgress bool                   `protobuf:"varint,4,opt,name=limits_loading_in_progress,json=limitsLoadingInProgress,proto3" json:"limits_loading_in_progress,omitempty"` //Признак идущей выгрузки лимитов в данный момент.
-	Futures                 []*PositionsFutures    `protobuf:"bytes,5,rep,name=futures,proto3" json:"futures,omitempty"`                                                                     //Список фьючерсов портфеля.
-	Options                 []*PositionsOptions    `protobuf:"bytes,6,rep,name=options,proto3" json:"options,omitempty"`                                                                     //Список опционов портфеля.
-	AccountId               string                 `protobuf:"bytes,15,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                               //Идентификатор счёта пользователя.
+	Money                   []*MoneyValue          `protobuf:"bytes,1,rep,name=money,proto3" json:"money,omitempty"`                                                                         // Массив валютных позиций портфеля.
+	Blocked                 []*MoneyValue          `protobuf:"bytes,2,rep,name=blocked,proto3" json:"blocked,omitempty"`                                                                     // Массив заблокированных валютных позиций портфеля.
+	Securities              []*PositionsSecurities `protobuf:"bytes,3,rep,name=securities,proto3" json:"securities,omitempty"`                                                               // Список ценно-бумажных позиций портфеля.
+	LimitsLoadingInProgress bool                   `protobuf:"varint,4,opt,name=limits_loading_in_progress,json=limitsLoadingInProgress,proto3" json:"limits_loading_in_progress,omitempty"` // Признак идущей выгрузки лимитов в данный момент.
+	Futures                 []*PositionsFutures    `protobuf:"bytes,5,rep,name=futures,proto3" json:"futures,omitempty"`                                                                     // Список фьючерсов портфеля.
+	Options                 []*PositionsOptions    `protobuf:"bytes,6,rep,name=options,proto3" json:"options,omitempty"`                                                                     // Список опционов портфеля.
+	AccountId               string                 `protobuf:"bytes,15,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                               // Идентификатор счёта пользователя.
 }
 
 func (x *PositionsResponse) Reset() {
@@ -1202,7 +1203,7 @@ type WithdrawLimitsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Идентификатор счета пользователя.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Идентификатор счета пользователя.
 }
 
 func (x *WithdrawLimitsRequest) Reset() {
@@ -1250,9 +1251,9 @@ type WithdrawLimitsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Money            []*MoneyValue `protobuf:"bytes,1,rep,name=money,proto3" json:"money,omitempty"`                                               //Массив валютных позиций портфеля.
-	Blocked          []*MoneyValue `protobuf:"bytes,2,rep,name=blocked,proto3" json:"blocked,omitempty"`                                           //Массив заблокированных валютных позиций портфеля.
-	BlockedGuarantee []*MoneyValue `protobuf:"bytes,3,rep,name=blocked_guarantee,json=blockedGuarantee,proto3" json:"blocked_guarantee,omitempty"` //Заблокировано под гарантийное обеспечение фьючерсов.
+	Money            []*MoneyValue `protobuf:"bytes,1,rep,name=money,proto3" json:"money,omitempty"`                                               // Массив валютных позиций портфеля.
+	Blocked          []*MoneyValue `protobuf:"bytes,2,rep,name=blocked,proto3" json:"blocked,omitempty"`                                           // Массив заблокированных валютных позиций портфеля.
+	BlockedGuarantee []*MoneyValue `protobuf:"bytes,3,rep,name=blocked_guarantee,json=blockedGuarantee,proto3" json:"blocked_guarantee,omitempty"` // Заблокировано под гарантийное обеспечение фьючерсов.
 }
 
 func (x *WithdrawLimitsResponse) Reset() {
@@ -1314,26 +1315,26 @@ type PortfolioPosition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi                 string      `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                               //FIGI-идентификатор инструмента.
-	InstrumentType       string      `protobuf:"bytes,2,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                     //Тип инструмента.
-	Quantity             *Quotation  `protobuf:"bytes,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                       //Количество инструмента в портфеле в штуках.
-	AveragePositionPrice *MoneyValue `protobuf:"bytes,4,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"` //Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды.
-	ExpectedYield        *Quotation  `protobuf:"bytes,5,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                        //Текущая рассчитанная доходность позиции.
+	Figi                 string      `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                               // FIGI-идентификатор инструмента.
+	InstrumentType       string      `protobuf:"bytes,2,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                     // Тип инструмента.
+	Quantity             *Quotation  `protobuf:"bytes,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                       // Количество инструмента в портфеле в штуках.
+	AveragePositionPrice *MoneyValue `protobuf:"bytes,4,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"` // Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды.
+	ExpectedYield        *Quotation  `protobuf:"bytes,5,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                        // Текущая рассчитанная доходность позиции.
 	CurrentNkd           *MoneyValue `protobuf:"bytes,6,opt,name=current_nkd,json=currentNkd,proto3" json:"current_nkd,omitempty"`                                 // Текущий НКД.
 	// Deprecated: Marked as deprecated in operations.proto.
 	AveragePositionPricePt   *Quotation  `protobuf:"bytes,7,opt,name=average_position_price_pt,json=averagePositionPricePt,proto3" json:"average_position_price_pt,omitempty"`       // Deprecated Средняя цена позиции в пунктах (для фьючерсов). Для пересчета возможна задержка до одной секунды.
-	CurrentPrice             *MoneyValue `protobuf:"bytes,8,opt,name=current_price,json=currentPrice,proto3" json:"current_price,omitempty"`                                         //Текущая цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
-	AveragePositionPriceFifo *MoneyValue `protobuf:"bytes,9,opt,name=average_position_price_fifo,json=averagePositionPriceFifo,proto3" json:"average_position_price_fifo,omitempty"` //Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды.
+	CurrentPrice             *MoneyValue `protobuf:"bytes,8,opt,name=current_price,json=currentPrice,proto3" json:"current_price,omitempty"`                                         // Текущая цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
+	AveragePositionPriceFifo *MoneyValue `protobuf:"bytes,9,opt,name=average_position_price_fifo,json=averagePositionPriceFifo,proto3" json:"average_position_price_fifo,omitempty"` // Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды.
 	// Deprecated: Marked as deprecated in operations.proto.
-	QuantityLots      *Quotation  `protobuf:"bytes,10,opt,name=quantity_lots,json=quantityLots,proto3" json:"quantity_lots,omitempty"`                  //Deprecated Количество лотов в портфеле.
-	Blocked           bool        `protobuf:"varint,21,opt,name=blocked,proto3" json:"blocked,omitempty"`                                               //Заблокировано на бирже.
-	BlockedLots       *Quotation  `protobuf:"bytes,22,opt,name=blocked_lots,json=blockedLots,proto3" json:"blocked_lots,omitempty"`                     //Количество бумаг, заблокированных выставленными заявками.
-	PositionUid       string      `protobuf:"bytes,24,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                     //Уникальный идентификатор позиции.
-	InstrumentUid     string      `protobuf:"bytes,25,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`               //Уникальный идентификатор инструмента.
-	VarMargin         *MoneyValue `protobuf:"bytes,26,opt,name=var_margin,json=varMargin,proto3" json:"var_margin,omitempty"`                           //Вариационная маржа.
-	ExpectedYieldFifo *Quotation  `protobuf:"bytes,27,opt,name=expected_yield_fifo,json=expectedYieldFifo,proto3" json:"expected_yield_fifo,omitempty"` //Текущая рассчитанная доходность позиции.
+	QuantityLots      *Quotation  `protobuf:"bytes,10,opt,name=quantity_lots,json=quantityLots,proto3" json:"quantity_lots,omitempty"`                  // Deprecated Количество лотов в портфеле.
+	Blocked           bool        `protobuf:"varint,21,opt,name=blocked,proto3" json:"blocked,omitempty"`                                               // Заблокировано на бирже.
+	BlockedLots       *Quotation  `protobuf:"bytes,22,opt,name=blocked_lots,json=blockedLots,proto3" json:"blocked_lots,omitempty"`                     // Количество бумаг, заблокированных выставленными заявками.
+	PositionUid       string      `protobuf:"bytes,24,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                     // Уникальный идентификатор позиции.
+	InstrumentUid     string      `protobuf:"bytes,25,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`               // Уникальный идентификатор инструмента.
+	VarMargin         *MoneyValue `protobuf:"bytes,26,opt,name=var_margin,json=varMargin,proto3" json:"var_margin,omitempty"`                           // Вариационная маржа.
+	ExpectedYieldFifo *Quotation  `protobuf:"bytes,27,opt,name=expected_yield_fifo,json=expectedYieldFifo,proto3" json:"expected_yield_fifo,omitempty"` // Текущая рассчитанная доходность позиции.
 	DailyYield        *MoneyValue `protobuf:"bytes,31,opt,name=daily_yield,json=dailyYield,proto3" json:"daily_yield,omitempty"`                        // Рассчитанная доходность портфеля за день.
-	Ticker            string      `protobuf:"bytes,32,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                  //Тикер инструмента.
+	Ticker            string      `protobuf:"bytes,32,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                  // Тикер инструмента.
 }
 
 func (x *PortfolioPosition) Reset() {
@@ -1501,19 +1502,19 @@ type VirtualPortfolioPosition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PositionUid              string                 `protobuf:"bytes,1,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                             //Уникальный идентификатор позиции.
-	InstrumentUid            string                 `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                       //Уникальный идентификатор инструмента.
-	Figi                     string                 `protobuf:"bytes,3,opt,name=figi,proto3" json:"figi,omitempty"`                                                                              //FIGI-идентификатор инструмента.
-	InstrumentType           string                 `protobuf:"bytes,4,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                    //Тип инструмента.
-	Quantity                 *Quotation             `protobuf:"bytes,5,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                      //Количество инструмента в портфеле в штуках.
-	AveragePositionPrice     *MoneyValue            `protobuf:"bytes,6,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"`                //Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды.
-	ExpectedYield            *Quotation             `protobuf:"bytes,7,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                                       //Текущая рассчитанная доходность позиции.
-	ExpectedYieldFifo        *Quotation             `protobuf:"bytes,8,opt,name=expected_yield_fifo,json=expectedYieldFifo,proto3" json:"expected_yield_fifo,omitempty"`                         //Текущая рассчитанная доходность позиции.
-	ExpireDate               *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expire_date,json=expireDate,proto3" json:"expire_date,omitempty"`                                                //Дата, до которой нужно продать виртуальные бумаги. После этой даты виртуальная позиция «сгораетт».
-	CurrentPrice             *MoneyValue            `protobuf:"bytes,10,opt,name=current_price,json=currentPrice,proto3" json:"current_price,omitempty"`                                         //Текущая цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
-	AveragePositionPriceFifo *MoneyValue            `protobuf:"bytes,11,opt,name=average_position_price_fifo,json=averagePositionPriceFifo,proto3" json:"average_position_price_fifo,omitempty"` //Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды.
+	PositionUid              string                 `protobuf:"bytes,1,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                             // Уникальный идентификатор позиции.
+	InstrumentUid            string                 `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                       // Уникальный идентификатор инструмента.
+	Figi                     string                 `protobuf:"bytes,3,opt,name=figi,proto3" json:"figi,omitempty"`                                                                              // FIGI-идентификатор инструмента.
+	InstrumentType           string                 `protobuf:"bytes,4,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                    // Тип инструмента.
+	Quantity                 *Quotation             `protobuf:"bytes,5,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                      // Количество инструмента в портфеле в штуках.
+	AveragePositionPrice     *MoneyValue            `protobuf:"bytes,6,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"`                // Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды.
+	ExpectedYield            *Quotation             `protobuf:"bytes,7,opt,name=expected_yield,json=expectedYield,proto3" json:"expected_yield,omitempty"`                                       // Текущая рассчитанная доходность позиции.
+	ExpectedYieldFifo        *Quotation             `protobuf:"bytes,8,opt,name=expected_yield_fifo,json=expectedYieldFifo,proto3" json:"expected_yield_fifo,omitempty"`                         // Текущая рассчитанная доходность позиции.
+	ExpireDate               *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expire_date,json=expireDate,proto3" json:"expire_date,omitempty"`                                                // Дата, до которой нужно продать виртуальные бумаги. После этой даты виртуальная позиция «сгораетт».
+	CurrentPrice             *MoneyValue            `protobuf:"bytes,10,opt,name=current_price,json=currentPrice,proto3" json:"current_price,omitempty"`                                         // Текущая цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента.
+	AveragePositionPriceFifo *MoneyValue            `protobuf:"bytes,11,opt,name=average_position_price_fifo,json=averagePositionPriceFifo,proto3" json:"average_position_price_fifo,omitempty"` // Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды.
 	DailyYield               *MoneyValue            `protobuf:"bytes,31,opt,name=daily_yield,json=dailyYield,proto3" json:"daily_yield,omitempty"`                                               // Рассчитанная доходность портфеля за день.
-	Ticker                   string                 `protobuf:"bytes,32,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                         //Тикер инструмента.
+	Ticker                   string                 `protobuf:"bytes,32,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                         // Тикер инструмента.
 }
 
 func (x *VirtualPortfolioPosition) Reset() {
@@ -1645,14 +1646,14 @@ type PositionsSecurities struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi            string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                //FIGI-идентификатор бумаги.
-	Blocked         int64  `protobuf:"varint,2,opt,name=blocked,proto3" json:"blocked,omitempty"`                                         //Количество бумаг, заблокированных выставленными заявками.
-	Balance         int64  `protobuf:"varint,3,opt,name=balance,proto3" json:"balance,omitempty"`                                         //Текущий незаблокированный баланс.
-	PositionUid     string `protobuf:"bytes,4,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`               //Уникальный идентификатор позиции.
-	InstrumentUid   string `protobuf:"bytes,5,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`         //Уникальный идентификатор инструмента.
-	Ticker          string `protobuf:"bytes,6,opt,name=ticker,proto3" json:"ticker,omitempty"`                                            //Тикер инструмента.
-	ExchangeBlocked bool   `protobuf:"varint,11,opt,name=exchange_blocked,json=exchangeBlocked,proto3" json:"exchange_blocked,omitempty"` //Заблокировано на бирже.
-	InstrumentType  string `protobuf:"bytes,16,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`     //Тип инструмента.
+	Figi            string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                // FIGI-идентификатор бумаги.
+	Blocked         int64  `protobuf:"varint,2,opt,name=blocked,proto3" json:"blocked,omitempty"`                                         // Количество бумаг, заблокированных выставленными заявками.
+	Balance         int64  `protobuf:"varint,3,opt,name=balance,proto3" json:"balance,omitempty"`                                         // Текущий незаблокированный баланс.
+	PositionUid     string `protobuf:"bytes,4,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`               // Уникальный идентификатор позиции.
+	InstrumentUid   string `protobuf:"bytes,5,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`         // Уникальный идентификатор инструмента.
+	Ticker          string `protobuf:"bytes,6,opt,name=ticker,proto3" json:"ticker,omitempty"`                                            // Тикер инструмента.
+	ExchangeBlocked bool   `protobuf:"varint,11,opt,name=exchange_blocked,json=exchangeBlocked,proto3" json:"exchange_blocked,omitempty"` // Заблокировано на бирже.
+	InstrumentType  string `protobuf:"bytes,16,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`     // Тип инструмента.
 }
 
 func (x *PositionsSecurities) Reset() {
@@ -1749,12 +1750,12 @@ type PositionsFutures struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi          string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                        //FIGI-идентификатор фьючерса.
-	Blocked       int64  `protobuf:"varint,2,opt,name=blocked,proto3" json:"blocked,omitempty"`                                 //Количество бумаг, заблокированных выставленными заявками.
-	Balance       int64  `protobuf:"varint,3,opt,name=balance,proto3" json:"balance,omitempty"`                                 //Текущий незаблокированный баланс.
-	PositionUid   string `protobuf:"bytes,4,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`       //Уникальный идентификатор позиции.
-	InstrumentUid string `protobuf:"bytes,5,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //Уникальный идентификатор  инструмента.
-	Ticker        string `protobuf:"bytes,6,opt,name=ticker,proto3" json:"ticker,omitempty"`                                    //Тикер инструмента.
+	Figi          string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                        // FIGI-идентификатор фьючерса.
+	Blocked       int64  `protobuf:"varint,2,opt,name=blocked,proto3" json:"blocked,omitempty"`                                 // Количество бумаг, заблокированных выставленными заявками.
+	Balance       int64  `protobuf:"varint,3,opt,name=balance,proto3" json:"balance,omitempty"`                                 // Текущий незаблокированный баланс.
+	PositionUid   string `protobuf:"bytes,4,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`       // Уникальный идентификатор позиции.
+	InstrumentUid string `protobuf:"bytes,5,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // Уникальный идентификатор  инструмента.
+	Ticker        string `protobuf:"bytes,6,opt,name=ticker,proto3" json:"ticker,omitempty"`                                    // Тикер инструмента.
 }
 
 func (x *PositionsFutures) Reset() {
@@ -1837,11 +1838,11 @@ type PositionsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PositionUid   string `protobuf:"bytes,1,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`       //Уникальный идентификатор позиции опциона.
-	InstrumentUid string `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //Уникальный идентификатор  инструмента.
-	Ticker        string `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                    //Тикер инструмента.
-	Blocked       int64  `protobuf:"varint,11,opt,name=blocked,proto3" json:"blocked,omitempty"`                                //Количество бумаг, заблокированных выставленными заявками.
-	Balance       int64  `protobuf:"varint,21,opt,name=balance,proto3" json:"balance,omitempty"`                                //Текущий незаблокированный баланс.
+	PositionUid   string `protobuf:"bytes,1,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`       // Уникальный идентификатор позиции опциона.
+	InstrumentUid string `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // Уникальный идентификатор  инструмента.
+	Ticker        string `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                    // Тикер инструмента.
+	Blocked       int64  `protobuf:"varint,11,opt,name=blocked,proto3" json:"blocked,omitempty"`                                // Количество бумаг, заблокированных выставленными заявками.
+	Balance       int64  `protobuf:"varint,21,opt,name=balance,proto3" json:"balance,omitempty"`                                // Текущий незаблокированный баланс.
 }
 
 func (x *PositionsOptions) Reset() {
@@ -2078,9 +2079,9 @@ type GenerateBrokerReportRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Идентификатор счета клиента.
-	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                            //Начало периода по UTC.
-	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                //Окончание периода по UTC.
+	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Идентификатор счета клиента.
+	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                            // Начало периода по UTC.
+	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                // Окончание периода по UTC.
 }
 
 func (x *GenerateBrokerReportRequest) Reset() {
@@ -2141,7 +2142,7 @@ type GenerateBrokerReportResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` //Идентификатор задачи формирования брокерского отчета.
+	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` // Идентификатор задачи формирования брокерского отчета.
 }
 
 func (x *GenerateBrokerReportResponse) Reset() {
@@ -2188,8 +2189,8 @@ type GetBrokerReportRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` //Идентификатор задачи формирования брокерского отчета.
-	Page   *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`            //Номер страницы отчета, начинается с 1. Значение по умолчанию — 0.
+	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` // Идентификатор задачи формирования брокерского отчета.
+	Page   *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`            // Номер страницы отчета, начинается с 1. Значение по умолчанию — 0.
 }
 
 func (x *GetBrokerReportRequest) Reset() {
@@ -2244,9 +2245,9 @@ type GetBrokerReportResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	BrokerReport []*BrokerReport `protobuf:"bytes,1,rep,name=broker_report,json=brokerReport,proto3" json:"broker_report,omitempty"`
-	ItemsCount   int32           `protobuf:"varint,2,opt,name=itemsCount,proto3" json:"itemsCount,omitempty"` //Количество записей в отчете.
-	PagesCount   int32           `protobuf:"varint,3,opt,name=pagesCount,proto3" json:"pagesCount,omitempty"` //Количество страниц с данными отчета, начинается с 0.
-	Page         int32           `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`             //Текущая страница, начинается с 0.
+	ItemsCount   int32           `protobuf:"varint,2,opt,name=itemsCount,proto3" json:"itemsCount,omitempty"` // Количество записей в отчете.
+	PagesCount   int32           `protobuf:"varint,3,opt,name=pagesCount,proto3" json:"pagesCount,omitempty"` // Количество страниц с данными отчета, начинается с 0.
+	Page         int32           `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`             // Текущая страница, начинается с 0.
 }
 
 func (x *GetBrokerReportResponse) Reset() {
@@ -2314,33 +2315,33 @@ type BrokerReport struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TradeId                    string                 `protobuf:"bytes,1,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`                                                             //Номер сделки.
-	OrderId                    string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                             //Номер поручения.
-	Figi                       string                 `protobuf:"bytes,3,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                  //FIGI-идентификаторинструмента.
-	ExecuteSign                string                 `protobuf:"bytes,4,opt,name=execute_sign,json=executeSign,proto3" json:"execute_sign,omitempty"`                                                 //Признак исполнения.
-	TradeDatetime              *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=trade_datetime,json=tradeDatetime,proto3" json:"trade_datetime,omitempty"`                                           //Дата и время заключения по UTC.
-	Exchange                   string                 `protobuf:"bytes,6,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                          //Торговая площадка.
-	ClassCode                  string                 `protobuf:"bytes,7,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                       //Режим торгов.
-	Direction                  string                 `protobuf:"bytes,8,opt,name=direction,proto3" json:"direction,omitempty"`                                                                        //Вид сделки.
-	Name                       string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`                                                                                  //Сокращенное наименование актива.
-	Ticker                     string                 `protobuf:"bytes,10,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                             //Код актива.
-	Price                      *MoneyValue            `protobuf:"bytes,11,opt,name=price,proto3" json:"price,omitempty"`                                                                               //Цена за единицу.
-	Quantity                   int64                  `protobuf:"varint,12,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                        //Количество.
-	OrderAmount                *MoneyValue            `protobuf:"bytes,13,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`                                                //Сумма без НКД.
-	AciValue                   *Quotation             `protobuf:"bytes,14,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                         //НКД.
-	TotalOrderAmount           *MoneyValue            `protobuf:"bytes,15,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                               //Сумма сделки.
-	BrokerCommission           *MoneyValue            `protobuf:"bytes,16,opt,name=broker_commission,json=brokerCommission,proto3" json:"broker_commission,omitempty"`                                 //Комиссия брокера.
-	ExchangeCommission         *MoneyValue            `protobuf:"bytes,17,opt,name=exchange_commission,json=exchangeCommission,proto3" json:"exchange_commission,omitempty"`                           //Комиссия биржи.
-	ExchangeClearingCommission *MoneyValue            `protobuf:"bytes,18,opt,name=exchange_clearing_commission,json=exchangeClearingCommission,proto3" json:"exchange_clearing_commission,omitempty"` //Комиссия клирингового центра.
-	RepoRate                   *Quotation             `protobuf:"bytes,19,opt,name=repo_rate,json=repoRate,proto3" json:"repo_rate,omitempty"`                                                         //Ставка РЕПО, %.
-	Party                      string                 `protobuf:"bytes,20,opt,name=party,proto3" json:"party,omitempty"`                                                                               //Контрагент или брокерарокер.
-	ClearValueDate             *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=clear_value_date,json=clearValueDate,proto3" json:"clear_value_date,omitempty"`                                     //Дата расчетов по UTC.
-	SecValueDate               *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=sec_value_date,json=secValueDate,proto3" json:"sec_value_date,omitempty"`                                           //Дата поставки по UTC.
-	BrokerStatus               string                 `protobuf:"bytes,23,opt,name=broker_status,json=brokerStatus,proto3" json:"broker_status,omitempty"`                                             //Статус брокера.
-	SeparateAgreementType      string                 `protobuf:"bytes,24,opt,name=separate_agreement_type,json=separateAgreementType,proto3" json:"separate_agreement_type,omitempty"`                //Тип договора.
-	SeparateAgreementNumber    string                 `protobuf:"bytes,25,opt,name=separate_agreement_number,json=separateAgreementNumber,proto3" json:"separate_agreement_number,omitempty"`          //Номер договора.
-	SeparateAgreementDate      string                 `protobuf:"bytes,26,opt,name=separate_agreement_date,json=separateAgreementDate,proto3" json:"separate_agreement_date,omitempty"`                //Дата договора.
-	DeliveryType               string                 `protobuf:"bytes,27,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type,omitempty"`                                             //Тип расчета по сделке.
+	TradeId                    string                 `protobuf:"bytes,1,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`                                                             // Номер сделки.
+	OrderId                    string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                             // Номер поручения.
+	Figi                       string                 `protobuf:"bytes,3,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                  // FIGI-идентификаторинструмента.
+	ExecuteSign                string                 `protobuf:"bytes,4,opt,name=execute_sign,json=executeSign,proto3" json:"execute_sign,omitempty"`                                                 // Признак исполнения.
+	TradeDatetime              *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=trade_datetime,json=tradeDatetime,proto3" json:"trade_datetime,omitempty"`                                           // Дата и время заключения по UTC.
+	Exchange                   string                 `protobuf:"bytes,6,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                          // Торговая площадка.
+	ClassCode                  string                 `protobuf:"bytes,7,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                       // Режим торгов.
+	Direction                  string                 `protobuf:"bytes,8,opt,name=direction,proto3" json:"direction,omitempty"`                                                                        // Вид сделки.
+	Name                       string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`                                                                                  // Сокращенное наименование актива.
+	Ticker                     string                 `protobuf:"bytes,10,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                             // Код актива.
+	Price                      *MoneyValue            `protobuf:"bytes,11,opt,name=price,proto3" json:"price,omitempty"`                                                                               // Цена за единицу.
+	Quantity                   int64                  `protobuf:"varint,12,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                        // Количество.
+	OrderAmount                *MoneyValue            `protobuf:"bytes,13,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`                                                // Сумма без НКД.
+	AciValue                   *Quotation             `protobuf:"bytes,14,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                         // НКД.
+	TotalOrderAmount           *MoneyValue            `protobuf:"bytes,15,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                               // Сумма сделки.
+	BrokerCommission           *MoneyValue            `protobuf:"bytes,16,opt,name=broker_commission,json=brokerCommission,proto3" json:"broker_commission,omitempty"`                                 // Комиссия брокера.
+	ExchangeCommission         *MoneyValue            `protobuf:"bytes,17,opt,name=exchange_commission,json=exchangeCommission,proto3" json:"exchange_commission,omitempty"`                           // Комиссия биржи.
+	ExchangeClearingCommission *MoneyValue            `protobuf:"bytes,18,opt,name=exchange_clearing_commission,json=exchangeClearingCommission,proto3" json:"exchange_clearing_commission,omitempty"` // Комиссия клирингового центра.
+	RepoRate                   *Quotation             `protobuf:"bytes,19,opt,name=repo_rate,json=repoRate,proto3" json:"repo_rate,omitempty"`                                                         // Ставка РЕПО, %.
+	Party                      string                 `protobuf:"bytes,20,opt,name=party,proto3" json:"party,omitempty"`                                                                               // Контрагент или брокерарокер.
+	ClearValueDate             *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=clear_value_date,json=clearValueDate,proto3" json:"clear_value_date,omitempty"`                                     // Дата расчетов по UTC.
+	SecValueDate               *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=sec_value_date,json=secValueDate,proto3" json:"sec_value_date,omitempty"`                                           // Дата поставки по UTC.
+	BrokerStatus               string                 `protobuf:"bytes,23,opt,name=broker_status,json=brokerStatus,proto3" json:"broker_status,omitempty"`                                             // Статус брокера.
+	SeparateAgreementType      string                 `protobuf:"bytes,24,opt,name=separate_agreement_type,json=separateAgreementType,proto3" json:"separate_agreement_type,omitempty"`                // Тип договора.
+	SeparateAgreementNumber    string                 `protobuf:"bytes,25,opt,name=separate_agreement_number,json=separateAgreementNumber,proto3" json:"separate_agreement_number,omitempty"`          // Номер договора.
+	SeparateAgreementDate      string                 `protobuf:"bytes,26,opt,name=separate_agreement_date,json=separateAgreementDate,proto3" json:"separate_agreement_date,omitempty"`                // Дата договора.
+	DeliveryType               string                 `protobuf:"bytes,27,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type,omitempty"`                                             // Тип расчета по сделке.
 }
 
 func (x *BrokerReport) Reset() {
@@ -2634,11 +2635,11 @@ type isGetDividendsForeignIssuerRequest_Payload interface {
 }
 
 type GetDividendsForeignIssuerRequest_GenerateDivForeignIssuerReport struct {
-	GenerateDivForeignIssuerReport *GenerateDividendsForeignIssuerReportRequest `protobuf:"bytes,1,opt,name=generate_div_foreign_issuer_report,json=generateDivForeignIssuerReport,proto3,oneof"` //Объект запроса формирования отчета.
+	GenerateDivForeignIssuerReport *GenerateDividendsForeignIssuerReportRequest `protobuf:"bytes,1,opt,name=generate_div_foreign_issuer_report,json=generateDivForeignIssuerReport,proto3,oneof"` // Объект запроса формирования отчета.
 }
 
 type GetDividendsForeignIssuerRequest_GetDivForeignIssuerReport struct {
-	GetDivForeignIssuerReport *GetDividendsForeignIssuerReportRequest `protobuf:"bytes,2,opt,name=get_div_foreign_issuer_report,json=getDivForeignIssuerReport,proto3,oneof"` //Объект запроса сформированного отчета.
+	GetDivForeignIssuerReport *GetDividendsForeignIssuerReportRequest `protobuf:"bytes,2,opt,name=get_div_foreign_issuer_report,json=getDivForeignIssuerReport,proto3,oneof"` // Объект запроса сформированного отчета.
 }
 
 func (*GetDividendsForeignIssuerRequest_GenerateDivForeignIssuerReport) isGetDividendsForeignIssuerRequest_Payload() {
@@ -2717,11 +2718,11 @@ type isGetDividendsForeignIssuerResponse_Payload interface {
 }
 
 type GetDividendsForeignIssuerResponse_GenerateDivForeignIssuerReportResponse struct {
-	GenerateDivForeignIssuerReportResponse *GenerateDividendsForeignIssuerReportResponse `protobuf:"bytes,1,opt,name=generate_div_foreign_issuer_report_response,json=generateDivForeignIssuerReportResponse,proto3,oneof"` //Объект результата задачи запуска формирования отчета.
+	GenerateDivForeignIssuerReportResponse *GenerateDividendsForeignIssuerReportResponse `protobuf:"bytes,1,opt,name=generate_div_foreign_issuer_report_response,json=generateDivForeignIssuerReportResponse,proto3,oneof"` // Объект результата задачи запуска формирования отчета.
 }
 
 type GetDividendsForeignIssuerResponse_DivForeignIssuerReport struct {
-	DivForeignIssuerReport *GetDividendsForeignIssuerReportResponse `protobuf:"bytes,2,opt,name=div_foreign_issuer_report,json=divForeignIssuerReport,proto3,oneof"` //Отчет «Справка о доходах за пределами РФ».
+	DivForeignIssuerReport *GetDividendsForeignIssuerReportResponse `protobuf:"bytes,2,opt,name=div_foreign_issuer_report,json=divForeignIssuerReport,proto3,oneof"` // Отчет «Справка о доходах за пределами РФ».
 }
 
 func (*GetDividendsForeignIssuerResponse_GenerateDivForeignIssuerReportResponse) isGetDividendsForeignIssuerResponse_Payload() {
@@ -2736,9 +2737,9 @@ type GenerateDividendsForeignIssuerReportRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Идентификатор счета клиента.
-	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                            //Начало периода по UTC.
-	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                //Окончание периода по UTC. Как правило, можно сформировать отчет по дату на несколько дней меньше текущей. Начало и окончание периода должны быть в рамках одного календарного года.
+	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Идентификатор счета клиента.
+	From      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                            // Начало периода по UTC.
+	To        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                // Окончание периода по UTC. Как правило, можно сформировать отчет по дату на несколько дней меньше текущей. Начало и окончание периода должны быть в рамках одного календарного года.
 }
 
 func (x *GenerateDividendsForeignIssuerReportRequest) Reset() {
@@ -2800,8 +2801,8 @@ type GetDividendsForeignIssuerReportRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` //Идентификатор задачи формирования отчета.
-	Page   *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`            //Номер страницы отчета (начинается с 0), значение по умолчанию: 0.
+	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` // Идентификатор задачи формирования отчета.
+	Page   *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`            // Номер страницы отчета (начинается с 0), значение по умолчанию: 0.
 }
 
 func (x *GetDividendsForeignIssuerReportRequest) Reset() {
@@ -2856,7 +2857,7 @@ type GenerateDividendsForeignIssuerReportResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` //Идентификатор задачи формирования отчета.
+	TaskId string `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"` // Идентификатор задачи формирования отчета.
 }
 
 func (x *GenerateDividendsForeignIssuerReportResponse) Reset() {
@@ -2904,9 +2905,9 @@ type GetDividendsForeignIssuerReportResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	DividendsForeignIssuerReport []*DividendsForeignIssuerReport `protobuf:"bytes,1,rep,name=dividends_foreign_issuer_report,json=dividendsForeignIssuerReport,proto3" json:"dividends_foreign_issuer_report,omitempty"`
-	ItemsCount                   int32                           `protobuf:"varint,2,opt,name=itemsCount,proto3" json:"itemsCount,omitempty"` //Количество записей в отчете.
-	PagesCount                   int32                           `protobuf:"varint,3,opt,name=pagesCount,proto3" json:"pagesCount,omitempty"` //Количество страниц с данными отчета, начинается с 0.
-	Page                         int32                           `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`             //Текущая страница, начинается с 0.
+	ItemsCount                   int32                           `protobuf:"varint,2,opt,name=itemsCount,proto3" json:"itemsCount,omitempty"` // Количество записей в отчете.
+	PagesCount                   int32                           `protobuf:"varint,3,opt,name=pagesCount,proto3" json:"pagesCount,omitempty"` // Количество страниц с данными отчета, начинается с 0.
+	Page                         int32                           `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`             // Текущая страница, начинается с 0.
 }
 
 func (x *GetDividendsForeignIssuerReportResponse) Reset() {
@@ -2975,18 +2976,18 @@ type DividendsForeignIssuerReport struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RecordDate         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=record_date,json=recordDate,proto3" json:"record_date,omitempty"`                         //Дата фиксации реестра.
-	PaymentDate        *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=payment_date,json=paymentDate,proto3" json:"payment_date,omitempty"`                      //Дата выплаты.
-	SecurityName       string                 `protobuf:"bytes,3,opt,name=security_name,json=securityName,proto3" json:"security_name,omitempty"`                   //Наименование ценной бумаги.
-	Isin               string                 `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                                                       //ISIN-идентификатор ценной бумаги.
-	IssuerCountry      string                 `protobuf:"bytes,5,opt,name=issuer_country,json=issuerCountry,proto3" json:"issuer_country,omitempty"`                //Страна эмитента. Для депозитарных расписок указывается страна эмитента базового актива.
-	Quantity           int64                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`                                              //Количество ценных бумаг.
-	Dividend           *Quotation             `protobuf:"bytes,7,opt,name=dividend,proto3" json:"dividend,omitempty"`                                               //Выплаты на одну бумагу
-	ExternalCommission *Quotation             `protobuf:"bytes,8,opt,name=external_commission,json=externalCommission,proto3" json:"external_commission,omitempty"` //Комиссия внешних платежных агентов.
-	DividendGross      *Quotation             `protobuf:"bytes,9,opt,name=dividend_gross,json=dividendGross,proto3" json:"dividend_gross,omitempty"`                //Сумма до удержания налога.
-	Tax                *Quotation             `protobuf:"bytes,10,opt,name=tax,proto3" json:"tax,omitempty"`                                                        //Сумма налога, удержанного агентом.
-	DividendAmount     *Quotation             `protobuf:"bytes,11,opt,name=dividend_amount,json=dividendAmount,proto3" json:"dividend_amount,omitempty"`            //Итоговая сумма выплаты.
-	Currency           string                 `protobuf:"bytes,12,opt,name=currency,proto3" json:"currency,omitempty"`                                              //Валюта.
+	RecordDate         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=record_date,json=recordDate,proto3" json:"record_date,omitempty"`                         // Дата фиксации реестра.
+	PaymentDate        *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=payment_date,json=paymentDate,proto3" json:"payment_date,omitempty"`                      // Дата выплаты.
+	SecurityName       string                 `protobuf:"bytes,3,opt,name=security_name,json=securityName,proto3" json:"security_name,omitempty"`                   // Наименование ценной бумаги.
+	Isin               string                 `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                                                       // ISIN-идентификатор ценной бумаги.
+	IssuerCountry      string                 `protobuf:"bytes,5,opt,name=issuer_country,json=issuerCountry,proto3" json:"issuer_country,omitempty"`                // Страна эмитента. Для депозитарных расписок указывается страна эмитента базового актива.
+	Quantity           int64                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`                                              // Количество ценных бумаг.
+	Dividend           *Quotation             `protobuf:"bytes,7,opt,name=dividend,proto3" json:"dividend,omitempty"`                                               // Выплаты на одну бумагу
+	ExternalCommission *Quotation             `protobuf:"bytes,8,opt,name=external_commission,json=externalCommission,proto3" json:"external_commission,omitempty"` // Комиссия внешних платежных агентов.
+	DividendGross      *Quotation             `protobuf:"bytes,9,opt,name=dividend_gross,json=dividendGross,proto3" json:"dividend_gross,omitempty"`                // Сумма до удержания налога.
+	Tax                *Quotation             `protobuf:"bytes,10,opt,name=tax,proto3" json:"tax,omitempty"`                                                        // Сумма налога, удержанного агентом.
+	DividendAmount     *Quotation             `protobuf:"bytes,11,opt,name=dividend_amount,json=dividendAmount,proto3" json:"dividend_amount,omitempty"`            // Итоговая сумма выплаты.
+	Currency           string                 `protobuf:"bytes,12,opt,name=currency,proto3" json:"currency,omitempty"`                                              // Валюта.
 }
 
 func (x *DividendsForeignIssuerReport) Reset() {
@@ -3111,8 +3112,8 @@ type PortfolioStreamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts     []string           `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                              //Массив идентификаторов счетов пользователя.
-	PingSettings *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"` //Запрос настройки пинга.
+	Accounts     []string           `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                              // Массив идентификаторов счетов пользователя.
+	PingSettings *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"` // Запрос настройки пинга.
 }
 
 func (x *PortfolioStreamRequest) Reset() {
@@ -3240,15 +3241,15 @@ type isPortfolioStreamResponse_Payload interface {
 }
 
 type PortfolioStreamResponse_Subscriptions struct {
-	Subscriptions *PortfolioSubscriptionResult `protobuf:"bytes,1,opt,name=subscriptions,proto3,oneof"` //Объект результата подписки.
+	Subscriptions *PortfolioSubscriptionResult `protobuf:"bytes,1,opt,name=subscriptions,proto3,oneof"` // Объект результата подписки.
 }
 
 type PortfolioStreamResponse_Portfolio struct {
-	Portfolio *PortfolioResponse `protobuf:"bytes,2,opt,name=portfolio,proto3,oneof"` //Объект стриминга портфеля.
+	Portfolio *PortfolioResponse `protobuf:"bytes,2,opt,name=portfolio,proto3,oneof"` // Объект стриминга портфеля.
 }
 
 type PortfolioStreamResponse_Ping struct {
-	Ping *Ping `protobuf:"bytes,3,opt,name=ping,proto3,oneof"` //Проверка активности стрима.
+	Ping *Ping `protobuf:"bytes,3,opt,name=ping,proto3,oneof"` // Проверка активности стрима.
 }
 
 func (*PortfolioStreamResponse_Subscriptions) isPortfolioStreamResponse_Payload() {}
@@ -3263,9 +3264,9 @@ type PortfolioSubscriptionResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts   []*AccountSubscriptionStatus `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                       //Массив счетов клиента.
-	TrackingId string                       `protobuf:"bytes,7,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` //Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id).
-	StreamId   string                       `protobuf:"bytes,8,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`       //Идентификатор открытого соединения
+	Accounts   []*AccountSubscriptionStatus `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                       // Массив счетов клиента.
+	TrackingId string                       `protobuf:"bytes,7,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` // Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id).
+	StreamId   string                       `protobuf:"bytes,8,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`       // Идентификатор открытого соединения
 }
 
 func (x *PortfolioSubscriptionResult) Reset() {
@@ -3327,8 +3328,8 @@ type AccountSubscriptionStatus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId          string                      `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                    //Идентификатор счета.
-	SubscriptionStatus PortfolioSubscriptionStatus `protobuf:"varint,6,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionStatus" json:"subscription_status,omitempty"` //Результат подписки.
+	AccountId          string                      `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                    // Идентификатор счета.
+	SubscriptionStatus PortfolioSubscriptionStatus `protobuf:"varint,6,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionStatus" json:"subscription_status,omitempty"` // Результат подписки.
 }
 
 func (x *AccountSubscriptionStatus) Reset() {
@@ -3383,17 +3384,17 @@ type GetOperationsByCursorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId          string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                  //Идентификатор счета клиента, обязательный параметр. Остальные параметры опциональны.
-	InstrumentId       *string                `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                                   //Идентификатор инструмента — FIGI или UID инструмента.
-	From               *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                                                       //Начало периода по UTC.
-	To                 *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                                                           //Окончание периода по UTC.
-	Cursor             *string                `protobuf:"bytes,11,opt,name=cursor,proto3,oneof" json:"cursor,omitempty"`                                                                                                  //Идентификатор элемента, с которого начать формировать ответ.
-	Limit              *int32                 `protobuf:"varint,12,opt,name=limit,proto3,oneof" json:"limit,omitempty"`                                                                                                   //Лимит количества операций. По умолчанию — `100`, максимальное значение — `1000`.
-	OperationTypes     []OperationType        `protobuf:"varint,13,rep,packed,name=operation_types,json=operationTypes,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"operation_types,omitempty"` //Тип операции. Принимает значение из списка `OperationType`.
-	State              *OperationState        `protobuf:"varint,14,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState,oneof" json:"state,omitempty"`                                         //Статус запрашиваемых операций. Возможные значения указаны в `OperationState`.
-	WithoutCommissions *bool                  `protobuf:"varint,15,opt,name=without_commissions,json=withoutCommissions,proto3,oneof" json:"without_commissions,omitempty"`                                               //Флаг возврата комиссии. По умолчанию — `false`.
-	WithoutTrades      *bool                  `protobuf:"varint,16,opt,name=without_trades,json=withoutTrades,proto3,oneof" json:"without_trades,omitempty"`                                                              //Флаг получения ответа без массива сделок.
-	WithoutOvernights  *bool                  `protobuf:"varint,17,opt,name=without_overnights,json=withoutOvernights,proto3,oneof" json:"without_overnights,omitempty"`                                                  //Флаг показа overnight операций.
+	AccountId          string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                  // Идентификатор счета клиента, обязательный параметр. Остальные параметры опциональны.
+	InstrumentId       *string                `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                                   // Идентификатор инструмента — FIGI или UID инструмента.
+	From               *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                                                       // Начало периода по UTC.
+	To                 *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                                                           // Окончание периода по UTC.
+	Cursor             *string                `protobuf:"bytes,11,opt,name=cursor,proto3,oneof" json:"cursor,omitempty"`                                                                                                  // Идентификатор элемента, с которого начать формировать ответ.
+	Limit              *int32                 `protobuf:"varint,12,opt,name=limit,proto3,oneof" json:"limit,omitempty"`                                                                                                   // Лимит количества операций. По умолчанию — `100`, максимальное значение — `1000`.
+	OperationTypes     []OperationType        `protobuf:"varint,13,rep,packed,name=operation_types,json=operationTypes,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"operation_types,omitempty"` // Тип операции. Принимает значение из списка `OperationType`.
+	State              *OperationState        `protobuf:"varint,14,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState,oneof" json:"state,omitempty"`                                         // Статус запрашиваемых операций. Возможные значения указаны в `OperationState`.
+	WithoutCommissions *bool                  `protobuf:"varint,15,opt,name=without_commissions,json=withoutCommissions,proto3,oneof" json:"without_commissions,omitempty"`                                               // Флаг возврата комиссии. По умолчанию — `false`.
+	WithoutTrades      *bool                  `protobuf:"varint,16,opt,name=without_trades,json=withoutTrades,proto3,oneof" json:"without_trades,omitempty"`                                                              // Флаг получения ответа без массива сделок.
+	WithoutOvernights  *bool                  `protobuf:"varint,17,opt,name=without_overnights,json=withoutOvernights,proto3,oneof" json:"without_overnights,omitempty"`                                                  // Флаг показа overnight операций.
 }
 
 func (x *GetOperationsByCursorRequest) Reset() {
@@ -3511,9 +3512,9 @@ type GetOperationsByCursorResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HasNext    bool             `protobuf:"varint,1,opt,name=has_next,json=hasNext,proto3" json:"has_next,omitempty"`         //Признак, есть ли следующий элемент.
-	NextCursor string           `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"` //Следующий курсор.
-	Items      []*OperationItem `protobuf:"bytes,6,rep,name=items,proto3" json:"items,omitempty"`                             //Список операций.
+	HasNext    bool             `protobuf:"varint,1,opt,name=has_next,json=hasNext,proto3" json:"has_next,omitempty"`         // Признак, есть ли следующий элемент.
+	NextCursor string           `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"` // Следующий курсор.
+	Items      []*OperationItem `protobuf:"bytes,6,rep,name=items,proto3" json:"items,omitempty"`                             // Список операций.
 }
 
 func (x *GetOperationsByCursorResponse) Reset() {
@@ -3575,34 +3576,34 @@ type OperationItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Cursor            string                 `protobuf:"bytes,1,opt,name=cursor,proto3" json:"cursor,omitempty"`                                                                                                   //Курсор.
-	BrokerAccountId   string                 `protobuf:"bytes,6,opt,name=broker_account_id,json=brokerAccountId,proto3" json:"broker_account_id,omitempty"`                                                        //Номер счета клиента.
-	Id                string                 `protobuf:"bytes,16,opt,name=id,proto3" json:"id,omitempty"`                                                                                                          //Идентификатор операции, может меняться с течением времени.
-	ParentOperationId string                 `protobuf:"bytes,17,opt,name=parent_operation_id,json=parentOperationId,proto3" json:"parent_operation_id,omitempty"`                                                 //Идентификатор родительской операции. Может измениться, если изменился ID родительской операции.
-	Name              string                 `protobuf:"bytes,18,opt,name=name,proto3" json:"name,omitempty"`                                                                                                      //Название операции.
-	Date              *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=date,proto3" json:"date,omitempty"`                                                                                                      //Дата поручения.
-	Type              OperationType          `protobuf:"varint,22,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"type,omitempty"`                                            //Тип операции.
-	Description       string                 `protobuf:"bytes,23,opt,name=description,proto3" json:"description,omitempty"`                                                                                        //Описание операции.
-	State             OperationState         `protobuf:"varint,24,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState" json:"state,omitempty"`                                         //Статус поручения.
-	InstrumentUid     string                 `protobuf:"bytes,31,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                               //Уникальный идентификатор инструмента.
-	Figi              string                 `protobuf:"bytes,32,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                      //FIGI.
-	InstrumentType    string                 `protobuf:"bytes,33,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                            //Тип инструмента.
-	InstrumentKind    InstrumentType         `protobuf:"varint,34,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
-	PositionUid       string                 `protobuf:"bytes,35,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                     //Уникальный идентификатор позиции.
-	Payment           *MoneyValue            `protobuf:"bytes,41,opt,name=payment,proto3" json:"payment,omitempty"`                                                                                                //Сумма операции.
-	Price             *MoneyValue            `protobuf:"bytes,42,opt,name=price,proto3" json:"price,omitempty"`                                                                                                    //Цена операции за 1 инструмент.
-	Commission        *MoneyValue            `protobuf:"bytes,43,opt,name=commission,proto3" json:"commission,omitempty"`                                                                                          //Комиссия.
-	Yield             *MoneyValue            `protobuf:"bytes,44,opt,name=yield,proto3" json:"yield,omitempty"`                                                                                                    //Доходность.
-	YieldRelative     *Quotation             `protobuf:"bytes,45,opt,name=yield_relative,json=yieldRelative,proto3" json:"yield_relative,omitempty"`                                                               //Относительная доходность.
-	AccruedInt        *MoneyValue            `protobuf:"bytes,46,opt,name=accrued_int,json=accruedInt,proto3" json:"accrued_int,omitempty"`                                                                        //Накопленный купонный доход.
-	Quantity          int64                  `protobuf:"varint,51,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                             //Количество единиц инструмента.
-	QuantityRest      int64                  `protobuf:"varint,52,opt,name=quantity_rest,json=quantityRest,proto3" json:"quantity_rest,omitempty"`                                                                 //Неисполненный остаток по сделке.
-	QuantityDone      int64                  `protobuf:"varint,53,opt,name=quantity_done,json=quantityDone,proto3" json:"quantity_done,omitempty"`                                                                 //Исполненный остаток.
-	CancelDateTime    *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=cancel_date_time,json=cancelDateTime,proto3" json:"cancel_date_time,omitempty"`                                                          //Дата и время снятия заявки.
-	CancelReason      string                 `protobuf:"bytes,57,opt,name=cancel_reason,json=cancelReason,proto3" json:"cancel_reason,omitempty"`                                                                  //Причина отмены операции.
-	TradesInfo        *OperationItemTrades   `protobuf:"bytes,61,opt,name=trades_info,json=tradesInfo,proto3" json:"trades_info,omitempty"`                                                                        //Массив сделок.
-	AssetUid          string                 `protobuf:"bytes,64,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                              //Идентификатор актива.
-	ChildOperations   []*ChildOperationItem  `protobuf:"bytes,65,rep,name=child_operations,json=childOperations,proto3" json:"child_operations,omitempty"`                                                         //Массив дочерних операций.
+	Cursor            string                 `protobuf:"bytes,1,opt,name=cursor,proto3" json:"cursor,omitempty"`                                                                                                   // Курсор.
+	BrokerAccountId   string                 `protobuf:"bytes,6,opt,name=broker_account_id,json=brokerAccountId,proto3" json:"broker_account_id,omitempty"`                                                        // Номер счета клиента.
+	Id                string                 `protobuf:"bytes,16,opt,name=id,proto3" json:"id,omitempty"`                                                                                                          // Идентификатор операции, может меняться с течением времени.
+	ParentOperationId string                 `protobuf:"bytes,17,opt,name=parent_operation_id,json=parentOperationId,proto3" json:"parent_operation_id,omitempty"`                                                 // Идентификатор родительской операции. Может измениться, если изменился ID родительской операции.
+	Name              string                 `protobuf:"bytes,18,opt,name=name,proto3" json:"name,omitempty"`                                                                                                      // Название операции.
+	Date              *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=date,proto3" json:"date,omitempty"`                                                                                                      // Дата поручения.
+	Type              OperationType          `protobuf:"varint,22,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationType" json:"type,omitempty"`                                            // Тип операции.
+	Description       string                 `protobuf:"bytes,23,opt,name=description,proto3" json:"description,omitempty"`                                                                                        // Описание операции.
+	State             OperationState         `protobuf:"varint,24,opt,name=state,proto3,enum=tinkoff.public.invest.api.contract.v1.OperationState" json:"state,omitempty"`                                         // Статус поручения.
+	InstrumentUid     string                 `protobuf:"bytes,31,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                               // Уникальный идентификатор инструмента.
+	Figi              string                 `protobuf:"bytes,32,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                      // FIGI.
+	InstrumentType    string                 `protobuf:"bytes,33,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                            // Тип инструмента.
+	InstrumentKind    InstrumentType         `protobuf:"varint,34,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
+	PositionUid       string                 `protobuf:"bytes,35,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                     // Уникальный идентификатор позиции.
+	Payment           *MoneyValue            `protobuf:"bytes,41,opt,name=payment,proto3" json:"payment,omitempty"`                                                                                                // Сумма операции.
+	Price             *MoneyValue            `protobuf:"bytes,42,opt,name=price,proto3" json:"price,omitempty"`                                                                                                    // Цена операции за 1 инструмент.
+	Commission        *MoneyValue            `protobuf:"bytes,43,opt,name=commission,proto3" json:"commission,omitempty"`                                                                                          // Комиссия.
+	Yield             *MoneyValue            `protobuf:"bytes,44,opt,name=yield,proto3" json:"yield,omitempty"`                                                                                                    // Доходность.
+	YieldRelative     *Quotation             `protobuf:"bytes,45,opt,name=yield_relative,json=yieldRelative,proto3" json:"yield_relative,omitempty"`                                                               // Относительная доходность.
+	AccruedInt        *MoneyValue            `protobuf:"bytes,46,opt,name=accrued_int,json=accruedInt,proto3" json:"accrued_int,omitempty"`                                                                        // Накопленный купонный доход.
+	Quantity          int64                  `protobuf:"varint,51,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                             // Количество единиц инструмента.
+	QuantityRest      int64                  `protobuf:"varint,52,opt,name=quantity_rest,json=quantityRest,proto3" json:"quantity_rest,omitempty"`                                                                 // Неисполненный остаток по сделке.
+	QuantityDone      int64                  `protobuf:"varint,53,opt,name=quantity_done,json=quantityDone,proto3" json:"quantity_done,omitempty"`                                                                 // Исполненный остаток.
+	CancelDateTime    *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=cancel_date_time,json=cancelDateTime,proto3" json:"cancel_date_time,omitempty"`                                                          // Дата и время снятия заявки.
+	CancelReason      string                 `protobuf:"bytes,57,opt,name=cancel_reason,json=cancelReason,proto3" json:"cancel_reason,omitempty"`                                                                  // Причина отмены операции.
+	TradesInfo        *OperationItemTrades   `protobuf:"bytes,61,opt,name=trades_info,json=tradesInfo,proto3" json:"trades_info,omitempty"`                                                                        // Массив сделок.
+	AssetUid          string                 `protobuf:"bytes,64,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                              // Идентификатор актива.
+	ChildOperations   []*ChildOperationItem  `protobuf:"bytes,65,rep,name=child_operations,json=childOperations,proto3" json:"child_operations,omitempty"`                                                         // Массив дочерних операций.
 }
 
 func (x *OperationItem) Reset() {
@@ -3887,12 +3888,12 @@ type OperationItemTrade struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Num           string                 `protobuf:"bytes,1,opt,name=num,proto3" json:"num,omitempty"`                                           //Номер сделки.
-	Date          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=date,proto3" json:"date,omitempty"`                                         //Дата сделки.
-	Quantity      int64                  `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`                               //Количество в единицах.
-	Price         *MoneyValue            `protobuf:"bytes,16,opt,name=price,proto3" json:"price,omitempty"`                                      //Цена.
-	Yield         *MoneyValue            `protobuf:"bytes,21,opt,name=yield,proto3" json:"yield,omitempty"`                                      //Доходность.
-	YieldRelative *Quotation             `protobuf:"bytes,22,opt,name=yield_relative,json=yieldRelative,proto3" json:"yield_relative,omitempty"` //Относительная доходность.
+	Num           string                 `protobuf:"bytes,1,opt,name=num,proto3" json:"num,omitempty"`                                           // Номер сделки.
+	Date          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=date,proto3" json:"date,omitempty"`                                         // Дата сделки.
+	Quantity      int64                  `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`                               // Количество в единицах.
+	Price         *MoneyValue            `protobuf:"bytes,16,opt,name=price,proto3" json:"price,omitempty"`                                      // Цена.
+	Yield         *MoneyValue            `protobuf:"bytes,21,opt,name=yield,proto3" json:"yield,omitempty"`                                      // Доходность.
+	YieldRelative *Quotation             `protobuf:"bytes,22,opt,name=yield_relative,json=yieldRelative,proto3" json:"yield_relative,omitempty"` // Относительная доходность.
 }
 
 func (x *OperationItemTrade) Reset() {
@@ -3975,9 +3976,9 @@ type PositionsStreamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts             []string           `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                        //Массив идентификаторов счетов пользователя.
-	WithInitialPositions bool               `protobuf:"varint,3,opt,name=with_initial_positions,json=withInitialPositions,proto3" json:"with_initial_positions,omitempty"` //Получение состояния позиций на момент подключения.
-	PingSettings         *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"`                           //Запрос настройки пинга.
+	Accounts             []string           `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                        // Массив идентификаторов счетов пользователя.
+	WithInitialPositions bool               `protobuf:"varint,3,opt,name=with_initial_positions,json=withInitialPositions,proto3" json:"with_initial_positions,omitempty"` // Получение состояния позиций на момент подключения.
+	PingSettings         *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"`                           // Запрос настройки пинга.
 }
 
 func (x *PositionsStreamRequest) Reset() {
@@ -4120,19 +4121,19 @@ type isPositionsStreamResponse_Payload interface {
 }
 
 type PositionsStreamResponse_Subscriptions struct {
-	Subscriptions *PositionsSubscriptionResult `protobuf:"bytes,1,opt,name=subscriptions,proto3,oneof"` //Объект результата подписки.
+	Subscriptions *PositionsSubscriptionResult `protobuf:"bytes,1,opt,name=subscriptions,proto3,oneof"` // Объект результата подписки.
 }
 
 type PositionsStreamResponse_Position struct {
-	Position *PositionData `protobuf:"bytes,2,opt,name=position,proto3,oneof"` //Объект стриминга позиций.
+	Position *PositionData `protobuf:"bytes,2,opt,name=position,proto3,oneof"` // Объект стриминга позиций.
 }
 
 type PositionsStreamResponse_Ping struct {
-	Ping *Ping `protobuf:"bytes,3,opt,name=ping,proto3,oneof"` //Проверка активности стрима.
+	Ping *Ping `protobuf:"bytes,3,opt,name=ping,proto3,oneof"` // Проверка активности стрима.
 }
 
 type PositionsStreamResponse_InitialPositions struct {
-	InitialPositions *PositionsResponse `protobuf:"bytes,5,opt,name=initial_positions,json=initialPositions,proto3,oneof"` //Текущие позиции.
+	InitialPositions *PositionsResponse `protobuf:"bytes,5,opt,name=initial_positions,json=initialPositions,proto3,oneof"` // Текущие позиции.
 }
 
 func (*PositionsStreamResponse_Subscriptions) isPositionsStreamResponse_Payload() {}
@@ -4149,9 +4150,9 @@ type PositionsSubscriptionResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts   []*PositionsSubscriptionStatus `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                       //Массив счетов клиента.
-	TrackingId string                         `protobuf:"bytes,7,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` //Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id).
-	StreamId   string                         `protobuf:"bytes,8,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`       //Идентификатор открытого соединения
+	Accounts   []*PositionsSubscriptionStatus `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                       // Массив счетов клиента.
+	TrackingId string                         `protobuf:"bytes,7,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` // Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id).
+	StreamId   string                         `protobuf:"bytes,8,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`       // Идентификатор открытого соединения
 }
 
 func (x *PositionsSubscriptionResult) Reset() {
@@ -4213,8 +4214,8 @@ type PositionsSubscriptionStatus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId          string                             `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                           //Идентификатор счета.
-	SubscriptionStatus PositionsAccountSubscriptionStatus `protobuf:"varint,6,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.PositionsAccountSubscriptionStatus" json:"subscription_status,omitempty"` //Результат подписки.
+	AccountId          string                             `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                           // Идентификатор счета.
+	SubscriptionStatus PositionsAccountSubscriptionStatus `protobuf:"varint,6,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.PositionsAccountSubscriptionStatus" json:"subscription_status,omitempty"` // Результат подписки.
 }
 
 func (x *PositionsSubscriptionStatus) Reset() {
@@ -4269,12 +4270,12 @@ type PositionData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId  string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Идентификатор счета.
-	Money      []*PositionsMoney      `protobuf:"bytes,2,rep,name=money,proto3" json:"money,omitempty"`                          //Массив валютных позиций портфеля.
-	Securities []*PositionsSecurities `protobuf:"bytes,3,rep,name=securities,proto3" json:"securities,omitempty"`                //Список ценно-бумажных позиций портфеля.
-	Futures    []*PositionsFutures    `protobuf:"bytes,4,rep,name=futures,proto3" json:"futures,omitempty"`                      //Список фьючерсов портфеля.
-	Options    []*PositionsOptions    `protobuf:"bytes,5,rep,name=options,proto3" json:"options,omitempty"`                      //Список опционов портфеля.
-	Date       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=date,proto3" json:"date,omitempty"`                            //Дата и время операции в формате UTC.
+	AccountId  string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Идентификатор счета.
+	Money      []*PositionsMoney      `protobuf:"bytes,2,rep,name=money,proto3" json:"money,omitempty"`                          // Массив валютных позиций портфеля.
+	Securities []*PositionsSecurities `protobuf:"bytes,3,rep,name=securities,proto3" json:"securities,omitempty"`                // Список ценно-бумажных позиций портфеля.
+	Futures    []*PositionsFutures    `protobuf:"bytes,4,rep,name=futures,proto3" json:"futures,omitempty"`                      // Список фьючерсов портфеля.
+	Options    []*PositionsOptions    `protobuf:"bytes,5,rep,name=options,proto3" json:"options,omitempty"`                      // Список опционов портфеля.
+	Date       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=date,proto3" json:"date,omitempty"`                            // Дата и время операции в формате UTC.
 }
 
 func (x *PositionData) Reset() {
@@ -4357,8 +4358,8 @@ type PositionsMoney struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AvailableValue *MoneyValue `protobuf:"bytes,1,opt,name=available_value,json=availableValue,proto3" json:"available_value,omitempty"` //Доступное количество валютный позиций.
-	BlockedValue   *MoneyValue `protobuf:"bytes,2,opt,name=blocked_value,json=blockedValue,proto3" json:"blocked_value,omitempty"`       //Заблокированное количество валютных позиций.
+	AvailableValue *MoneyValue `protobuf:"bytes,1,opt,name=available_value,json=availableValue,proto3" json:"available_value,omitempty"` // Доступное количество валютный позиций.
+	BlockedValue   *MoneyValue `protobuf:"bytes,2,opt,name=blocked_value,json=blockedValue,proto3" json:"blocked_value,omitempty"`       // Заблокированное количество валютных позиций.
 }
 
 func (x *PositionsMoney) Reset() {
@@ -4412,8 +4413,8 @@ type ChildOperationItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentUid string      `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //Уникальный идентификатор инструмента.
-	Payment       *MoneyValue `protobuf:"bytes,2,opt,name=payment,proto3" json:"payment,omitempty"`                                  //Сумма операции.
+	InstrumentUid string      `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // Уникальный идентификатор инструмента.
+	Payment       *MoneyValue `protobuf:"bytes,2,opt,name=payment,proto3" json:"payment,omitempty"`                                  // Сумма операции.
 }
 
 func (x *ChildOperationItem) Reset() {
@@ -5816,66 +5817,69 @@ func file_operations_proto_rawDescGZIP() []byte {
 	return file_operations_proto_rawDescData
 }
 
-var file_operations_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_operations_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
-var file_operations_proto_goTypes = []interface{}{
-	(OperationState)(0),                                  // 0: tinkoff.public.invest.api.contract.v1.OperationState
-	(OperationType)(0),                                   // 1: tinkoff.public.invest.api.contract.v1.OperationType
-	(PortfolioSubscriptionStatus)(0),                     // 2: tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionStatus
-	(PositionsAccountSubscriptionStatus)(0),              // 3: tinkoff.public.invest.api.contract.v1.PositionsAccountSubscriptionStatus
-	(PortfolioRequest_CurrencyRequest)(0),                // 4: tinkoff.public.invest.api.contract.v1.PortfolioRequest.CurrencyRequest
-	(*OperationsRequest)(nil),                            // 5: tinkoff.public.invest.api.contract.v1.OperationsRequest
-	(*OperationsResponse)(nil),                           // 6: tinkoff.public.invest.api.contract.v1.OperationsResponse
-	(*Operation)(nil),                                    // 7: tinkoff.public.invest.api.contract.v1.Operation
-	(*OperationTrade)(nil),                               // 8: tinkoff.public.invest.api.contract.v1.OperationTrade
-	(*PortfolioRequest)(nil),                             // 9: tinkoff.public.invest.api.contract.v1.PortfolioRequest
-	(*PortfolioResponse)(nil),                            // 10: tinkoff.public.invest.api.contract.v1.PortfolioResponse
-	(*PositionsRequest)(nil),                             // 11: tinkoff.public.invest.api.contract.v1.PositionsRequest
-	(*PositionsResponse)(nil),                            // 12: tinkoff.public.invest.api.contract.v1.PositionsResponse
-	(*WithdrawLimitsRequest)(nil),                        // 13: tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest
-	(*WithdrawLimitsResponse)(nil),                       // 14: tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse
-	(*PortfolioPosition)(nil),                            // 15: tinkoff.public.invest.api.contract.v1.PortfolioPosition
-	(*VirtualPortfolioPosition)(nil),                     // 16: tinkoff.public.invest.api.contract.v1.VirtualPortfolioPosition
-	(*PositionsSecurities)(nil),                          // 17: tinkoff.public.invest.api.contract.v1.PositionsSecurities
-	(*PositionsFutures)(nil),                             // 18: tinkoff.public.invest.api.contract.v1.PositionsFutures
-	(*PositionsOptions)(nil),                             // 19: tinkoff.public.invest.api.contract.v1.PositionsOptions
-	(*BrokerReportRequest)(nil),                          // 20: tinkoff.public.invest.api.contract.v1.BrokerReportRequest
-	(*BrokerReportResponse)(nil),                         // 21: tinkoff.public.invest.api.contract.v1.BrokerReportResponse
-	(*GenerateBrokerReportRequest)(nil),                  // 22: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest
-	(*GenerateBrokerReportResponse)(nil),                 // 23: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse
-	(*GetBrokerReportRequest)(nil),                       // 24: tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest
-	(*GetBrokerReportResponse)(nil),                      // 25: tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse
-	(*BrokerReport)(nil),                                 // 26: tinkoff.public.invest.api.contract.v1.BrokerReport
-	(*GetDividendsForeignIssuerRequest)(nil),             // 27: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest
-	(*GetDividendsForeignIssuerResponse)(nil),            // 28: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse
-	(*GenerateDividendsForeignIssuerReportRequest)(nil),  // 29: tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest
-	(*GetDividendsForeignIssuerReportRequest)(nil),       // 30: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest
-	(*GenerateDividendsForeignIssuerReportResponse)(nil), // 31: tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponse
-	(*GetDividendsForeignIssuerReportResponse)(nil),      // 32: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse
-	(*DividendsForeignIssuerReport)(nil),                 // 33: tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport
-	(*PortfolioStreamRequest)(nil),                       // 34: tinkoff.public.invest.api.contract.v1.PortfolioStreamRequest
-	(*PortfolioStreamResponse)(nil),                      // 35: tinkoff.public.invest.api.contract.v1.PortfolioStreamResponse
-	(*PortfolioSubscriptionResult)(nil),                  // 36: tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionResult
-	(*AccountSubscriptionStatus)(nil),                    // 37: tinkoff.public.invest.api.contract.v1.AccountSubscriptionStatus
-	(*GetOperationsByCursorRequest)(nil),                 // 38: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest
-	(*GetOperationsByCursorResponse)(nil),                // 39: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse
-	(*OperationItem)(nil),                                // 40: tinkoff.public.invest.api.contract.v1.OperationItem
-	(*OperationItemTrades)(nil),                          // 41: tinkoff.public.invest.api.contract.v1.OperationItemTrades
-	(*OperationItemTrade)(nil),                           // 42: tinkoff.public.invest.api.contract.v1.OperationItemTrade
-	(*PositionsStreamRequest)(nil),                       // 43: tinkoff.public.invest.api.contract.v1.PositionsStreamRequest
-	(*PositionsStreamResponse)(nil),                      // 44: tinkoff.public.invest.api.contract.v1.PositionsStreamResponse
-	(*PositionsSubscriptionResult)(nil),                  // 45: tinkoff.public.invest.api.contract.v1.PositionsSubscriptionResult
-	(*PositionsSubscriptionStatus)(nil),                  // 46: tinkoff.public.invest.api.contract.v1.PositionsSubscriptionStatus
-	(*PositionData)(nil),                                 // 47: tinkoff.public.invest.api.contract.v1.PositionData
-	(*PositionsMoney)(nil),                               // 48: tinkoff.public.invest.api.contract.v1.PositionsMoney
-	(*ChildOperationItem)(nil),                           // 49: tinkoff.public.invest.api.contract.v1.ChildOperationItem
-	(*timestamppb.Timestamp)(nil),                        // 50: google.protobuf.Timestamp
-	(*MoneyValue)(nil),                                   // 51: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(*Quotation)(nil),                                    // 52: tinkoff.public.invest.api.contract.v1.Quotation
-	(*PingDelaySettings)(nil),                            // 53: tinkoff.public.invest.api.contract.v1.PingDelaySettings
-	(*Ping)(nil),                                         // 54: tinkoff.public.invest.api.contract.v1.Ping
-	(InstrumentType)(0),                                  // 55: tinkoff.public.invest.api.contract.v1.InstrumentType
-}
+var (
+	file_operations_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+	file_operations_proto_msgTypes  = make([]protoimpl.MessageInfo, 45)
+	file_operations_proto_goTypes   = []interface{}{
+		(OperationState)(0),                                  // 0: tinkoff.public.invest.api.contract.v1.OperationState
+		(OperationType)(0),                                   // 1: tinkoff.public.invest.api.contract.v1.OperationType
+		(PortfolioSubscriptionStatus)(0),                     // 2: tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionStatus
+		(PositionsAccountSubscriptionStatus)(0),              // 3: tinkoff.public.invest.api.contract.v1.PositionsAccountSubscriptionStatus
+		(PortfolioRequest_CurrencyRequest)(0),                // 4: tinkoff.public.invest.api.contract.v1.PortfolioRequest.CurrencyRequest
+		(*OperationsRequest)(nil),                            // 5: tinkoff.public.invest.api.contract.v1.OperationsRequest
+		(*OperationsResponse)(nil),                           // 6: tinkoff.public.invest.api.contract.v1.OperationsResponse
+		(*Operation)(nil),                                    // 7: tinkoff.public.invest.api.contract.v1.Operation
+		(*OperationTrade)(nil),                               // 8: tinkoff.public.invest.api.contract.v1.OperationTrade
+		(*PortfolioRequest)(nil),                             // 9: tinkoff.public.invest.api.contract.v1.PortfolioRequest
+		(*PortfolioResponse)(nil),                            // 10: tinkoff.public.invest.api.contract.v1.PortfolioResponse
+		(*PositionsRequest)(nil),                             // 11: tinkoff.public.invest.api.contract.v1.PositionsRequest
+		(*PositionsResponse)(nil),                            // 12: tinkoff.public.invest.api.contract.v1.PositionsResponse
+		(*WithdrawLimitsRequest)(nil),                        // 13: tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest
+		(*WithdrawLimitsResponse)(nil),                       // 14: tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse
+		(*PortfolioPosition)(nil),                            // 15: tinkoff.public.invest.api.contract.v1.PortfolioPosition
+		(*VirtualPortfolioPosition)(nil),                     // 16: tinkoff.public.invest.api.contract.v1.VirtualPortfolioPosition
+		(*PositionsSecurities)(nil),                          // 17: tinkoff.public.invest.api.contract.v1.PositionsSecurities
+		(*PositionsFutures)(nil),                             // 18: tinkoff.public.invest.api.contract.v1.PositionsFutures
+		(*PositionsOptions)(nil),                             // 19: tinkoff.public.invest.api.contract.v1.PositionsOptions
+		(*BrokerReportRequest)(nil),                          // 20: tinkoff.public.invest.api.contract.v1.BrokerReportRequest
+		(*BrokerReportResponse)(nil),                         // 21: tinkoff.public.invest.api.contract.v1.BrokerReportResponse
+		(*GenerateBrokerReportRequest)(nil),                  // 22: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest
+		(*GenerateBrokerReportResponse)(nil),                 // 23: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse
+		(*GetBrokerReportRequest)(nil),                       // 24: tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest
+		(*GetBrokerReportResponse)(nil),                      // 25: tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse
+		(*BrokerReport)(nil),                                 // 26: tinkoff.public.invest.api.contract.v1.BrokerReport
+		(*GetDividendsForeignIssuerRequest)(nil),             // 27: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest
+		(*GetDividendsForeignIssuerResponse)(nil),            // 28: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse
+		(*GenerateDividendsForeignIssuerReportRequest)(nil),  // 29: tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest
+		(*GetDividendsForeignIssuerReportRequest)(nil),       // 30: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest
+		(*GenerateDividendsForeignIssuerReportResponse)(nil), // 31: tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponse
+		(*GetDividendsForeignIssuerReportResponse)(nil),      // 32: tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse
+		(*DividendsForeignIssuerReport)(nil),                 // 33: tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport
+		(*PortfolioStreamRequest)(nil),                       // 34: tinkoff.public.invest.api.contract.v1.PortfolioStreamRequest
+		(*PortfolioStreamResponse)(nil),                      // 35: tinkoff.public.invest.api.contract.v1.PortfolioStreamResponse
+		(*PortfolioSubscriptionResult)(nil),                  // 36: tinkoff.public.invest.api.contract.v1.PortfolioSubscriptionResult
+		(*AccountSubscriptionStatus)(nil),                    // 37: tinkoff.public.invest.api.contract.v1.AccountSubscriptionStatus
+		(*GetOperationsByCursorRequest)(nil),                 // 38: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest
+		(*GetOperationsByCursorResponse)(nil),                // 39: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse
+		(*OperationItem)(nil),                                // 40: tinkoff.public.invest.api.contract.v1.OperationItem
+		(*OperationItemTrades)(nil),                          // 41: tinkoff.public.invest.api.contract.v1.OperationItemTrades
+		(*OperationItemTrade)(nil),                           // 42: tinkoff.public.invest.api.contract.v1.OperationItemTrade
+		(*PositionsStreamRequest)(nil),                       // 43: tinkoff.public.invest.api.contract.v1.PositionsStreamRequest
+		(*PositionsStreamResponse)(nil),                      // 44: tinkoff.public.invest.api.contract.v1.PositionsStreamResponse
+		(*PositionsSubscriptionResult)(nil),                  // 45: tinkoff.public.invest.api.contract.v1.PositionsSubscriptionResult
+		(*PositionsSubscriptionStatus)(nil),                  // 46: tinkoff.public.invest.api.contract.v1.PositionsSubscriptionStatus
+		(*PositionData)(nil),                                 // 47: tinkoff.public.invest.api.contract.v1.PositionData
+		(*PositionsMoney)(nil),                               // 48: tinkoff.public.invest.api.contract.v1.PositionsMoney
+		(*ChildOperationItem)(nil),                           // 49: tinkoff.public.invest.api.contract.v1.ChildOperationItem
+		(*timestamppb.Timestamp)(nil),                        // 50: google.protobuf.Timestamp
+		(*MoneyValue)(nil),                                   // 51: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(*Quotation)(nil),                                    // 52: tinkoff.public.invest.api.contract.v1.Quotation
+		(*PingDelaySettings)(nil),                            // 53: tinkoff.public.invest.api.contract.v1.PingDelaySettings
+		(*Ping)(nil),                                         // 54: tinkoff.public.invest.api.contract.v1.Ping
+		(InstrumentType)(0),                                  // 55: tinkoff.public.invest.api.contract.v1.InstrumentType
+	}
+)
+
 var file_operations_proto_depIdxs = []int32{
 	50,  // 0: tinkoff.public.invest.api.contract.v1.OperationsRequest.from:type_name -> google.protobuf.Timestamp
 	50,  // 1: tinkoff.public.invest.api.contract.v1.OperationsRequest.to:type_name -> google.protobuf.Timestamp

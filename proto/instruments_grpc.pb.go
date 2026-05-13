@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -580,120 +581,156 @@ type InstrumentsServiceServer interface {
 }
 
 // UnimplementedInstrumentsServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedInstrumentsServiceServer struct {
-}
+type UnimplementedInstrumentsServiceServer struct{}
 
 func (UnimplementedInstrumentsServiceServer) TradingSchedules(context.Context, *TradingSchedulesRequest) (*TradingSchedulesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TradingSchedules not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) BondBy(context.Context, *InstrumentRequest) (*BondResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BondBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Bonds(context.Context, *InstrumentsRequest) (*BondsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Bonds not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetBondCoupons(context.Context, *GetBondCouponsRequest) (*GetBondCouponsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBondCoupons not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetBondEvents(context.Context, *GetBondEventsRequest) (*GetBondEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBondEvents not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) CurrencyBy(context.Context, *InstrumentRequest) (*CurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CurrencyBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Currencies(context.Context, *InstrumentsRequest) (*CurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Currencies not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) EtfBy(context.Context, *InstrumentRequest) (*EtfResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EtfBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Etfs(context.Context, *InstrumentsRequest) (*EtfsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Etfs not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) FutureBy(context.Context, *InstrumentRequest) (*FutureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FutureBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Futures(context.Context, *InstrumentsRequest) (*FuturesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Futures not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) OptionBy(context.Context, *InstrumentRequest) (*OptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OptionBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Options(context.Context, *InstrumentsRequest) (*OptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Options not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) OptionsBy(context.Context, *FilterOptionsRequest) (*OptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OptionsBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) ShareBy(context.Context, *InstrumentRequest) (*ShareResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShareBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Shares(context.Context, *InstrumentsRequest) (*SharesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Shares not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) Indicatives(context.Context, *IndicativesRequest) (*IndicativesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Indicatives not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetAccruedInterests(context.Context, *GetAccruedInterestsRequest) (*GetAccruedInterestsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccruedInterests not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetFuturesMargin(context.Context, *GetFuturesMarginRequest) (*GetFuturesMarginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFuturesMargin not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetInstrumentBy(context.Context, *InstrumentRequest) (*InstrumentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInstrumentBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetDividends(context.Context, *GetDividendsRequest) (*GetDividendsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDividends not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetAssetBy(context.Context, *AssetRequest) (*AssetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssetBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetAssets(context.Context, *AssetsRequest) (*AssetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssets not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetFavorites(context.Context, *GetFavoritesRequest) (*GetFavoritesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFavorites not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) EditFavorites(context.Context, *EditFavoritesRequest) (*EditFavoritesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EditFavorites not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) CreateFavoriteGroup(context.Context, *CreateFavoriteGroupRequest) (*CreateFavoriteGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFavoriteGroup not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) DeleteFavoriteGroup(context.Context, *DeleteFavoriteGroupRequest) (*DeleteFavoriteGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFavoriteGroup not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetFavoriteGroups(context.Context, *GetFavoriteGroupsRequest) (*GetFavoriteGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFavoriteGroups not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetCountries(context.Context, *GetCountriesRequest) (*GetCountriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCountries not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) FindInstrument(context.Context, *FindInstrumentRequest) (*FindInstrumentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindInstrument not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetBrands(context.Context, *GetBrandsRequest) (*GetBrandsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBrands not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetBrandBy(context.Context, *GetBrandRequest) (*Brand, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBrandBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetAssetFundamentals(context.Context, *GetAssetFundamentalsRequest) (*GetAssetFundamentalsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssetFundamentals not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetAssetReports(context.Context, *GetAssetReportsRequest) (*GetAssetReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssetReports not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetConsensusForecasts(context.Context, *GetConsensusForecastsRequest) (*GetConsensusForecastsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConsensusForecasts not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetForecastBy(context.Context, *GetForecastRequest) (*GetForecastResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetForecastBy not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetRiskRates(context.Context, *RiskRatesRequest) (*RiskRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRiskRates not implemented")
 }
+
 func (UnimplementedInstrumentsServiceServer) GetInsiderDeals(context.Context, *GetInsiderDealsRequest) (*GetInsiderDealsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInsiderDeals not implemented")
 }

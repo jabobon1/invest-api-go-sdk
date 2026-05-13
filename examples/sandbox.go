@@ -151,5 +151,4 @@ func main() {
 	} else {
 		fmt.Printf("order status = %v\n", sellResp.GetExecutionReportStatus().String())
 	}
-
 }

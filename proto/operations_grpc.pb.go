@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -145,27 +146,32 @@ type OperationsServiceServer interface {
 }
 
 // UnimplementedOperationsServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOperationsServiceServer struct {
-}
+type UnimplementedOperationsServiceServer struct{}
 
 func (UnimplementedOperationsServiceServer) GetOperations(context.Context, *OperationsRequest) (*OperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperations not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetPortfolio(context.Context, *PortfolioRequest) (*PortfolioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolio not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetPositions(context.Context, *PositionsRequest) (*PositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPositions not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetWithdrawLimits(context.Context, *WithdrawLimitsRequest) (*WithdrawLimitsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWithdrawLimits not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetBrokerReport(context.Context, *BrokerReportRequest) (*BrokerReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBrokerReport not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetDividendsForeignIssuer(context.Context, *GetDividendsForeignIssuerRequest) (*GetDividendsForeignIssuerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDividendsForeignIssuer not implemented")
 }
+
 func (UnimplementedOperationsServiceServer) GetOperationsByCursor(context.Context, *GetOperationsByCursorRequest) (*GetOperationsByCursorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperationsByCursor not implemented")
 }
@@ -447,15 +453,16 @@ type OperationsStreamServiceServer interface {
 }
 
 // UnimplementedOperationsStreamServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOperationsStreamServiceServer struct {
-}
+type UnimplementedOperationsStreamServiceServer struct{}
 
 func (UnimplementedOperationsStreamServiceServer) PortfolioStream(*PortfolioStreamRequest, OperationsStreamService_PortfolioStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method PortfolioStream not implemented")
 }
+
 func (UnimplementedOperationsStreamServiceServer) PositionsStream(*PositionsStreamRequest, OperationsStreamService_PositionsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method PositionsStream not implemented")
 }
+
 func (UnimplementedOperationsStreamServiceServer) mustEmbedUnimplementedOperationsStreamServiceServer() {
 }
 

@@ -13,7 +13,7 @@ import (
 type Config struct {
 	// EndPoint - Для работы с реальным контуром и контуром песочницы нужны разные эндпоинты.
 	// По умолчанию = sandbox-invest-public-api.tinkoff.ru:443
-	//https://tinkoff.github.io/investAPI/url_difference/
+	// https://tinkoff.github.io/investAPI/url_difference/
 	EndPoint string `yaml:"EndPoint"`
 	// Token - Ваш токен для Tinkoff InvestAPI
 	Token string `yaml:"APIToken"`

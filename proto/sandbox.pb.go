@@ -7,11 +7,12 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -75,7 +76,7 @@ type OpenSandboxAccountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Номер счета
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Номер счета
 }
 
 func (x *OpenSandboxAccountResponse) Reset() {
@@ -123,7 +124,7 @@ type CloseSandboxAccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Номер счета
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Номер счета
 }
 
 func (x *CloseSandboxAccountRequest) Reset() {
@@ -210,8 +211,8 @@ type SandboxPayInRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId string      `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //Номер счета
-	Amount    *MoneyValue `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                        //Сумма пополнения счета в рублях
+	AccountId string      `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // Номер счета
+	Amount    *MoneyValue `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                        // Сумма пополнения счета в рублях
 }
 
 func (x *SandboxPayInRequest) Reset() {
@@ -266,7 +267,7 @@ type SandboxPayInResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Balance *MoneyValue `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"` //Текущий баланс счета
+	Balance *MoneyValue `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"` // Текущий баланс счета
 }
 
 func (x *SandboxPayInResponse) Reset() {
@@ -517,41 +518,44 @@ func file_sandbox_proto_rawDescGZIP() []byte {
 	return file_sandbox_proto_rawDescData
 }
 
-var file_sandbox_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_sandbox_proto_goTypes = []interface{}{
-	(*OpenSandboxAccountRequest)(nil),     // 0: tinkoff.public.invest.api.contract.v1.OpenSandboxAccountRequest
-	(*OpenSandboxAccountResponse)(nil),    // 1: tinkoff.public.invest.api.contract.v1.OpenSandboxAccountResponse
-	(*CloseSandboxAccountRequest)(nil),    // 2: tinkoff.public.invest.api.contract.v1.CloseSandboxAccountRequest
-	(*CloseSandboxAccountResponse)(nil),   // 3: tinkoff.public.invest.api.contract.v1.CloseSandboxAccountResponse
-	(*SandboxPayInRequest)(nil),           // 4: tinkoff.public.invest.api.contract.v1.SandboxPayInRequest
-	(*SandboxPayInResponse)(nil),          // 5: tinkoff.public.invest.api.contract.v1.SandboxPayInResponse
-	(*MoneyValue)(nil),                    // 6: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(*GetAccountsRequest)(nil),            // 7: tinkoff.public.invest.api.contract.v1.GetAccountsRequest
-	(*PostOrderRequest)(nil),              // 8: tinkoff.public.invest.api.contract.v1.PostOrderRequest
-	(*PostOrderAsyncRequest)(nil),         // 9: tinkoff.public.invest.api.contract.v1.PostOrderAsyncRequest
-	(*ReplaceOrderRequest)(nil),           // 10: tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest
-	(*GetOrdersRequest)(nil),              // 11: tinkoff.public.invest.api.contract.v1.GetOrdersRequest
-	(*CancelOrderRequest)(nil),            // 12: tinkoff.public.invest.api.contract.v1.CancelOrderRequest
-	(*GetOrderStateRequest)(nil),          // 13: tinkoff.public.invest.api.contract.v1.GetOrderStateRequest
-	(*PositionsRequest)(nil),              // 14: tinkoff.public.invest.api.contract.v1.PositionsRequest
-	(*OperationsRequest)(nil),             // 15: tinkoff.public.invest.api.contract.v1.OperationsRequest
-	(*GetOperationsByCursorRequest)(nil),  // 16: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest
-	(*PortfolioRequest)(nil),              // 17: tinkoff.public.invest.api.contract.v1.PortfolioRequest
-	(*WithdrawLimitsRequest)(nil),         // 18: tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest
-	(*GetMaxLotsRequest)(nil),             // 19: tinkoff.public.invest.api.contract.v1.GetMaxLotsRequest
-	(*GetAccountsResponse)(nil),           // 20: tinkoff.public.invest.api.contract.v1.GetAccountsResponse
-	(*PostOrderResponse)(nil),             // 21: tinkoff.public.invest.api.contract.v1.PostOrderResponse
-	(*PostOrderAsyncResponse)(nil),        // 22: tinkoff.public.invest.api.contract.v1.PostOrderAsyncResponse
-	(*GetOrdersResponse)(nil),             // 23: tinkoff.public.invest.api.contract.v1.GetOrdersResponse
-	(*CancelOrderResponse)(nil),           // 24: tinkoff.public.invest.api.contract.v1.CancelOrderResponse
-	(*OrderState)(nil),                    // 25: tinkoff.public.invest.api.contract.v1.OrderState
-	(*PositionsResponse)(nil),             // 26: tinkoff.public.invest.api.contract.v1.PositionsResponse
-	(*OperationsResponse)(nil),            // 27: tinkoff.public.invest.api.contract.v1.OperationsResponse
-	(*GetOperationsByCursorResponse)(nil), // 28: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse
-	(*PortfolioResponse)(nil),             // 29: tinkoff.public.invest.api.contract.v1.PortfolioResponse
-	(*WithdrawLimitsResponse)(nil),        // 30: tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse
-	(*GetMaxLotsResponse)(nil),            // 31: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse
-}
+var (
+	file_sandbox_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+	file_sandbox_proto_goTypes  = []interface{}{
+		(*OpenSandboxAccountRequest)(nil),     // 0: tinkoff.public.invest.api.contract.v1.OpenSandboxAccountRequest
+		(*OpenSandboxAccountResponse)(nil),    // 1: tinkoff.public.invest.api.contract.v1.OpenSandboxAccountResponse
+		(*CloseSandboxAccountRequest)(nil),    // 2: tinkoff.public.invest.api.contract.v1.CloseSandboxAccountRequest
+		(*CloseSandboxAccountResponse)(nil),   // 3: tinkoff.public.invest.api.contract.v1.CloseSandboxAccountResponse
+		(*SandboxPayInRequest)(nil),           // 4: tinkoff.public.invest.api.contract.v1.SandboxPayInRequest
+		(*SandboxPayInResponse)(nil),          // 5: tinkoff.public.invest.api.contract.v1.SandboxPayInResponse
+		(*MoneyValue)(nil),                    // 6: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(*GetAccountsRequest)(nil),            // 7: tinkoff.public.invest.api.contract.v1.GetAccountsRequest
+		(*PostOrderRequest)(nil),              // 8: tinkoff.public.invest.api.contract.v1.PostOrderRequest
+		(*PostOrderAsyncRequest)(nil),         // 9: tinkoff.public.invest.api.contract.v1.PostOrderAsyncRequest
+		(*ReplaceOrderRequest)(nil),           // 10: tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest
+		(*GetOrdersRequest)(nil),              // 11: tinkoff.public.invest.api.contract.v1.GetOrdersRequest
+		(*CancelOrderRequest)(nil),            // 12: tinkoff.public.invest.api.contract.v1.CancelOrderRequest
+		(*GetOrderStateRequest)(nil),          // 13: tinkoff.public.invest.api.contract.v1.GetOrderStateRequest
+		(*PositionsRequest)(nil),              // 14: tinkoff.public.invest.api.contract.v1.PositionsRequest
+		(*OperationsRequest)(nil),             // 15: tinkoff.public.invest.api.contract.v1.OperationsRequest
+		(*GetOperationsByCursorRequest)(nil),  // 16: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest
+		(*PortfolioRequest)(nil),              // 17: tinkoff.public.invest.api.contract.v1.PortfolioRequest
+		(*WithdrawLimitsRequest)(nil),         // 18: tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest
+		(*GetMaxLotsRequest)(nil),             // 19: tinkoff.public.invest.api.contract.v1.GetMaxLotsRequest
+		(*GetAccountsResponse)(nil),           // 20: tinkoff.public.invest.api.contract.v1.GetAccountsResponse
+		(*PostOrderResponse)(nil),             // 21: tinkoff.public.invest.api.contract.v1.PostOrderResponse
+		(*PostOrderAsyncResponse)(nil),        // 22: tinkoff.public.invest.api.contract.v1.PostOrderAsyncResponse
+		(*GetOrdersResponse)(nil),             // 23: tinkoff.public.invest.api.contract.v1.GetOrdersResponse
+		(*CancelOrderResponse)(nil),           // 24: tinkoff.public.invest.api.contract.v1.CancelOrderResponse
+		(*OrderState)(nil),                    // 25: tinkoff.public.invest.api.contract.v1.OrderState
+		(*PositionsResponse)(nil),             // 26: tinkoff.public.invest.api.contract.v1.PositionsResponse
+		(*OperationsResponse)(nil),            // 27: tinkoff.public.invest.api.contract.v1.OperationsResponse
+		(*GetOperationsByCursorResponse)(nil), // 28: tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse
+		(*PortfolioResponse)(nil),             // 29: tinkoff.public.invest.api.contract.v1.PortfolioResponse
+		(*WithdrawLimitsResponse)(nil),        // 30: tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse
+		(*GetMaxLotsResponse)(nil),            // 31: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse
+	}
+)
+
 var file_sandbox_proto_depIdxs = []int32{
 	6,  // 0: tinkoff.public.invest.api.contract.v1.SandboxPayInRequest.amount:type_name -> tinkoff.public.invest.api.contract.v1.MoneyValue
 	6,  // 1: tinkoff.public.invest.api.contract.v1.SandboxPayInResponse.balance:type_name -> tinkoff.public.invest.api.contract.v1.MoneyValue

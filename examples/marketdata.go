@@ -171,5 +171,4 @@ func main() {
 	if err != nil {
 		logger.Errorf(err.Error())
 	}
-
 }

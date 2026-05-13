@@ -7,12 +7,13 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,9 +27,9 @@ const (
 type OrderDirection int32
 
 const (
-	OrderDirection_ORDER_DIRECTION_UNSPECIFIED OrderDirection = 0 //Значение не указано
-	OrderDirection_ORDER_DIRECTION_BUY         OrderDirection = 1 //Покупка
-	OrderDirection_ORDER_DIRECTION_SELL        OrderDirection = 2 //Продажа
+	OrderDirection_ORDER_DIRECTION_UNSPECIFIED OrderDirection = 0 // Значение не указано
+	OrderDirection_ORDER_DIRECTION_BUY         OrderDirection = 1 // Покупка
+	OrderDirection_ORDER_DIRECTION_SELL        OrderDirection = 2 // Продажа
 )
 
 // Enum value maps for OrderDirection.
@@ -76,10 +77,10 @@ func (OrderDirection) EnumDescriptor() ([]byte, []int) {
 type OrderType int32
 
 const (
-	OrderType_ORDER_TYPE_UNSPECIFIED OrderType = 0 //Значение не указано
-	OrderType_ORDER_TYPE_LIMIT       OrderType = 1 //Лимитная
-	OrderType_ORDER_TYPE_MARKET      OrderType = 2 //Рыночная
-	OrderType_ORDER_TYPE_BESTPRICE   OrderType = 3 //Лучшая цена
+	OrderType_ORDER_TYPE_UNSPECIFIED OrderType = 0 // Значение не указано
+	OrderType_ORDER_TYPE_LIMIT       OrderType = 1 // Лимитная
+	OrderType_ORDER_TYPE_MARKET      OrderType = 2 // Рыночная
+	OrderType_ORDER_TYPE_BESTPRICE   OrderType = 3 // Лучшая цена
 )
 
 // Enum value maps for OrderType.
@@ -130,11 +131,11 @@ type OrderExecutionReportStatus int32
 
 const (
 	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_UNSPECIFIED   OrderExecutionReportStatus = 0
-	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_FILL          OrderExecutionReportStatus = 1 //Исполнена
-	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_REJECTED      OrderExecutionReportStatus = 2 //Отклонена
-	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_CANCELLED     OrderExecutionReportStatus = 3 //Отменена пользователем
-	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_NEW           OrderExecutionReportStatus = 4 //Новая
-	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_PARTIALLYFILL OrderExecutionReportStatus = 5 //Частично исполнена
+	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_FILL          OrderExecutionReportStatus = 1 // Исполнена
+	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_REJECTED      OrderExecutionReportStatus = 2 // Отклонена
+	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_CANCELLED     OrderExecutionReportStatus = 3 // Отменена пользователем
+	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_NEW           OrderExecutionReportStatus = 4 // Новая
+	OrderExecutionReportStatus_EXECUTION_REPORT_STATUS_PARTIALLYFILL OrderExecutionReportStatus = 5 // Частично исполнена
 )
 
 // Enum value maps for OrderExecutionReportStatus.
@@ -188,10 +189,10 @@ func (OrderExecutionReportStatus) EnumDescriptor() ([]byte, []int) {
 type TimeInForceType int32
 
 const (
-	TimeInForceType_TIME_IN_FORCE_UNSPECIFIED   TimeInForceType = 0 //Значение не определено см. TIME_IN_FORCE_DAY
-	TimeInForceType_TIME_IN_FORCE_DAY           TimeInForceType = 1 //Заявка действует до конца торгового дня. Значение по умолчанию
-	TimeInForceType_TIME_IN_FORCE_FILL_AND_KILL TimeInForceType = 2 //Если в момент выставления возможно исполнение заявки(в т.ч. частичное), заявка будет исполнена или отменена сразу после выставления
-	TimeInForceType_TIME_IN_FORCE_FILL_OR_KILL  TimeInForceType = 3 //Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным
+	TimeInForceType_TIME_IN_FORCE_UNSPECIFIED   TimeInForceType = 0 // Значение не определено см. TIME_IN_FORCE_DAY
+	TimeInForceType_TIME_IN_FORCE_DAY           TimeInForceType = 1 // Заявка действует до конца торгового дня. Значение по умолчанию
+	TimeInForceType_TIME_IN_FORCE_FILL_AND_KILL TimeInForceType = 2 // Если в момент выставления возможно исполнение заявки(в т.ч. частичное), заявка будет исполнена или отменена сразу после выставления
+	TimeInForceType_TIME_IN_FORCE_FILL_OR_KILL  TimeInForceType = 3 // Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным
 )
 
 // Enum value maps for TimeInForceType.
@@ -241,9 +242,9 @@ func (TimeInForceType) EnumDescriptor() ([]byte, []int) {
 type OrderIdType int32
 
 const (
-	OrderIdType_ORDER_ID_TYPE_UNSPECIFIED OrderIdType = 0 //Тип идентификатора не указан.
-	OrderIdType_ORDER_ID_TYPE_EXCHANGE    OrderIdType = 1 //Биржевой идентификатор
-	OrderIdType_ORDER_ID_TYPE_REQUEST     OrderIdType = 2 //Ключ идемпотентности, переданный клиентом
+	OrderIdType_ORDER_ID_TYPE_UNSPECIFIED OrderIdType = 0 // Тип идентификатора не указан.
+	OrderIdType_ORDER_ID_TYPE_EXCHANGE    OrderIdType = 1 // Биржевой идентификатор
+	OrderIdType_ORDER_ID_TYPE_REQUEST     OrderIdType = 2 // Ключ идемпотентности, переданный клиентом
 )
 
 // Enum value maps for OrderIdType.
@@ -291,14 +292,14 @@ func (OrderIdType) EnumDescriptor() ([]byte, []int) {
 type OrderStateStreamResponse_MarkerType int32
 
 const (
-	OrderStateStreamResponse_MARKER_UNKNOWN OrderStateStreamResponse_MarkerType = 0 //не определено
-	OrderStateStreamResponse_MARKER_BROKER  OrderStateStreamResponse_MarkerType = 1 //сделки брокера
-	OrderStateStreamResponse_MARKER_CHAT    OrderStateStreamResponse_MarkerType = 2 //исполнение поручение, полученного от клиента через каналы связи
-	OrderStateStreamResponse_MARKER_PAPER   OrderStateStreamResponse_MarkerType = 3 //исполнение поручение, полученного от клиента в бумажной форме
-	OrderStateStreamResponse_MARKER_MARGIN  OrderStateStreamResponse_MarkerType = 4 //принудительное закрытие позиций
-	OrderStateStreamResponse_MARKER_TKBNM   OrderStateStreamResponse_MarkerType = 5 //сделки по управлению ликвидностью
-	OrderStateStreamResponse_MARKER_SHORT   OrderStateStreamResponse_MarkerType = 6 //сделки РЕПО по привлечению у клиентов бумаг
-	OrderStateStreamResponse_MARKER_SPECMM  OrderStateStreamResponse_MarkerType = 7 //перенос временно непокрытых позиций
+	OrderStateStreamResponse_MARKER_UNKNOWN OrderStateStreamResponse_MarkerType = 0 // не определено
+	OrderStateStreamResponse_MARKER_BROKER  OrderStateStreamResponse_MarkerType = 1 // сделки брокера
+	OrderStateStreamResponse_MARKER_CHAT    OrderStateStreamResponse_MarkerType = 2 // исполнение поручение, полученного от клиента через каналы связи
+	OrderStateStreamResponse_MARKER_PAPER   OrderStateStreamResponse_MarkerType = 3 // исполнение поручение, полученного от клиента в бумажной форме
+	OrderStateStreamResponse_MARKER_MARGIN  OrderStateStreamResponse_MarkerType = 4 // принудительное закрытие позиций
+	OrderStateStreamResponse_MARKER_TKBNM   OrderStateStreamResponse_MarkerType = 5 // сделки по управлению ликвидностью
+	OrderStateStreamResponse_MARKER_SHORT   OrderStateStreamResponse_MarkerType = 6 // сделки РЕПО по привлечению у клиентов бумаг
+	OrderStateStreamResponse_MARKER_SPECMM  OrderStateStreamResponse_MarkerType = 7 // перенос временно непокрытых позиций
 	OrderStateStreamResponse_MARKER_PO      OrderStateStreamResponse_MarkerType = 8
 )
 
@@ -359,14 +360,14 @@ func (OrderStateStreamResponse_MarkerType) EnumDescriptor() ([]byte, []int) {
 type OrderStateStreamResponse_StatusCauseInfo int32
 
 const (
-	OrderStateStreamResponse_CAUSE_UNSPECIFIED                   OrderStateStreamResponse_StatusCauseInfo = 0  //Не определено
-	OrderStateStreamResponse_CAUSE_CANCELLED_BY_CLIENT           OrderStateStreamResponse_StatusCauseInfo = 15 //Отменено клиентом
-	OrderStateStreamResponse_CAUSE_CANCELLED_BY_EXCHANGE         OrderStateStreamResponse_StatusCauseInfo = 1  //Отменено биржей
-	OrderStateStreamResponse_CAUSE_CANCELLED_NOT_ENOUGH_POSITION OrderStateStreamResponse_StatusCauseInfo = 2  //Заявка не выставлена из-за нехватки средств
-	OrderStateStreamResponse_CAUSE_CANCELLED_BY_CLIENT_BLOCK     OrderStateStreamResponse_StatusCauseInfo = 3  //Отменено из-за блокировки клиента
-	OrderStateStreamResponse_CAUSE_REJECTED_BY_BROKER            OrderStateStreamResponse_StatusCauseInfo = 4  //Отклонено брокером
-	OrderStateStreamResponse_CAUSE_REJECTED_BY_EXCHANGE          OrderStateStreamResponse_StatusCauseInfo = 5  //Отклонено биржей
-	OrderStateStreamResponse_CAUSE_CANCELLED_BY_BROKER           OrderStateStreamResponse_StatusCauseInfo = 6  //Отменено брокером
+	OrderStateStreamResponse_CAUSE_UNSPECIFIED                   OrderStateStreamResponse_StatusCauseInfo = 0  // Не определено
+	OrderStateStreamResponse_CAUSE_CANCELLED_BY_CLIENT           OrderStateStreamResponse_StatusCauseInfo = 15 // Отменено клиентом
+	OrderStateStreamResponse_CAUSE_CANCELLED_BY_EXCHANGE         OrderStateStreamResponse_StatusCauseInfo = 1  // Отменено биржей
+	OrderStateStreamResponse_CAUSE_CANCELLED_NOT_ENOUGH_POSITION OrderStateStreamResponse_StatusCauseInfo = 2  // Заявка не выставлена из-за нехватки средств
+	OrderStateStreamResponse_CAUSE_CANCELLED_BY_CLIENT_BLOCK     OrderStateStreamResponse_StatusCauseInfo = 3  // Отменено из-за блокировки клиента
+	OrderStateStreamResponse_CAUSE_REJECTED_BY_BROKER            OrderStateStreamResponse_StatusCauseInfo = 4  // Отклонено брокером
+	OrderStateStreamResponse_CAUSE_REJECTED_BY_EXCHANGE          OrderStateStreamResponse_StatusCauseInfo = 5  // Отклонено биржей
+	OrderStateStreamResponse_CAUSE_CANCELLED_BY_BROKER           OrderStateStreamResponse_StatusCauseInfo = 6  // Отменено брокером
 )
 
 // Enum value maps for OrderStateStreamResponse_StatusCauseInfo.
@@ -426,8 +427,8 @@ type TradesStreamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts    []string `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                    //Идентификаторы счетов.
-	PingDelayMs *int32   `protobuf:"varint,15,opt,name=ping_delay_ms,json=pingDelayMs,proto3,oneof" json:"ping_delay_ms,omitempty"` //Задержка (пинг) сообщений: 5000–180 000 миллисекунд. Значение по умолчанию — 120 000.
+	Accounts    []string `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                    // Идентификаторы счетов.
+	PingDelayMs *int32   `protobuf:"varint,15,opt,name=ping_delay_ms,json=pingDelayMs,proto3,oneof" json:"ping_delay_ms,omitempty"` // Задержка (пинг) сообщений: 5000–180 000 миллисекунд. Значение по умолчанию — 120 000.
 }
 
 func (x *TradesStreamRequest) Reset() {
@@ -555,15 +556,15 @@ type isTradesStreamResponse_Payload interface {
 }
 
 type TradesStreamResponse_OrderTrades struct {
-	OrderTrades *OrderTrades `protobuf:"bytes,1,opt,name=order_trades,json=orderTrades,proto3,oneof"` //Информация об исполнении торгового поручения.
+	OrderTrades *OrderTrades `protobuf:"bytes,1,opt,name=order_trades,json=orderTrades,proto3,oneof"` // Информация об исполнении торгового поручения.
 }
 
 type TradesStreamResponse_Ping struct {
-	Ping *Ping `protobuf:"bytes,2,opt,name=ping,proto3,oneof"` //Проверка активности стрима.
+	Ping *Ping `protobuf:"bytes,2,opt,name=ping,proto3,oneof"` // Проверка активности стрима.
 }
 
 type TradesStreamResponse_Subscription struct {
-	Subscription *SubscriptionResponse `protobuf:"bytes,3,opt,name=subscription,proto3,oneof"` //Ответ на запрос на подписку.
+	Subscription *SubscriptionResponse `protobuf:"bytes,3,opt,name=subscription,proto3,oneof"` // Ответ на запрос на подписку.
 }
 
 func (*TradesStreamResponse_OrderTrades) isTradesStreamResponse_Payload() {}
@@ -578,13 +579,13 @@ type OrderTrades struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                 //Идентификатор торгового поручения.
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                                           //Дата и время создания сообщения в часовом поясе UTC.
-	Direction     OrderDirection         `protobuf:"varint,3,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"` //Направление сделки.
-	Figi          string                 `protobuf:"bytes,4,opt,name=figi,proto3" json:"figi,omitempty"`                                                                      //Figi-идентификатор инструмента.
-	Trades        []*OrderTrade          `protobuf:"bytes,5,rep,name=trades,proto3" json:"trades,omitempty"`                                                                  //Массив сделок.
-	AccountId     string                 `protobuf:"bytes,6,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                           //Идентификатор счета.
-	InstrumentUid string                 `protobuf:"bytes,7,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                               //UID идентификатор инструмента.
+	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                 // Идентификатор торгового поручения.
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                                           // Дата и время создания сообщения в часовом поясе UTC.
+	Direction     OrderDirection         `protobuf:"varint,3,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"` // Направление сделки.
+	Figi          string                 `protobuf:"bytes,4,opt,name=figi,proto3" json:"figi,omitempty"`                                                                      // Figi-идентификатор инструмента.
+	Trades        []*OrderTrade          `protobuf:"bytes,5,rep,name=trades,proto3" json:"trades,omitempty"`                                                                  // Массив сделок.
+	AccountId     string                 `protobuf:"bytes,6,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                           // Идентификатор счета.
+	InstrumentUid string                 `protobuf:"bytes,7,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                               // UID идентификатор инструмента.
 }
 
 func (x *OrderTrades) Reset() {
@@ -674,10 +675,10 @@ type OrderTrade struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"` //Дата и время совершения сделки в часовом поясе UTC.
-	Price    *Quotation             `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"`                       //Цена за 1 инструмент, по которой совершена сделка.
-	Quantity int64                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                //Количество штук в сделке.
-	TradeId  string                 `protobuf:"bytes,4,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`    //Идентификатор сделки.
+	DateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"` // Дата и время совершения сделки в часовом поясе UTC.
+	Price    *Quotation             `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"`                       // Цена за 1 инструмент, по которой совершена сделка.
+	Quantity int64                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                // Количество штук в сделке.
+	TradeId  string                 `protobuf:"bytes,4,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`    // Идентификатор сделки.
 }
 
 func (x *OrderTrade) Reset() {
@@ -747,16 +748,16 @@ type PostOrderRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in orders.proto.
-	Figi               *string         `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                          //Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id.
-	Quantity           int64           `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                       //Количество лотов.
-	Price              *Quotation      `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                        //Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений.
-	Direction          OrderDirection  `protobuf:"varint,4,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                           //Направление операции.
-	AccountId          string          `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                     //Номер счета.
-	OrderType          OrderType       `protobuf:"varint,6,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`               //Тип заявки.
-	OrderId            string          `protobuf:"bytes,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                           //Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов.
-	InstrumentId       string          `protobuf:"bytes,8,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                            //Идентификатор инструмента, принимает значения Figi или Instrument_uid.
-	TimeInForce        TimeInForceType `protobuf:"varint,9,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType" json:"time_in_force,omitempty"` //Алгоритм исполнения поручения, применяется только к лимитной заявке.
-	PriceType          PriceType       `protobuf:"varint,10,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType" json:"price_type,omitempty"`              //Тип цены.
+	Figi               *string         `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                          // Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id.
+	Quantity           int64           `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                       // Количество лотов.
+	Price              *Quotation      `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                        // Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений.
+	Direction          OrderDirection  `protobuf:"varint,4,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                           // Направление операции.
+	AccountId          string          `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                     // Номер счета.
+	OrderType          OrderType       `protobuf:"varint,6,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`               // Тип заявки.
+	OrderId            string          `protobuf:"bytes,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                           // Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов.
+	InstrumentId       string          `protobuf:"bytes,8,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                            // Идентификатор инструмента, принимает значения Figi или Instrument_uid.
+	TimeInForce        TimeInForceType `protobuf:"varint,9,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType" json:"time_in_force,omitempty"` // Алгоритм исполнения поручения, применяется только к лимитной заявке.
+	PriceType          PriceType       `protobuf:"varint,10,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType" json:"price_type,omitempty"`              // Тип цены.
 	ConfirmMarginTrade bool            `protobuf:"varint,11,opt,name=confirm_margin_trade,json=confirmMarginTrade,proto3" json:"confirm_margin_trade,omitempty"`                                      // Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false.
 }
 
@@ -876,25 +877,25 @@ type PostOrderResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId               string                     `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    //Биржевой идентификатор заявки.
-	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` //Текущий статус заявки.
-	LotsRequested         int64                      `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                 //Запрошено лотов.
-	LotsExecuted          int64                      `protobuf:"varint,4,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                    //Исполнено лотов.
-	InitialOrderPrice     *MoneyValue                `protobuf:"bytes,5,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                    //Начальная цена заявки. Произведение количества запрошенных лотов на цену.
-	ExecutedOrderPrice    *MoneyValue                `protobuf:"bytes,6,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                 //Исполненная средняя цена одного инструмента в заявке.
-	TotalOrderAmount      *MoneyValue                `protobuf:"bytes,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                                                                                       //Итоговая стоимость заявки, включающая все комиссии.
-	InitialCommission     *MoneyValue                `protobuf:"bytes,8,opt,name=initial_commission,json=initialCommission,proto3" json:"initial_commission,omitempty"`                                                                                      //Начальная комиссия. Комиссия рассчитанная при выставлении заявки.
-	ExecutedCommission    *MoneyValue                `protobuf:"bytes,9,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`                                                                                   //Фактическая комиссия по итогам исполнения заявки.
-	AciValue              *MoneyValue                `protobuf:"bytes,10,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                                                                                //Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](./head-orders#coupon)
+	OrderId               string                     `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    // Биржевой идентификатор заявки.
+	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` // Текущий статус заявки.
+	LotsRequested         int64                      `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                 // Запрошено лотов.
+	LotsExecuted          int64                      `protobuf:"varint,4,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                    // Исполнено лотов.
+	InitialOrderPrice     *MoneyValue                `protobuf:"bytes,5,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                    // Начальная цена заявки. Произведение количества запрошенных лотов на цену.
+	ExecutedOrderPrice    *MoneyValue                `protobuf:"bytes,6,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                 // Исполненная средняя цена одного инструмента в заявке.
+	TotalOrderAmount      *MoneyValue                `protobuf:"bytes,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                                                                                       // Итоговая стоимость заявки, включающая все комиссии.
+	InitialCommission     *MoneyValue                `protobuf:"bytes,8,opt,name=initial_commission,json=initialCommission,proto3" json:"initial_commission,omitempty"`                                                                                      // Начальная комиссия. Комиссия рассчитанная при выставлении заявки.
+	ExecutedCommission    *MoneyValue                `protobuf:"bytes,9,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`                                                                                   // Фактическая комиссия по итогам исполнения заявки.
+	AciValue              *MoneyValue                `protobuf:"bytes,10,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                                                                                // Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](./head-orders#coupon)
 	Figi                  string                     `protobuf:"bytes,11,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                                        // Figi-идентификатор инструмента.
-	Direction             OrderDirection             `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   //Направление сделки.
-	InitialSecurityPrice  *MoneyValue                `protobuf:"bytes,13,opt,name=initial_security_price,json=initialSecurityPrice,proto3" json:"initial_security_price,omitempty"`                                                                          //Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
-	OrderType             OrderType                  `protobuf:"varint,14,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       //Тип заявки.
-	Message               string                     `protobuf:"bytes,15,opt,name=message,proto3" json:"message,omitempty"`                                                                                                                                  //Дополнительные данные об исполнении заявки.
-	InitialOrderPricePt   *Quotation                 `protobuf:"bytes,16,opt,name=initial_order_price_pt,json=initialOrderPricePt,proto3" json:"initial_order_price_pt,omitempty"`                                                                           //Начальная цена заявки в пунктах (для фьючерсов).
-	InstrumentUid         string                     `protobuf:"bytes,17,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 //UID идентификатор инструмента.
-	OrderRequestId        string                     `protobuf:"bytes,20,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                            //Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
-	ResponseMetadata      *ResponseMetadata          `protobuf:"bytes,254,opt,name=response_metadata,json=responseMetadata,proto3" json:"response_metadata,omitempty"`                                                                                       //Метадата
+	Direction             OrderDirection             `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   // Направление сделки.
+	InitialSecurityPrice  *MoneyValue                `protobuf:"bytes,13,opt,name=initial_security_price,json=initialSecurityPrice,proto3" json:"initial_security_price,omitempty"`                                                                          // Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
+	OrderType             OrderType                  `protobuf:"varint,14,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       // Тип заявки.
+	Message               string                     `protobuf:"bytes,15,opt,name=message,proto3" json:"message,omitempty"`                                                                                                                                  // Дополнительные данные об исполнении заявки.
+	InitialOrderPricePt   *Quotation                 `protobuf:"bytes,16,opt,name=initial_order_price_pt,json=initialOrderPricePt,proto3" json:"initial_order_price_pt,omitempty"`                                                                           // Начальная цена заявки в пунктах (для фьючерсов).
+	InstrumentUid         string                     `protobuf:"bytes,17,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 // UID идентификатор инструмента.
+	OrderRequestId        string                     `protobuf:"bytes,20,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                            // Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
+	ResponseMetadata      *ResponseMetadata          `protobuf:"bytes,254,opt,name=response_metadata,json=responseMetadata,proto3" json:"response_metadata,omitempty"`                                                                                       // Метадата
 }
 
 func (x *PostOrderResponse) Reset() {
@@ -1068,15 +1069,15 @@ type PostOrderAsyncRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId       string           `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                  //Идентификатор инструмента, принимает значения Figi или Instrument_uid.
-	Quantity           int64            `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                             //Количество лотов.
-	Price              *Quotation       `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                              //Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений.
-	Direction          OrderDirection   `protobuf:"varint,4,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                 //Направление операции.
-	AccountId          string           `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                           //Номер счета.
-	OrderType          OrderType        `protobuf:"varint,6,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                     //Тип заявки.
-	OrderId            string           `protobuf:"bytes,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                 //Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов.
-	TimeInForce        *TimeInForceType `protobuf:"varint,8,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType,oneof" json:"time_in_force,omitempty"` //Алгоритм исполнения поручения, применяется только к лимитной заявке.
-	PriceType          *PriceType       `protobuf:"varint,9,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType,oneof" json:"price_type,omitempty"`               //Тип цены.
+	InstrumentId       string           `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                  // Идентификатор инструмента, принимает значения Figi или Instrument_uid.
+	Quantity           int64            `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                             // Количество лотов.
+	Price              *Quotation       `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                              // Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений.
+	Direction          OrderDirection   `protobuf:"varint,4,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                 // Направление операции.
+	AccountId          string           `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                           // Номер счета.
+	OrderType          OrderType        `protobuf:"varint,6,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                     // Тип заявки.
+	OrderId            string           `protobuf:"bytes,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                 // Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов.
+	TimeInForce        *TimeInForceType `protobuf:"varint,8,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType,oneof" json:"time_in_force,omitempty"` // Алгоритм исполнения поручения, применяется только к лимитной заявке.
+	PriceType          *PriceType       `protobuf:"varint,9,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType,oneof" json:"price_type,omitempty"`               // Тип цены.
 	ConfirmMarginTrade bool             `protobuf:"varint,10,opt,name=confirm_margin_trade,json=confirmMarginTrade,proto3" json:"confirm_margin_trade,omitempty"`                                            // Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false.
 }
 
@@ -1188,9 +1189,9 @@ type PostOrderAsyncResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderRequestId        string                     `protobuf:"bytes,1,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                             //Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
-	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` //Текущий статус заявки.
-	TradeIntentId         *string                    `protobuf:"bytes,3,opt,name=trade_intent_id,json=tradeIntentId,proto3,oneof" json:"trade_intent_id,omitempty"`                                                                                          //Идентификатор торгового поручения.
+	OrderRequestId        string                     `protobuf:"bytes,1,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                             // Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
+	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` // Текущий статус заявки.
+	TradeIntentId         *string                    `protobuf:"bytes,3,opt,name=trade_intent_id,json=tradeIntentId,proto3,oneof" json:"trade_intent_id,omitempty"`                                                                                          // Идентификатор торгового поручения.
 }
 
 func (x *PostOrderAsyncResponse) Reset() {
@@ -1252,9 +1253,9 @@ type CancelOrderRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId   string       `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                       //Номер счета.
-	OrderId     string       `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                             //Идентификатор заявки.
-	OrderIdType *OrderIdType `protobuf:"varint,3,opt,name=order_id_type,json=orderIdType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderIdType,oneof" json:"order_id_type,omitempty"` //Тип идентификатора заявки.
+	AccountId   string       `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                       // Номер счета.
+	OrderId     string       `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                             // Идентификатор заявки.
+	OrderIdType *OrderIdType `protobuf:"varint,3,opt,name=order_id_type,json=orderIdType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderIdType,oneof" json:"order_id_type,omitempty"` // Тип идентификатора заявки.
 }
 
 func (x *CancelOrderRequest) Reset() {
@@ -1316,8 +1317,8 @@ type CancelOrderResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Time             *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`                                                   //Дата и время отмены заявки в часовом поясе UTC.
-	ResponseMetadata *ResponseMetadata      `protobuf:"bytes,254,opt,name=response_metadata,json=responseMetadata,proto3" json:"response_metadata,omitempty"` //Метадата
+	Time             *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`                                                   // Дата и время отмены заявки в часовом поясе UTC.
+	ResponseMetadata *ResponseMetadata      `protobuf:"bytes,254,opt,name=response_metadata,json=responseMetadata,proto3" json:"response_metadata,omitempty"` // Метадата
 }
 
 func (x *CancelOrderResponse) Reset() {
@@ -1372,10 +1373,10 @@ type GetOrderStateRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId   string       `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                       //Номер счета.
-	OrderId     string       `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                             //Идентификатор заявки.
-	PriceType   PriceType    `protobuf:"varint,3,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType" json:"price_type,omitempty"`                 //Тип цены.
-	OrderIdType *OrderIdType `protobuf:"varint,4,opt,name=order_id_type,json=orderIdType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderIdType,oneof" json:"order_id_type,omitempty"` //Тип идентификатора заявки.
+	AccountId   string       `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                       // Номер счета.
+	OrderId     string       `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                             // Идентификатор заявки.
+	PriceType   PriceType    `protobuf:"varint,3,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType" json:"price_type,omitempty"`                 // Тип цены.
+	OrderIdType *OrderIdType `protobuf:"varint,4,opt,name=order_id_type,json=orderIdType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderIdType,oneof" json:"order_id_type,omitempty"` // Тип идентификатора заявки.
 }
 
 func (x *GetOrderStateRequest) Reset() {
@@ -1444,8 +1445,8 @@ type GetOrdersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId       string                                    `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                         //Номер счета.
-	AdvancedFilters *GetOrdersRequest_GetOrdersRequestFilters `protobuf:"bytes,2,opt,name=advanced_filters,json=advancedFilters,proto3,oneof" json:"advanced_filters,omitempty"` //Дополнительные фильтры.
+	AccountId       string                                    `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                         // Номер счета.
+	AdvancedFilters *GetOrdersRequest_GetOrdersRequestFilters `protobuf:"bytes,2,opt,name=advanced_filters,json=advancedFilters,proto3,oneof" json:"advanced_filters,omitempty"` // Дополнительные фильтры.
 }
 
 func (x *GetOrdersRequest) Reset() {
@@ -1500,7 +1501,7 @@ type GetOrdersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Orders []*OrderState `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"` //Массив активных заявок.
+	Orders []*OrderState `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"` // Массив активных заявок.
 }
 
 func (x *GetOrdersResponse) Reset() {
@@ -1548,26 +1549,26 @@ type OrderState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId               string                     `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    //Биржевой идентификатор заявки.
-	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` //Текущий статус заявки.
-	LotsRequested         int64                      `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                 //Запрошено лотов.
-	LotsExecuted          int64                      `protobuf:"varint,4,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                    //Исполнено лотов.
-	InitialOrderPrice     *MoneyValue                `protobuf:"bytes,5,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                    //Начальная цена заявки. Произведение количества запрошенных лотов на цену.
-	ExecutedOrderPrice    *MoneyValue                `protobuf:"bytes,6,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                 //Исполненная цена заявки. Произведение средней цены покупки на количество лотов.
-	TotalOrderAmount      *MoneyValue                `protobuf:"bytes,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                                                                                       //Итоговая стоимость заявки, включающая все комиссии.
-	AveragePositionPrice  *MoneyValue                `protobuf:"bytes,8,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"`                                                                           //Средняя цена позиции по сделке.
-	InitialCommission     *MoneyValue                `protobuf:"bytes,9,opt,name=initial_commission,json=initialCommission,proto3" json:"initial_commission,omitempty"`                                                                                      //Начальная комиссия. Комиссия, рассчитанная на момент подачи заявки.
-	ExecutedCommission    *MoneyValue                `protobuf:"bytes,10,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`                                                                                  //Фактическая комиссия по итогам исполнения заявки.
-	Figi                  string                     `protobuf:"bytes,11,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                                        //Figi-идентификатор инструмента.
-	Direction             OrderDirection             `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   //Направление заявки.
-	InitialSecurityPrice  *MoneyValue                `protobuf:"bytes,13,opt,name=initial_security_price,json=initialSecurityPrice,proto3" json:"initial_security_price,omitempty"`                                                                          //Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
-	Stages                []*OrderStage              `protobuf:"bytes,14,rep,name=stages,proto3" json:"stages,omitempty"`                                                                                                                                    //Стадии выполнения заявки.
-	ServiceCommission     *MoneyValue                `protobuf:"bytes,15,opt,name=service_commission,json=serviceCommission,proto3" json:"service_commission,omitempty"`                                                                                     //Сервисная комиссия.
-	Currency              string                     `protobuf:"bytes,16,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                                                //Валюта заявки.
-	OrderType             OrderType                  `protobuf:"varint,17,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       //Тип заявки.
-	OrderDate             *timestamppb.Timestamp     `protobuf:"bytes,18,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`                                                                                                             //Дата и время выставления заявки в часовом поясе UTC.
-	InstrumentUid         string                     `protobuf:"bytes,19,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 //UID идентификатор инструмента.
-	OrderRequestId        string                     `protobuf:"bytes,20,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                            //Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
+	OrderId               string                     `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    // Биржевой идентификатор заявки.
+	ExecutionReportStatus OrderExecutionReportStatus `protobuf:"varint,2,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` // Текущий статус заявки.
+	LotsRequested         int64                      `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                 // Запрошено лотов.
+	LotsExecuted          int64                      `protobuf:"varint,4,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                    // Исполнено лотов.
+	InitialOrderPrice     *MoneyValue                `protobuf:"bytes,5,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                    // Начальная цена заявки. Произведение количества запрошенных лотов на цену.
+	ExecutedOrderPrice    *MoneyValue                `protobuf:"bytes,6,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                 // Исполненная цена заявки. Произведение средней цены покупки на количество лотов.
+	TotalOrderAmount      *MoneyValue                `protobuf:"bytes,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                                                                                       // Итоговая стоимость заявки, включающая все комиссии.
+	AveragePositionPrice  *MoneyValue                `protobuf:"bytes,8,opt,name=average_position_price,json=averagePositionPrice,proto3" json:"average_position_price,omitempty"`                                                                           // Средняя цена позиции по сделке.
+	InitialCommission     *MoneyValue                `protobuf:"bytes,9,opt,name=initial_commission,json=initialCommission,proto3" json:"initial_commission,omitempty"`                                                                                      // Начальная комиссия. Комиссия, рассчитанная на момент подачи заявки.
+	ExecutedCommission    *MoneyValue                `protobuf:"bytes,10,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`                                                                                  // Фактическая комиссия по итогам исполнения заявки.
+	Figi                  string                     `protobuf:"bytes,11,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                                        // Figi-идентификатор инструмента.
+	Direction             OrderDirection             `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   // Направление заявки.
+	InitialSecurityPrice  *MoneyValue                `protobuf:"bytes,13,opt,name=initial_security_price,json=initialSecurityPrice,proto3" json:"initial_security_price,omitempty"`                                                                          // Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
+	Stages                []*OrderStage              `protobuf:"bytes,14,rep,name=stages,proto3" json:"stages,omitempty"`                                                                                                                                    // Стадии выполнения заявки.
+	ServiceCommission     *MoneyValue                `protobuf:"bytes,15,opt,name=service_commission,json=serviceCommission,proto3" json:"service_commission,omitempty"`                                                                                     // Сервисная комиссия.
+	Currency              string                     `protobuf:"bytes,16,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                                                // Валюта заявки.
+	OrderType             OrderType                  `protobuf:"varint,17,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       // Тип заявки.
+	OrderDate             *timestamppb.Timestamp     `protobuf:"bytes,18,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`                                                                                                             // Дата и время выставления заявки в часовом поясе UTC.
+	InstrumentUid         string                     `protobuf:"bytes,19,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 // UID идентификатор инструмента.
+	OrderRequestId        string                     `protobuf:"bytes,20,opt,name=order_request_id,json=orderRequestId,proto3" json:"order_request_id,omitempty"`                                                                                            // Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
 }
 
 func (x *OrderState) Reset() {
@@ -1748,10 +1749,10 @@ type OrderStage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Price         *MoneyValue            `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`                                      //Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
-	Quantity      int64                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                               //Количество лотов.
-	TradeId       string                 `protobuf:"bytes,3,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`                   //Идентификатор сделки.
-	ExecutionTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=execution_time,json=executionTime,proto3" json:"execution_time,omitempty"` //Время исполнения сделки
+	Price         *MoneyValue            `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`                                      // Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
+	Quantity      int64                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`                               // Количество лотов.
+	TradeId       string                 `protobuf:"bytes,3,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`                   // Идентификатор сделки.
+	ExecutionTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=execution_time,json=executionTime,proto3" json:"execution_time,omitempty"` // Время исполнения сделки
 }
 
 func (x *OrderStage) Reset() {
@@ -1820,12 +1821,12 @@ type ReplaceOrderRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId          string     `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                              //Номер счета.
-	OrderId            string     `protobuf:"bytes,6,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                    //Идентификатор заявки на бирже.
-	IdempotencyKey     string     `protobuf:"bytes,7,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`                                               //Новый идентификатор запроса выставления поручения для целей идемпотентности. Максимальная длина 36 символов. Перезатирает старый ключ.
-	Quantity           int64      `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                               //Количество лотов.
-	Price              *Quotation `protobuf:"bytes,12,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                //Цена за 1 инструмент.
-	PriceType          *PriceType `protobuf:"varint,13,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType,oneof" json:"price_type,omitempty"` //Тип цены.
+	AccountId          string     `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                              // Номер счета.
+	OrderId            string     `protobuf:"bytes,6,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                    // Идентификатор заявки на бирже.
+	IdempotencyKey     string     `protobuf:"bytes,7,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`                                               // Новый идентификатор запроса выставления поручения для целей идемпотентности. Максимальная длина 36 символов. Перезатирает старый ключ.
+	Quantity           int64      `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                               // Количество лотов.
+	Price              *Quotation `protobuf:"bytes,12,opt,name=price,proto3,oneof" json:"price,omitempty"`                                                                                // Цена за 1 инструмент.
+	PriceType          *PriceType `protobuf:"varint,13,opt,name=price_type,json=priceType,proto3,enum=tinkoff.public.invest.api.contract.v1.PriceType,oneof" json:"price_type,omitempty"` // Тип цены.
 	ConfirmMarginTrade bool       `protobuf:"varint,14,opt,name=confirm_margin_trade,json=confirmMarginTrade,proto3" json:"confirm_margin_trade,omitempty"`                               // Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false.
 }
 
@@ -1916,9 +1917,9 @@ type GetMaxLotsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId    string     `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`          //Номер счета
-	InstrumentId string     `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента, принимает значения Figi или instrument_uid
-	Price        *Quotation `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                             //Цена инструмента
+	AccountId    string     `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`          // Номер счета
+	InstrumentId string     `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента, принимает значения Figi или instrument_uid
+	Price        *Quotation `protobuf:"bytes,3,opt,name=price,proto3,oneof" json:"price,omitempty"`                             // Цена инструмента
 }
 
 func (x *GetMaxLotsRequest) Reset() {
@@ -1980,11 +1981,11 @@ type GetMaxLotsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Currency         string                             `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`                                           //Валюта инструмента
-	BuyLimits        *GetMaxLotsResponse_BuyLimitsView  `protobuf:"bytes,2,opt,name=buy_limits,json=buyLimits,proto3" json:"buy_limits,omitempty"`                        //Лимиты для покупок на собственные деньги
-	BuyMarginLimits  *GetMaxLotsResponse_BuyLimitsView  `protobuf:"bytes,3,opt,name=buy_margin_limits,json=buyMarginLimits,proto3" json:"buy_margin_limits,omitempty"`    //Лимиты для покупок с учетом маржинального кредитования
-	SellLimits       *GetMaxLotsResponse_SellLimitsView `protobuf:"bytes,4,opt,name=sell_limits,json=sellLimits,proto3" json:"sell_limits,omitempty"`                     //Лимиты для продаж по собственной позиции
-	SellMarginLimits *GetMaxLotsResponse_SellLimitsView `protobuf:"bytes,5,opt,name=sell_margin_limits,json=sellMarginLimits,proto3" json:"sell_margin_limits,omitempty"` //Лимиты для продаж с учетом маржинального кредитования
+	Currency         string                             `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`                                           // Валюта инструмента
+	BuyLimits        *GetMaxLotsResponse_BuyLimitsView  `protobuf:"bytes,2,opt,name=buy_limits,json=buyLimits,proto3" json:"buy_limits,omitempty"`                        // Лимиты для покупок на собственные деньги
+	BuyMarginLimits  *GetMaxLotsResponse_BuyLimitsView  `protobuf:"bytes,3,opt,name=buy_margin_limits,json=buyMarginLimits,proto3" json:"buy_margin_limits,omitempty"`    // Лимиты для покупок с учетом маржинального кредитования
+	SellLimits       *GetMaxLotsResponse_SellLimitsView `protobuf:"bytes,4,opt,name=sell_limits,json=sellLimits,proto3" json:"sell_limits,omitempty"`                     // Лимиты для продаж по собственной позиции
+	SellMarginLimits *GetMaxLotsResponse_SellLimitsView `protobuf:"bytes,5,opt,name=sell_margin_limits,json=sellMarginLimits,proto3" json:"sell_margin_limits,omitempty"` // Лимиты для продаж с учетом маржинального кредитования
 }
 
 func (x *GetMaxLotsResponse) Reset() {
@@ -2060,11 +2061,11 @@ type GetOrderPriceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountId    string         `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                            //Номер счета
-	InstrumentId string         `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                   //Идентификатор инструмента, принимает значения Figi или instrument_uid
-	Price        *Quotation     `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`                                                                     //Цена инструмента
-	Direction    OrderDirection `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"` //Направление заявки
-	Quantity     int64          `protobuf:"varint,13,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                             //Количество лотов
+	AccountId    string         `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                            // Номер счета
+	InstrumentId string         `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                   // Идентификатор инструмента, принимает значения Figi или instrument_uid
+	Price        *Quotation     `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`                                                                     // Цена инструмента
+	Direction    OrderDirection `protobuf:"varint,12,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"` // Направление заявки
+	Quantity     int64          `protobuf:"varint,13,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                             // Количество лотов
 }
 
 func (x *GetOrderPriceRequest) Reset() {
@@ -2140,13 +2141,13 @@ type GetOrderPriceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TotalOrderAmount      *MoneyValue `protobuf:"bytes,1,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                //Итоговая стоимость заявки
-	InitialOrderAmount    *MoneyValue `protobuf:"bytes,5,opt,name=initial_order_amount,json=initialOrderAmount,proto3" json:"initial_order_amount,omitempty"`          //Стоимость заявки без комиссий, НКД, ГО (для фьючерсов — стоимость контрактов)
-	LotsRequested         int64       `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                          //Запрошено лотов
-	ExecutedCommission    *MoneyValue `protobuf:"bytes,7,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`            //Общая комиссия
-	ExecutedCommissionRub *MoneyValue `protobuf:"bytes,8,opt,name=executed_commission_rub,json=executedCommissionRub,proto3" json:"executed_commission_rub,omitempty"` //Общая комиссия в рублях
-	ServiceCommission     *MoneyValue `protobuf:"bytes,9,opt,name=service_commission,json=serviceCommission,proto3" json:"service_commission,omitempty"`               //Сервисная комиссия
-	DealCommission        *MoneyValue `protobuf:"bytes,10,opt,name=deal_commission,json=dealCommission,proto3" json:"deal_commission,omitempty"`                       //Комиссия за проведение сделки
+	TotalOrderAmount      *MoneyValue `protobuf:"bytes,1,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`                // Итоговая стоимость заявки
+	InitialOrderAmount    *MoneyValue `protobuf:"bytes,5,opt,name=initial_order_amount,json=initialOrderAmount,proto3" json:"initial_order_amount,omitempty"`          // Стоимость заявки без комиссий, НКД, ГО (для фьючерсов — стоимость контрактов)
+	LotsRequested         int64       `protobuf:"varint,3,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                          // Запрошено лотов
+	ExecutedCommission    *MoneyValue `protobuf:"bytes,7,opt,name=executed_commission,json=executedCommission,proto3" json:"executed_commission,omitempty"`            // Общая комиссия
+	ExecutedCommissionRub *MoneyValue `protobuf:"bytes,8,opt,name=executed_commission_rub,json=executedCommissionRub,proto3" json:"executed_commission_rub,omitempty"` // Общая комиссия в рублях
+	ServiceCommission     *MoneyValue `protobuf:"bytes,9,opt,name=service_commission,json=serviceCommission,proto3" json:"service_commission,omitempty"`               // Сервисная комиссия
+	DealCommission        *MoneyValue `protobuf:"bytes,10,opt,name=deal_commission,json=dealCommission,proto3" json:"deal_commission,omitempty"`                       // Комиссия за проведение сделки
 	// Types that are assignable to InstrumentExtra:
 	//
 	//	*GetOrderPriceResponse_ExtraBond_
@@ -2261,11 +2262,11 @@ type isGetOrderPriceResponse_InstrumentExtra interface {
 }
 
 type GetOrderPriceResponse_ExtraBond_ struct {
-	ExtraBond *GetOrderPriceResponse_ExtraBond `protobuf:"bytes,12,opt,name=extra_bond,json=extraBond,proto3,oneof"` //Дополнительная информация по облигациям
+	ExtraBond *GetOrderPriceResponse_ExtraBond `protobuf:"bytes,12,opt,name=extra_bond,json=extraBond,proto3,oneof"` // Дополнительная информация по облигациям
 }
 
 type GetOrderPriceResponse_ExtraFuture_ struct {
-	ExtraFuture *GetOrderPriceResponse_ExtraFuture `protobuf:"bytes,13,opt,name=extra_future,json=extraFuture,proto3,oneof"` //Дополнительная информация по фьючерсам
+	ExtraFuture *GetOrderPriceResponse_ExtraFuture `protobuf:"bytes,13,opt,name=extra_future,json=extraFuture,proto3,oneof"` // Дополнительная информация по фьючерсам
 }
 
 func (*GetOrderPriceResponse_ExtraBond_) isGetOrderPriceResponse_InstrumentExtra() {}
@@ -2278,8 +2279,8 @@ type OrderStateStreamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts        []string `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                //Идентификаторы счетов.
-	PingDelayMillis *int32   `protobuf:"varint,15,opt,name=ping_delay_millis,json=pingDelayMillis,proto3,oneof" json:"ping_delay_millis,omitempty"` //Задержка (пинг) сообщений:  1000-120 000 миллисекунд. Значение по умолчанию — 120 000.
+	Accounts        []string `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                // Идентификаторы счетов.
+	PingDelayMillis *int32   `protobuf:"varint,15,opt,name=ping_delay_millis,json=pingDelayMillis,proto3,oneof" json:"ping_delay_millis,omitempty"` // Задержка (пинг) сообщений:  1000-120 000 миллисекунд. Значение по умолчанию — 120 000.
 }
 
 func (x *OrderStateStreamRequest) Reset() {
@@ -2334,10 +2335,10 @@ type SubscriptionResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                            //Уникальный идентификатор запроса, подробнее: [tracking_id](./grpc#tracking-id).
-	Status     ResultSubscriptionStatus `protobuf:"varint,2,opt,name=status,proto3,enum=tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus" json:"status,omitempty"` //Статус подписки.
-	StreamId   string                   `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                  //Идентификатор открытого соединения
-	Accounts   []string                 `protobuf:"bytes,5,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                                  //Идентификаторы счетов.
+	TrackingId string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                            // Уникальный идентификатор запроса, подробнее: [tracking_id](./grpc#tracking-id).
+	Status     ResultSubscriptionStatus `protobuf:"varint,2,opt,name=status,proto3,enum=tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus" json:"status,omitempty"` // Статус подписки.
+	StreamId   string                   `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                  // Идентификатор открытого соединения
+	Accounts   []string                 `protobuf:"bytes,5,rep,name=accounts,proto3" json:"accounts,omitempty"`                                                                  // Идентификаторы счетов.
 	Error      *ErrorDetail             `protobuf:"bytes,7,opt,name=error,proto3,oneof" json:"error,omitempty"`
 }
 
@@ -2487,15 +2488,15 @@ type isOrderStateStreamResponse_Payload interface {
 }
 
 type OrderStateStreamResponse_OrderState_ struct {
-	OrderState *OrderStateStreamResponse_OrderState `protobuf:"bytes,1,opt,name=order_state,json=orderState,proto3,oneof"` //Информация об исполнении торгового поручения.
+	OrderState *OrderStateStreamResponse_OrderState `protobuf:"bytes,1,opt,name=order_state,json=orderState,proto3,oneof"` // Информация об исполнении торгового поручения.
 }
 
 type OrderStateStreamResponse_Ping struct {
-	Ping *Ping `protobuf:"bytes,2,opt,name=ping,proto3,oneof"` //Проверка активности стрима.
+	Ping *Ping `protobuf:"bytes,2,opt,name=ping,proto3,oneof"` // Проверка активности стрима.
 }
 
 type OrderStateStreamResponse_Subscription struct {
-	Subscription *SubscriptionResponse `protobuf:"bytes,3,opt,name=subscription,proto3,oneof"` //Ответ на запрос на подписку.
+	Subscription *SubscriptionResponse `protobuf:"bytes,3,opt,name=subscription,proto3,oneof"` // Ответ на запрос на подписку.
 }
 
 func (*OrderStateStreamResponse_OrderState_) isOrderStateStreamResponse_Payload() {}
@@ -2509,9 +2510,9 @@ type GetOrdersRequest_GetOrdersRequestFilters struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	From            *timestamppb.Timestamp       `protobuf:"bytes,1,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                                                                      //Дата и время, начиная с которой нужно получить информацию в часовом поясе UTC. Параметр применим только к ордерам, созданным сегодня.
-	To              *timestamppb.Timestamp       `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                                                                          //Дата и время, до которой нужно получить информацию в часовом поясе UTC. Параметр применим только к ордерам, созданным сегодня.
-	ExecutionStatus []OrderExecutionReportStatus `protobuf:"varint,3,rep,packed,name=execution_status,json=executionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_status,omitempty"` //Статусы заявок.
+	From            *timestamppb.Timestamp       `protobuf:"bytes,1,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                                                                      // Дата и время, начиная с которой нужно получить информацию в часовом поясе UTC. Параметр применим только к ордерам, созданным сегодня.
+	To              *timestamppb.Timestamp       `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                                                                          // Дата и время, до которой нужно получить информацию в часовом поясе UTC. Параметр применим только к ордерам, созданным сегодня.
+	ExecutionStatus []OrderExecutionReportStatus `protobuf:"varint,3,rep,packed,name=execution_status,json=executionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_status,omitempty"` // Статусы заявок.
 }
 
 func (x *GetOrdersRequest_GetOrdersRequestFilters) Reset() {
@@ -2572,9 +2573,9 @@ type GetMaxLotsResponse_BuyLimitsView struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BuyMoneyAmount   *Quotation `protobuf:"bytes,1,opt,name=buy_money_amount,json=buyMoneyAmount,proto3" json:"buy_money_amount,omitempty"`          //Количество доступной валюты для покупки
-	BuyMaxLots       int64      `protobuf:"varint,2,opt,name=buy_max_lots,json=buyMaxLots,proto3" json:"buy_max_lots,omitempty"`                     //Максимальное доступное количество лотов для покупки
-	BuyMaxMarketLots int64      `protobuf:"varint,3,opt,name=buy_max_market_lots,json=buyMaxMarketLots,proto3" json:"buy_max_market_lots,omitempty"` //Максимальное доступное количество лотов для покупки для заявки по рыночной цене на текущий момент
+	BuyMoneyAmount   *Quotation `protobuf:"bytes,1,opt,name=buy_money_amount,json=buyMoneyAmount,proto3" json:"buy_money_amount,omitempty"`          // Количество доступной валюты для покупки
+	BuyMaxLots       int64      `protobuf:"varint,2,opt,name=buy_max_lots,json=buyMaxLots,proto3" json:"buy_max_lots,omitempty"`                     // Максимальное доступное количество лотов для покупки
+	BuyMaxMarketLots int64      `protobuf:"varint,3,opt,name=buy_max_market_lots,json=buyMaxMarketLots,proto3" json:"buy_max_market_lots,omitempty"` // Максимальное доступное количество лотов для покупки для заявки по рыночной цене на текущий момент
 }
 
 func (x *GetMaxLotsResponse_BuyLimitsView) Reset() {
@@ -2635,7 +2636,7 @@ type GetMaxLotsResponse_SellLimitsView struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SellMaxLots int64 `protobuf:"varint,1,opt,name=sell_max_lots,json=sellMaxLots,proto3" json:"sell_max_lots,omitempty"` //Максимальное доступное количество лотов для продажи
+	SellMaxLots int64 `protobuf:"varint,1,opt,name=sell_max_lots,json=sellMaxLots,proto3" json:"sell_max_lots,omitempty"` // Максимальное доступное количество лотов для продажи
 }
 
 func (x *GetMaxLotsResponse_SellLimitsView) Reset() {
@@ -2682,8 +2683,8 @@ type GetOrderPriceResponse_ExtraBond struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AciValue              *MoneyValue `protobuf:"bytes,2,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                          //Значение НКД (накопленного купонного дохода) на дату
-	NominalConversionRate *Quotation  `protobuf:"bytes,3,opt,name=nominal_conversion_rate,json=nominalConversionRate,proto3" json:"nominal_conversion_rate,omitempty"` //Курс конвертации для замещающих облигаций
+	AciValue              *MoneyValue `protobuf:"bytes,2,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                          // Значение НКД (накопленного купонного дохода) на дату
+	NominalConversionRate *Quotation  `protobuf:"bytes,3,opt,name=nominal_conversion_rate,json=nominalConversionRate,proto3" json:"nominal_conversion_rate,omitempty"` // Курс конвертации для замещающих облигаций
 }
 
 func (x *GetOrderPriceResponse_ExtraBond) Reset() {
@@ -2737,7 +2738,7 @@ type GetOrderPriceResponse_ExtraFuture struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InitialMargin *MoneyValue `protobuf:"bytes,2,opt,name=initial_margin,json=initialMargin,proto3" json:"initial_margin,omitempty"` //Гарантийное обеспечение для фьючерса
+	InitialMargin *MoneyValue `protobuf:"bytes,2,opt,name=initial_margin,json=initialMargin,proto3" json:"initial_margin,omitempty"` // Гарантийное обеспечение для фьючерса
 }
 
 func (x *GetOrderPriceResponse_ExtraFuture) Reset() {
@@ -2785,33 +2786,33 @@ type OrderStateStreamResponse_OrderState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId               string                                    `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    //Биржевой идентификатор заявки.
-	OrderRequestId        *string                                   `protobuf:"bytes,2,opt,name=order_request_id,json=orderRequestId,proto3,oneof" json:"order_request_id,omitempty"`                                                                                       //Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
-	ClientCode            string                                    `protobuf:"bytes,3,opt,name=client_code,json=clientCode,proto3" json:"client_code,omitempty"`                                                                                                           //Код клиента на бирже.
-	CreatedAt             *timestamppb.Timestamp                    `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                                                                                                              //Дата создания заявки.
-	ExecutionReportStatus OrderExecutionReportStatus                `protobuf:"varint,5,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` //Статус заявки.
-	StatusInfo            *OrderStateStreamResponse_StatusCauseInfo `protobuf:"varint,6,opt,name=status_info,json=statusInfo,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse_StatusCauseInfo,oneof" json:"status_info,omitempty"`                //Дополнительная информация по статусу.
-	Ticker                string                                    `protobuf:"bytes,7,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                                                     //Тикер инструмента.
-	ClassCode             string                                    `protobuf:"bytes,8,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                                                              //Класс-код (секция торгов).
-	LotSize               int32                                     `protobuf:"varint,9,opt,name=lot_size,json=lotSize,proto3" json:"lot_size,omitempty"`                                                                                                                   //Лотность инструмента заявки.
-	Direction             OrderDirection                            `protobuf:"varint,10,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   //Направление заявки.
-	TimeInForce           TimeInForceType                           `protobuf:"varint,11,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType" json:"time_in_force,omitempty"`                                         //Алгоритм исполнения поручения.
-	OrderType             OrderType                                 `protobuf:"varint,12,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       //Тип заявки.
-	AccountId             string                                    `protobuf:"bytes,13,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                             //Номер счета.
-	InitialOrderPrice     *MoneyValue                               `protobuf:"bytes,22,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                   //Начальная цена заявки.
-	OrderPrice            *MoneyValue                               `protobuf:"bytes,23,opt,name=order_price,json=orderPrice,proto3" json:"order_price,omitempty"`                                                                                                          //Цена выставления заявки.
-	Amount                *MoneyValue                               `protobuf:"bytes,24,opt,name=amount,proto3,oneof" json:"amount,omitempty"`                                                                                                                              //Предрассчитанная стоимость полной заявки.
-	ExecutedOrderPrice    *MoneyValue                               `protobuf:"bytes,25,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                //Исполненная цена заявки.
-	Currency              string                                    `protobuf:"bytes,26,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                                                //Валюта исполнения.
-	LotsRequested         int64                                     `protobuf:"varint,27,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                //Запрошено лотов.
-	LotsExecuted          int64                                     `protobuf:"varint,28,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                   //Исполнено лотов.
-	LotsLeft              int64                                     `protobuf:"varint,29,opt,name=lots_left,json=lotsLeft,proto3" json:"lots_left,omitempty"`                                                                                                               //Число неисполненных лотов по заявке.
-	LotsCancelled         int64                                     `protobuf:"varint,30,opt,name=lots_cancelled,json=lotsCancelled,proto3" json:"lots_cancelled,omitempty"`                                                                                                //Отмененные лоты.
-	Marker                *OrderStateStreamResponse_MarkerType      `protobuf:"varint,31,opt,name=marker,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse_MarkerType,oneof" json:"marker,omitempty"`                                              //Спецсимвол.
+	OrderId               string                                    `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                                                                                                                    // Биржевой идентификатор заявки.
+	OrderRequestId        *string                                   `protobuf:"bytes,2,opt,name=order_request_id,json=orderRequestId,proto3,oneof" json:"order_request_id,omitempty"`                                                                                       // Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов.
+	ClientCode            string                                    `protobuf:"bytes,3,opt,name=client_code,json=clientCode,proto3" json:"client_code,omitempty"`                                                                                                           // Код клиента на бирже.
+	CreatedAt             *timestamppb.Timestamp                    `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                                                                                                              // Дата создания заявки.
+	ExecutionReportStatus OrderExecutionReportStatus                `protobuf:"varint,5,opt,name=execution_report_status,json=executionReportStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus" json:"execution_report_status,omitempty"` // Статус заявки.
+	StatusInfo            *OrderStateStreamResponse_StatusCauseInfo `protobuf:"varint,6,opt,name=status_info,json=statusInfo,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse_StatusCauseInfo,oneof" json:"status_info,omitempty"`                // Дополнительная информация по статусу.
+	Ticker                string                                    `protobuf:"bytes,7,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                                                     // Тикер инструмента.
+	ClassCode             string                                    `protobuf:"bytes,8,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                                                              // Класс-код (секция торгов).
+	LotSize               int32                                     `protobuf:"varint,9,opt,name=lot_size,json=lotSize,proto3" json:"lot_size,omitempty"`                                                                                                                   // Лотность инструмента заявки.
+	Direction             OrderDirection                            `protobuf:"varint,10,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderDirection" json:"direction,omitempty"`                                                                   // Направление заявки.
+	TimeInForce           TimeInForceType                           `protobuf:"varint,11,opt,name=time_in_force,json=timeInForce,proto3,enum=tinkoff.public.invest.api.contract.v1.TimeInForceType" json:"time_in_force,omitempty"`                                         // Алгоритм исполнения поручения.
+	OrderType             OrderType                                 `protobuf:"varint,12,opt,name=order_type,json=orderType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderType" json:"order_type,omitempty"`                                                       // Тип заявки.
+	AccountId             string                                    `protobuf:"bytes,13,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`                                                                                                             // Номер счета.
+	InitialOrderPrice     *MoneyValue                               `protobuf:"bytes,22,opt,name=initial_order_price,json=initialOrderPrice,proto3" json:"initial_order_price,omitempty"`                                                                                   // Начальная цена заявки.
+	OrderPrice            *MoneyValue                               `protobuf:"bytes,23,opt,name=order_price,json=orderPrice,proto3" json:"order_price,omitempty"`                                                                                                          // Цена выставления заявки.
+	Amount                *MoneyValue                               `protobuf:"bytes,24,opt,name=amount,proto3,oneof" json:"amount,omitempty"`                                                                                                                              // Предрассчитанная стоимость полной заявки.
+	ExecutedOrderPrice    *MoneyValue                               `protobuf:"bytes,25,opt,name=executed_order_price,json=executedOrderPrice,proto3" json:"executed_order_price,omitempty"`                                                                                // Исполненная цена заявки.
+	Currency              string                                    `protobuf:"bytes,26,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                                                // Валюта исполнения.
+	LotsRequested         int64                                     `protobuf:"varint,27,opt,name=lots_requested,json=lotsRequested,proto3" json:"lots_requested,omitempty"`                                                                                                // Запрошено лотов.
+	LotsExecuted          int64                                     `protobuf:"varint,28,opt,name=lots_executed,json=lotsExecuted,proto3" json:"lots_executed,omitempty"`                                                                                                   // Исполнено лотов.
+	LotsLeft              int64                                     `protobuf:"varint,29,opt,name=lots_left,json=lotsLeft,proto3" json:"lots_left,omitempty"`                                                                                                               // Число неисполненных лотов по заявке.
+	LotsCancelled         int64                                     `protobuf:"varint,30,opt,name=lots_cancelled,json=lotsCancelled,proto3" json:"lots_cancelled,omitempty"`                                                                                                // Отмененные лоты.
+	Marker                *OrderStateStreamResponse_MarkerType      `protobuf:"varint,31,opt,name=marker,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse_MarkerType,oneof" json:"marker,omitempty"`                                              // Спецсимвол.
 	Trades                []*OrderTrade                             `protobuf:"bytes,33,rep,name=trades,proto3" json:"trades,omitempty"`                                                                                                                                    //	Список сделок.
-	CompletionTime        *timestamppb.Timestamp                    `protobuf:"bytes,35,opt,name=completion_time,json=completionTime,proto3" json:"completion_time,omitempty"`                                                                                              //Время исполнения заявки.
-	Exchange              string                                    `protobuf:"bytes,36,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                                //Код биржи.
-	InstrumentUid         string                                    `protobuf:"bytes,41,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 //UID идентификатор инструмента.
+	CompletionTime        *timestamppb.Timestamp                    `protobuf:"bytes,35,opt,name=completion_time,json=completionTime,proto3" json:"completion_time,omitempty"`                                                                                              // Время исполнения заявки.
+	Exchange              string                                    `protobuf:"bytes,36,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                                // Код биржи.
+	InstrumentUid         string                                    `protobuf:"bytes,41,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                                 // UID идентификатор инструмента.
 }
 
 func (x *OrderStateStreamResponse_OrderState) Reset() {
@@ -3990,54 +3991,57 @@ func file_orders_proto_rawDescGZIP() []byte {
 	return file_orders_proto_rawDescData
 }
 
-var file_orders_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_orders_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
-var file_orders_proto_goTypes = []interface{}{
-	(OrderDirection)(0),                              // 0: tinkoff.public.invest.api.contract.v1.OrderDirection
-	(OrderType)(0),                                   // 1: tinkoff.public.invest.api.contract.v1.OrderType
-	(OrderExecutionReportStatus)(0),                  // 2: tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus
-	(TimeInForceType)(0),                             // 3: tinkoff.public.invest.api.contract.v1.TimeInForceType
-	(OrderIdType)(0),                                 // 4: tinkoff.public.invest.api.contract.v1.OrderIdType
-	(OrderStateStreamResponse_MarkerType)(0),         // 5: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.MarkerType
-	(OrderStateStreamResponse_StatusCauseInfo)(0),    // 6: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.StatusCauseInfo
-	(*TradesStreamRequest)(nil),                      // 7: tinkoff.public.invest.api.contract.v1.TradesStreamRequest
-	(*TradesStreamResponse)(nil),                     // 8: tinkoff.public.invest.api.contract.v1.TradesStreamResponse
-	(*OrderTrades)(nil),                              // 9: tinkoff.public.invest.api.contract.v1.OrderTrades
-	(*OrderTrade)(nil),                               // 10: tinkoff.public.invest.api.contract.v1.OrderTrade
-	(*PostOrderRequest)(nil),                         // 11: tinkoff.public.invest.api.contract.v1.PostOrderRequest
-	(*PostOrderResponse)(nil),                        // 12: tinkoff.public.invest.api.contract.v1.PostOrderResponse
-	(*PostOrderAsyncRequest)(nil),                    // 13: tinkoff.public.invest.api.contract.v1.PostOrderAsyncRequest
-	(*PostOrderAsyncResponse)(nil),                   // 14: tinkoff.public.invest.api.contract.v1.PostOrderAsyncResponse
-	(*CancelOrderRequest)(nil),                       // 15: tinkoff.public.invest.api.contract.v1.CancelOrderRequest
-	(*CancelOrderResponse)(nil),                      // 16: tinkoff.public.invest.api.contract.v1.CancelOrderResponse
-	(*GetOrderStateRequest)(nil),                     // 17: tinkoff.public.invest.api.contract.v1.GetOrderStateRequest
-	(*GetOrdersRequest)(nil),                         // 18: tinkoff.public.invest.api.contract.v1.GetOrdersRequest
-	(*GetOrdersResponse)(nil),                        // 19: tinkoff.public.invest.api.contract.v1.GetOrdersResponse
-	(*OrderState)(nil),                               // 20: tinkoff.public.invest.api.contract.v1.OrderState
-	(*OrderStage)(nil),                               // 21: tinkoff.public.invest.api.contract.v1.OrderStage
-	(*ReplaceOrderRequest)(nil),                      // 22: tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest
-	(*GetMaxLotsRequest)(nil),                        // 23: tinkoff.public.invest.api.contract.v1.GetMaxLotsRequest
-	(*GetMaxLotsResponse)(nil),                       // 24: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse
-	(*GetOrderPriceRequest)(nil),                     // 25: tinkoff.public.invest.api.contract.v1.GetOrderPriceRequest
-	(*GetOrderPriceResponse)(nil),                    // 26: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse
-	(*OrderStateStreamRequest)(nil),                  // 27: tinkoff.public.invest.api.contract.v1.OrderStateStreamRequest
-	(*SubscriptionResponse)(nil),                     // 28: tinkoff.public.invest.api.contract.v1.SubscriptionResponse
-	(*OrderStateStreamResponse)(nil),                 // 29: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse
-	(*GetOrdersRequest_GetOrdersRequestFilters)(nil), // 30: tinkoff.public.invest.api.contract.v1.GetOrdersRequest.GetOrdersRequestFilters
-	(*GetMaxLotsResponse_BuyLimitsView)(nil),         // 31: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse.BuyLimitsView
-	(*GetMaxLotsResponse_SellLimitsView)(nil),        // 32: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse.SellLimitsView
-	(*GetOrderPriceResponse_ExtraBond)(nil),          // 33: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse.ExtraBond
-	(*GetOrderPriceResponse_ExtraFuture)(nil),        // 34: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse.ExtraFuture
-	(*OrderStateStreamResponse_OrderState)(nil),      // 35: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.OrderState
-	(*Ping)(nil),                                     // 36: tinkoff.public.invest.api.contract.v1.Ping
-	(*timestamppb.Timestamp)(nil),                    // 37: google.protobuf.Timestamp
-	(*Quotation)(nil),                                // 38: tinkoff.public.invest.api.contract.v1.Quotation
-	(PriceType)(0),                                   // 39: tinkoff.public.invest.api.contract.v1.PriceType
-	(*MoneyValue)(nil),                               // 40: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(*ResponseMetadata)(nil),                         // 41: tinkoff.public.invest.api.contract.v1.ResponseMetadata
-	(ResultSubscriptionStatus)(0),                    // 42: tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus
-	(*ErrorDetail)(nil),                              // 43: tinkoff.public.invest.api.contract.v1.ErrorDetail
-}
+var (
+	file_orders_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
+	file_orders_proto_msgTypes  = make([]protoimpl.MessageInfo, 29)
+	file_orders_proto_goTypes   = []interface{}{
+		(OrderDirection)(0),                              // 0: tinkoff.public.invest.api.contract.v1.OrderDirection
+		(OrderType)(0),                                   // 1: tinkoff.public.invest.api.contract.v1.OrderType
+		(OrderExecutionReportStatus)(0),                  // 2: tinkoff.public.invest.api.contract.v1.OrderExecutionReportStatus
+		(TimeInForceType)(0),                             // 3: tinkoff.public.invest.api.contract.v1.TimeInForceType
+		(OrderIdType)(0),                                 // 4: tinkoff.public.invest.api.contract.v1.OrderIdType
+		(OrderStateStreamResponse_MarkerType)(0),         // 5: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.MarkerType
+		(OrderStateStreamResponse_StatusCauseInfo)(0),    // 6: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.StatusCauseInfo
+		(*TradesStreamRequest)(nil),                      // 7: tinkoff.public.invest.api.contract.v1.TradesStreamRequest
+		(*TradesStreamResponse)(nil),                     // 8: tinkoff.public.invest.api.contract.v1.TradesStreamResponse
+		(*OrderTrades)(nil),                              // 9: tinkoff.public.invest.api.contract.v1.OrderTrades
+		(*OrderTrade)(nil),                               // 10: tinkoff.public.invest.api.contract.v1.OrderTrade
+		(*PostOrderRequest)(nil),                         // 11: tinkoff.public.invest.api.contract.v1.PostOrderRequest
+		(*PostOrderResponse)(nil),                        // 12: tinkoff.public.invest.api.contract.v1.PostOrderResponse
+		(*PostOrderAsyncRequest)(nil),                    // 13: tinkoff.public.invest.api.contract.v1.PostOrderAsyncRequest
+		(*PostOrderAsyncResponse)(nil),                   // 14: tinkoff.public.invest.api.contract.v1.PostOrderAsyncResponse
+		(*CancelOrderRequest)(nil),                       // 15: tinkoff.public.invest.api.contract.v1.CancelOrderRequest
+		(*CancelOrderResponse)(nil),                      // 16: tinkoff.public.invest.api.contract.v1.CancelOrderResponse
+		(*GetOrderStateRequest)(nil),                     // 17: tinkoff.public.invest.api.contract.v1.GetOrderStateRequest
+		(*GetOrdersRequest)(nil),                         // 18: tinkoff.public.invest.api.contract.v1.GetOrdersRequest
+		(*GetOrdersResponse)(nil),                        // 19: tinkoff.public.invest.api.contract.v1.GetOrdersResponse
+		(*OrderState)(nil),                               // 20: tinkoff.public.invest.api.contract.v1.OrderState
+		(*OrderStage)(nil),                               // 21: tinkoff.public.invest.api.contract.v1.OrderStage
+		(*ReplaceOrderRequest)(nil),                      // 22: tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest
+		(*GetMaxLotsRequest)(nil),                        // 23: tinkoff.public.invest.api.contract.v1.GetMaxLotsRequest
+		(*GetMaxLotsResponse)(nil),                       // 24: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse
+		(*GetOrderPriceRequest)(nil),                     // 25: tinkoff.public.invest.api.contract.v1.GetOrderPriceRequest
+		(*GetOrderPriceResponse)(nil),                    // 26: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse
+		(*OrderStateStreamRequest)(nil),                  // 27: tinkoff.public.invest.api.contract.v1.OrderStateStreamRequest
+		(*SubscriptionResponse)(nil),                     // 28: tinkoff.public.invest.api.contract.v1.SubscriptionResponse
+		(*OrderStateStreamResponse)(nil),                 // 29: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse
+		(*GetOrdersRequest_GetOrdersRequestFilters)(nil), // 30: tinkoff.public.invest.api.contract.v1.GetOrdersRequest.GetOrdersRequestFilters
+		(*GetMaxLotsResponse_BuyLimitsView)(nil),         // 31: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse.BuyLimitsView
+		(*GetMaxLotsResponse_SellLimitsView)(nil),        // 32: tinkoff.public.invest.api.contract.v1.GetMaxLotsResponse.SellLimitsView
+		(*GetOrderPriceResponse_ExtraBond)(nil),          // 33: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse.ExtraBond
+		(*GetOrderPriceResponse_ExtraFuture)(nil),        // 34: tinkoff.public.invest.api.contract.v1.GetOrderPriceResponse.ExtraFuture
+		(*OrderStateStreamResponse_OrderState)(nil),      // 35: tinkoff.public.invest.api.contract.v1.OrderStateStreamResponse.OrderState
+		(*Ping)(nil),                                     // 36: tinkoff.public.invest.api.contract.v1.Ping
+		(*timestamppb.Timestamp)(nil),                    // 37: google.protobuf.Timestamp
+		(*Quotation)(nil),                                // 38: tinkoff.public.invest.api.contract.v1.Quotation
+		(PriceType)(0),                                   // 39: tinkoff.public.invest.api.contract.v1.PriceType
+		(*MoneyValue)(nil),                               // 40: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(*ResponseMetadata)(nil),                         // 41: tinkoff.public.invest.api.contract.v1.ResponseMetadata
+		(ResultSubscriptionStatus)(0),                    // 42: tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus
+		(*ErrorDetail)(nil),                              // 43: tinkoff.public.invest.api.contract.v1.ErrorDetail
+	}
+)
+
 var file_orders_proto_depIdxs = []int32{
 	9,   // 0: tinkoff.public.invest.api.contract.v1.TradesStreamResponse.order_trades:type_name -> tinkoff.public.invest.api.contract.v1.OrderTrades
 	36,  // 1: tinkoff.public.invest.api.contract.v1.TradesStreamResponse.ping:type_name -> tinkoff.public.invest.api.contract.v1.Ping

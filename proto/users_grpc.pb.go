@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -107,18 +108,20 @@ type UsersServiceServer interface {
 }
 
 // UnimplementedUsersServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedUsersServiceServer struct {
-}
+type UnimplementedUsersServiceServer struct{}
 
 func (UnimplementedUsersServiceServer) GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccounts not implemented")
 }
+
 func (UnimplementedUsersServiceServer) GetMarginAttributes(context.Context, *GetMarginAttributesRequest) (*GetMarginAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarginAttributes not implemented")
 }
+
 func (UnimplementedUsersServiceServer) GetUserTariff(context.Context, *GetUserTariffRequest) (*GetUserTariffResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTariff not implemented")
 }
+
 func (UnimplementedUsersServiceServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }

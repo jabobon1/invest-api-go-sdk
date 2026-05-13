@@ -7,12 +7,13 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,11 +27,11 @@ const (
 type AccountType int32
 
 const (
-	AccountType_ACCOUNT_TYPE_UNSPECIFIED AccountType = 0 //Тип аккаунта не определeн.
-	AccountType_ACCOUNT_TYPE_TINKOFF     AccountType = 1 //Брокерский счeт Т-Инвестиций.
-	AccountType_ACCOUNT_TYPE_TINKOFF_IIS AccountType = 2 //ИИС.
-	AccountType_ACCOUNT_TYPE_INVEST_BOX  AccountType = 3 //Инвесткопилка.
-	AccountType_ACCOUNT_TYPE_INVEST_FUND AccountType = 4 //Фонд денежного рынка.
+	AccountType_ACCOUNT_TYPE_UNSPECIFIED AccountType = 0 // Тип аккаунта не определeн.
+	AccountType_ACCOUNT_TYPE_TINKOFF     AccountType = 1 // Брокерский счeт Т-Инвестиций.
+	AccountType_ACCOUNT_TYPE_TINKOFF_IIS AccountType = 2 // ИИС.
+	AccountType_ACCOUNT_TYPE_INVEST_BOX  AccountType = 3 // Инвесткопилка.
+	AccountType_ACCOUNT_TYPE_INVEST_FUND AccountType = 4 // Фонд денежного рынка.
 )
 
 // Enum value maps for AccountType.
@@ -82,11 +83,11 @@ func (AccountType) EnumDescriptor() ([]byte, []int) {
 type AccountStatus int32
 
 const (
-	AccountStatus_ACCOUNT_STATUS_UNSPECIFIED AccountStatus = 0 //Статус счeта не определeн.
-	AccountStatus_ACCOUNT_STATUS_NEW         AccountStatus = 1 //Новый, в процессе открытия.
-	AccountStatus_ACCOUNT_STATUS_OPEN        AccountStatus = 2 //Открытый и активный счeт.
-	AccountStatus_ACCOUNT_STATUS_CLOSED      AccountStatus = 3 //Закрытый счeт.
-	AccountStatus_ACCOUNT_STATUS_ALL         AccountStatus = 4 //Все счета.
+	AccountStatus_ACCOUNT_STATUS_UNSPECIFIED AccountStatus = 0 // Статус счeта не определeн.
+	AccountStatus_ACCOUNT_STATUS_NEW         AccountStatus = 1 // Новый, в процессе открытия.
+	AccountStatus_ACCOUNT_STATUS_OPEN        AccountStatus = 2 // Открытый и активный счeт.
+	AccountStatus_ACCOUNT_STATUS_CLOSED      AccountStatus = 3 // Закрытый счeт.
+	AccountStatus_ACCOUNT_STATUS_ALL         AccountStatus = 4 // Все счета.
 )
 
 // Enum value maps for AccountStatus.
@@ -138,10 +139,10 @@ func (AccountStatus) EnumDescriptor() ([]byte, []int) {
 type AccessLevel int32
 
 const (
-	AccessLevel_ACCOUNT_ACCESS_LEVEL_UNSPECIFIED AccessLevel = 0 //Уровень доступа не определeн.
-	AccessLevel_ACCOUNT_ACCESS_LEVEL_FULL_ACCESS AccessLevel = 1 //Полный доступ к счeту.
-	AccessLevel_ACCOUNT_ACCESS_LEVEL_READ_ONLY   AccessLevel = 2 //Доступ с уровнем прав «только чтение».
-	AccessLevel_ACCOUNT_ACCESS_LEVEL_NO_ACCESS   AccessLevel = 3 //Доступа нет.
+	AccessLevel_ACCOUNT_ACCESS_LEVEL_UNSPECIFIED AccessLevel = 0 // Уровень доступа не определeн.
+	AccessLevel_ACCOUNT_ACCESS_LEVEL_FULL_ACCESS AccessLevel = 1 // Полный доступ к счeту.
+	AccessLevel_ACCOUNT_ACCESS_LEVEL_READ_ONLY   AccessLevel = 2 // Доступ с уровнем прав «только чтение».
+	AccessLevel_ACCOUNT_ACCESS_LEVEL_NO_ACCESS   AccessLevel = 3 // Доступа нет.
 )
 
 // Enum value maps for AccessLevel.
@@ -193,7 +194,7 @@ type GetAccountsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status *AccountStatus `protobuf:"varint,1,opt,name=status,proto3,enum=tinkoff.public.invest.api.contract.v1.AccountStatus,oneof" json:"status,omitempty"` //Статус счета.
+	Status *AccountStatus `protobuf:"varint,1,opt,name=status,proto3,enum=tinkoff.public.invest.api.contract.v1.AccountStatus,oneof" json:"status,omitempty"` // Статус счета.
 }
 
 func (x *GetAccountsRequest) Reset() {
@@ -575,8 +576,8 @@ type GetUserTariffResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UnaryLimits  []*UnaryLimit  `protobuf:"bytes,1,rep,name=unary_limits,json=unaryLimits,proto3" json:"unary_limits,omitempty"`    //Массив лимитов пользователя по unary-запросам.
-	StreamLimits []*StreamLimit `protobuf:"bytes,2,rep,name=stream_limits,json=streamLimits,proto3" json:"stream_limits,omitempty"` //Массив лимитов пользователей для stream-соединений.
+	UnaryLimits  []*UnaryLimit  `protobuf:"bytes,1,rep,name=unary_limits,json=unaryLimits,proto3" json:"unary_limits,omitempty"`    // Массив лимитов пользователя по unary-запросам.
+	StreamLimits []*StreamLimit `protobuf:"bytes,2,rep,name=stream_limits,json=streamLimits,proto3" json:"stream_limits,omitempty"` // Массив лимитов пользователей для stream-соединений.
 }
 
 func (x *GetUserTariffResponse) Reset() {
@@ -631,8 +632,8 @@ type UnaryLimit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LimitPerMinute int32    `protobuf:"varint,1,opt,name=limit_per_minute,json=limitPerMinute,proto3" json:"limit_per_minute,omitempty"` //Количество unary-запросов в минуту.
-	Methods        []string `protobuf:"bytes,2,rep,name=methods,proto3" json:"methods,omitempty"`                                        //Названия методов.
+	LimitPerMinute int32    `protobuf:"varint,1,opt,name=limit_per_minute,json=limitPerMinute,proto3" json:"limit_per_minute,omitempty"` // Количество unary-запросов в минуту.
+	Methods        []string `protobuf:"bytes,2,rep,name=methods,proto3" json:"methods,omitempty"`                                        // Названия методов.
 }
 
 func (x *UnaryLimit) Reset() {
@@ -687,9 +688,9 @@ type StreamLimit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Limit   int32    `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`    //Максимальное количество stream-соединений.
-	Streams []string `protobuf:"bytes,2,rep,name=streams,proto3" json:"streams,omitempty"` //Названия stream-методов.
-	Open    int32    `protobuf:"varint,3,opt,name=open,proto3" json:"open,omitempty"`      //Текущее количество открытых stream-соединений.
+	Limit   int32    `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`    // Максимальное количество stream-соединений.
+	Streams []string `protobuf:"bytes,2,rep,name=streams,proto3" json:"streams,omitempty"` // Названия stream-методов.
+	Open    int32    `protobuf:"varint,3,opt,name=open,proto3" json:"open,omitempty"`      // Текущее количество открытых stream-соединений.
 }
 
 func (x *StreamLimit) Reset() {
@@ -790,11 +791,11 @@ type GetInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PremStatus           bool     `protobuf:"varint,1,opt,name=prem_status,json=premStatus,proto3" json:"prem_status,omitempty"`                                  //Признак премиум клиента.
-	QualStatus           bool     `protobuf:"varint,2,opt,name=qual_status,json=qualStatus,proto3" json:"qual_status,omitempty"`                                  //Признак квалифицированного инвестора.
-	QualifiedForWorkWith []string `protobuf:"bytes,3,rep,name=qualified_for_work_with,json=qualifiedForWorkWith,proto3" json:"qualified_for_work_with,omitempty"` //Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](/invest/services/accounts/faq_users).
-	Tariff               string   `protobuf:"bytes,4,opt,name=tariff,proto3" json:"tariff,omitempty"`                                                             //Наименование тарифа пользователя.
-	UserId               string   `protobuf:"bytes,9,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                               //Идентификатор пользователя.
+	PremStatus           bool     `protobuf:"varint,1,opt,name=prem_status,json=premStatus,proto3" json:"prem_status,omitempty"`                                  // Признак премиум клиента.
+	QualStatus           bool     `protobuf:"varint,2,opt,name=qual_status,json=qualStatus,proto3" json:"qual_status,omitempty"`                                  // Признак квалифицированного инвестора.
+	QualifiedForWorkWith []string `protobuf:"bytes,3,rep,name=qualified_for_work_with,json=qualifiedForWorkWith,proto3" json:"qualified_for_work_with,omitempty"` // Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](/invest/services/accounts/faq_users).
+	Tariff               string   `protobuf:"bytes,4,opt,name=tariff,proto3" json:"tariff,omitempty"`                                                             // Наименование тарифа пользователя.
+	UserId               string   `protobuf:"bytes,9,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                               // Идентификатор пользователя.
 	RiskLevelCode        string   `protobuf:"bytes,12,opt,name=risk_level_code,json=riskLevelCode,proto3" json:"risk_level_code,omitempty"`                       // Категория риска.
 }
 
@@ -1091,27 +1092,30 @@ func file_users_proto_rawDescGZIP() []byte {
 	return file_users_proto_rawDescData
 }
 
-var file_users_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
-var file_users_proto_goTypes = []interface{}{
-	(AccountType)(0),                    // 0: tinkoff.public.invest.api.contract.v1.AccountType
-	(AccountStatus)(0),                  // 1: tinkoff.public.invest.api.contract.v1.AccountStatus
-	(AccessLevel)(0),                    // 2: tinkoff.public.invest.api.contract.v1.AccessLevel
-	(*GetAccountsRequest)(nil),          // 3: tinkoff.public.invest.api.contract.v1.GetAccountsRequest
-	(*GetAccountsResponse)(nil),         // 4: tinkoff.public.invest.api.contract.v1.GetAccountsResponse
-	(*Account)(nil),                     // 5: tinkoff.public.invest.api.contract.v1.Account
-	(*GetMarginAttributesRequest)(nil),  // 6: tinkoff.public.invest.api.contract.v1.GetMarginAttributesRequest
-	(*GetMarginAttributesResponse)(nil), // 7: tinkoff.public.invest.api.contract.v1.GetMarginAttributesResponse
-	(*GetUserTariffRequest)(nil),        // 8: tinkoff.public.invest.api.contract.v1.GetUserTariffRequest
-	(*GetUserTariffResponse)(nil),       // 9: tinkoff.public.invest.api.contract.v1.GetUserTariffResponse
-	(*UnaryLimit)(nil),                  // 10: tinkoff.public.invest.api.contract.v1.UnaryLimit
-	(*StreamLimit)(nil),                 // 11: tinkoff.public.invest.api.contract.v1.StreamLimit
-	(*GetInfoRequest)(nil),              // 12: tinkoff.public.invest.api.contract.v1.GetInfoRequest
-	(*GetInfoResponse)(nil),             // 13: tinkoff.public.invest.api.contract.v1.GetInfoResponse
-	(*timestamppb.Timestamp)(nil),       // 14: google.protobuf.Timestamp
-	(*MoneyValue)(nil),                  // 15: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(*Quotation)(nil),                   // 16: tinkoff.public.invest.api.contract.v1.Quotation
-}
+var (
+	file_users_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+	file_users_proto_msgTypes  = make([]protoimpl.MessageInfo, 11)
+	file_users_proto_goTypes   = []interface{}{
+		(AccountType)(0),                    // 0: tinkoff.public.invest.api.contract.v1.AccountType
+		(AccountStatus)(0),                  // 1: tinkoff.public.invest.api.contract.v1.AccountStatus
+		(AccessLevel)(0),                    // 2: tinkoff.public.invest.api.contract.v1.AccessLevel
+		(*GetAccountsRequest)(nil),          // 3: tinkoff.public.invest.api.contract.v1.GetAccountsRequest
+		(*GetAccountsResponse)(nil),         // 4: tinkoff.public.invest.api.contract.v1.GetAccountsResponse
+		(*Account)(nil),                     // 5: tinkoff.public.invest.api.contract.v1.Account
+		(*GetMarginAttributesRequest)(nil),  // 6: tinkoff.public.invest.api.contract.v1.GetMarginAttributesRequest
+		(*GetMarginAttributesResponse)(nil), // 7: tinkoff.public.invest.api.contract.v1.GetMarginAttributesResponse
+		(*GetUserTariffRequest)(nil),        // 8: tinkoff.public.invest.api.contract.v1.GetUserTariffRequest
+		(*GetUserTariffResponse)(nil),       // 9: tinkoff.public.invest.api.contract.v1.GetUserTariffResponse
+		(*UnaryLimit)(nil),                  // 10: tinkoff.public.invest.api.contract.v1.UnaryLimit
+		(*StreamLimit)(nil),                 // 11: tinkoff.public.invest.api.contract.v1.StreamLimit
+		(*GetInfoRequest)(nil),              // 12: tinkoff.public.invest.api.contract.v1.GetInfoRequest
+		(*GetInfoResponse)(nil),             // 13: tinkoff.public.invest.api.contract.v1.GetInfoResponse
+		(*timestamppb.Timestamp)(nil),       // 14: google.protobuf.Timestamp
+		(*MoneyValue)(nil),                  // 15: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(*Quotation)(nil),                   // 16: tinkoff.public.invest.api.contract.v1.Quotation
+	}
+)
+
 var file_users_proto_depIdxs = []int32{
 	1,  // 0: tinkoff.public.invest.api.contract.v1.GetAccountsRequest.status:type_name -> tinkoff.public.invest.api.contract.v1.AccountStatus
 	5,  // 1: tinkoff.public.invest.api.contract.v1.GetAccountsResponse.accounts:type_name -> tinkoff.public.invest.api.contract.v1.Account

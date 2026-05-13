@@ -7,11 +7,12 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,16 +27,16 @@ type InstrumentType int32
 
 const (
 	InstrumentType_INSTRUMENT_TYPE_UNSPECIFIED          InstrumentType = 0
-	InstrumentType_INSTRUMENT_TYPE_BOND                 InstrumentType = 1  //Облигация.
-	InstrumentType_INSTRUMENT_TYPE_SHARE                InstrumentType = 2  //Акция.
-	InstrumentType_INSTRUMENT_TYPE_CURRENCY             InstrumentType = 3  //Валюта.
-	InstrumentType_INSTRUMENT_TYPE_ETF                  InstrumentType = 4  //Exchange-traded fund. Фонд.
-	InstrumentType_INSTRUMENT_TYPE_FUTURES              InstrumentType = 5  //Фьючерс.
-	InstrumentType_INSTRUMENT_TYPE_SP                   InstrumentType = 6  //Структурная нота.
-	InstrumentType_INSTRUMENT_TYPE_OPTION               InstrumentType = 7  //Опцион.
-	InstrumentType_INSTRUMENT_TYPE_CLEARING_CERTIFICATE InstrumentType = 8  //Clearing certificate.
-	InstrumentType_INSTRUMENT_TYPE_INDEX                InstrumentType = 9  //Индекс.
-	InstrumentType_INSTRUMENT_TYPE_COMMODITY            InstrumentType = 10 //Товар.
+	InstrumentType_INSTRUMENT_TYPE_BOND                 InstrumentType = 1  // Облигация.
+	InstrumentType_INSTRUMENT_TYPE_SHARE                InstrumentType = 2  // Акция.
+	InstrumentType_INSTRUMENT_TYPE_CURRENCY             InstrumentType = 3  // Валюта.
+	InstrumentType_INSTRUMENT_TYPE_ETF                  InstrumentType = 4  // Exchange-traded fund. Фонд.
+	InstrumentType_INSTRUMENT_TYPE_FUTURES              InstrumentType = 5  // Фьючерс.
+	InstrumentType_INSTRUMENT_TYPE_SP                   InstrumentType = 6  // Структурная нота.
+	InstrumentType_INSTRUMENT_TYPE_OPTION               InstrumentType = 7  // Опцион.
+	InstrumentType_INSTRUMENT_TYPE_CLEARING_CERTIFICATE InstrumentType = 8  // Clearing certificate.
+	InstrumentType_INSTRUMENT_TYPE_INDEX                InstrumentType = 9  // Индекс.
+	InstrumentType_INSTRUMENT_TYPE_COMMODITY            InstrumentType = 10 // Товар.
 )
 
 // Enum value maps for InstrumentType.
@@ -99,9 +100,9 @@ func (InstrumentType) EnumDescriptor() ([]byte, []int) {
 type InstrumentStatus int32
 
 const (
-	InstrumentStatus_INSTRUMENT_STATUS_UNSPECIFIED InstrumentStatus = 0 //Значение не определено.
-	InstrumentStatus_INSTRUMENT_STATUS_BASE        InstrumentStatus = 1 //По умолчанию — базовый список инструментов, которыми можно торговать через T-Invest API. Сейчас списки доступных бумаг в API и других интерфейсах совпадают — кроме внебиржевых бумаг, но в будущем списки могут различаться.
-	InstrumentStatus_INSTRUMENT_STATUS_ALL         InstrumentStatus = 2 //Список всех инструментов.
+	InstrumentStatus_INSTRUMENT_STATUS_UNSPECIFIED InstrumentStatus = 0 // Значение не определено.
+	InstrumentStatus_INSTRUMENT_STATUS_BASE        InstrumentStatus = 1 // По умолчанию — базовый список инструментов, которыми можно торговать через T-Invest API. Сейчас списки доступных бумаг в API и других интерфейсах совпадают — кроме внебиржевых бумаг, но в будущем списки могут различаться.
+	InstrumentStatus_INSTRUMENT_STATUS_ALL         InstrumentStatus = 2 // Список всех инструментов.
 )
 
 // Enum value maps for InstrumentStatus.
@@ -149,23 +150,23 @@ func (InstrumentStatus) EnumDescriptor() ([]byte, []int) {
 type SecurityTradingStatus int32
 
 const (
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_UNSPECIFIED                      SecurityTradingStatus = 0  //Торговый статус не определен.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING        SecurityTradingStatus = 1  //Недоступен для торгов.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_OPENING_PERIOD                   SecurityTradingStatus = 2  //Период открытия торгов.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_CLOSING_PERIOD                   SecurityTradingStatus = 3  //Период закрытия торгов.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_BREAK_IN_TRADING                 SecurityTradingStatus = 4  //Перерыв в торговле.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_NORMAL_TRADING                   SecurityTradingStatus = 5  //Нормальная торговля.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_CLOSING_AUCTION                  SecurityTradingStatus = 6  //Аукцион закрытия.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_DARK_POOL_AUCTION                SecurityTradingStatus = 7  //Аукцион крупных пакетов.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_DISCRETE_AUCTION                 SecurityTradingStatus = 8  //Дискретный аукцион.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD           SecurityTradingStatus = 9  //Аукцион открытия.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE SecurityTradingStatus = 10 //Период торгов по цене аукциона закрытия.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_ASSIGNED                 SecurityTradingStatus = 11 //Сессия назначена.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_CLOSE                    SecurityTradingStatus = 12 //Сессия закрыта.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_OPEN                     SecurityTradingStatus = 13 //Сессия открыта.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING            SecurityTradingStatus = 14 //Доступна торговля в режиме внутренней ликвидности брокера.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING          SecurityTradingStatus = 15 //Перерыв торговли в режиме внутренней ликвидности брокера.
-	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING SecurityTradingStatus = 16 //Недоступна торговля в режиме внутренней ликвидности брокера.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_UNSPECIFIED                      SecurityTradingStatus = 0  // Торговый статус не определен.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING        SecurityTradingStatus = 1  // Недоступен для торгов.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_OPENING_PERIOD                   SecurityTradingStatus = 2  // Период открытия торгов.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_CLOSING_PERIOD                   SecurityTradingStatus = 3  // Период закрытия торгов.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_BREAK_IN_TRADING                 SecurityTradingStatus = 4  // Перерыв в торговле.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_NORMAL_TRADING                   SecurityTradingStatus = 5  // Нормальная торговля.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_CLOSING_AUCTION                  SecurityTradingStatus = 6  // Аукцион закрытия.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_DARK_POOL_AUCTION                SecurityTradingStatus = 7  // Аукцион крупных пакетов.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_DISCRETE_AUCTION                 SecurityTradingStatus = 8  // Дискретный аукцион.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD           SecurityTradingStatus = 9  // Аукцион открытия.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE SecurityTradingStatus = 10 // Период торгов по цене аукциона закрытия.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_ASSIGNED                 SecurityTradingStatus = 11 // Сессия назначена.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_CLOSE                    SecurityTradingStatus = 12 // Сессия закрыта.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_SESSION_OPEN                     SecurityTradingStatus = 13 // Сессия открыта.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING            SecurityTradingStatus = 14 // Доступна торговля в режиме внутренней ликвидности брокера.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING          SecurityTradingStatus = 15 // Перерыв торговли в режиме внутренней ликвидности брокера.
+	SecurityTradingStatus_SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING SecurityTradingStatus = 16 // Недоступна торговля в режиме внутренней ликвидности брокера.
 )
 
 // Enum value maps for SecurityTradingStatus.
@@ -241,9 +242,9 @@ func (SecurityTradingStatus) EnumDescriptor() ([]byte, []int) {
 type PriceType int32
 
 const (
-	PriceType_PRICE_TYPE_UNSPECIFIED PriceType = 0 //Значение не определено.
-	PriceType_PRICE_TYPE_POINT       PriceType = 1 //Цена в пунктах (только для фьючерсов и облигаций).
-	PriceType_PRICE_TYPE_CURRENCY    PriceType = 2 //Цена в валюте расчетов по инструменту.
+	PriceType_PRICE_TYPE_UNSPECIFIED PriceType = 0 // Значение не определено.
+	PriceType_PRICE_TYPE_POINT       PriceType = 1 // Цена в пунктах (только для фьючерсов и облигаций).
+	PriceType_PRICE_TYPE_CURRENCY    PriceType = 2 // Цена в валюте расчетов по инструменту.
 )
 
 // Enum value maps for PriceType.
@@ -290,9 +291,9 @@ func (PriceType) EnumDescriptor() ([]byte, []int) {
 type ResultSubscriptionStatus int32
 
 const (
-	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_UNSPECIFIED ResultSubscriptionStatus = 0  //Статус подписки не определен.
-	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_OK          ResultSubscriptionStatus = 1  //Подписка успешно установлена.
-	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_ERROR       ResultSubscriptionStatus = 13 //Ошибка подписки
+	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_UNSPECIFIED ResultSubscriptionStatus = 0  // Статус подписки не определен.
+	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_OK          ResultSubscriptionStatus = 1  // Подписка успешно установлена.
+	ResultSubscriptionStatus_RESULT_SUBSCRIPTION_STATUS_ERROR       ResultSubscriptionStatus = 13 // Ошибка подписки
 )
 
 // Enum value maps for ResultSubscriptionStatus.
@@ -340,11 +341,11 @@ func (ResultSubscriptionStatus) EnumDescriptor() ([]byte, []int) {
 type RealExchange int32
 
 const (
-	RealExchange_REAL_EXCHANGE_UNSPECIFIED RealExchange = 0 //Тип не определен.
-	RealExchange_REAL_EXCHANGE_MOEX        RealExchange = 1 //Московская биржа.
-	RealExchange_REAL_EXCHANGE_RTS         RealExchange = 2 //Санкт-Петербургская биржа.
-	RealExchange_REAL_EXCHANGE_OTC         RealExchange = 3 //Внебиржевой инструмент.
-	RealExchange_REAL_EXCHANGE_DEALER      RealExchange = 4 //Инструмент, торгуемый на площадке брокера.
+	RealExchange_REAL_EXCHANGE_UNSPECIFIED RealExchange = 0 // Тип не определен.
+	RealExchange_REAL_EXCHANGE_MOEX        RealExchange = 1 // Московская биржа.
+	RealExchange_REAL_EXCHANGE_RTS         RealExchange = 2 // Санкт-Петербургская биржа.
+	RealExchange_REAL_EXCHANGE_OTC         RealExchange = 3 // Внебиржевой инструмент.
+	RealExchange_REAL_EXCHANGE_DEALER      RealExchange = 4 // Инструмент, торгуемый на площадке брокера.
 )
 
 // Enum value maps for RealExchange.
@@ -522,7 +523,7 @@ type PingRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Time *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3,oneof" json:"time,omitempty"` //Время формирования запроса.
+	Time *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3,oneof" json:"time,omitempty"` // Время формирования запроса.
 }
 
 func (x *PingRequest) Reset() {
@@ -569,7 +570,7 @@ type PingDelaySettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PingDelayMs *int32 `protobuf:"varint,15,opt,name=ping_delay_ms,json=pingDelayMs,proto3,oneof" json:"ping_delay_ms,omitempty"` //Задержка (пинг) сообщений:  5000–180 000 миллисекунд. Значение по умолчанию — 120 000.
+	PingDelayMs *int32 `protobuf:"varint,15,opt,name=ping_delay_ms,json=pingDelayMs,proto3,oneof" json:"ping_delay_ms,omitempty"` // Задержка (пинг) сообщений:  5000–180 000 миллисекунд. Значение по умолчанию — 120 000.
 }
 
 func (x *PingDelaySettings) Reset() {
@@ -617,9 +618,9 @@ type Ping struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Time            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`                                                      //Время проверки.
-	StreamId        string                 `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                              //Идентификатор соединения.
-	PingRequestTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=ping_request_time,json=pingRequestTime,proto3,oneof" json:"ping_request_time,omitempty"` //Время формирования запроса.
+	Time            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`                                                      // Время проверки.
+	StreamId        string                 `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                              // Идентификатор соединения.
+	PingRequestTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=ping_request_time,json=pingRequestTime,proto3,oneof" json:"ping_request_time,omitempty"` // Время формирования запроса.
 }
 
 func (x *Ping) Reset() {
@@ -680,8 +681,8 @@ type Page struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Limit      int32 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`                             //Максимальное число возвращаемых записей.
-	PageNumber int32 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"` //Порядковый номер страницы, начиная с 0.
+	Limit      int32 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`                             // Максимальное число возвращаемых записей.
+	PageNumber int32 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"` // Порядковый номер страницы, начиная с 0.
 }
 
 func (x *Page) Reset() {
@@ -735,9 +736,9 @@ type PageResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Limit      int32 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`                             //Максимальное число возвращаемых записей.
-	PageNumber int32 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"` //Порядковый номер страницы, начиная с 0.
-	TotalCount int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"` //Общее количество записей.
+	Limit      int32 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`                             // Максимальное число возвращаемых записей.
+	PageNumber int32 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"` // Порядковый номер страницы, начиная с 0.
+	TotalCount int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"` // Общее количество записей.
 }
 
 func (x *PageResponse) Reset() {
@@ -798,8 +799,8 @@ type ResponseMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId string                 `protobuf:"bytes,42,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` //Идентификатор трекинга.
-	ServerTime *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` //Серверное время.
+	TrackingId string                 `protobuf:"bytes,42,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"` // Идентификатор трекинга.
+	ServerTime *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` // Серверное время.
 }
 
 func (x *ResponseMetadata) Reset() {
@@ -916,8 +917,8 @@ type ErrorDetail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code    string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`       //Код ошибки.
-	Message string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"` //Описание ошибки.
+	Code    string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`       // Код ошибки.
+	Message string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"` // Описание ошибки.
 }
 
 func (x *ErrorDetail) Reset() {
@@ -1159,27 +1160,30 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_common_proto_goTypes = []interface{}{
-	(InstrumentType)(0),           // 0: tinkoff.public.invest.api.contract.v1.InstrumentType
-	(InstrumentStatus)(0),         // 1: tinkoff.public.invest.api.contract.v1.InstrumentStatus
-	(SecurityTradingStatus)(0),    // 2: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
-	(PriceType)(0),                // 3: tinkoff.public.invest.api.contract.v1.PriceType
-	(ResultSubscriptionStatus)(0), // 4: tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus
-	(RealExchange)(0),             // 5: tinkoff.public.invest.api.contract.v1.RealExchange
-	(*MoneyValue)(nil),            // 6: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(*Quotation)(nil),             // 7: tinkoff.public.invest.api.contract.v1.Quotation
-	(*PingRequest)(nil),           // 8: tinkoff.public.invest.api.contract.v1.PingRequest
-	(*PingDelaySettings)(nil),     // 9: tinkoff.public.invest.api.contract.v1.PingDelaySettings
-	(*Ping)(nil),                  // 10: tinkoff.public.invest.api.contract.v1.Ping
-	(*Page)(nil),                  // 11: tinkoff.public.invest.api.contract.v1.Page
-	(*PageResponse)(nil),          // 12: tinkoff.public.invest.api.contract.v1.PageResponse
-	(*ResponseMetadata)(nil),      // 13: tinkoff.public.invest.api.contract.v1.ResponseMetadata
-	(*BrandData)(nil),             // 14: tinkoff.public.invest.api.contract.v1.BrandData
-	(*ErrorDetail)(nil),           // 15: tinkoff.public.invest.api.contract.v1.ErrorDetail
-	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
-}
+var (
+	file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+	file_common_proto_msgTypes  = make([]protoimpl.MessageInfo, 10)
+	file_common_proto_goTypes   = []interface{}{
+		(InstrumentType)(0),           // 0: tinkoff.public.invest.api.contract.v1.InstrumentType
+		(InstrumentStatus)(0),         // 1: tinkoff.public.invest.api.contract.v1.InstrumentStatus
+		(SecurityTradingStatus)(0),    // 2: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
+		(PriceType)(0),                // 3: tinkoff.public.invest.api.contract.v1.PriceType
+		(ResultSubscriptionStatus)(0), // 4: tinkoff.public.invest.api.contract.v1.ResultSubscriptionStatus
+		(RealExchange)(0),             // 5: tinkoff.public.invest.api.contract.v1.RealExchange
+		(*MoneyValue)(nil),            // 6: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(*Quotation)(nil),             // 7: tinkoff.public.invest.api.contract.v1.Quotation
+		(*PingRequest)(nil),           // 8: tinkoff.public.invest.api.contract.v1.PingRequest
+		(*PingDelaySettings)(nil),     // 9: tinkoff.public.invest.api.contract.v1.PingDelaySettings
+		(*Ping)(nil),                  // 10: tinkoff.public.invest.api.contract.v1.Ping
+		(*Page)(nil),                  // 11: tinkoff.public.invest.api.contract.v1.Page
+		(*PageResponse)(nil),          // 12: tinkoff.public.invest.api.contract.v1.PageResponse
+		(*ResponseMetadata)(nil),      // 13: tinkoff.public.invest.api.contract.v1.ResponseMetadata
+		(*BrandData)(nil),             // 14: tinkoff.public.invest.api.contract.v1.BrandData
+		(*ErrorDetail)(nil),           // 15: tinkoff.public.invest.api.contract.v1.ErrorDetail
+		(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
+	}
+)
+
 var file_common_proto_depIdxs = []int32{
 	16, // 0: tinkoff.public.invest.api.contract.v1.PingRequest.time:type_name -> google.protobuf.Timestamp
 	16, // 1: tinkoff.public.invest.api.contract.v1.Ping.time:type_name -> google.protobuf.Timestamp

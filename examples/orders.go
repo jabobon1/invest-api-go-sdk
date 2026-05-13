@@ -67,7 +67,6 @@ func main() {
 		OrderType:    pb.OrderType_ORDER_TYPE_MARKET,
 		OrderId:      investgo.CreateUid(),
 	})
-
 	if err != nil {
 		logger.Errorf("buy order %v", err.Error())
 	}
@@ -127,5 +126,4 @@ func main() {
 			fmt.Printf("order id = %v, direction =  %v, lots executed = %v\n", order.GetOrderId(), order.GetDirection(), order.GetLotsExecuted())
 		}
 	}
-
 }

@@ -7,12 +7,13 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,9 +27,9 @@ const (
 type SubscriptionAction int32
 
 const (
-	SubscriptionAction_SUBSCRIPTION_ACTION_UNSPECIFIED SubscriptionAction = 0 //Статус подписки не определен.
-	SubscriptionAction_SUBSCRIPTION_ACTION_SUBSCRIBE   SubscriptionAction = 1 //Подписаться.
-	SubscriptionAction_SUBSCRIPTION_ACTION_UNSUBSCRIBE SubscriptionAction = 2 //Отписаться.
+	SubscriptionAction_SUBSCRIPTION_ACTION_UNSPECIFIED SubscriptionAction = 0 // Статус подписки не определен.
+	SubscriptionAction_SUBSCRIPTION_ACTION_SUBSCRIBE   SubscriptionAction = 1 // Подписаться.
+	SubscriptionAction_SUBSCRIPTION_ACTION_UNSUBSCRIBE SubscriptionAction = 2 // Отписаться.
 )
 
 // Enum value maps for SubscriptionAction.
@@ -76,20 +77,20 @@ func (SubscriptionAction) EnumDescriptor() ([]byte, []int) {
 type SubscriptionInterval int32
 
 const (
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_UNSPECIFIED     SubscriptionInterval = 0  //Интервал свечи не определен.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_MINUTE      SubscriptionInterval = 1  //Минутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_FIVE_MINUTES    SubscriptionInterval = 2  //Пятиминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES SubscriptionInterval = 3  //Пятнадцатиминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_HOUR        SubscriptionInterval = 4  //Часовые свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_DAY         SubscriptionInterval = 5  //Дневные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_2_MIN           SubscriptionInterval = 6  //Двухминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_3_MIN           SubscriptionInterval = 7  //Трехминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_10_MIN          SubscriptionInterval = 8  //Десятиминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_30_MIN          SubscriptionInterval = 9  //Тридцатиминутные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_2_HOUR          SubscriptionInterval = 10 //Двухчасовые свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_4_HOUR          SubscriptionInterval = 11 //Четырехчасовые свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_WEEK            SubscriptionInterval = 12 //Недельные свечи.
-	SubscriptionInterval_SUBSCRIPTION_INTERVAL_MONTH           SubscriptionInterval = 13 //Месячные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_UNSPECIFIED     SubscriptionInterval = 0  // Интервал свечи не определен.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_MINUTE      SubscriptionInterval = 1  // Минутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_FIVE_MINUTES    SubscriptionInterval = 2  // Пятиминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES SubscriptionInterval = 3  // Пятнадцатиминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_HOUR        SubscriptionInterval = 4  // Часовые свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_ONE_DAY         SubscriptionInterval = 5  // Дневные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_2_MIN           SubscriptionInterval = 6  // Двухминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_3_MIN           SubscriptionInterval = 7  // Трехминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_10_MIN          SubscriptionInterval = 8  // Десятиминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_30_MIN          SubscriptionInterval = 9  // Тридцатиминутные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_2_HOUR          SubscriptionInterval = 10 // Двухчасовые свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_4_HOUR          SubscriptionInterval = 11 // Четырехчасовые свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_WEEK            SubscriptionInterval = 12 // Недельные свечи.
+	SubscriptionInterval_SUBSCRIPTION_INTERVAL_MONTH           SubscriptionInterval = 13 // Месячные свечи.
 )
 
 // Enum value maps for SubscriptionInterval.
@@ -159,17 +160,17 @@ func (SubscriptionInterval) EnumDescriptor() ([]byte, []int) {
 type SubscriptionStatus int32
 
 const (
-	SubscriptionStatus_SUBSCRIPTION_STATUS_UNSPECIFIED                    SubscriptionStatus = 0  //Статус подписки не определен.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_SUCCESS                        SubscriptionStatus = 1  //Успешно.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND           SubscriptionStatus = 2  //Инструмент не найден.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID SubscriptionStatus = 3  //Некорректный статус подписки. [Список возможных значений](./marketdata#subscriptionaction).
-	SubscriptionStatus_SUBSCRIPTION_STATUS_DEPTH_IS_INVALID               SubscriptionStatus = 4  //Некорректная глубина стакана. Доступные значения — 1, 10, 20, 30, 40, 50.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID            SubscriptionStatus = 5  //Некорректный интервал свечей. [Список возможных значений](./marketdata#subscriptioninterval).
-	SubscriptionStatus_SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED              SubscriptionStatus = 6  //Превышен лимит на общее количество подписок в рамках стрима. [Лимитная политика](./limits/).
-	SubscriptionStatus_SUBSCRIPTION_STATUS_INTERNAL_ERROR                 SubscriptionStatus = 7  //Внутренняя ошибка сервиса.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS              SubscriptionStatus = 8  //Превышен лимит на количество запросов на подписки в течение установленного отрезка времени.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_UNSPECIFIED                    SubscriptionStatus = 0  // Статус подписки не определен.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_SUCCESS                        SubscriptionStatus = 1  // Успешно.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND           SubscriptionStatus = 2  // Инструмент не найден.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID SubscriptionStatus = 3  // Некорректный статус подписки. [Список возможных значений](./marketdata#subscriptionaction).
+	SubscriptionStatus_SUBSCRIPTION_STATUS_DEPTH_IS_INVALID               SubscriptionStatus = 4  // Некорректная глубина стакана. Доступные значения — 1, 10, 20, 30, 40, 50.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID            SubscriptionStatus = 5  // Некорректный интервал свечей. [Список возможных значений](./marketdata#subscriptioninterval).
+	SubscriptionStatus_SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED              SubscriptionStatus = 6  // Превышен лимит на общее количество подписок в рамках стрима. [Лимитная политика](./limits/).
+	SubscriptionStatus_SUBSCRIPTION_STATUS_INTERNAL_ERROR                 SubscriptionStatus = 7  // Внутренняя ошибка сервиса.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS              SubscriptionStatus = 8  // Превышен лимит на количество запросов на подписки в течение установленного отрезка времени.
 	SubscriptionStatus_SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND         SubscriptionStatus = 9  // Активная подписка не найдена. Ошибка может возникнуть только при отписке от несуществующей подписки.
-	SubscriptionStatus_SUBSCRIPTION_STATUS_SOURCE_IS_INVALID              SubscriptionStatus = 10 //Указан некорректный источник.
+	SubscriptionStatus_SUBSCRIPTION_STATUS_SOURCE_IS_INVALID              SubscriptionStatus = 10 // Указан некорректный источник.
 )
 
 // Enum value maps for SubscriptionStatus.
@@ -233,7 +234,7 @@ func (SubscriptionStatus) EnumDescriptor() ([]byte, []int) {
 type TradeSourceType int32
 
 const (
-	TradeSourceType_TRADE_SOURCE_UNSPECIFIED TradeSourceType = 0 //Тип источника сделки не определён.
+	TradeSourceType_TRADE_SOURCE_UNSPECIFIED TradeSourceType = 0 // Тип источника сделки не определён.
 	TradeSourceType_TRADE_SOURCE_EXCHANGE    TradeSourceType = 1 // Биржевые сделки.
 	TradeSourceType_TRADE_SOURCE_DEALER      TradeSourceType = 2 // Сделки дилера.
 	TradeSourceType_TRADE_SOURCE_ALL         TradeSourceType = 3 // Все сделки.
@@ -286,9 +287,9 @@ func (TradeSourceType) EnumDescriptor() ([]byte, []int) {
 type TradeDirection int32
 
 const (
-	TradeDirection_TRADE_DIRECTION_UNSPECIFIED TradeDirection = 0 //Направление сделки не определено.
-	TradeDirection_TRADE_DIRECTION_BUY         TradeDirection = 1 //Покупка.
-	TradeDirection_TRADE_DIRECTION_SELL        TradeDirection = 2 //Продажа.
+	TradeDirection_TRADE_DIRECTION_UNSPECIFIED TradeDirection = 0 // Направление сделки не определено.
+	TradeDirection_TRADE_DIRECTION_BUY         TradeDirection = 1 // Покупка.
+	TradeDirection_TRADE_DIRECTION_SELL        TradeDirection = 2 // Продажа.
 )
 
 // Enum value maps for TradeDirection.
@@ -336,23 +337,23 @@ func (TradeDirection) EnumDescriptor() ([]byte, []int) {
 type CandleInterval int32
 
 const (
-	CandleInterval_CANDLE_INTERVAL_UNSPECIFIED CandleInterval = 0  //Интервал не определен.
-	CandleInterval_CANDLE_INTERVAL_1_MIN       CandleInterval = 1  //От 1 минуты до 1 дня. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_5_MIN       CandleInterval = 2  //От 5 минут до недели. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_15_MIN      CandleInterval = 3  //От 15 минут до 3 недель. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_HOUR        CandleInterval = 4  //От 1 часа до 3 месяцев. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_DAY         CandleInterval = 5  //От 1 дня до 6 лет. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_2_MIN       CandleInterval = 6  //От 2 минут до 1 дня. Максимальное значение `limit` — 1200.
-	CandleInterval_CANDLE_INTERVAL_3_MIN       CandleInterval = 7  //От 3 минут до 1 дня. Максимальное значение `limit` — 750.
-	CandleInterval_CANDLE_INTERVAL_10_MIN      CandleInterval = 8  //От 10 минут до недели. Максимальное значение `limit` — 1200.
-	CandleInterval_CANDLE_INTERVAL_30_MIN      CandleInterval = 9  //От 30 минут до 3 недель. Максимальное значение `limit` — 1200.
-	CandleInterval_CANDLE_INTERVAL_2_HOUR      CandleInterval = 10 //От 2 часов до 3 месяцев. Максимальное значение `limit` — 2400.
-	CandleInterval_CANDLE_INTERVAL_4_HOUR      CandleInterval = 11 //От 4 часов до 3 месяцев. Максимальное значение `limit` — 700.
-	CandleInterval_CANDLE_INTERVAL_WEEK        CandleInterval = 12 //От 1 недели до 5 лет. Максимальное значение `limit` — 300.
-	CandleInterval_CANDLE_INTERVAL_MONTH       CandleInterval = 13 //От 1 месяца до 10 лет. Максимальное значение `limit` — 120.
-	CandleInterval_CANDLE_INTERVAL_5_SEC       CandleInterval = 14 //От 5 секунд до 200 минут. Максимальное значение `limit` — 2500.
-	CandleInterval_CANDLE_INTERVAL_10_SEC      CandleInterval = 15 //От 10 секунд до 200 минут. Максимальное значение `limit` — 1250.
-	CandleInterval_CANDLE_INTERVAL_30_SEC      CandleInterval = 16 //От 30 секунд до 20 часов. Максимальное значение `limit` — 2500.
+	CandleInterval_CANDLE_INTERVAL_UNSPECIFIED CandleInterval = 0  // Интервал не определен.
+	CandleInterval_CANDLE_INTERVAL_1_MIN       CandleInterval = 1  // От 1 минуты до 1 дня. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_5_MIN       CandleInterval = 2  // От 5 минут до недели. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_15_MIN      CandleInterval = 3  // От 15 минут до 3 недель. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_HOUR        CandleInterval = 4  // От 1 часа до 3 месяцев. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_DAY         CandleInterval = 5  // От 1 дня до 6 лет. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_2_MIN       CandleInterval = 6  // От 2 минут до 1 дня. Максимальное значение `limit` — 1200.
+	CandleInterval_CANDLE_INTERVAL_3_MIN       CandleInterval = 7  // От 3 минут до 1 дня. Максимальное значение `limit` — 750.
+	CandleInterval_CANDLE_INTERVAL_10_MIN      CandleInterval = 8  // От 10 минут до недели. Максимальное значение `limit` — 1200.
+	CandleInterval_CANDLE_INTERVAL_30_MIN      CandleInterval = 9  // От 30 минут до 3 недель. Максимальное значение `limit` — 1200.
+	CandleInterval_CANDLE_INTERVAL_2_HOUR      CandleInterval = 10 // От 2 часов до 3 месяцев. Максимальное значение `limit` — 2400.
+	CandleInterval_CANDLE_INTERVAL_4_HOUR      CandleInterval = 11 // От 4 часов до 3 месяцев. Максимальное значение `limit` — 700.
+	CandleInterval_CANDLE_INTERVAL_WEEK        CandleInterval = 12 // От 1 недели до 5 лет. Максимальное значение `limit` — 300.
+	CandleInterval_CANDLE_INTERVAL_MONTH       CandleInterval = 13 // От 1 месяца до 10 лет. Максимальное значение `limit` — 120.
+	CandleInterval_CANDLE_INTERVAL_5_SEC       CandleInterval = 14 // От 5 секунд до 200 минут. Максимальное значение `limit` — 2500.
+	CandleInterval_CANDLE_INTERVAL_10_SEC      CandleInterval = 15 // От 10 секунд до 200 минут. Максимальное значение `limit` — 1250.
+	CandleInterval_CANDLE_INTERVAL_30_SEC      CandleInterval = 16 // От 30 секунд до 20 часов. Максимальное значение `limit` — 2500.
 )
 
 // Enum value maps for CandleInterval.
@@ -427,9 +428,9 @@ func (CandleInterval) EnumDescriptor() ([]byte, []int) {
 type CandleSource int32
 
 const (
-	CandleSource_CANDLE_SOURCE_UNSPECIFIED    CandleSource = 0 //Источник свечей не определен.
-	CandleSource_CANDLE_SOURCE_EXCHANGE       CandleSource = 1 //Биржевые свечи.
-	CandleSource_CANDLE_SOURCE_DEALER_WEEKEND CandleSource = 2 //Свечи  дилера в результате торговли по выходным.
+	CandleSource_CANDLE_SOURCE_UNSPECIFIED    CandleSource = 0 // Источник свечей не определен.
+	CandleSource_CANDLE_SOURCE_EXCHANGE       CandleSource = 1 // Биржевые свечи.
+	CandleSource_CANDLE_SOURCE_DEALER_WEEKEND CandleSource = 2 // Свечи  дилера в результате торговли по выходным.
 )
 
 // Enum value maps for CandleSource.
@@ -476,13 +477,13 @@ func (CandleSource) EnumDescriptor() ([]byte, []int) {
 type MarketValueType int32
 
 const (
-	MarketValueType_INSTRUMENT_VALUE_UNSPECIFIED           MarketValueType = 0 //Не определен.
-	MarketValueType_INSTRUMENT_VALUE_LAST_PRICE            MarketValueType = 1 //Последняя биржевая цена.
-	MarketValueType_INSTRUMENT_VALUE_LAST_PRICE_DEALER     MarketValueType = 2 //Последняя цена дилера.
-	MarketValueType_INSTRUMENT_VALUE_CLOSE_PRICE           MarketValueType = 3 //Цена закрытия.
-	MarketValueType_INSTRUMENT_VALUE_EVENING_SESSION_PRICE MarketValueType = 4 //Цена последней сделки с вечерней сессии.
+	MarketValueType_INSTRUMENT_VALUE_UNSPECIFIED           MarketValueType = 0 // Не определен.
+	MarketValueType_INSTRUMENT_VALUE_LAST_PRICE            MarketValueType = 1 // Последняя биржевая цена.
+	MarketValueType_INSTRUMENT_VALUE_LAST_PRICE_DEALER     MarketValueType = 2 // Последняя цена дилера.
+	MarketValueType_INSTRUMENT_VALUE_CLOSE_PRICE           MarketValueType = 3 // Цена закрытия.
+	MarketValueType_INSTRUMENT_VALUE_EVENING_SESSION_PRICE MarketValueType = 4 // Цена последней сделки с вечерней сессии.
 	MarketValueType_INSTRUMENT_VALUE_OPEN_INTEREST         MarketValueType = 5 // Открытый интерес, возвращается только для фьючерсов.
-	MarketValueType_INSTRUMENT_VALUE_THEOR_PRICE           MarketValueType = 6 //Теоретическая цена, возвращается только для опционов.
+	MarketValueType_INSTRUMENT_VALUE_THEOR_PRICE           MarketValueType = 6 // Теоретическая цена, возвращается только для опционов.
 )
 
 // Enum value maps for MarketValueType.
@@ -537,10 +538,10 @@ func (MarketValueType) EnumDescriptor() ([]byte, []int) {
 type OrderBookType int32
 
 const (
-	OrderBookType_ORDERBOOK_TYPE_UNSPECIFIED OrderBookType = 0 //Не определен.
-	OrderBookType_ORDERBOOK_TYPE_EXCHANGE    OrderBookType = 1 //Биржевой стакан.
-	OrderBookType_ORDERBOOK_TYPE_DEALER      OrderBookType = 2 //Стакан дилера.
-	OrderBookType_ORDERBOOK_TYPE_ALL         OrderBookType = 3 //Стакан биржевой и дилера.
+	OrderBookType_ORDERBOOK_TYPE_UNSPECIFIED OrderBookType = 0 // Не определен.
+	OrderBookType_ORDERBOOK_TYPE_EXCHANGE    OrderBookType = 1 // Биржевой стакан.
+	OrderBookType_ORDERBOOK_TYPE_DEALER      OrderBookType = 2 // Стакан дилера.
+	OrderBookType_ORDERBOOK_TYPE_ALL         OrderBookType = 3 // Стакан биржевой и дилера.
 )
 
 // Enum value maps for OrderBookType.
@@ -590,7 +591,7 @@ func (OrderBookType) EnumDescriptor() ([]byte, []int) {
 type LastPriceType int32
 
 const (
-	LastPriceType_LAST_PRICE_UNSPECIFIED LastPriceType = 0 //Не определен.
+	LastPriceType_LAST_PRICE_UNSPECIFIED LastPriceType = 0 // Не определен.
 	LastPriceType_LAST_PRICE_EXCHANGE    LastPriceType = 1 // Цена биржи.
 	LastPriceType_LAST_PRICE_DEALER      LastPriceType = 2 // Цена дилера
 )
@@ -639,9 +640,9 @@ func (LastPriceType) EnumDescriptor() ([]byte, []int) {
 type GetCandlesRequest_CandleSource int32
 
 const (
-	GetCandlesRequest_CANDLE_SOURCE_UNSPECIFIED     GetCandlesRequest_CandleSource = 0 //Все свечи.
-	GetCandlesRequest_CANDLE_SOURCE_EXCHANGE        GetCandlesRequest_CandleSource = 1 //Биржевые свечи.
-	GetCandlesRequest_CANDLE_SOURCE_INCLUDE_WEEKEND GetCandlesRequest_CandleSource = 3 //Все свечи с учетом торговли по выходным.
+	GetCandlesRequest_CANDLE_SOURCE_UNSPECIFIED     GetCandlesRequest_CandleSource = 0 // Все свечи.
+	GetCandlesRequest_CANDLE_SOURCE_EXCHANGE        GetCandlesRequest_CandleSource = 1 // Биржевые свечи.
+	GetCandlesRequest_CANDLE_SOURCE_INCLUDE_WEEKEND GetCandlesRequest_CandleSource = 3 // Все свечи с учетом торговли по выходным.
 )
 
 // Enum value maps for GetCandlesRequest_CandleSource.
@@ -689,20 +690,20 @@ func (GetCandlesRequest_CandleSource) EnumDescriptor() ([]byte, []int) {
 type GetTechAnalysisRequest_IndicatorInterval int32
 
 const (
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_UNSPECIFIED     GetTechAnalysisRequest_IndicatorInterval = 0  //Интервал не определен.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_MINUTE      GetTechAnalysisRequest_IndicatorInterval = 1  //1 минута.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_FIVE_MINUTES    GetTechAnalysisRequest_IndicatorInterval = 2  //5 минут.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_FIFTEEN_MINUTES GetTechAnalysisRequest_IndicatorInterval = 3  //15 минут.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_HOUR        GetTechAnalysisRequest_IndicatorInterval = 4  //1 час.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_DAY         GetTechAnalysisRequest_IndicatorInterval = 5  //1 день.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_2_MIN           GetTechAnalysisRequest_IndicatorInterval = 6  //2 минуты.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_3_MIN           GetTechAnalysisRequest_IndicatorInterval = 7  //3 минуты.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_10_MIN          GetTechAnalysisRequest_IndicatorInterval = 8  //10 минут.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_30_MIN          GetTechAnalysisRequest_IndicatorInterval = 9  //30 минут.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_2_HOUR          GetTechAnalysisRequest_IndicatorInterval = 10 //2 часа.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_4_HOUR          GetTechAnalysisRequest_IndicatorInterval = 11 //4 часа.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_WEEK            GetTechAnalysisRequest_IndicatorInterval = 12 //Неделя.
-	GetTechAnalysisRequest_INDICATOR_INTERVAL_MONTH           GetTechAnalysisRequest_IndicatorInterval = 13 //Месяц.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_UNSPECIFIED     GetTechAnalysisRequest_IndicatorInterval = 0  // Интервал не определен.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_MINUTE      GetTechAnalysisRequest_IndicatorInterval = 1  // 1 минута.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_FIVE_MINUTES    GetTechAnalysisRequest_IndicatorInterval = 2  // 5 минут.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_FIFTEEN_MINUTES GetTechAnalysisRequest_IndicatorInterval = 3  // 15 минут.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_HOUR        GetTechAnalysisRequest_IndicatorInterval = 4  // 1 час.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_ONE_DAY         GetTechAnalysisRequest_IndicatorInterval = 5  // 1 день.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_2_MIN           GetTechAnalysisRequest_IndicatorInterval = 6  // 2 минуты.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_3_MIN           GetTechAnalysisRequest_IndicatorInterval = 7  // 3 минуты.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_10_MIN          GetTechAnalysisRequest_IndicatorInterval = 8  // 10 минут.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_30_MIN          GetTechAnalysisRequest_IndicatorInterval = 9  // 30 минут.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_2_HOUR          GetTechAnalysisRequest_IndicatorInterval = 10 // 2 часа.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_4_HOUR          GetTechAnalysisRequest_IndicatorInterval = 11 // 4 часа.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_WEEK            GetTechAnalysisRequest_IndicatorInterval = 12 // Неделя.
+	GetTechAnalysisRequest_INDICATOR_INTERVAL_MONTH           GetTechAnalysisRequest_IndicatorInterval = 13 // Месяц.
 )
 
 // Enum value maps for GetTechAnalysisRequest_IndicatorInterval.
@@ -771,12 +772,12 @@ func (GetTechAnalysisRequest_IndicatorInterval) EnumDescriptor() ([]byte, []int)
 type GetTechAnalysisRequest_TypeOfPrice int32
 
 const (
-	GetTechAnalysisRequest_TYPE_OF_PRICE_UNSPECIFIED GetTechAnalysisRequest_TypeOfPrice = 0 //Не указано.
-	GetTechAnalysisRequest_TYPE_OF_PRICE_CLOSE       GetTechAnalysisRequest_TypeOfPrice = 1 //Цена закрытия.
-	GetTechAnalysisRequest_TYPE_OF_PRICE_OPEN        GetTechAnalysisRequest_TypeOfPrice = 2 //Цена открытия.
-	GetTechAnalysisRequest_TYPE_OF_PRICE_HIGH        GetTechAnalysisRequest_TypeOfPrice = 3 //Максимальное значение за выбранный интервал.
-	GetTechAnalysisRequest_TYPE_OF_PRICE_LOW         GetTechAnalysisRequest_TypeOfPrice = 4 //Минимальное значение за выбранный интервал.
-	GetTechAnalysisRequest_TYPE_OF_PRICE_AVG         GetTechAnalysisRequest_TypeOfPrice = 5 //Среднее значение по показателям [ (close + open + high + low) / 4 ].
+	GetTechAnalysisRequest_TYPE_OF_PRICE_UNSPECIFIED GetTechAnalysisRequest_TypeOfPrice = 0 // Не указано.
+	GetTechAnalysisRequest_TYPE_OF_PRICE_CLOSE       GetTechAnalysisRequest_TypeOfPrice = 1 // Цена закрытия.
+	GetTechAnalysisRequest_TYPE_OF_PRICE_OPEN        GetTechAnalysisRequest_TypeOfPrice = 2 // Цена открытия.
+	GetTechAnalysisRequest_TYPE_OF_PRICE_HIGH        GetTechAnalysisRequest_TypeOfPrice = 3 // Максимальное значение за выбранный интервал.
+	GetTechAnalysisRequest_TYPE_OF_PRICE_LOW         GetTechAnalysisRequest_TypeOfPrice = 4 // Минимальное значение за выбранный интервал.
+	GetTechAnalysisRequest_TYPE_OF_PRICE_AVG         GetTechAnalysisRequest_TypeOfPrice = 5 // Среднее значение по показателям [ (close + open + high + low) / 4 ].
 )
 
 // Enum value maps for GetTechAnalysisRequest_TypeOfPrice.
@@ -829,12 +830,12 @@ func (GetTechAnalysisRequest_TypeOfPrice) EnumDescriptor() ([]byte, []int) {
 type GetTechAnalysisRequest_IndicatorType int32
 
 const (
-	GetTechAnalysisRequest_INDICATOR_TYPE_UNSPECIFIED GetTechAnalysisRequest_IndicatorType = 0 //Не определен.
-	GetTechAnalysisRequest_INDICATOR_TYPE_BB          GetTechAnalysisRequest_IndicatorType = 1 //Bollinger Bands — линия Боллинжера.
-	GetTechAnalysisRequest_INDICATOR_TYPE_EMA         GetTechAnalysisRequest_IndicatorType = 2 //Exponential Moving Average — EMA, экспоненциальная скользящая средняя.
-	GetTechAnalysisRequest_INDICATOR_TYPE_RSI         GetTechAnalysisRequest_IndicatorType = 3 //Relative Strength Index — индекс относительной силы.
-	GetTechAnalysisRequest_INDICATOR_TYPE_MACD        GetTechAnalysisRequest_IndicatorType = 4 //Moving Average Convergence/Divergence — схождение/расхождение скользящих средних.
-	GetTechAnalysisRequest_INDICATOR_TYPE_SMA         GetTechAnalysisRequest_IndicatorType = 5 //Simple Moving Average — простое скользящее среднее.
+	GetTechAnalysisRequest_INDICATOR_TYPE_UNSPECIFIED GetTechAnalysisRequest_IndicatorType = 0 // Не определен.
+	GetTechAnalysisRequest_INDICATOR_TYPE_BB          GetTechAnalysisRequest_IndicatorType = 1 // Bollinger Bands — линия Боллинжера.
+	GetTechAnalysisRequest_INDICATOR_TYPE_EMA         GetTechAnalysisRequest_IndicatorType = 2 // Exponential Moving Average — EMA, экспоненциальная скользящая средняя.
+	GetTechAnalysisRequest_INDICATOR_TYPE_RSI         GetTechAnalysisRequest_IndicatorType = 3 // Relative Strength Index — индекс относительной силы.
+	GetTechAnalysisRequest_INDICATOR_TYPE_MACD        GetTechAnalysisRequest_IndicatorType = 4 // Moving Average Convergence/Divergence — схождение/расхождение скользящих средних.
+	GetTechAnalysisRequest_INDICATOR_TYPE_SMA         GetTechAnalysisRequest_IndicatorType = 5 // Simple Moving Average — простое скользящее среднее.
 )
 
 // Enum value maps for GetTechAnalysisRequest_IndicatorType.
@@ -1003,35 +1004,35 @@ type isMarketDataRequest_Payload interface {
 }
 
 type MarketDataRequest_SubscribeCandlesRequest struct {
-	SubscribeCandlesRequest *SubscribeCandlesRequest `protobuf:"bytes,1,opt,name=subscribe_candles_request,json=subscribeCandlesRequest,proto3,oneof"` //Запрос подписки на свечи.
+	SubscribeCandlesRequest *SubscribeCandlesRequest `protobuf:"bytes,1,opt,name=subscribe_candles_request,json=subscribeCandlesRequest,proto3,oneof"` // Запрос подписки на свечи.
 }
 
 type MarketDataRequest_SubscribeOrderBookRequest struct {
-	SubscribeOrderBookRequest *SubscribeOrderBookRequest `protobuf:"bytes,2,opt,name=subscribe_order_book_request,json=subscribeOrderBookRequest,proto3,oneof"` //Запрос подписки на стаканы.
+	SubscribeOrderBookRequest *SubscribeOrderBookRequest `protobuf:"bytes,2,opt,name=subscribe_order_book_request,json=subscribeOrderBookRequest,proto3,oneof"` // Запрос подписки на стаканы.
 }
 
 type MarketDataRequest_SubscribeTradesRequest struct {
-	SubscribeTradesRequest *SubscribeTradesRequest `protobuf:"bytes,3,opt,name=subscribe_trades_request,json=subscribeTradesRequest,proto3,oneof"` //Запрос подписки на ленту обезличенных сделок.
+	SubscribeTradesRequest *SubscribeTradesRequest `protobuf:"bytes,3,opt,name=subscribe_trades_request,json=subscribeTradesRequest,proto3,oneof"` // Запрос подписки на ленту обезличенных сделок.
 }
 
 type MarketDataRequest_SubscribeInfoRequest struct {
-	SubscribeInfoRequest *SubscribeInfoRequest `protobuf:"bytes,4,opt,name=subscribe_info_request,json=subscribeInfoRequest,proto3,oneof"` //Запрос подписки на торговые статусы инструментов.
+	SubscribeInfoRequest *SubscribeInfoRequest `protobuf:"bytes,4,opt,name=subscribe_info_request,json=subscribeInfoRequest,proto3,oneof"` // Запрос подписки на торговые статусы инструментов.
 }
 
 type MarketDataRequest_SubscribeLastPriceRequest struct {
-	SubscribeLastPriceRequest *SubscribeLastPriceRequest `protobuf:"bytes,5,opt,name=subscribe_last_price_request,json=subscribeLastPriceRequest,proto3,oneof"` //Запрос подписки на цены последних сделок.
+	SubscribeLastPriceRequest *SubscribeLastPriceRequest `protobuf:"bytes,5,opt,name=subscribe_last_price_request,json=subscribeLastPriceRequest,proto3,oneof"` // Запрос подписки на цены последних сделок.
 }
 
 type MarketDataRequest_GetMySubscriptions struct {
-	GetMySubscriptions *GetMySubscriptions `protobuf:"bytes,6,opt,name=get_my_subscriptions,json=getMySubscriptions,proto3,oneof"` //Запрос своих подписок.
+	GetMySubscriptions *GetMySubscriptions `protobuf:"bytes,6,opt,name=get_my_subscriptions,json=getMySubscriptions,proto3,oneof"` // Запрос своих подписок.
 }
 
 type MarketDataRequest_Ping struct {
-	Ping *PingRequest `protobuf:"bytes,7,opt,name=ping,proto3,oneof"` //Запрос проверки активности соединения.
+	Ping *PingRequest `protobuf:"bytes,7,opt,name=ping,proto3,oneof"` // Запрос проверки активности соединения.
 }
 
 type MarketDataRequest_PingSettings struct {
-	PingSettings *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3,oneof"` //Запрос настройки пинга.
+	PingSettings *PingDelaySettings `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3,oneof"` // Запрос настройки пинга.
 }
 
 func (*MarketDataRequest_SubscribeCandlesRequest) isMarketDataRequest_Payload() {}
@@ -1055,12 +1056,12 @@ type MarketDataServerSideStreamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscribeCandlesRequest   *SubscribeCandlesRequest   `protobuf:"bytes,1,opt,name=subscribe_candles_request,json=subscribeCandlesRequest,proto3" json:"subscribe_candles_request,omitempty"`         //Запрос подписки на свечи.
-	SubscribeOrderBookRequest *SubscribeOrderBookRequest `protobuf:"bytes,2,opt,name=subscribe_order_book_request,json=subscribeOrderBookRequest,proto3" json:"subscribe_order_book_request,omitempty"` //Запрос подписки на стаканы.
-	SubscribeTradesRequest    *SubscribeTradesRequest    `protobuf:"bytes,3,opt,name=subscribe_trades_request,json=subscribeTradesRequest,proto3" json:"subscribe_trades_request,omitempty"`            //Запрос подписки на ленту обезличенных сделок.
-	SubscribeInfoRequest      *SubscribeInfoRequest      `protobuf:"bytes,4,opt,name=subscribe_info_request,json=subscribeInfoRequest,proto3" json:"subscribe_info_request,omitempty"`                  //Запрос подписки на торговые статусы инструментов.
-	SubscribeLastPriceRequest *SubscribeLastPriceRequest `protobuf:"bytes,5,opt,name=subscribe_last_price_request,json=subscribeLastPriceRequest,proto3" json:"subscribe_last_price_request,omitempty"` //Запрос подписки на цены последних сделок.
-	PingSettings              *PingDelaySettings         `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"`                                           //Запрос настройки пинга.
+	SubscribeCandlesRequest   *SubscribeCandlesRequest   `protobuf:"bytes,1,opt,name=subscribe_candles_request,json=subscribeCandlesRequest,proto3" json:"subscribe_candles_request,omitempty"`         // Запрос подписки на свечи.
+	SubscribeOrderBookRequest *SubscribeOrderBookRequest `protobuf:"bytes,2,opt,name=subscribe_order_book_request,json=subscribeOrderBookRequest,proto3" json:"subscribe_order_book_request,omitempty"` // Запрос подписки на стаканы.
+	SubscribeTradesRequest    *SubscribeTradesRequest    `protobuf:"bytes,3,opt,name=subscribe_trades_request,json=subscribeTradesRequest,proto3" json:"subscribe_trades_request,omitempty"`            // Запрос подписки на ленту обезличенных сделок.
+	SubscribeInfoRequest      *SubscribeInfoRequest      `protobuf:"bytes,4,opt,name=subscribe_info_request,json=subscribeInfoRequest,proto3" json:"subscribe_info_request,omitempty"`                  // Запрос подписки на торговые статусы инструментов.
+	SubscribeLastPriceRequest *SubscribeLastPriceRequest `protobuf:"bytes,5,opt,name=subscribe_last_price_request,json=subscribeLastPriceRequest,proto3" json:"subscribe_last_price_request,omitempty"` // Запрос подписки на цены последних сделок.
+	PingSettings              *PingDelaySettings         `protobuf:"bytes,15,opt,name=ping_settings,json=pingSettings,proto3" json:"ping_settings,omitempty"`                                           // Запрос настройки пинга.
 }
 
 func (x *MarketDataServerSideStreamRequest) Reset() {
@@ -1288,51 +1289,51 @@ type isMarketDataResponse_Payload interface {
 }
 
 type MarketDataResponse_SubscribeCandlesResponse struct {
-	SubscribeCandlesResponse *SubscribeCandlesResponse `protobuf:"bytes,1,opt,name=subscribe_candles_response,json=subscribeCandlesResponse,proto3,oneof"` //Результат подписки на свечи.
+	SubscribeCandlesResponse *SubscribeCandlesResponse `protobuf:"bytes,1,opt,name=subscribe_candles_response,json=subscribeCandlesResponse,proto3,oneof"` // Результат подписки на свечи.
 }
 
 type MarketDataResponse_SubscribeOrderBookResponse struct {
-	SubscribeOrderBookResponse *SubscribeOrderBookResponse `protobuf:"bytes,2,opt,name=subscribe_order_book_response,json=subscribeOrderBookResponse,proto3,oneof"` //Результат подписки на стаканы.
+	SubscribeOrderBookResponse *SubscribeOrderBookResponse `protobuf:"bytes,2,opt,name=subscribe_order_book_response,json=subscribeOrderBookResponse,proto3,oneof"` // Результат подписки на стаканы.
 }
 
 type MarketDataResponse_SubscribeTradesResponse struct {
-	SubscribeTradesResponse *SubscribeTradesResponse `protobuf:"bytes,3,opt,name=subscribe_trades_response,json=subscribeTradesResponse,proto3,oneof"` //Результат подписки на поток обезличенных сделок.
+	SubscribeTradesResponse *SubscribeTradesResponse `protobuf:"bytes,3,opt,name=subscribe_trades_response,json=subscribeTradesResponse,proto3,oneof"` // Результат подписки на поток обезличенных сделок.
 }
 
 type MarketDataResponse_SubscribeInfoResponse struct {
-	SubscribeInfoResponse *SubscribeInfoResponse `protobuf:"bytes,4,opt,name=subscribe_info_response,json=subscribeInfoResponse,proto3,oneof"` //Результат подписки на торговые статусы инструментов.
+	SubscribeInfoResponse *SubscribeInfoResponse `protobuf:"bytes,4,opt,name=subscribe_info_response,json=subscribeInfoResponse,proto3,oneof"` // Результат подписки на торговые статусы инструментов.
 }
 
 type MarketDataResponse_Candle struct {
-	Candle *Candle `protobuf:"bytes,5,opt,name=candle,proto3,oneof"` //Свеча.
+	Candle *Candle `protobuf:"bytes,5,opt,name=candle,proto3,oneof"` // Свеча.
 }
 
 type MarketDataResponse_Trade struct {
-	Trade *Trade `protobuf:"bytes,6,opt,name=trade,proto3,oneof"` //Сделки.
+	Trade *Trade `protobuf:"bytes,6,opt,name=trade,proto3,oneof"` // Сделки.
 }
 
 type MarketDataResponse_Orderbook struct {
-	Orderbook *OrderBook `protobuf:"bytes,7,opt,name=orderbook,proto3,oneof"` //Стакан.
+	Orderbook *OrderBook `protobuf:"bytes,7,opt,name=orderbook,proto3,oneof"` // Стакан.
 }
 
 type MarketDataResponse_TradingStatus struct {
-	TradingStatus *TradingStatus `protobuf:"bytes,8,opt,name=trading_status,json=tradingStatus,proto3,oneof"` //Торговый статус.
+	TradingStatus *TradingStatus `protobuf:"bytes,8,opt,name=trading_status,json=tradingStatus,proto3,oneof"` // Торговый статус.
 }
 
 type MarketDataResponse_Ping struct {
-	Ping *Ping `protobuf:"bytes,9,opt,name=ping,proto3,oneof"` //Проверка активности стрима.
+	Ping *Ping `protobuf:"bytes,9,opt,name=ping,proto3,oneof"` // Проверка активности стрима.
 }
 
 type MarketDataResponse_SubscribeLastPriceResponse struct {
-	SubscribeLastPriceResponse *SubscribeLastPriceResponse `protobuf:"bytes,10,opt,name=subscribe_last_price_response,json=subscribeLastPriceResponse,proto3,oneof"` //Результат подписки на цены последние сделок по инструментам.
+	SubscribeLastPriceResponse *SubscribeLastPriceResponse `protobuf:"bytes,10,opt,name=subscribe_last_price_response,json=subscribeLastPriceResponse,proto3,oneof"` // Результат подписки на цены последние сделок по инструментам.
 }
 
 type MarketDataResponse_LastPrice struct {
-	LastPrice *LastPrice `protobuf:"bytes,11,opt,name=last_price,json=lastPrice,proto3,oneof"` //Цена последней сделки.
+	LastPrice *LastPrice `protobuf:"bytes,11,opt,name=last_price,json=lastPrice,proto3,oneof"` // Цена последней сделки.
 }
 
 type MarketDataResponse_OpenInterest struct {
-	OpenInterest *OpenInterest `protobuf:"bytes,12,opt,name=open_interest,json=openInterest,proto3,oneof"` //Открытый интерес.
+	OpenInterest *OpenInterest `protobuf:"bytes,12,opt,name=open_interest,json=openInterest,proto3,oneof"` // Открытый интерес.
 }
 
 func (*MarketDataResponse_SubscribeCandlesResponse) isMarketDataResponse_Payload() {}
@@ -1365,10 +1366,10 @@ type SubscribeCandlesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscriptionAction SubscriptionAction              `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"`               //Изменение статуса подписки.
-	Instruments        []*CandleInstrument             `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                                      //Массив инструментов для подписки на свечи.
-	WaitingClose       bool                            `protobuf:"varint,3,opt,name=waiting_close,json=waitingClose,proto3" json:"waiting_close,omitempty"`                                                                                               //Флаг ожидания закрытия временного интервала для отправки свечи.
-	CandleSourceType   *GetCandlesRequest_CandleSource `protobuf:"varint,9,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` //Источник свечей.
+	SubscriptionAction SubscriptionAction              `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"`               // Изменение статуса подписки.
+	Instruments        []*CandleInstrument             `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                                      // Массив инструментов для подписки на свечи.
+	WaitingClose       bool                            `protobuf:"varint,3,opt,name=waiting_close,json=waitingClose,proto3" json:"waiting_close,omitempty"`                                                                                               // Флаг ожидания закрытия временного интервала для отправки свечи.
+	CandleSourceType   *GetCandlesRequest_CandleSource `protobuf:"varint,9,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` // Источник свечей.
 }
 
 func (x *SubscribeCandlesRequest) Reset() {
@@ -1439,8 +1440,8 @@ type CandleInstrument struct {
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
 	Figi         string               `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                          // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	Interval     SubscriptionInterval `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"` //Интервал свечей. Двухчасовые и четырехчасовые свечи в стриме отсчитываются с 0:00 по UTC.
-	InstrumentId string               `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                      //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Interval     SubscriptionInterval `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"` // Интервал свечей. Двухчасовые и четырехчасовые свечи в стриме отсчитываются с 0:00 по UTC.
+	InstrumentId string               `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                      // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *CandleInstrument) Reset() {
@@ -1503,8 +1504,8 @@ type SubscribeCandlesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId           string                `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                               //Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
-	CandlesSubscriptions []*CandleSubscription `protobuf:"bytes,2,rep,name=candles_subscriptions,json=candlesSubscriptions,proto3" json:"candles_subscriptions,omitempty"` //Массив статусов подписки на свечи.
+	TrackingId           string                `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                               // Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
+	CandlesSubscriptions []*CandleSubscription `protobuf:"bytes,2,rep,name=candles_subscriptions,json=candlesSubscriptions,proto3" json:"candles_subscriptions,omitempty"` // Массив статусов подписки на свечи.
 }
 
 func (x *SubscribeCandlesResponse) Reset() {
@@ -1559,15 +1560,15 @@ type CandleSubscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi               string                          `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                                    //FIGI-идентификатор инструмента.
-	Interval           SubscriptionInterval            `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"`                                                           //Интервал свечей.
-	SubscriptionStatus SubscriptionStatus              `protobuf:"varint,3,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"`               //Статус подписки.
-	InstrumentUid      string                          `protobuf:"bytes,4,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                             //UID инструмента.
-	WaitingClose       bool                            `protobuf:"varint,5,opt,name=waiting_close,json=waitingClose,proto3" json:"waiting_close,omitempty"`                                                                                               //Флаг ожидания закрытия временного интервала для отправки свечи.
-	StreamId           string                          `protobuf:"bytes,6,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                                            //Идентификатор открытого соединения.
-	SubscriptionId     string                          `protobuf:"bytes,7,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                                          //Идентификатор подписки в формате `UUID`.
-	SubscriptionAction SubscriptionAction              `protobuf:"varint,8,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"`               //Действие подписки.
-	CandleSourceType   *GetCandlesRequest_CandleSource `protobuf:"varint,9,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` //Источник свечей.
+	Figi               string                          `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                                    // FIGI-идентификатор инструмента.
+	Interval           SubscriptionInterval            `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"`                                                           // Интервал свечей.
+	SubscriptionStatus SubscriptionStatus              `protobuf:"varint,3,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"`               // Статус подписки.
+	InstrumentUid      string                          `protobuf:"bytes,4,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                             // UID инструмента.
+	WaitingClose       bool                            `protobuf:"varint,5,opt,name=waiting_close,json=waitingClose,proto3" json:"waiting_close,omitempty"`                                                                                               // Флаг ожидания закрытия временного интервала для отправки свечи.
+	StreamId           string                          `protobuf:"bytes,6,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                                            // Идентификатор открытого соединения.
+	SubscriptionId     string                          `protobuf:"bytes,7,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                                          // Идентификатор подписки в формате `UUID`.
+	SubscriptionAction SubscriptionAction              `protobuf:"varint,8,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"`               // Действие подписки.
+	CandleSourceType   *GetCandlesRequest_CandleSource `protobuf:"varint,9,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` // Источник свечей.
 }
 
 func (x *CandleSubscription) Reset() {
@@ -1671,8 +1672,8 @@ type SubscribeOrderBookRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscriptionAction SubscriptionAction     `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Изменение статуса подписки.
-	Instruments        []*OrderBookInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        //Массив инструментов для подписки на стаканы.
+	SubscriptionAction SubscriptionAction     `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Изменение статуса подписки.
+	Instruments        []*OrderBookInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        // Массив инструментов для подписки на стаканы.
 }
 
 func (x *SubscribeOrderBookRequest) Reset() {
@@ -1728,10 +1729,10 @@ type OrderBookInstrument struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi          string        `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                    //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	Depth         int32         `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                 //Глубина стакана.
-	InstrumentId  string        `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
-	OrderBookType OrderBookType `protobuf:"varint,4,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"` //Тип стакана. Значение по умолчанию — `ORDERBOOK_TYPE_ALL`, стакан биржевой и дилера.
+	Figi          string        `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                    // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	Depth         int32         `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                 // Глубина стакана.
+	InstrumentId  string        `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	OrderBookType OrderBookType `protobuf:"varint,4,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"` // Тип стакана. Значение по умолчанию — `ORDERBOOK_TYPE_ALL`, стакан биржевой и дилера.
 }
 
 func (x *OrderBookInstrument) Reset() {
@@ -1801,8 +1802,8 @@ type SubscribeOrderBookResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId             string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                       //Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
-	OrderBookSubscriptions []*OrderBookSubscription `protobuf:"bytes,2,rep,name=order_book_subscriptions,json=orderBookSubscriptions,proto3" json:"order_book_subscriptions,omitempty"` //Массив статусов подписки на стаканы.
+	TrackingId             string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                       // Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
+	OrderBookSubscriptions []*OrderBookSubscription `protobuf:"bytes,2,rep,name=order_book_subscriptions,json=orderBookSubscriptions,proto3" json:"order_book_subscriptions,omitempty"` // Массив статусов подписки на стаканы.
 }
 
 func (x *SubscribeOrderBookResponse) Reset() {
@@ -1857,14 +1858,14 @@ type OrderBookSubscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      //FIGI-идентификатор инструмента.
-	Depth              int32              `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                                   //Глубина стакана.
-	SubscriptionStatus SubscriptionStatus `protobuf:"varint,3,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` //Статус подписки.
-	InstrumentUid      string             `protobuf:"bytes,4,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               //UID инструмента.
-	StreamId           string             `protobuf:"bytes,5,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              //Идентификатор открытого соединения.
-	SubscriptionId     string             `protobuf:"bytes,6,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            //Идентификатор подписки в формате `UUID`.
-	OrderBookType      OrderBookType      `protobuf:"varint,7,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"`                   //Тип стакана.
-	SubscriptionAction SubscriptionAction `protobuf:"varint,8,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Действие подписки.
+	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      // FIGI-идентификатор инструмента.
+	Depth              int32              `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                                   // Глубина стакана.
+	SubscriptionStatus SubscriptionStatus `protobuf:"varint,3,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` // Статус подписки.
+	InstrumentUid      string             `protobuf:"bytes,4,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               // UID инструмента.
+	StreamId           string             `protobuf:"bytes,5,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              // Идентификатор открытого соединения.
+	SubscriptionId     string             `protobuf:"bytes,6,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            // Идентификатор подписки в формате `UUID`.
+	OrderBookType      OrderBookType      `protobuf:"varint,7,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"`                   // Тип стакана.
+	SubscriptionAction SubscriptionAction `protobuf:"varint,8,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Действие подписки.
 }
 
 func (x *OrderBookSubscription) Reset() {
@@ -1961,10 +1962,10 @@ type SubscribeTradesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscriptionAction SubscriptionAction `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Изменение статуса подписки.
-	Instruments        []*TradeInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        //Массив инструментов для подписки на поток обезличенных сделок.
-	TradeSource        TradeSourceType    `protobuf:"varint,3,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"`                         //Тип источника сделок. Значение по умолчанию — `TRADE_SOURCE_ALL`, все сделки.
-	WithOpenInterest   bool               `protobuf:"varint,4,opt,name=with_open_interest,json=withOpenInterest,proto3" json:"with_open_interest,omitempty"`                                                                   //Флаг открытого интереса. **true** - в стриме дополнительно передается информация об открытом интересе для фьючерсов
+	SubscriptionAction SubscriptionAction `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Изменение статуса подписки.
+	Instruments        []*TradeInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        // Массив инструментов для подписки на поток обезличенных сделок.
+	TradeSource        TradeSourceType    `protobuf:"varint,3,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"`                         // Тип источника сделок. Значение по умолчанию — `TRADE_SOURCE_ALL`, все сделки.
+	WithOpenInterest   bool               `protobuf:"varint,4,opt,name=with_open_interest,json=withOpenInterest,proto3" json:"with_open_interest,omitempty"`                                                                   // Флаг открытого интереса. **true** - в стриме дополнительно передается информация об открытом интересе для фьючерсов
 }
 
 func (x *SubscribeTradesRequest) Reset() {
@@ -2034,8 +2035,8 @@ type TradeInstrument struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
-	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
+	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *TradeInstrument) Reset() {
@@ -2091,9 +2092,9 @@ type SubscribeTradesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId         string               `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                                                //Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
-	TradeSubscriptions []*TradeSubscription `protobuf:"bytes,2,rep,name=trade_subscriptions,json=tradeSubscriptions,proto3" json:"trade_subscriptions,omitempty"`                                        //Массив статусов подписки на поток сделок.
-	TradeSource        TradeSourceType      `protobuf:"varint,3,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` //Тип источника сделок.
+	TrackingId         string               `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                                                // Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
+	TradeSubscriptions []*TradeSubscription `protobuf:"bytes,2,rep,name=trade_subscriptions,json=tradeSubscriptions,proto3" json:"trade_subscriptions,omitempty"`                                        // Массив статусов подписки на поток сделок.
+	TradeSource        TradeSourceType      `protobuf:"varint,3,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` // Тип источника сделок.
 }
 
 func (x *SubscribeTradesResponse) Reset() {
@@ -2155,13 +2156,13 @@ type TradeSubscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      //FIGI-идентификатор инструмента.
-	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` //Статус подписки.
-	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               //UID инструмента.
-	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              //Идентификатор открытого соединения.
-	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            //Идентификатор подписки в формате UUID.
-	WithOpenInterest   bool               `protobuf:"varint,6,opt,name=with_open_interest,json=withOpenInterest,proto3" json:"with_open_interest,omitempty"`                                                                   //Флаг открытого интереса. **true** - в стриме дополнительно передается информация об открытом интересе для фьючерсов
-	SubscriptionAction SubscriptionAction `protobuf:"varint,7,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Действие подписки.
+	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      // FIGI-идентификатор инструмента.
+	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` // Статус подписки.
+	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               // UID инструмента.
+	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              // Идентификатор открытого соединения.
+	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            // Идентификатор подписки в формате UUID.
+	WithOpenInterest   bool               `protobuf:"varint,6,opt,name=with_open_interest,json=withOpenInterest,proto3" json:"with_open_interest,omitempty"`                                                                   // Флаг открытого интереса. **true** - в стриме дополнительно передается информация об открытом интересе для фьючерсов
+	SubscriptionAction SubscriptionAction `protobuf:"varint,7,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Действие подписки.
 }
 
 func (x *TradeSubscription) Reset() {
@@ -2251,8 +2252,8 @@ type SubscribeInfoRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscriptionAction SubscriptionAction `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Изменение статуса подписки.
-	Instruments        []*InfoInstrument  `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        //Массив инструментов для подписки на торговый статус.
+	SubscriptionAction SubscriptionAction `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Изменение статуса подписки.
+	Instruments        []*InfoInstrument  `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        // Массив инструментов для подписки на торговый статус.
 }
 
 func (x *SubscribeInfoRequest) Reset() {
@@ -2308,8 +2309,8 @@ type InfoInstrument struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
-	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
+	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *InfoInstrument) Reset() {
@@ -2365,8 +2366,8 @@ type SubscribeInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId        string              `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                      //Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
-	InfoSubscriptions []*InfoSubscription `protobuf:"bytes,2,rep,name=info_subscriptions,json=infoSubscriptions,proto3" json:"info_subscriptions,omitempty"` //Массив статусов подписки на торговый статус.
+	TrackingId        string              `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                      // Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
+	InfoSubscriptions []*InfoSubscription `protobuf:"bytes,2,rep,name=info_subscriptions,json=infoSubscriptions,proto3" json:"info_subscriptions,omitempty"` // Массив статусов подписки на торговый статус.
 }
 
 func (x *SubscribeInfoResponse) Reset() {
@@ -2421,12 +2422,12 @@ type InfoSubscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      //FIGI-идентификатор инструмента.
-	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` //Статус подписки.
-	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               //UID инструмента.
-	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              //Идентификатор открытого соединения.
-	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            //Идентификатор подписки в формате UUID.
-	SubscriptionAction SubscriptionAction `protobuf:"varint,6,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Действие подписки.
+	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      // FIGI-идентификатор инструмента.
+	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` // Статус подписки.
+	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               // UID инструмента.
+	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              // Идентификатор открытого соединения.
+	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            // Идентификатор подписки в формате UUID.
+	SubscriptionAction SubscriptionAction `protobuf:"varint,6,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Действие подписки.
 }
 
 func (x *InfoSubscription) Reset() {
@@ -2509,8 +2510,8 @@ type SubscribeLastPriceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SubscriptionAction SubscriptionAction     `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Изменение статуса подписки.
-	Instruments        []*LastPriceInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        //Массив инструментов для подписки на цену последней сделки.
+	SubscriptionAction SubscriptionAction     `protobuf:"varint,1,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Изменение статуса подписки.
+	Instruments        []*LastPriceInstrument `protobuf:"bytes,2,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                        // Массив инструментов для подписки на цену последней сделки.
 }
 
 func (x *SubscribeLastPriceRequest) Reset() {
@@ -2566,8 +2567,8 @@ type LastPriceInstrument struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
-	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // Deprecated FIGI-идентификатор инструмента. Используйте instrument_id`.
+	InstrumentId string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *LastPriceInstrument) Reset() {
@@ -2623,8 +2624,8 @@ type SubscribeLastPriceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrackingId             string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                       //Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
-	LastPriceSubscriptions []*LastPriceSubscription `protobuf:"bytes,2,rep,name=last_price_subscriptions,json=lastPriceSubscriptions,proto3" json:"last_price_subscriptions,omitempty"` //Массив статусов подписки на цену последней сделки.
+	TrackingId             string                   `protobuf:"bytes,1,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`                                       // Уникальный идентификатор запроса. [Подробнее](./grpc#tracking-id).
+	LastPriceSubscriptions []*LastPriceSubscription `protobuf:"bytes,2,rep,name=last_price_subscriptions,json=lastPriceSubscriptions,proto3" json:"last_price_subscriptions,omitempty"` // Массив статусов подписки на цену последней сделки.
 }
 
 func (x *SubscribeLastPriceResponse) Reset() {
@@ -2679,12 +2680,12 @@ type LastPriceSubscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      //FIGI-идентификатор инструмента.
-	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` //Статус подписки.
-	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               //UID инструмента.
-	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              //Идентификатор открытого соединения.
-	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            //Идентификатор подписки в формате `UUID`.
-	SubscriptionAction SubscriptionAction `protobuf:"varint,6,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` //Действие подписки.
+	Figi               string             `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                                      // FIGI-идентификатор инструмента.
+	SubscriptionStatus SubscriptionStatus `protobuf:"varint,2,opt,name=subscription_status,json=subscriptionStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionStatus" json:"subscription_status,omitempty"` // Статус подписки.
+	InstrumentUid      string             `protobuf:"bytes,3,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                               // UID инструмента.
+	StreamId           string             `protobuf:"bytes,4,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`                                                                                              // Идентификатор открытого соединения.
+	SubscriptionId     string             `protobuf:"bytes,5,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`                                                                            // Идентификатор подписки в формате `UUID`.
+	SubscriptionAction SubscriptionAction `protobuf:"varint,6,opt,name=subscription_action,json=subscriptionAction,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionAction" json:"subscription_action,omitempty"` // Действие подписки.
 }
 
 func (x *LastPriceSubscription) Reset() {
@@ -2767,17 +2768,17 @@ type Candle struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi             string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                             //FIGI-идентификатор инструмента.
-	Interval         SubscriptionInterval   `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"`                                    //Интервал свечи.
-	Open             *Quotation             `protobuf:"bytes,3,opt,name=open,proto3" json:"open,omitempty"`                                                                                                             //Цена открытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	High             *Quotation             `protobuf:"bytes,4,opt,name=high,proto3" json:"high,omitempty"`                                                                                                             //Максимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Low              *Quotation             `protobuf:"bytes,5,opt,name=low,proto3" json:"low,omitempty"`                                                                                                               //Минимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Close            *Quotation             `protobuf:"bytes,6,opt,name=close,proto3" json:"close,omitempty"`                                                                                                           //Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Volume           int64                  `protobuf:"varint,7,opt,name=volume,proto3" json:"volume,omitempty"`                                                                                                        //Объем сделок в лотах.
-	Time             *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=time,proto3" json:"time,omitempty"`                                                                                                             //Время начала интервала свечи по UTC.
-	LastTradeTs      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_trade_ts,json=lastTradeTs,proto3" json:"last_trade_ts,omitempty"`                                                                          //Время последней сделки, вошедшей в свечу по UTC.
-	InstrumentUid    string                 `protobuf:"bytes,10,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                     //UID инструмента.
-	CandleSourceType CandleSource           `protobuf:"varint,19,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleSource" json:"candle_source_type,omitempty"` //Источник свечей.
+	Figi             string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                             // FIGI-идентификатор инструмента.
+	Interval         SubscriptionInterval   `protobuf:"varint,2,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.SubscriptionInterval" json:"interval,omitempty"`                                    // Интервал свечи.
+	Open             *Quotation             `protobuf:"bytes,3,opt,name=open,proto3" json:"open,omitempty"`                                                                                                             // Цена открытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	High             *Quotation             `protobuf:"bytes,4,opt,name=high,proto3" json:"high,omitempty"`                                                                                                             // Максимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Low              *Quotation             `protobuf:"bytes,5,opt,name=low,proto3" json:"low,omitempty"`                                                                                                               // Минимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Close            *Quotation             `protobuf:"bytes,6,opt,name=close,proto3" json:"close,omitempty"`                                                                                                           // Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Volume           int64                  `protobuf:"varint,7,opt,name=volume,proto3" json:"volume,omitempty"`                                                                                                        // Объем сделок в лотах.
+	Time             *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=time,proto3" json:"time,omitempty"`                                                                                                             // Время начала интервала свечи по UTC.
+	LastTradeTs      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_trade_ts,json=lastTradeTs,proto3" json:"last_trade_ts,omitempty"`                                                                          // Время последней сделки, вошедшей в свечу по UTC.
+	InstrumentUid    string                 `protobuf:"bytes,10,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                     // UID инструмента.
+	CandleSourceType CandleSource           `protobuf:"varint,19,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleSource" json:"candle_source_type,omitempty"` // Источник свечей.
 }
 
 func (x *Candle) Reset() {
@@ -2895,16 +2896,16 @@ type OrderBook struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                     //FIGI-идентификатор инструмента.
-	Depth         int32                  `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                  //Глубина стакана.
-	IsConsistent  bool                   `protobuf:"varint,3,opt,name=is_consistent,json=isConsistent,proto3" json:"is_consistent,omitempty"`                                                                //Флаг консистентности стакана. **false** — не все заявки попали в стакан из-за сетевых задержек или нарушения порядка доставки.
-	Bids          []*Order               `protobuf:"bytes,4,rep,name=bids,proto3" json:"bids,omitempty"`                                                                                                     //Массив предложений.
-	Asks          []*Order               `protobuf:"bytes,5,rep,name=asks,proto3" json:"asks,omitempty"`                                                                                                     //Массив спроса.
-	Time          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=time,proto3" json:"time,omitempty"`                                                                                                     //Время формирования стакана в часовом поясе UTC по времени биржи.
-	LimitUp       *Quotation             `protobuf:"bytes,7,opt,name=limit_up,json=limitUp,proto3" json:"limit_up,omitempty"`                                                                                //Верхний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	LimitDown     *Quotation             `protobuf:"bytes,8,opt,name=limit_down,json=limitDown,proto3" json:"limit_down,omitempty"`                                                                          //Нижний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	InstrumentUid string                 `protobuf:"bytes,9,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                              //UID инструмента.
-	OrderBookType OrderBookType          `protobuf:"varint,10,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"` //Тип стакана.
+	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                     // FIGI-идентификатор инструмента.
+	Depth         int32                  `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                                                                                  // Глубина стакана.
+	IsConsistent  bool                   `protobuf:"varint,3,opt,name=is_consistent,json=isConsistent,proto3" json:"is_consistent,omitempty"`                                                                // Флаг консистентности стакана. **false** — не все заявки попали в стакан из-за сетевых задержек или нарушения порядка доставки.
+	Bids          []*Order               `protobuf:"bytes,4,rep,name=bids,proto3" json:"bids,omitempty"`                                                                                                     // Массив предложений.
+	Asks          []*Order               `protobuf:"bytes,5,rep,name=asks,proto3" json:"asks,omitempty"`                                                                                                     // Массив спроса.
+	Time          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=time,proto3" json:"time,omitempty"`                                                                                                     // Время формирования стакана в часовом поясе UTC по времени биржи.
+	LimitUp       *Quotation             `protobuf:"bytes,7,opt,name=limit_up,json=limitUp,proto3" json:"limit_up,omitempty"`                                                                                // Верхний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	LimitDown     *Quotation             `protobuf:"bytes,8,opt,name=limit_down,json=limitDown,proto3" json:"limit_down,omitempty"`                                                                          // Нижний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	InstrumentUid string                 `protobuf:"bytes,9,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                              // UID инструмента.
+	OrderBookType OrderBookType          `protobuf:"varint,10,opt,name=order_book_type,json=orderBookType,proto3,enum=tinkoff.public.invest.api.contract.v1.OrderBookType" json:"order_book_type,omitempty"` // Тип стакана.
 }
 
 func (x *OrderBook) Reset() {
@@ -3015,8 +3016,8 @@ type Order struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Price    *Quotation `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`        //Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Quantity int64      `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"` //Количество в лотах.
+	Price    *Quotation `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`        // Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Quantity int64      `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"` // Количество в лотах.
 }
 
 func (x *Order) Reset() {
@@ -3071,13 +3072,13 @@ type Trade struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                              //FIGI-идентификатор инструмента.
-	Direction     TradeDirection         `protobuf:"varint,2,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeDirection" json:"direction,omitempty"`                         //Направление сделки.
-	Price         *Quotation             `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`                                                                                            //Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Quantity      int64                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                     //Количество лотов.
-	Time          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=time,proto3" json:"time,omitempty"`                                                                                              //Время сделки в часовом поясе UTC по времени биржи.
-	InstrumentUid string                 `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                       //UID инструмента.
-	TradeSource   TradeSourceType        `protobuf:"varint,7,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` //Тип источника сделки.
+	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                              // FIGI-идентификатор инструмента.
+	Direction     TradeDirection         `protobuf:"varint,2,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeDirection" json:"direction,omitempty"`                         // Направление сделки.
+	Price         *Quotation             `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`                                                                                            // Цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Quantity      int64                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`                                                                                     // Количество лотов.
+	Time          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=time,proto3" json:"time,omitempty"`                                                                                              // Время сделки в часовом поясе UTC по времени биржи.
+	InstrumentUid string                 `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                       // UID инструмента.
+	TradeSource   TradeSourceType        `protobuf:"varint,7,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` // Тип источника сделки.
 }
 
 func (x *Trade) Reset() {
@@ -3167,12 +3168,12 @@ type TradingStatus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi                     string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                          //FIGI-идентификатор инструмента.
-	TradingStatus            SecurityTradingStatus  `protobuf:"varint,2,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Статус торговли инструментом.
-	Time                     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3" json:"time,omitempty"`                                                                                                          //Время изменения торгового статуса по UTC.
-	LimitOrderAvailableFlag  bool                   `protobuf:"varint,4,opt,name=limit_order_available_flag,json=limitOrderAvailableFlag,proto3" json:"limit_order_available_flag,omitempty"`                                //Признак доступности выставления лимитной заявки по инструменту.
-	MarketOrderAvailableFlag bool                   `protobuf:"varint,5,opt,name=market_order_available_flag,json=marketOrderAvailableFlag,proto3" json:"market_order_available_flag,omitempty"`                             //Признак доступности выставления рыночной заявки по инструменту.
-	InstrumentUid            string                 `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                   //UID инструмента.
+	Figi                     string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                          // FIGI-идентификатор инструмента.
+	TradingStatus            SecurityTradingStatus  `protobuf:"varint,2,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Статус торговли инструментом.
+	Time                     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3" json:"time,omitempty"`                                                                                                          // Время изменения торгового статуса по UTC.
+	LimitOrderAvailableFlag  bool                   `protobuf:"varint,4,opt,name=limit_order_available_flag,json=limitOrderAvailableFlag,proto3" json:"limit_order_available_flag,omitempty"`                                // Признак доступности выставления лимитной заявки по инструменту.
+	MarketOrderAvailableFlag bool                   `protobuf:"varint,5,opt,name=market_order_available_flag,json=marketOrderAvailableFlag,proto3" json:"market_order_available_flag,omitempty"`                             // Признак доступности выставления рыночной заявки по инструменту.
+	InstrumentUid            string                 `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                   // UID инструмента.
 }
 
 func (x *TradingStatus) Reset() {
@@ -3256,13 +3257,13 @@ type GetCandlesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi             *string                         `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                                                              //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	From             *timestamppb.Timestamp          `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                                                                                                                    //Начало запрашиваемого периода по UTC.
-	To               *timestamppb.Timestamp          `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                                                                                                                        //Окончание запрашиваемого периода по UTC.
-	Interval         CandleInterval                  `protobuf:"varint,4,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleInterval" json:"interval,omitempty"`                                                                 //Интервал запрошенных свечей.
-	InstrumentId     *string                         `protobuf:"bytes,5,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                                                          //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
-	CandleSourceType *GetCandlesRequest_CandleSource `protobuf:"varint,7,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` //Тип источника свечи.
-	Limit            *int32                          `protobuf:"varint,10,opt,name=limit,proto3,oneof" json:"limit,omitempty"`                                                                                                                          //Максимальное количество свечей в ответе.
+	Figi             *string                         `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                                                              // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	From             *timestamppb.Timestamp          `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                                                                                                                    // Начало запрашиваемого периода по UTC.
+	To               *timestamppb.Timestamp          `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                                                                                                                        // Окончание запрашиваемого периода по UTC.
+	Interval         CandleInterval                  `protobuf:"varint,4,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleInterval" json:"interval,omitempty"`                                                                 // Интервал запрошенных свечей.
+	InstrumentId     *string                         `protobuf:"bytes,5,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                                                          // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	CandleSourceType *GetCandlesRequest_CandleSource `protobuf:"varint,7,opt,name=candle_source_type,json=candleSourceType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetCandlesRequest_CandleSource,oneof" json:"candle_source_type,omitempty"` // Тип источника свечи.
+	Limit            *int32                          `protobuf:"varint,10,opt,name=limit,proto3,oneof" json:"limit,omitempty"`                                                                                                                          // Максимальное количество свечей в ответе.
 }
 
 func (x *GetCandlesRequest) Reset() {
@@ -3353,7 +3354,7 @@ type GetCandlesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Candles []*HistoricCandle `protobuf:"bytes,1,rep,name=candles,proto3" json:"candles,omitempty"` //Массив свечей.
+	Candles []*HistoricCandle `protobuf:"bytes,1,rep,name=candles,proto3" json:"candles,omitempty"` // Массив свечей.
 }
 
 func (x *GetCandlesResponse) Reset() {
@@ -3401,14 +3402,14 @@ type HistoricCandle struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Open         *Quotation             `protobuf:"bytes,1,opt,name=open,proto3" json:"open,omitempty"`                                                                                              //Цена открытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	High         *Quotation             `protobuf:"bytes,2,opt,name=high,proto3" json:"high,omitempty"`                                                                                              //Максимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Low          *Quotation             `protobuf:"bytes,3,opt,name=low,proto3" json:"low,omitempty"`                                                                                                //Минимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Close        *Quotation             `protobuf:"bytes,4,opt,name=close,proto3" json:"close,omitempty"`                                                                                            //Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Volume       int64                  `protobuf:"varint,5,opt,name=volume,proto3" json:"volume,omitempty"`                                                                                         //Объем торгов в лотах.
-	Time         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=time,proto3" json:"time,omitempty"`                                                                                              //Время свечи в часовом поясе UTC.
-	IsComplete   bool                   `protobuf:"varint,7,opt,name=is_complete,json=isComplete,proto3" json:"is_complete,omitempty"`                                                               //Признак завершенности свечи. **false** — свеча за текущие интервал еще сформирована не полностью.
-	CandleSource CandleSource           `protobuf:"varint,9,opt,name=candle_source,json=candleSource,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleSource" json:"candle_source,omitempty"` //Тип источника свечи
+	Open         *Quotation             `protobuf:"bytes,1,opt,name=open,proto3" json:"open,omitempty"`                                                                                              // Цена открытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	High         *Quotation             `protobuf:"bytes,2,opt,name=high,proto3" json:"high,omitempty"`                                                                                              // Максимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Low          *Quotation             `protobuf:"bytes,3,opt,name=low,proto3" json:"low,omitempty"`                                                                                                // Минимальная цена за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Close        *Quotation             `protobuf:"bytes,4,opt,name=close,proto3" json:"close,omitempty"`                                                                                            // Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Volume       int64                  `protobuf:"varint,5,opt,name=volume,proto3" json:"volume,omitempty"`                                                                                         // Объем торгов в лотах.
+	Time         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=time,proto3" json:"time,omitempty"`                                                                                              // Время свечи в часовом поясе UTC.
+	IsComplete   bool                   `protobuf:"varint,7,opt,name=is_complete,json=isComplete,proto3" json:"is_complete,omitempty"`                                                               // Признак завершенности свечи. **false** — свеча за текущие интервал еще сформирована не полностью.
+	CandleSource CandleSource           `protobuf:"varint,9,opt,name=candle_source,json=candleSource,proto3,enum=tinkoff.public.invest.api.contract.v1.CandleSource" json:"candle_source,omitempty"` // Тип источника свечи
 }
 
 func (x *HistoricCandle) Reset() {
@@ -3506,10 +3507,10 @@ type GetLastPricesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi             []string          `protobuf:"bytes,1,rep,name=figi,proto3" json:"figi,omitempty"`                                                                                                                    //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	InstrumentId     []string          `protobuf:"bytes,2,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                                //Массив идентификаторов инструмента. Принимает значения `figi` или `instrument_uid`.
-	LastPriceType    LastPriceType     `protobuf:"varint,3,opt,name=last_price_type,json=lastPriceType,proto3,enum=tinkoff.public.invest.api.contract.v1.LastPriceType" json:"last_price_type,omitempty"`                 //Тип запрашиваемой последней цены.
-	InstrumentStatus *InstrumentStatus `protobuf:"varint,9,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` //Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
+	Figi             []string          `protobuf:"bytes,1,rep,name=figi,proto3" json:"figi,omitempty"`                                                                                                                    // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	InstrumentId     []string          `protobuf:"bytes,2,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                                                                // Массив идентификаторов инструмента. Принимает значения `figi` или `instrument_uid`.
+	LastPriceType    LastPriceType     `protobuf:"varint,3,opt,name=last_price_type,json=lastPriceType,proto3,enum=tinkoff.public.invest.api.contract.v1.LastPriceType" json:"last_price_type,omitempty"`                 // Тип запрашиваемой последней цены.
+	InstrumentStatus *InstrumentStatus `protobuf:"varint,9,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` // Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
 }
 
 func (x *GetLastPricesRequest) Reset() {
@@ -3579,7 +3580,7 @@ type GetLastPricesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LastPrices []*LastPrice `protobuf:"bytes,1,rep,name=last_prices,json=lastPrices,proto3" json:"last_prices,omitempty"` //Массив цен последних сделок.
+	LastPrices []*LastPrice `protobuf:"bytes,1,rep,name=last_prices,json=lastPrices,proto3" json:"last_prices,omitempty"` // Массив цен последних сделок.
 }
 
 func (x *GetLastPricesResponse) Reset() {
@@ -3627,11 +3628,11 @@ type LastPrice struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                     //FIGI инструмента.
-	Price         *Quotation             `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"`                                                                                                   //Цена последней сделки за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	Time          *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3" json:"time,omitempty"`                                                                                                     //Время получения последней цены в часовом поясе UTC по времени биржи.
-	InstrumentUid string                 `protobuf:"bytes,11,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                             //UID инструмента.
-	LastPriceType LastPriceType          `protobuf:"varint,12,opt,name=last_price_type,json=lastPriceType,proto3,enum=tinkoff.public.invest.api.contract.v1.LastPriceType" json:"last_price_type,omitempty"` //Тип последней цены.
+	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                     // FIGI инструмента.
+	Price         *Quotation             `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"`                                                                                                   // Цена последней сделки за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	Time          *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3" json:"time,omitempty"`                                                                                                     // Время получения последней цены в часовом поясе UTC по времени биржи.
+	InstrumentUid string                 `protobuf:"bytes,11,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                             // UID инструмента.
+	LastPriceType LastPriceType          `protobuf:"varint,12,opt,name=last_price_type,json=lastPriceType,proto3,enum=tinkoff.public.invest.api.contract.v1.LastPriceType" json:"last_price_type,omitempty"` // Тип последней цены.
 }
 
 func (x *LastPrice) Reset() {
@@ -3706,9 +3707,9 @@ type OpenInterest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentUid string                 `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //UID инструмента.
-	Time          *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`                                        //Время получения открытого интереса в часовом поясе UTC по времени биржи.
-	OpenInterest  int64                  `protobuf:"varint,3,opt,name=open_interest,json=openInterest,proto3" json:"open_interest,omitempty"`   //Открытый интерес.
+	InstrumentUid string                 `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // UID инструмента.
+	Time          *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`                                        // Время получения открытого интереса в часовом поясе UTC по времени биржи.
+	OpenInterest  int64                  `protobuf:"varint,3,opt,name=open_interest,json=openInterest,proto3" json:"open_interest,omitempty"`   // Открытый интерес.
 }
 
 func (x *OpenInterest) Reset() {
@@ -3771,9 +3772,9 @@ type GetOrderBookRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                     //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	Depth        int32   `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                        //Глубина стакана.
-	InstrumentId *string `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                     // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	Depth        int32   `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                        // Глубина стакана.
+	InstrumentId *string `protobuf:"bytes,3,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *GetOrderBookRequest) Reset() {
@@ -3836,18 +3837,18 @@ type GetOrderBookResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                        //FIGI-идентификатор инструмента.
-	Depth         int32                  `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                     //Глубина стакана.
-	Bids          []*Order               `protobuf:"bytes,3,rep,name=bids,proto3" json:"bids,omitempty"`                                        //Множество пар значений на покупку.
-	Asks          []*Order               `protobuf:"bytes,4,rep,name=asks,proto3" json:"asks,omitempty"`                                        //Множество пар значений на продажу.
-	LastPrice     *Quotation             `protobuf:"bytes,5,opt,name=last_price,json=lastPrice,proto3" json:"last_price,omitempty"`             //Цена последней сделки за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	ClosePrice    *Quotation             `protobuf:"bytes,6,opt,name=close_price,json=closePrice,proto3" json:"close_price,omitempty"`          //Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	LimitUp       *Quotation             `protobuf:"bytes,7,opt,name=limit_up,json=limitUp,proto3" json:"limit_up,omitempty"`                   //Верхний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	LimitDown     *Quotation             `protobuf:"bytes,8,opt,name=limit_down,json=limitDown,proto3" json:"limit_down,omitempty"`             //Нижний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
-	LastPriceTs   *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=last_price_ts,json=lastPriceTs,proto3" json:"last_price_ts,omitempty"`    //Время получения цены последней сделки.
-	ClosePriceTs  *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=close_price_ts,json=closePriceTs,proto3" json:"close_price_ts,omitempty"` //Время получения цены закрытия.
-	OrderbookTs   *timestamppb.Timestamp `protobuf:"bytes,23,opt,name=orderbook_ts,json=orderbookTs,proto3" json:"orderbook_ts,omitempty"`      //Время формирования стакана на бирже.
-	InstrumentUid string                 `protobuf:"bytes,9,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //UID инструмента.
+	Figi          string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                        // FIGI-идентификатор инструмента.
+	Depth         int32                  `protobuf:"varint,2,opt,name=depth,proto3" json:"depth,omitempty"`                                     // Глубина стакана.
+	Bids          []*Order               `protobuf:"bytes,3,rep,name=bids,proto3" json:"bids,omitempty"`                                        // Множество пар значений на покупку.
+	Asks          []*Order               `protobuf:"bytes,4,rep,name=asks,proto3" json:"asks,omitempty"`                                        // Множество пар значений на продажу.
+	LastPrice     *Quotation             `protobuf:"bytes,5,opt,name=last_price,json=lastPrice,proto3" json:"last_price,omitempty"`             // Цена последней сделки за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	ClosePrice    *Quotation             `protobuf:"bytes,6,opt,name=close_price,json=closePrice,proto3" json:"close_price,omitempty"`          // Цена закрытия за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	LimitUp       *Quotation             `protobuf:"bytes,7,opt,name=limit_up,json=limitUp,proto3" json:"limit_up,omitempty"`                   // Верхний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	LimitDown     *Quotation             `protobuf:"bytes,8,opt,name=limit_down,json=limitDown,proto3" json:"limit_down,omitempty"`             // Нижний лимит цены за 1 инструмент. Чтобы получить стоимость лота, нужно умножить на лотность инструмента. [Подробнее про перевод цен в валюту](./faq_marketdata/#_15).
+	LastPriceTs   *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=last_price_ts,json=lastPriceTs,proto3" json:"last_price_ts,omitempty"`    // Время получения цены последней сделки.
+	ClosePriceTs  *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=close_price_ts,json=closePriceTs,proto3" json:"close_price_ts,omitempty"` // Время получения цены закрытия.
+	OrderbookTs   *timestamppb.Timestamp `protobuf:"bytes,23,opt,name=orderbook_ts,json=orderbookTs,proto3" json:"orderbook_ts,omitempty"`      // Время формирования стакана на бирже.
+	InstrumentUid string                 `protobuf:"bytes,9,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // UID инструмента.
 }
 
 func (x *GetOrderBookResponse) Reset() {
@@ -3973,8 +3974,8 @@ type GetTradingStatusRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                     //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	InstrumentId *string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                     // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	InstrumentId *string `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *GetTradingStatusRequest) Reset() {
@@ -4030,7 +4031,7 @@ type GetTradingStatusesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId []string `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	InstrumentId []string `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *GetTradingStatusesRequest) Reset() {
@@ -4078,7 +4079,7 @@ type GetTradingStatusesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TradingStatuses []*GetTradingStatusResponse `protobuf:"bytes,1,rep,name=trading_statuses,json=tradingStatuses,proto3" json:"trading_statuses,omitempty"` //Массив информации о торговых статусах.
+	TradingStatuses []*GetTradingStatusResponse `protobuf:"bytes,1,rep,name=trading_statuses,json=tradingStatuses,proto3" json:"trading_statuses,omitempty"` // Массив информации о торговых статусах.
 }
 
 func (x *GetTradingStatusesResponse) Reset() {
@@ -4126,14 +4127,14 @@ type GetTradingStatusResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi                        string                `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                          //FIGI-идентификатор инструмента.
-	TradingStatus               SecurityTradingStatus `protobuf:"varint,2,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Статус торговли инструментом.
-	LimitOrderAvailableFlag     bool                  `protobuf:"varint,3,opt,name=limit_order_available_flag,json=limitOrderAvailableFlag,proto3" json:"limit_order_available_flag,omitempty"`                                //Признак доступности выставления лимитной заявки по инструменту.
-	MarketOrderAvailableFlag    bool                  `protobuf:"varint,4,opt,name=market_order_available_flag,json=marketOrderAvailableFlag,proto3" json:"market_order_available_flag,omitempty"`                             //Признак доступности выставления рыночной заявки по инструменту.
-	ApiTradeAvailableFlag       bool                  `protobuf:"varint,5,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      //Признак доступности торгов через API.
-	InstrumentUid               string                `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                   //UID инструмента.
-	BestpriceOrderAvailableFlag bool                  `protobuf:"varint,8,opt,name=bestprice_order_available_flag,json=bestpriceOrderAvailableFlag,proto3" json:"bestprice_order_available_flag,omitempty"`                    //Признак доступности завяки по лучшей цене.
-	OnlyBestPrice               bool                  `protobuf:"varint,9,opt,name=only_best_price,json=onlyBestPrice,proto3" json:"only_best_price,omitempty"`                                                                //Признак доступности только заявки по лучшей цене.
+	Figi                        string                `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                          // FIGI-идентификатор инструмента.
+	TradingStatus               SecurityTradingStatus `protobuf:"varint,2,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Статус торговли инструментом.
+	LimitOrderAvailableFlag     bool                  `protobuf:"varint,3,opt,name=limit_order_available_flag,json=limitOrderAvailableFlag,proto3" json:"limit_order_available_flag,omitempty"`                                // Признак доступности выставления лимитной заявки по инструменту.
+	MarketOrderAvailableFlag    bool                  `protobuf:"varint,4,opt,name=market_order_available_flag,json=marketOrderAvailableFlag,proto3" json:"market_order_available_flag,omitempty"`                             // Признак доступности выставления рыночной заявки по инструменту.
+	ApiTradeAvailableFlag       bool                  `protobuf:"varint,5,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      // Признак доступности торгов через API.
+	InstrumentUid               string                `protobuf:"bytes,6,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                   // UID инструмента.
+	BestpriceOrderAvailableFlag bool                  `protobuf:"varint,8,opt,name=bestprice_order_available_flag,json=bestpriceOrderAvailableFlag,proto3" json:"bestprice_order_available_flag,omitempty"`                    // Признак доступности завяки по лучшей цене.
+	OnlyBestPrice               bool                  `protobuf:"varint,9,opt,name=only_best_price,json=onlyBestPrice,proto3" json:"only_best_price,omitempty"`                                                                // Признак доступности только заявки по лучшей цене.
 }
 
 func (x *GetTradingStatusResponse) Reset() {
@@ -4231,11 +4232,11 @@ type GetLastTradesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in marketdata.proto.
-	Figi         *string                `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                        //Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
-	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                                                                              //Начало запрашиваемого периода по UTC.
-	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                                                                                  //Окончание запрашиваемого периода по UTC.
-	InstrumentId *string                `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                    //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
-	TradeSource  TradeSourceType        `protobuf:"varint,5,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` //Тип источника сделок. Значение по умолчанию — `TRADE_SOURCE_ALL`, все сделки.
+	Figi         *string                `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                                                                                        // Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`.
+	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                                                                              // Начало запрашиваемого периода по UTC.
+	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                                                                                  // Окончание запрашиваемого периода по UTC.
+	InstrumentId *string                `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3,oneof" json:"instrument_id,omitempty"`                                                    // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	TradeSource  TradeSourceType        `protobuf:"varint,5,opt,name=trade_source,json=tradeSource,proto3,enum=tinkoff.public.invest.api.contract.v1.TradeSourceType" json:"trade_source,omitempty"` // Тип источника сделок. Значение по умолчанию — `TRADE_SOURCE_ALL`, все сделки.
 }
 
 func (x *GetLastTradesRequest) Reset() {
@@ -4312,7 +4313,7 @@ type GetLastTradesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Trades []*Trade `protobuf:"bytes,1,rep,name=trades,proto3" json:"trades,omitempty"` //Массив сделок.
+	Trades []*Trade `protobuf:"bytes,1,rep,name=trades,proto3" json:"trades,omitempty"` // Массив сделок.
 }
 
 func (x *GetLastTradesResponse) Reset() {
@@ -4399,8 +4400,8 @@ type GetClosePricesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments      []*InstrumentClosePriceRequest `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                      //Массив по инструментам.
-	InstrumentStatus *InstrumentStatus              `protobuf:"varint,9,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` //Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
+	Instruments      []*InstrumentClosePriceRequest `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                                      // Массив по инструментам.
+	InstrumentStatus *InstrumentStatus              `protobuf:"varint,9,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` // Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
 }
 
 func (x *GetClosePricesRequest) Reset() {
@@ -4455,7 +4456,7 @@ type InstrumentClosePriceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId string `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
+	InstrumentId string `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`.
 }
 
 func (x *InstrumentClosePriceRequest) Reset() {
@@ -4503,7 +4504,7 @@ type GetClosePricesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClosePrices []*InstrumentClosePriceResponse `protobuf:"bytes,1,rep,name=close_prices,json=closePrices,proto3" json:"close_prices,omitempty"` //Массив по инструментам.
+	ClosePrices []*InstrumentClosePriceResponse `protobuf:"bytes,1,rep,name=close_prices,json=closePrices,proto3" json:"close_prices,omitempty"` // Массив по инструментам.
 }
 
 func (x *GetClosePricesResponse) Reset() {
@@ -4551,12 +4552,12 @@ type InstrumentClosePriceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi                    string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                           //FIGI инструмента.
-	InstrumentUid           string                 `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                    //UID инструмента.
-	Price                   *Quotation             `protobuf:"bytes,11,opt,name=price,proto3" json:"price,omitempty"`                                                                        //Цена закрытия торговой сессии.
-	EveningSessionPrice     *Quotation             `protobuf:"bytes,12,opt,name=evening_session_price,json=eveningSessionPrice,proto3" json:"evening_session_price,omitempty"`               //Цена последней сделки с вечерней сессии. Цена публикуется биржей по торговым дням и в нерабочие дни не обновляется.
-	Time                    *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=time,proto3" json:"time,omitempty"`                                                                          //Дата совершения торгов.
-	EveningSessionPriceTime *timestamppb.Timestamp `protobuf:"bytes,23,opt,name=evening_session_price_time,json=eveningSessionPriceTime,proto3" json:"evening_session_price_time,omitempty"` //Дата цены закрытия вечерней сессии.
+	Figi                    string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                           // FIGI инструмента.
+	InstrumentUid           string                 `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                    // UID инструмента.
+	Price                   *Quotation             `protobuf:"bytes,11,opt,name=price,proto3" json:"price,omitempty"`                                                                        // Цена закрытия торговой сессии.
+	EveningSessionPrice     *Quotation             `protobuf:"bytes,12,opt,name=evening_session_price,json=eveningSessionPrice,proto3" json:"evening_session_price,omitempty"`               // Цена последней сделки с вечерней сессии. Цена публикуется биржей по торговым дням и в нерабочие дни не обновляется.
+	Time                    *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=time,proto3" json:"time,omitempty"`                                                                          // Дата совершения торгов.
+	EveningSessionPriceTime *timestamppb.Timestamp `protobuf:"bytes,23,opt,name=evening_session_price_time,json=eveningSessionPriceTime,proto3" json:"evening_session_price_time,omitempty"` // Дата цены закрытия вечерней сессии.
 }
 
 func (x *InstrumentClosePriceResponse) Reset() {
@@ -4638,15 +4639,15 @@ type GetTechAnalysisRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IndicatorType GetTechAnalysisRequest_IndicatorType     `protobuf:"varint,1,opt,name=indicator_type,json=indicatorType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_IndicatorType" json:"indicator_type,omitempty"` //Тип технического индикатора.
-	InstrumentUid string                                   `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                  //UID инструмента.
-	From          *timestamppb.Timestamp                   `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`                                                                                                                         //Начало запрашиваемого периода по UTC.
-	To            *timestamppb.Timestamp                   `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`                                                                                                                             //Окончание запрашиваемого периода по UTC.
-	Interval      GetTechAnalysisRequest_IndicatorInterval `protobuf:"varint,5,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_IndicatorInterval" json:"interval,omitempty"`                            //Интервал, за который рассчитывается индикатор.
-	TypeOfPrice   GetTechAnalysisRequest_TypeOfPrice       `protobuf:"varint,6,opt,name=type_of_price,json=typeOfPrice,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_TypeOfPrice" json:"type_of_price,omitempty"`       //Тип цены, который используется при расчете индикатора.
-	Length        int32                                    `protobuf:"varint,7,opt,name=length,proto3" json:"length,omitempty"`                                                                                                                    //Торговый период, за который рассчитывается индикатор.
-	Deviation     *GetTechAnalysisRequest_Deviation        `protobuf:"bytes,8,opt,name=deviation,proto3" json:"deviation,omitempty"`                                                                                                               //Параметры отклонения.
-	Smoothing     *GetTechAnalysisRequest_Smoothing        `protobuf:"bytes,9,opt,name=smoothing,proto3" json:"smoothing,omitempty"`                                                                                                               //Параметры сглаживания.
+	IndicatorType GetTechAnalysisRequest_IndicatorType     `protobuf:"varint,1,opt,name=indicator_type,json=indicatorType,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_IndicatorType" json:"indicator_type,omitempty"` // Тип технического индикатора.
+	InstrumentUid string                                   `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`                                                                                  // UID инструмента.
+	From          *timestamppb.Timestamp                   `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`                                                                                                                         // Начало запрашиваемого периода по UTC.
+	To            *timestamppb.Timestamp                   `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`                                                                                                                             // Окончание запрашиваемого периода по UTC.
+	Interval      GetTechAnalysisRequest_IndicatorInterval `protobuf:"varint,5,opt,name=interval,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_IndicatorInterval" json:"interval,omitempty"`                            // Интервал, за который рассчитывается индикатор.
+	TypeOfPrice   GetTechAnalysisRequest_TypeOfPrice       `protobuf:"varint,6,opt,name=type_of_price,json=typeOfPrice,proto3,enum=tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest_TypeOfPrice" json:"type_of_price,omitempty"`       // Тип цены, который используется при расчете индикатора.
+	Length        int32                                    `protobuf:"varint,7,opt,name=length,proto3" json:"length,omitempty"`                                                                                                                    // Торговый период, за который рассчитывается индикатор.
+	Deviation     *GetTechAnalysisRequest_Deviation        `protobuf:"bytes,8,opt,name=deviation,proto3" json:"deviation,omitempty"`                                                                                                               // Параметры отклонения.
+	Smoothing     *GetTechAnalysisRequest_Smoothing        `protobuf:"bytes,9,opt,name=smoothing,proto3" json:"smoothing,omitempty"`                                                                                                               // Параметры сглаживания.
 }
 
 func (x *GetTechAnalysisRequest) Reset() {
@@ -4749,7 +4750,7 @@ type GetTechAnalysisResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TechnicalIndicators []*GetTechAnalysisResponse_TechAnalysisItem `protobuf:"bytes,1,rep,name=technical_indicators,json=technicalIndicators,proto3" json:"technical_indicators,omitempty"` //Массив значений результатов технического анализа.
+	TechnicalIndicators []*GetTechAnalysisResponse_TechAnalysisItem `protobuf:"bytes,1,rep,name=technical_indicators,json=technicalIndicators,proto3" json:"technical_indicators,omitempty"` // Массив значений результатов технического анализа.
 }
 
 func (x *GetTechAnalysisResponse) Reset() {
@@ -4796,8 +4797,8 @@ type GetMarketValuesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId []string          `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                    //Массив идентификаторов инструментов.
-	Values       []MarketValueType `protobuf:"varint,2,rep,packed,name=values,proto3,enum=tinkoff.public.invest.api.contract.v1.MarketValueType" json:"values,omitempty"` //Массив запрашиваемых параметров.
+	InstrumentId []string          `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                    // Массив идентификаторов инструментов.
+	Values       []MarketValueType `protobuf:"varint,2,rep,packed,name=values,proto3,enum=tinkoff.public.invest.api.contract.v1.MarketValueType" json:"values,omitempty"` // Массив запрашиваемых параметров.
 }
 
 func (x *GetMarketValuesRequest) Reset() {
@@ -4851,7 +4852,7 @@ type GetMarketValuesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*MarketValueInstrument `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив значений параметров.
+	Instruments []*MarketValueInstrument `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив значений параметров.
 }
 
 func (x *GetMarketValuesResponse) Reset() {
@@ -4898,8 +4899,8 @@ type MarketValueInstrument struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentUid string         `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //Идентификатор инструмента.
-	Values        []*MarketValue `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`                                    //Массив параметров инструмента.
+	InstrumentUid string         `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // Идентификатор инструмента.
+	Values        []*MarketValue `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`                                    // Массив параметров инструмента.
 }
 
 func (x *MarketValueInstrument) Reset() {
@@ -4953,9 +4954,9 @@ type MarketValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type  *MarketValueType       `protobuf:"varint,1,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.MarketValueType,oneof" json:"type,omitempty"` //Тип параметра.
-	Value *Quotation             `protobuf:"bytes,2,opt,name=value,proto3,oneof" json:"value,omitempty"`                                                           //Значение.
-	Time  *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3,oneof" json:"time,omitempty"`                                                             //Дата и время.
+	Type  *MarketValueType       `protobuf:"varint,1,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.MarketValueType,oneof" json:"type,omitempty"` // Тип параметра.
+	Value *Quotation             `protobuf:"bytes,2,opt,name=value,proto3,oneof" json:"value,omitempty"`                                                           // Значение.
+	Time  *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3,oneof" json:"time,omitempty"`                                                             // Дата и время.
 }
 
 func (x *MarketValue) Reset() {
@@ -5016,9 +5017,9 @@ type GetTechAnalysisRequest_Smoothing struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FastLength      int32 `protobuf:"varint,1,opt,name=fast_length,json=fastLength,proto3" json:"fast_length,omitempty"`                //Короткий период сглаживания для первой экспоненциальной скользящей средней (EMA).
-	SlowLength      int32 `protobuf:"varint,2,opt,name=slow_length,json=slowLength,proto3" json:"slow_length,omitempty"`                //Длинный период сглаживания для второй экспоненциальной скользящей средней (EMA).
-	SignalSmoothing int32 `protobuf:"varint,3,opt,name=signal_smoothing,json=signalSmoothing,proto3" json:"signal_smoothing,omitempty"` //Период сглаживания для третьей экспоненциальной скользящей средней (EMA)
+	FastLength      int32 `protobuf:"varint,1,opt,name=fast_length,json=fastLength,proto3" json:"fast_length,omitempty"`                // Короткий период сглаживания для первой экспоненциальной скользящей средней (EMA).
+	SlowLength      int32 `protobuf:"varint,2,opt,name=slow_length,json=slowLength,proto3" json:"slow_length,omitempty"`                // Длинный период сглаживания для второй экспоненциальной скользящей средней (EMA).
+	SignalSmoothing int32 `protobuf:"varint,3,opt,name=signal_smoothing,json=signalSmoothing,proto3" json:"signal_smoothing,omitempty"` // Период сглаживания для третьей экспоненциальной скользящей средней (EMA)
 }
 
 func (x *GetTechAnalysisRequest_Smoothing) Reset() {
@@ -5079,7 +5080,7 @@ type GetTechAnalysisRequest_Deviation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DeviationMultiplier *Quotation `protobuf:"bytes,1,opt,name=deviation_multiplier,json=deviationMultiplier,proto3" json:"deviation_multiplier,omitempty"` //Количество стандартных отклонений, на которые отступают верхняя и нижняя границы.
+	DeviationMultiplier *Quotation `protobuf:"bytes,1,opt,name=deviation_multiplier,json=deviationMultiplier,proto3" json:"deviation_multiplier,omitempty"` // Количество стандартных отклонений, на которые отступают верхняя и нижняя границы.
 }
 
 func (x *GetTechAnalysisRequest_Deviation) Reset() {
@@ -5126,12 +5127,12 @@ type GetTechAnalysisResponse_TechAnalysisItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Timestamp  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                           //Временная метка по UTC, для которой были рассчитаны значения индикатора.
-	MiddleBand *Quotation             `protobuf:"bytes,2,opt,name=middle_band,json=middleBand,proto3,oneof" json:"middle_band,omitempty"` //Значение простого скользящего среднего (средней линии).
-	UpperBand  *Quotation             `protobuf:"bytes,3,opt,name=upper_band,json=upperBand,proto3,oneof" json:"upper_band,omitempty"`    //Значение верхней линии Боллинджера.
-	LowerBand  *Quotation             `protobuf:"bytes,4,opt,name=lower_band,json=lowerBand,proto3,oneof" json:"lower_band,omitempty"`    //Значение нижней линии Боллинджера.
-	Signal     *Quotation             `protobuf:"bytes,5,opt,name=signal,proto3,oneof" json:"signal,omitempty"`                           //Значение сигнальной линии.
-	Macd       *Quotation             `protobuf:"bytes,6,opt,name=macd,proto3,oneof" json:"macd,omitempty"`                               //Значение линии MACD.
+	Timestamp  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                           // Временная метка по UTC, для которой были рассчитаны значения индикатора.
+	MiddleBand *Quotation             `protobuf:"bytes,2,opt,name=middle_band,json=middleBand,proto3,oneof" json:"middle_band,omitempty"` // Значение простого скользящего среднего (средней линии).
+	UpperBand  *Quotation             `protobuf:"bytes,3,opt,name=upper_band,json=upperBand,proto3,oneof" json:"upper_band,omitempty"`    // Значение верхней линии Боллинджера.
+	LowerBand  *Quotation             `protobuf:"bytes,4,opt,name=lower_band,json=lowerBand,proto3,oneof" json:"lower_band,omitempty"`    // Значение нижней линии Боллинджера.
+	Signal     *Quotation             `protobuf:"bytes,5,opt,name=signal,proto3,oneof" json:"signal,omitempty"`                           // Значение сигнальной линии.
+	Macd       *Quotation             `protobuf:"bytes,6,opt,name=macd,proto3,oneof" json:"macd,omitempty"`                               // Значение линии MACD.
 }
 
 func (x *GetTechAnalysisResponse_TechAnalysisItem) Reset() {
@@ -6661,88 +6662,91 @@ func file_marketdata_proto_rawDescGZIP() []byte {
 	return file_marketdata_proto_rawDescData
 }
 
-var file_marketdata_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
-var file_marketdata_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
-var file_marketdata_proto_goTypes = []interface{}{
-	(SubscriptionAction)(0),                          // 0: tinkoff.public.invest.api.contract.v1.SubscriptionAction
-	(SubscriptionInterval)(0),                        // 1: tinkoff.public.invest.api.contract.v1.SubscriptionInterval
-	(SubscriptionStatus)(0),                          // 2: tinkoff.public.invest.api.contract.v1.SubscriptionStatus
-	(TradeSourceType)(0),                             // 3: tinkoff.public.invest.api.contract.v1.TradeSourceType
-	(TradeDirection)(0),                              // 4: tinkoff.public.invest.api.contract.v1.TradeDirection
-	(CandleInterval)(0),                              // 5: tinkoff.public.invest.api.contract.v1.CandleInterval
-	(CandleSource)(0),                                // 6: tinkoff.public.invest.api.contract.v1.CandleSource
-	(MarketValueType)(0),                             // 7: tinkoff.public.invest.api.contract.v1.MarketValueType
-	(OrderBookType)(0),                               // 8: tinkoff.public.invest.api.contract.v1.OrderBookType
-	(LastPriceType)(0),                               // 9: tinkoff.public.invest.api.contract.v1.LastPriceType
-	(GetCandlesRequest_CandleSource)(0),              // 10: tinkoff.public.invest.api.contract.v1.GetCandlesRequest.CandleSource
-	(GetTechAnalysisRequest_IndicatorInterval)(0),    // 11: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.IndicatorInterval
-	(GetTechAnalysisRequest_TypeOfPrice)(0),          // 12: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.TypeOfPrice
-	(GetTechAnalysisRequest_IndicatorType)(0),        // 13: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.IndicatorType
-	(*MarketDataRequest)(nil),                        // 14: tinkoff.public.invest.api.contract.v1.MarketDataRequest
-	(*MarketDataServerSideStreamRequest)(nil),        // 15: tinkoff.public.invest.api.contract.v1.MarketDataServerSideStreamRequest
-	(*MarketDataResponse)(nil),                       // 16: tinkoff.public.invest.api.contract.v1.MarketDataResponse
-	(*SubscribeCandlesRequest)(nil),                  // 17: tinkoff.public.invest.api.contract.v1.SubscribeCandlesRequest
-	(*CandleInstrument)(nil),                         // 18: tinkoff.public.invest.api.contract.v1.CandleInstrument
-	(*SubscribeCandlesResponse)(nil),                 // 19: tinkoff.public.invest.api.contract.v1.SubscribeCandlesResponse
-	(*CandleSubscription)(nil),                       // 20: tinkoff.public.invest.api.contract.v1.CandleSubscription
-	(*SubscribeOrderBookRequest)(nil),                // 21: tinkoff.public.invest.api.contract.v1.SubscribeOrderBookRequest
-	(*OrderBookInstrument)(nil),                      // 22: tinkoff.public.invest.api.contract.v1.OrderBookInstrument
-	(*SubscribeOrderBookResponse)(nil),               // 23: tinkoff.public.invest.api.contract.v1.SubscribeOrderBookResponse
-	(*OrderBookSubscription)(nil),                    // 24: tinkoff.public.invest.api.contract.v1.OrderBookSubscription
-	(*SubscribeTradesRequest)(nil),                   // 25: tinkoff.public.invest.api.contract.v1.SubscribeTradesRequest
-	(*TradeInstrument)(nil),                          // 26: tinkoff.public.invest.api.contract.v1.TradeInstrument
-	(*SubscribeTradesResponse)(nil),                  // 27: tinkoff.public.invest.api.contract.v1.SubscribeTradesResponse
-	(*TradeSubscription)(nil),                        // 28: tinkoff.public.invest.api.contract.v1.TradeSubscription
-	(*SubscribeInfoRequest)(nil),                     // 29: tinkoff.public.invest.api.contract.v1.SubscribeInfoRequest
-	(*InfoInstrument)(nil),                           // 30: tinkoff.public.invest.api.contract.v1.InfoInstrument
-	(*SubscribeInfoResponse)(nil),                    // 31: tinkoff.public.invest.api.contract.v1.SubscribeInfoResponse
-	(*InfoSubscription)(nil),                         // 32: tinkoff.public.invest.api.contract.v1.InfoSubscription
-	(*SubscribeLastPriceRequest)(nil),                // 33: tinkoff.public.invest.api.contract.v1.SubscribeLastPriceRequest
-	(*LastPriceInstrument)(nil),                      // 34: tinkoff.public.invest.api.contract.v1.LastPriceInstrument
-	(*SubscribeLastPriceResponse)(nil),               // 35: tinkoff.public.invest.api.contract.v1.SubscribeLastPriceResponse
-	(*LastPriceSubscription)(nil),                    // 36: tinkoff.public.invest.api.contract.v1.LastPriceSubscription
-	(*Candle)(nil),                                   // 37: tinkoff.public.invest.api.contract.v1.Candle
-	(*OrderBook)(nil),                                // 38: tinkoff.public.invest.api.contract.v1.OrderBook
-	(*Order)(nil),                                    // 39: tinkoff.public.invest.api.contract.v1.Order
-	(*Trade)(nil),                                    // 40: tinkoff.public.invest.api.contract.v1.Trade
-	(*TradingStatus)(nil),                            // 41: tinkoff.public.invest.api.contract.v1.TradingStatus
-	(*GetCandlesRequest)(nil),                        // 42: tinkoff.public.invest.api.contract.v1.GetCandlesRequest
-	(*GetCandlesResponse)(nil),                       // 43: tinkoff.public.invest.api.contract.v1.GetCandlesResponse
-	(*HistoricCandle)(nil),                           // 44: tinkoff.public.invest.api.contract.v1.HistoricCandle
-	(*GetLastPricesRequest)(nil),                     // 45: tinkoff.public.invest.api.contract.v1.GetLastPricesRequest
-	(*GetLastPricesResponse)(nil),                    // 46: tinkoff.public.invest.api.contract.v1.GetLastPricesResponse
-	(*LastPrice)(nil),                                // 47: tinkoff.public.invest.api.contract.v1.LastPrice
-	(*OpenInterest)(nil),                             // 48: tinkoff.public.invest.api.contract.v1.OpenInterest
-	(*GetOrderBookRequest)(nil),                      // 49: tinkoff.public.invest.api.contract.v1.GetOrderBookRequest
-	(*GetOrderBookResponse)(nil),                     // 50: tinkoff.public.invest.api.contract.v1.GetOrderBookResponse
-	(*GetTradingStatusRequest)(nil),                  // 51: tinkoff.public.invest.api.contract.v1.GetTradingStatusRequest
-	(*GetTradingStatusesRequest)(nil),                // 52: tinkoff.public.invest.api.contract.v1.GetTradingStatusesRequest
-	(*GetTradingStatusesResponse)(nil),               // 53: tinkoff.public.invest.api.contract.v1.GetTradingStatusesResponse
-	(*GetTradingStatusResponse)(nil),                 // 54: tinkoff.public.invest.api.contract.v1.GetTradingStatusResponse
-	(*GetLastTradesRequest)(nil),                     // 55: tinkoff.public.invest.api.contract.v1.GetLastTradesRequest
-	(*GetLastTradesResponse)(nil),                    // 56: tinkoff.public.invest.api.contract.v1.GetLastTradesResponse
-	(*GetMySubscriptions)(nil),                       // 57: tinkoff.public.invest.api.contract.v1.GetMySubscriptions
-	(*GetClosePricesRequest)(nil),                    // 58: tinkoff.public.invest.api.contract.v1.GetClosePricesRequest
-	(*InstrumentClosePriceRequest)(nil),              // 59: tinkoff.public.invest.api.contract.v1.InstrumentClosePriceRequest
-	(*GetClosePricesResponse)(nil),                   // 60: tinkoff.public.invest.api.contract.v1.GetClosePricesResponse
-	(*InstrumentClosePriceResponse)(nil),             // 61: tinkoff.public.invest.api.contract.v1.InstrumentClosePriceResponse
-	(*GetTechAnalysisRequest)(nil),                   // 62: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest
-	(*GetTechAnalysisResponse)(nil),                  // 63: tinkoff.public.invest.api.contract.v1.GetTechAnalysisResponse
-	(*GetMarketValuesRequest)(nil),                   // 64: tinkoff.public.invest.api.contract.v1.GetMarketValuesRequest
-	(*GetMarketValuesResponse)(nil),                  // 65: tinkoff.public.invest.api.contract.v1.GetMarketValuesResponse
-	(*MarketValueInstrument)(nil),                    // 66: tinkoff.public.invest.api.contract.v1.MarketValueInstrument
-	(*MarketValue)(nil),                              // 67: tinkoff.public.invest.api.contract.v1.MarketValue
-	(*GetTechAnalysisRequest_Smoothing)(nil),         // 68: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.Smoothing
-	(*GetTechAnalysisRequest_Deviation)(nil),         // 69: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.Deviation
-	(*GetTechAnalysisResponse_TechAnalysisItem)(nil), // 70: tinkoff.public.invest.api.contract.v1.GetTechAnalysisResponse.TechAnalysisItem
-	(*PingRequest)(nil),                              // 71: tinkoff.public.invest.api.contract.v1.PingRequest
-	(*PingDelaySettings)(nil),                        // 72: tinkoff.public.invest.api.contract.v1.PingDelaySettings
-	(*Ping)(nil),                                     // 73: tinkoff.public.invest.api.contract.v1.Ping
-	(*Quotation)(nil),                                // 74: tinkoff.public.invest.api.contract.v1.Quotation
-	(*timestamppb.Timestamp)(nil),                    // 75: google.protobuf.Timestamp
-	(SecurityTradingStatus)(0),                       // 76: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
-	(InstrumentStatus)(0),                            // 77: tinkoff.public.invest.api.contract.v1.InstrumentStatus
-}
+var (
+	file_marketdata_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
+	file_marketdata_proto_msgTypes  = make([]protoimpl.MessageInfo, 57)
+	file_marketdata_proto_goTypes   = []interface{}{
+		(SubscriptionAction)(0),                          // 0: tinkoff.public.invest.api.contract.v1.SubscriptionAction
+		(SubscriptionInterval)(0),                        // 1: tinkoff.public.invest.api.contract.v1.SubscriptionInterval
+		(SubscriptionStatus)(0),                          // 2: tinkoff.public.invest.api.contract.v1.SubscriptionStatus
+		(TradeSourceType)(0),                             // 3: tinkoff.public.invest.api.contract.v1.TradeSourceType
+		(TradeDirection)(0),                              // 4: tinkoff.public.invest.api.contract.v1.TradeDirection
+		(CandleInterval)(0),                              // 5: tinkoff.public.invest.api.contract.v1.CandleInterval
+		(CandleSource)(0),                                // 6: tinkoff.public.invest.api.contract.v1.CandleSource
+		(MarketValueType)(0),                             // 7: tinkoff.public.invest.api.contract.v1.MarketValueType
+		(OrderBookType)(0),                               // 8: tinkoff.public.invest.api.contract.v1.OrderBookType
+		(LastPriceType)(0),                               // 9: tinkoff.public.invest.api.contract.v1.LastPriceType
+		(GetCandlesRequest_CandleSource)(0),              // 10: tinkoff.public.invest.api.contract.v1.GetCandlesRequest.CandleSource
+		(GetTechAnalysisRequest_IndicatorInterval)(0),    // 11: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.IndicatorInterval
+		(GetTechAnalysisRequest_TypeOfPrice)(0),          // 12: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.TypeOfPrice
+		(GetTechAnalysisRequest_IndicatorType)(0),        // 13: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.IndicatorType
+		(*MarketDataRequest)(nil),                        // 14: tinkoff.public.invest.api.contract.v1.MarketDataRequest
+		(*MarketDataServerSideStreamRequest)(nil),        // 15: tinkoff.public.invest.api.contract.v1.MarketDataServerSideStreamRequest
+		(*MarketDataResponse)(nil),                       // 16: tinkoff.public.invest.api.contract.v1.MarketDataResponse
+		(*SubscribeCandlesRequest)(nil),                  // 17: tinkoff.public.invest.api.contract.v1.SubscribeCandlesRequest
+		(*CandleInstrument)(nil),                         // 18: tinkoff.public.invest.api.contract.v1.CandleInstrument
+		(*SubscribeCandlesResponse)(nil),                 // 19: tinkoff.public.invest.api.contract.v1.SubscribeCandlesResponse
+		(*CandleSubscription)(nil),                       // 20: tinkoff.public.invest.api.contract.v1.CandleSubscription
+		(*SubscribeOrderBookRequest)(nil),                // 21: tinkoff.public.invest.api.contract.v1.SubscribeOrderBookRequest
+		(*OrderBookInstrument)(nil),                      // 22: tinkoff.public.invest.api.contract.v1.OrderBookInstrument
+		(*SubscribeOrderBookResponse)(nil),               // 23: tinkoff.public.invest.api.contract.v1.SubscribeOrderBookResponse
+		(*OrderBookSubscription)(nil),                    // 24: tinkoff.public.invest.api.contract.v1.OrderBookSubscription
+		(*SubscribeTradesRequest)(nil),                   // 25: tinkoff.public.invest.api.contract.v1.SubscribeTradesRequest
+		(*TradeInstrument)(nil),                          // 26: tinkoff.public.invest.api.contract.v1.TradeInstrument
+		(*SubscribeTradesResponse)(nil),                  // 27: tinkoff.public.invest.api.contract.v1.SubscribeTradesResponse
+		(*TradeSubscription)(nil),                        // 28: tinkoff.public.invest.api.contract.v1.TradeSubscription
+		(*SubscribeInfoRequest)(nil),                     // 29: tinkoff.public.invest.api.contract.v1.SubscribeInfoRequest
+		(*InfoInstrument)(nil),                           // 30: tinkoff.public.invest.api.contract.v1.InfoInstrument
+		(*SubscribeInfoResponse)(nil),                    // 31: tinkoff.public.invest.api.contract.v1.SubscribeInfoResponse
+		(*InfoSubscription)(nil),                         // 32: tinkoff.public.invest.api.contract.v1.InfoSubscription
+		(*SubscribeLastPriceRequest)(nil),                // 33: tinkoff.public.invest.api.contract.v1.SubscribeLastPriceRequest
+		(*LastPriceInstrument)(nil),                      // 34: tinkoff.public.invest.api.contract.v1.LastPriceInstrument
+		(*SubscribeLastPriceResponse)(nil),               // 35: tinkoff.public.invest.api.contract.v1.SubscribeLastPriceResponse
+		(*LastPriceSubscription)(nil),                    // 36: tinkoff.public.invest.api.contract.v1.LastPriceSubscription
+		(*Candle)(nil),                                   // 37: tinkoff.public.invest.api.contract.v1.Candle
+		(*OrderBook)(nil),                                // 38: tinkoff.public.invest.api.contract.v1.OrderBook
+		(*Order)(nil),                                    // 39: tinkoff.public.invest.api.contract.v1.Order
+		(*Trade)(nil),                                    // 40: tinkoff.public.invest.api.contract.v1.Trade
+		(*TradingStatus)(nil),                            // 41: tinkoff.public.invest.api.contract.v1.TradingStatus
+		(*GetCandlesRequest)(nil),                        // 42: tinkoff.public.invest.api.contract.v1.GetCandlesRequest
+		(*GetCandlesResponse)(nil),                       // 43: tinkoff.public.invest.api.contract.v1.GetCandlesResponse
+		(*HistoricCandle)(nil),                           // 44: tinkoff.public.invest.api.contract.v1.HistoricCandle
+		(*GetLastPricesRequest)(nil),                     // 45: tinkoff.public.invest.api.contract.v1.GetLastPricesRequest
+		(*GetLastPricesResponse)(nil),                    // 46: tinkoff.public.invest.api.contract.v1.GetLastPricesResponse
+		(*LastPrice)(nil),                                // 47: tinkoff.public.invest.api.contract.v1.LastPrice
+		(*OpenInterest)(nil),                             // 48: tinkoff.public.invest.api.contract.v1.OpenInterest
+		(*GetOrderBookRequest)(nil),                      // 49: tinkoff.public.invest.api.contract.v1.GetOrderBookRequest
+		(*GetOrderBookResponse)(nil),                     // 50: tinkoff.public.invest.api.contract.v1.GetOrderBookResponse
+		(*GetTradingStatusRequest)(nil),                  // 51: tinkoff.public.invest.api.contract.v1.GetTradingStatusRequest
+		(*GetTradingStatusesRequest)(nil),                // 52: tinkoff.public.invest.api.contract.v1.GetTradingStatusesRequest
+		(*GetTradingStatusesResponse)(nil),               // 53: tinkoff.public.invest.api.contract.v1.GetTradingStatusesResponse
+		(*GetTradingStatusResponse)(nil),                 // 54: tinkoff.public.invest.api.contract.v1.GetTradingStatusResponse
+		(*GetLastTradesRequest)(nil),                     // 55: tinkoff.public.invest.api.contract.v1.GetLastTradesRequest
+		(*GetLastTradesResponse)(nil),                    // 56: tinkoff.public.invest.api.contract.v1.GetLastTradesResponse
+		(*GetMySubscriptions)(nil),                       // 57: tinkoff.public.invest.api.contract.v1.GetMySubscriptions
+		(*GetClosePricesRequest)(nil),                    // 58: tinkoff.public.invest.api.contract.v1.GetClosePricesRequest
+		(*InstrumentClosePriceRequest)(nil),              // 59: tinkoff.public.invest.api.contract.v1.InstrumentClosePriceRequest
+		(*GetClosePricesResponse)(nil),                   // 60: tinkoff.public.invest.api.contract.v1.GetClosePricesResponse
+		(*InstrumentClosePriceResponse)(nil),             // 61: tinkoff.public.invest.api.contract.v1.InstrumentClosePriceResponse
+		(*GetTechAnalysisRequest)(nil),                   // 62: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest
+		(*GetTechAnalysisResponse)(nil),                  // 63: tinkoff.public.invest.api.contract.v1.GetTechAnalysisResponse
+		(*GetMarketValuesRequest)(nil),                   // 64: tinkoff.public.invest.api.contract.v1.GetMarketValuesRequest
+		(*GetMarketValuesResponse)(nil),                  // 65: tinkoff.public.invest.api.contract.v1.GetMarketValuesResponse
+		(*MarketValueInstrument)(nil),                    // 66: tinkoff.public.invest.api.contract.v1.MarketValueInstrument
+		(*MarketValue)(nil),                              // 67: tinkoff.public.invest.api.contract.v1.MarketValue
+		(*GetTechAnalysisRequest_Smoothing)(nil),         // 68: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.Smoothing
+		(*GetTechAnalysisRequest_Deviation)(nil),         // 69: tinkoff.public.invest.api.contract.v1.GetTechAnalysisRequest.Deviation
+		(*GetTechAnalysisResponse_TechAnalysisItem)(nil), // 70: tinkoff.public.invest.api.contract.v1.GetTechAnalysisResponse.TechAnalysisItem
+		(*PingRequest)(nil),                              // 71: tinkoff.public.invest.api.contract.v1.PingRequest
+		(*PingDelaySettings)(nil),                        // 72: tinkoff.public.invest.api.contract.v1.PingDelaySettings
+		(*Ping)(nil),                                     // 73: tinkoff.public.invest.api.contract.v1.Ping
+		(*Quotation)(nil),                                // 74: tinkoff.public.invest.api.contract.v1.Quotation
+		(*timestamppb.Timestamp)(nil),                    // 75: google.protobuf.Timestamp
+		(SecurityTradingStatus)(0),                       // 76: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
+		(InstrumentStatus)(0),                            // 77: tinkoff.public.invest.api.contract.v1.InstrumentStatus
+	}
+)
+
 var file_marketdata_proto_depIdxs = []int32{
 	17,  // 0: tinkoff.public.invest.api.contract.v1.MarketDataRequest.subscribe_candles_request:type_name -> tinkoff.public.invest.api.contract.v1.SubscribeCandlesRequest
 	21,  // 1: tinkoff.public.invest.api.contract.v1.MarketDataRequest.subscribe_order_book_request:type_name -> tinkoff.public.invest.api.contract.v1.SubscribeOrderBookRequest

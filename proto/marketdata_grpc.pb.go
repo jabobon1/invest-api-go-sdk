@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -171,33 +172,40 @@ type MarketDataServiceServer interface {
 }
 
 // UnimplementedMarketDataServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMarketDataServiceServer struct {
-}
+type UnimplementedMarketDataServiceServer struct{}
 
 func (UnimplementedMarketDataServiceServer) GetCandles(context.Context, *GetCandlesRequest) (*GetCandlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCandles not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetLastPrices(context.Context, *GetLastPricesRequest) (*GetLastPricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastPrices not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetOrderBook(context.Context, *GetOrderBookRequest) (*GetOrderBookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderBook not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetTradingStatus(context.Context, *GetTradingStatusRequest) (*GetTradingStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTradingStatus not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetTradingStatuses(context.Context, *GetTradingStatusesRequest) (*GetTradingStatusesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTradingStatuses not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetLastTrades(context.Context, *GetLastTradesRequest) (*GetLastTradesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastTrades not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetClosePrices(context.Context, *GetClosePricesRequest) (*GetClosePricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClosePrices not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetTechAnalysis(context.Context, *GetTechAnalysisRequest) (*GetTechAnalysisResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTechAnalysis not implemented")
 }
+
 func (UnimplementedMarketDataServiceServer) GetMarketValues(context.Context, *GetMarketValuesRequest) (*GetMarketValuesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketValues not implemented")
 }
@@ -522,15 +530,16 @@ type MarketDataStreamServiceServer interface {
 }
 
 // UnimplementedMarketDataStreamServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMarketDataStreamServiceServer struct {
-}
+type UnimplementedMarketDataStreamServiceServer struct{}
 
 func (UnimplementedMarketDataStreamServiceServer) MarketDataStream(MarketDataStreamService_MarketDataStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method MarketDataStream not implemented")
 }
+
 func (UnimplementedMarketDataStreamServiceServer) MarketDataServerSideStream(*MarketDataServerSideStreamRequest, MarketDataStreamService_MarketDataServerSideStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method MarketDataServerSideStream not implemented")
 }
+
 func (UnimplementedMarketDataStreamServiceServer) mustEmbedUnimplementedMarketDataStreamServiceServer() {
 }
 

@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -71,12 +72,12 @@ type SignalServiceServer interface {
 }
 
 // UnimplementedSignalServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSignalServiceServer struct {
-}
+type UnimplementedSignalServiceServer struct{}
 
 func (UnimplementedSignalServiceServer) GetStrategies(context.Context, *GetStrategiesRequest) (*GetStrategiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStrategies not implemented")
 }
+
 func (UnimplementedSignalServiceServer) GetSignals(context.Context, *GetSignalsRequest) (*GetSignalsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSignals not implemented")
 }

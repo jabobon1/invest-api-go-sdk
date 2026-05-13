@@ -594,7 +594,8 @@ func (is *InstrumentsServiceClient) GetAssetFundamentals(assets []string) (*GetA
 
 // GetBondEvents - Метод получения событий по облигации
 func (is *InstrumentsServiceClient) GetBondEvents(instrumentID string,
-	eventType pb.GetBondEventsRequest_EventType, from, to time.Time) (*GetBondEventsResponse, error) {
+	eventType pb.GetBondEventsRequest_EventType, from, to time.Time,
+) (*GetBondEventsResponse, error) {
 	var header, trailer metadata.MD
 	resp, err := is.pbClient.GetBondEvents(is.ctx, &pb.GetBondEventsRequest{
 		From:         TimeToTimestamp(from),

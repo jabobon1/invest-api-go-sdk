@@ -90,5 +90,4 @@ func main() {
 		report := generateReportResp.String()
 		fmt.Println(report)
 	}
-
 }

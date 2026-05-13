@@ -28,8 +28,8 @@ type MarketDataStream struct {
 	orderBook     chan *pb.OrderBook
 	lastPrice     chan *pb.LastPrice
 	tradingStatus chan *pb.TradingStatus
-
-	tech chan *pb.MarketDataResponse
+	pings         chan *pb.Ping
+	tech          chan *pb.MarketDataResponse
 
 	subs subscriptions
 }
@@ -92,6 +92,10 @@ func (mds *MarketDataStream) sendCandlesReq(ids []string, interval pb.Subscripti
 	})
 }
 
+func (mds *MarketDataStream) Pings() <-chan *pb.Ping {
+	return mds.pings
+}
+
 // SubscribeOrderBook - метод подписки на стаканы инструментов с одинаковой глубиной
 func (mds *MarketDataStream) SubscribeOrderBook(ids []string, depth int32) (<-chan *pb.OrderBook, error) {
 	err := mds.sendOrderBookReq(ids, depth, pb.SubscriptionAction_SUBSCRIPTION_ACTION_SUBSCRIBE)
@@ -129,7 +133,9 @@ func (mds *MarketDataStream) sendOrderBookReq(ids []string, depth int32, act pb.
 			SubscribeOrderBookRequest: &pb.SubscribeOrderBookRequest{
 				SubscriptionAction: act,
 				Instruments:        instruments,
-			}}})
+			},
+		},
+	})
 }
 
 // SubscribeTrade - метод подписки на ленту обезличенных сделок
@@ -218,7 +224,9 @@ func (mds *MarketDataStream) sendInfoReq(ids []string, act pb.SubscriptionAction
 			SubscribeInfoRequest: &pb.SubscribeInfoRequest{
 				SubscriptionAction: act,
 				Instruments:        instruments,
-			}}})
+			},
+		},
+	})
 }
 
 // SubscribeLastPrice - метод подписки на последние цены инструментов
@@ -257,14 +265,18 @@ func (mds *MarketDataStream) sendLastPriceReq(ids []string, act pb.SubscriptionA
 			SubscribeLastPriceRequest: &pb.SubscribeLastPriceRequest{
 				SubscriptionAction: act,
 				Instruments:        instruments,
-			}}})
+			},
+		},
+	})
 }
 
 // GetMySubscriptions - метод получения подписок в рамках данного стрима
 func (mds *MarketDataStream) GetMySubscriptions() error {
 	return mds.stream.Send(&pb.MarketDataRequest{
 		Payload: &pb.MarketDataRequest_GetMySubscriptions{
-			GetMySubscriptions: &pb.GetMySubscriptions{}}})
+			GetMySubscriptions: &pb.GetMySubscriptions{},
+		},
+	})
 }
 
 // Listen - метод начинает слушать стрим и отправлять информацию в каналы
@@ -300,12 +312,16 @@ func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 		mds.candle <- resp.GetCandle()
 	case *pb.MarketDataResponse_Orderbook:
 		mds.orderBook <- resp.GetOrderbook()
+		// имитируем пинг, внутри nil
+		mds.pings <- resp.GetPing()
 	case *pb.MarketDataResponse_Trade:
 		mds.trade <- resp.GetTrade()
 	case *pb.MarketDataResponse_LastPrice:
 		mds.lastPrice <- resp.GetLastPrice()
 	case *pb.MarketDataResponse_TradingStatus:
 		mds.tradingStatus <- resp.GetTradingStatus()
+	case *pb.MarketDataResponse_Ping:
+		mds.pings <- resp.GetPing()
 	default:
 		// mds.tech <- resp
 		mds.mdsClient.logger.Infof("info from MD stream %v", resp.String())
@@ -318,6 +334,7 @@ func (mds *MarketDataStream) shutdown() {
 	close(mds.trade)
 	close(mds.lastPrice)
 	close(mds.orderBook)
+	close(mds.pings)
 	close(mds.tradingStatus)
 	close(mds.tech)
 }

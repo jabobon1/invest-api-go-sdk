@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -119,12 +120,12 @@ type OrdersStreamServiceServer interface {
 }
 
 // UnimplementedOrdersStreamServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOrdersStreamServiceServer struct {
-}
+type UnimplementedOrdersStreamServiceServer struct{}
 
 func (UnimplementedOrdersStreamServiceServer) TradesStream(*TradesStreamRequest, OrdersStreamService_TradesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method TradesStream not implemented")
 }
+
 func (UnimplementedOrdersStreamServiceServer) OrderStateStream(*OrderStateStreamRequest, OrdersStreamService_OrderStateStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method OrderStateStream not implemented")
 }
@@ -344,30 +345,36 @@ type OrdersServiceServer interface {
 }
 
 // UnimplementedOrdersServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOrdersServiceServer struct {
-}
+type UnimplementedOrdersServiceServer struct{}
 
 func (UnimplementedOrdersServiceServer) PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostOrder not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) PostOrderAsync(context.Context, *PostOrderAsyncRequest) (*PostOrderAsyncResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostOrderAsync not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) GetOrderState(context.Context, *GetOrderStateRequest) (*OrderState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderState not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrders not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) ReplaceOrder(context.Context, *ReplaceOrderRequest) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplaceOrder not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) GetMaxLots(context.Context, *GetMaxLotsRequest) (*GetMaxLotsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMaxLots not implemented")
 }
+
 func (UnimplementedOrdersServiceServer) GetOrderPrice(context.Context, *GetOrderPriceRequest) (*GetOrderPriceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderPrice not implemented")
 }

@@ -8,6 +8,7 @@ package investapi
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -85,15 +86,16 @@ type StopOrdersServiceServer interface {
 }
 
 // UnimplementedStopOrdersServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedStopOrdersServiceServer struct {
-}
+type UnimplementedStopOrdersServiceServer struct{}
 
 func (UnimplementedStopOrdersServiceServer) PostStopOrder(context.Context, *PostStopOrderRequest) (*PostStopOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostStopOrder not implemented")
 }
+
 func (UnimplementedStopOrdersServiceServer) GetStopOrders(context.Context, *GetStopOrdersRequest) (*GetStopOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStopOrders not implemented")
 }
+
 func (UnimplementedStopOrdersServiceServer) CancelStopOrder(context.Context, *CancelStopOrderRequest) (*CancelStopOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelStopOrder not implemented")
 }

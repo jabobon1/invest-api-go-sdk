@@ -69,11 +69,11 @@ type Instrument struct {
 	Quantity int64
 	// lot - Лотность инструмента
 	Lot int32
-	//currency - Код валюты инструмента
+	// currency - Код валюты инструмента
 	Currency string
-	//ticker - Тикер инструмента
+	// ticker - Тикер инструмента
 	Ticker string
-	//minPriceInc - Минимальный шаг цены
+	// minPriceInc - Минимальный шаг цены
 	MinPriceInc *pb.Quotation
 	// entryPrice - После открытия позиции, сохраняется цена этой сделки
 	EntryPrice float64

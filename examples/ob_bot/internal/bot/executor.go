@@ -369,7 +369,7 @@ func (e *Executor) isProfitable(id string) bool {
 func (e *Executor) possibleToBuy(id string) bool {
 	// требуемая сумма для покупки
 	// кол-во лотов * лотность * стоимость 1 инструмента
-	//return true
+	// return true
 	lp, ok := e.lastPrices.Get(id)
 	if !ok {
 		return false

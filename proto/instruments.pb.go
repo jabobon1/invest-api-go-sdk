@@ -7,12 +7,13 @@
 package investapi
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -26,14 +27,14 @@ const (
 type CouponType int32
 
 const (
-	CouponType_COUPON_TYPE_UNSPECIFIED CouponType = 0 //Неопределенное значение.
-	CouponType_COUPON_TYPE_CONSTANT    CouponType = 1 //Постоянный.
-	CouponType_COUPON_TYPE_FLOATING    CouponType = 2 //Плавающий.
-	CouponType_COUPON_TYPE_DISCOUNT    CouponType = 3 //Дисконт.
-	CouponType_COUPON_TYPE_MORTGAGE    CouponType = 4 //Ипотечный.
-	CouponType_COUPON_TYPE_FIX         CouponType = 5 //Фиксированный.
-	CouponType_COUPON_TYPE_VARIABLE    CouponType = 6 //Переменный.
-	CouponType_COUPON_TYPE_OTHER       CouponType = 7 //Прочее.
+	CouponType_COUPON_TYPE_UNSPECIFIED CouponType = 0 // Неопределенное значение.
+	CouponType_COUPON_TYPE_CONSTANT    CouponType = 1 // Постоянный.
+	CouponType_COUPON_TYPE_FLOATING    CouponType = 2 // Плавающий.
+	CouponType_COUPON_TYPE_DISCOUNT    CouponType = 3 // Дисконт.
+	CouponType_COUPON_TYPE_MORTGAGE    CouponType = 4 // Ипотечный.
+	CouponType_COUPON_TYPE_FIX         CouponType = 5 // Фиксированный.
+	CouponType_COUPON_TYPE_VARIABLE    CouponType = 6 // Переменный.
+	CouponType_COUPON_TYPE_OTHER       CouponType = 7 // Прочее.
 )
 
 // Enum value maps for CouponType.
@@ -91,9 +92,9 @@ func (CouponType) EnumDescriptor() ([]byte, []int) {
 type OptionDirection int32
 
 const (
-	OptionDirection_OPTION_DIRECTION_UNSPECIFIED OptionDirection = 0 //Тип не определен.
-	OptionDirection_OPTION_DIRECTION_PUT         OptionDirection = 1 //Опцион на продажу.
-	OptionDirection_OPTION_DIRECTION_CALL        OptionDirection = 2 //Опцион на покупку.
+	OptionDirection_OPTION_DIRECTION_UNSPECIFIED OptionDirection = 0 // Тип не определен.
+	OptionDirection_OPTION_DIRECTION_PUT         OptionDirection = 1 // Опцион на продажу.
+	OptionDirection_OPTION_DIRECTION_CALL        OptionDirection = 2 // Опцион на покупку.
 )
 
 // Enum value maps for OptionDirection.
@@ -141,9 +142,9 @@ func (OptionDirection) EnumDescriptor() ([]byte, []int) {
 type OptionPaymentType int32
 
 const (
-	OptionPaymentType_OPTION_PAYMENT_TYPE_UNSPECIFIED OptionPaymentType = 0 //Тип не определен.
-	OptionPaymentType_OPTION_PAYMENT_TYPE_PREMIUM     OptionPaymentType = 1 //Опционы с использованием премии в расчетах.
-	OptionPaymentType_OPTION_PAYMENT_TYPE_MARGINAL    OptionPaymentType = 2 //Маржируемые опционы.
+	OptionPaymentType_OPTION_PAYMENT_TYPE_UNSPECIFIED OptionPaymentType = 0 // Тип не определен.
+	OptionPaymentType_OPTION_PAYMENT_TYPE_PREMIUM     OptionPaymentType = 1 // Опционы с использованием премии в расчетах.
+	OptionPaymentType_OPTION_PAYMENT_TYPE_MARGINAL    OptionPaymentType = 2 // Маржируемые опционы.
 )
 
 // Enum value maps for OptionPaymentType.
@@ -191,9 +192,9 @@ func (OptionPaymentType) EnumDescriptor() ([]byte, []int) {
 type OptionStyle int32
 
 const (
-	OptionStyle_OPTION_STYLE_UNSPECIFIED OptionStyle = 0 //Тип не определен.
-	OptionStyle_OPTION_STYLE_AMERICAN    OptionStyle = 1 //Американский опцион.
-	OptionStyle_OPTION_STYLE_EUROPEAN    OptionStyle = 2 //Европейский опцион.
+	OptionStyle_OPTION_STYLE_UNSPECIFIED OptionStyle = 0 // Тип не определен.
+	OptionStyle_OPTION_STYLE_AMERICAN    OptionStyle = 1 // Американский опцион.
+	OptionStyle_OPTION_STYLE_EUROPEAN    OptionStyle = 2 // Европейский опцион.
 )
 
 // Enum value maps for OptionStyle.
@@ -241,9 +242,9 @@ func (OptionStyle) EnumDescriptor() ([]byte, []int) {
 type OptionSettlementType int32
 
 const (
-	OptionSettlementType_OPTION_EXECUTION_TYPE_UNSPECIFIED       OptionSettlementType = 0 //Тип не определен.
+	OptionSettlementType_OPTION_EXECUTION_TYPE_UNSPECIFIED       OptionSettlementType = 0 // Тип не определен.
 	OptionSettlementType_OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY OptionSettlementType = 1 // Поставочный тип опциона.
-	OptionSettlementType_OPTION_EXECUTION_TYPE_CASH_SETTLEMENT   OptionSettlementType = 2 //Расчетный тип опциона.
+	OptionSettlementType_OPTION_EXECUTION_TYPE_CASH_SETTLEMENT   OptionSettlementType = 2 // Расчетный тип опциона.
 )
 
 // Enum value maps for OptionSettlementType.
@@ -291,11 +292,11 @@ func (OptionSettlementType) EnumDescriptor() ([]byte, []int) {
 type InstrumentIdType int32
 
 const (
-	InstrumentIdType_INSTRUMENT_ID_UNSPECIFIED       InstrumentIdType = 0 //Значение не определено.
-	InstrumentIdType_INSTRUMENT_ID_TYPE_FIGI         InstrumentIdType = 1 //FIGI.
-	InstrumentIdType_INSTRUMENT_ID_TYPE_TICKER       InstrumentIdType = 2 //Ticker.
-	InstrumentIdType_INSTRUMENT_ID_TYPE_UID          InstrumentIdType = 3 //Уникальный идентификатор.
-	InstrumentIdType_INSTRUMENT_ID_TYPE_POSITION_UID InstrumentIdType = 4 //Идентификатор позиции.
+	InstrumentIdType_INSTRUMENT_ID_UNSPECIFIED       InstrumentIdType = 0 // Значение не определено.
+	InstrumentIdType_INSTRUMENT_ID_TYPE_FIGI         InstrumentIdType = 1 // FIGI.
+	InstrumentIdType_INSTRUMENT_ID_TYPE_TICKER       InstrumentIdType = 2 // Ticker.
+	InstrumentIdType_INSTRUMENT_ID_TYPE_UID          InstrumentIdType = 3 // Уникальный идентификатор.
+	InstrumentIdType_INSTRUMENT_ID_TYPE_POSITION_UID InstrumentIdType = 4 // Идентификатор позиции.
 )
 
 // Enum value maps for InstrumentIdType.
@@ -347,15 +348,15 @@ func (InstrumentIdType) EnumDescriptor() ([]byte, []int) {
 type ShareType int32
 
 const (
-	ShareType_SHARE_TYPE_UNSPECIFIED     ShareType = 0 //Значение не определено.
-	ShareType_SHARE_TYPE_COMMON          ShareType = 1 //Обыкновенная.
-	ShareType_SHARE_TYPE_PREFERRED       ShareType = 2 //Привилегированная.
-	ShareType_SHARE_TYPE_ADR             ShareType = 3 //Американские депозитарные расписки.
-	ShareType_SHARE_TYPE_GDR             ShareType = 4 //Глобальные депозитарные расписки.
-	ShareType_SHARE_TYPE_MLP             ShareType = 5 //Товарищество с ограниченной ответственностью.
-	ShareType_SHARE_TYPE_NY_REG_SHRS     ShareType = 6 //Акции из реестра Нью-Йорка.
-	ShareType_SHARE_TYPE_CLOSED_END_FUND ShareType = 7 //Закрытый инвестиционный фонд.
-	ShareType_SHARE_TYPE_REIT            ShareType = 8 //Траст недвижимости.
+	ShareType_SHARE_TYPE_UNSPECIFIED     ShareType = 0 // Значение не определено.
+	ShareType_SHARE_TYPE_COMMON          ShareType = 1 // Обыкновенная.
+	ShareType_SHARE_TYPE_PREFERRED       ShareType = 2 // Привилегированная.
+	ShareType_SHARE_TYPE_ADR             ShareType = 3 // Американские депозитарные расписки.
+	ShareType_SHARE_TYPE_GDR             ShareType = 4 // Глобальные депозитарные расписки.
+	ShareType_SHARE_TYPE_MLP             ShareType = 5 // Товарищество с ограниченной ответственностью.
+	ShareType_SHARE_TYPE_NY_REG_SHRS     ShareType = 6 // Акции из реестра Нью-Йорка.
+	ShareType_SHARE_TYPE_CLOSED_END_FUND ShareType = 7 // Закрытый инвестиционный фонд.
+	ShareType_SHARE_TYPE_REIT            ShareType = 8 // Траст недвижимости.
 )
 
 // Enum value maps for ShareType.
@@ -415,11 +416,11 @@ func (ShareType) EnumDescriptor() ([]byte, []int) {
 type AssetType int32
 
 const (
-	AssetType_ASSET_TYPE_UNSPECIFIED AssetType = 0 //Тип не определен.
-	AssetType_ASSET_TYPE_CURRENCY    AssetType = 1 //Валюта.
-	AssetType_ASSET_TYPE_COMMODITY   AssetType = 2 //Товар.
-	AssetType_ASSET_TYPE_INDEX       AssetType = 3 //Индекс.
-	AssetType_ASSET_TYPE_SECURITY    AssetType = 4 //Ценная бумага.
+	AssetType_ASSET_TYPE_UNSPECIFIED AssetType = 0 // Тип не определен.
+	AssetType_ASSET_TYPE_CURRENCY    AssetType = 1 // Валюта.
+	AssetType_ASSET_TYPE_COMMODITY   AssetType = 2 // Товар.
+	AssetType_ASSET_TYPE_INDEX       AssetType = 3 // Индекс.
+	AssetType_ASSET_TYPE_SECURITY    AssetType = 4 // Ценная бумага.
 )
 
 // Enum value maps for AssetType.
@@ -471,9 +472,9 @@ func (AssetType) EnumDescriptor() ([]byte, []int) {
 type StructuredProductType int32
 
 const (
-	StructuredProductType_SP_TYPE_UNSPECIFIED     StructuredProductType = 0 //Тип не определен.
-	StructuredProductType_SP_TYPE_DELIVERABLE     StructuredProductType = 1 //Поставочный.
-	StructuredProductType_SP_TYPE_NON_DELIVERABLE StructuredProductType = 2 //Беспоставочный.
+	StructuredProductType_SP_TYPE_UNSPECIFIED     StructuredProductType = 0 // Тип не определен.
+	StructuredProductType_SP_TYPE_DELIVERABLE     StructuredProductType = 1 // Поставочный.
+	StructuredProductType_SP_TYPE_NON_DELIVERABLE StructuredProductType = 2 // Беспоставочный.
 )
 
 // Enum value maps for StructuredProductType.
@@ -521,9 +522,9 @@ func (StructuredProductType) EnumDescriptor() ([]byte, []int) {
 type EditFavoritesActionType int32
 
 const (
-	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED EditFavoritesActionType = 0 //Тип не определен.
-	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_ADD         EditFavoritesActionType = 1 //Добавить в список.
-	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_DEL         EditFavoritesActionType = 2 //Удалить из списка.
+	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED EditFavoritesActionType = 0 // Тип не определен.
+	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_ADD         EditFavoritesActionType = 1 // Добавить в список.
+	EditFavoritesActionType_EDIT_FAVORITES_ACTION_TYPE_DEL         EditFavoritesActionType = 2 // Удалить из списка.
 )
 
 // Enum value maps for EditFavoritesActionType.
@@ -623,10 +624,10 @@ func (Recommendation) EnumDescriptor() ([]byte, []int) {
 type RiskLevel int32
 
 const (
-	RiskLevel_RISK_LEVEL_UNSPECIFIED RiskLevel = 0 //Не указан.
-	RiskLevel_RISK_LEVEL_LOW         RiskLevel = 1 //Низкий уровень риска.
-	RiskLevel_RISK_LEVEL_MODERATE    RiskLevel = 2 //Средний уровень риска.
-	RiskLevel_RISK_LEVEL_HIGH        RiskLevel = 3 //Высокий уровень риска.
+	RiskLevel_RISK_LEVEL_UNSPECIFIED RiskLevel = 0 // Не указан.
+	RiskLevel_RISK_LEVEL_LOW         RiskLevel = 1 // Низкий уровень риска.
+	RiskLevel_RISK_LEVEL_MODERATE    RiskLevel = 2 // Средний уровень риска.
+	RiskLevel_RISK_LEVEL_HIGH        RiskLevel = 3 // Высокий уровень риска.
 )
 
 // Enum value maps for RiskLevel.
@@ -768,7 +769,7 @@ func (InstrumentExchangeType) EnumDescriptor() ([]byte, []int) {
 type GetBondEventsRequest_EventType int32
 
 const (
-	GetBondEventsRequest_EVENT_TYPE_UNSPECIFIED GetBondEventsRequest_EventType = 0 //Неопределенное значение.
+	GetBondEventsRequest_EVENT_TYPE_UNSPECIFIED GetBondEventsRequest_EventType = 0 // Неопределенное значение.
 	GetBondEventsRequest_EVENT_TYPE_CPN         GetBondEventsRequest_EventType = 1 // Купон.
 	GetBondEventsRequest_EVENT_TYPE_CALL        GetBondEventsRequest_EventType = 2 // Опцион (оферта).
 	GetBondEventsRequest_EVENT_TYPE_MTY         GetBondEventsRequest_EventType = 3 // Погашение.
@@ -927,9 +928,9 @@ type TradingSchedulesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Exchange *string                `protobuf:"bytes,1,opt,name=exchange,proto3,oneof" json:"exchange,omitempty"` //Наименование биржи или расчетного календаря. <br/>Если не передается, возвращается информация по всем доступным торговым площадкам.
-	From     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`         //Начало периода по UTC.
-	To       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`             //Окончание периода по UTC.
+	Exchange *string                `protobuf:"bytes,1,opt,name=exchange,proto3,oneof" json:"exchange,omitempty"` // Наименование биржи или расчетного календаря. <br/>Если не передается, возвращается информация по всем доступным торговым площадкам.
+	From     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`         // Начало периода по UTC.
+	To       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`             // Окончание периода по UTC.
 }
 
 func (x *TradingSchedulesRequest) Reset() {
@@ -1327,7 +1328,7 @@ type InstrumentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentStatus   *InstrumentStatus       `protobuf:"varint,1,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"`             //Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
+	InstrumentStatus   *InstrumentStatus       `protobuf:"varint,1,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"`             // Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
 	InstrumentExchange *InstrumentExchangeType `protobuf:"varint,2,opt,name=instrument_exchange,json=instrumentExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentExchangeType,oneof" json:"instrument_exchange,omitempty"` // Тип площадки торговли. [Возможные значения](#instrumentexchangetype).
 }
 
@@ -1383,8 +1384,8 @@ type FilterOptionsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BasicAssetUid         *string `protobuf:"bytes,1,opt,name=basic_asset_uid,json=basicAssetUid,proto3,oneof" json:"basic_asset_uid,omitempty"`                           //Идентификатор базового актива опциона.  Обязательный параметр.
-	BasicAssetPositionUid *string `protobuf:"bytes,2,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3,oneof" json:"basic_asset_position_uid,omitempty"` //Идентификатор позиции базового актива опциона.
+	BasicAssetUid         *string `protobuf:"bytes,1,opt,name=basic_asset_uid,json=basicAssetUid,proto3,oneof" json:"basic_asset_uid,omitempty"`                           // Идентификатор базового актива опциона.  Обязательный параметр.
+	BasicAssetPositionUid *string `protobuf:"bytes,2,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3,oneof" json:"basic_asset_position_uid,omitempty"` // Идентификатор позиции базового актива опциона.
 }
 
 func (x *FilterOptionsRequest) Reset() {
@@ -1487,7 +1488,7 @@ type BondsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Bond `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив облигаций.
+	Instruments []*Bond `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив облигаций.
 }
 
 func (x *BondsResponse) Reset() {
@@ -1536,10 +1537,10 @@ type GetBondCouponsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //FIGI-идентификатор инструмента.
-	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               //Начало запрашиваемого периода по UTC. Фильтрация по `coupon_date` — дата выплаты купона.
-	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   //Окончание запрашиваемого периода по UTC. Фильтрация по `coupon_date` — дата выплаты купона.
-	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента — `figi` или `instrument_uid`.
+	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // FIGI-идентификатор инструмента.
+	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               // Начало запрашиваемого периода по UTC. Фильтрация по `coupon_date` — дата выплаты купона.
+	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   // Окончание запрашиваемого периода по UTC. Фильтрация по `coupon_date` — дата выплаты купона.
+	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента — `figi` или `instrument_uid`.
 }
 
 func (x *GetBondCouponsRequest) Reset() {
@@ -1657,10 +1658,10 @@ type GetBondEventsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	From         *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                      //Начало запрашиваемого периода по UTC.
-	To           *timestamppb.Timestamp         `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                          //Окончание запрашиваемого периода по UTC.
-	InstrumentId string                         `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                        //Идентификатор инструмента — `figi` или `instrument_uid`.
-	Type         GetBondEventsRequest_EventType `protobuf:"varint,5,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.GetBondEventsRequest_EventType" json:"type,omitempty"` //Тип события
+	From         *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                                                                      // Начало запрашиваемого периода по UTC.
+	To           *timestamppb.Timestamp         `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                                                          // Окончание запрашиваемого периода по UTC.
+	InstrumentId string                         `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`                                        // Идентификатор инструмента — `figi` или `instrument_uid`.
+	Type         GetBondEventsRequest_EventType `protobuf:"varint,5,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.GetBondEventsRequest_EventType" json:"type,omitempty"` // Тип события
 }
 
 func (x *GetBondEventsRequest) Reset() {
@@ -1777,15 +1778,15 @@ type Coupon struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi            string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                      //FIGI-идентификатор инструмента.
-	CouponDate      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=coupon_date,json=couponDate,proto3" json:"coupon_date,omitempty"`                                                        //Дата выплаты купона.
-	CouponNumber    int64                  `protobuf:"varint,3,opt,name=coupon_number,json=couponNumber,proto3" json:"coupon_number,omitempty"`                                                 //Номер купона.
-	FixDate         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=fix_date,json=fixDate,proto3" json:"fix_date,omitempty"`                                                                 //Дата фиксации реестра для выплаты купона — опционально.
-	PayOneBond      *MoneyValue            `protobuf:"bytes,5,opt,name=pay_one_bond,json=payOneBond,proto3" json:"pay_one_bond,omitempty"`                                                      //Выплата на одну облигацию.
-	CouponType      CouponType             `protobuf:"varint,6,opt,name=coupon_type,json=couponType,proto3,enum=tinkoff.public.invest.api.contract.v1.CouponType" json:"coupon_type,omitempty"` //Тип купона.
-	CouponStartDate *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=coupon_start_date,json=couponStartDate,proto3" json:"coupon_start_date,omitempty"`                                       //Начало купонного периода.
-	CouponEndDate   *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=coupon_end_date,json=couponEndDate,proto3" json:"coupon_end_date,omitempty"`                                             //Окончание купонного периода.
-	CouponPeriod    int32                  `protobuf:"varint,9,opt,name=coupon_period,json=couponPeriod,proto3" json:"coupon_period,omitempty"`                                                 //Купонный период в днях.
+	Figi            string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                      // FIGI-идентификатор инструмента.
+	CouponDate      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=coupon_date,json=couponDate,proto3" json:"coupon_date,omitempty"`                                                        // Дата выплаты купона.
+	CouponNumber    int64                  `protobuf:"varint,3,opt,name=coupon_number,json=couponNumber,proto3" json:"coupon_number,omitempty"`                                                 // Номер купона.
+	FixDate         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=fix_date,json=fixDate,proto3" json:"fix_date,omitempty"`                                                                 // Дата фиксации реестра для выплаты купона — опционально.
+	PayOneBond      *MoneyValue            `protobuf:"bytes,5,opt,name=pay_one_bond,json=payOneBond,proto3" json:"pay_one_bond,omitempty"`                                                      // Выплата на одну облигацию.
+	CouponType      CouponType             `protobuf:"varint,6,opt,name=coupon_type,json=couponType,proto3,enum=tinkoff.public.invest.api.contract.v1.CouponType" json:"coupon_type,omitempty"` // Тип купона.
+	CouponStartDate *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=coupon_start_date,json=couponStartDate,proto3" json:"coupon_start_date,omitempty"`                                       // Начало купонного периода.
+	CouponEndDate   *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=coupon_end_date,json=couponEndDate,proto3" json:"coupon_end_date,omitempty"`                                             // Окончание купонного периода.
+	CouponPeriod    int32                  `protobuf:"varint,9,opt,name=coupon_period,json=couponPeriod,proto3" json:"coupon_period,omitempty"`                                                 // Купонный период в днях.
 }
 
 func (x *Coupon) Reset() {
@@ -1937,7 +1938,7 @@ type CurrenciesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Currency `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив валют.
+	Instruments []*Currency `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив валют.
 }
 
 func (x *CurrenciesResponse) Reset() {
@@ -2033,7 +2034,7 @@ type EtfsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Etf `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив фондов.
+	Instruments []*Etf `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив фондов.
 }
 
 func (x *EtfsResponse) Reset() {
@@ -2129,7 +2130,7 @@ type FuturesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Future `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив фьючерсов.
+	Instruments []*Future `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив фьючерсов.
 }
 
 func (x *FuturesResponse) Reset() {
@@ -2225,7 +2226,7 @@ type OptionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Option `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив данных по опциону.
+	Instruments []*Option `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив данных по опциону.
 }
 
 func (x *OptionsResponse) Reset() {
@@ -2273,56 +2274,56 @@ type Option struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid                   string                `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                               //Уникальный идентификатор инструмента.
-	PositionUid           string                `protobuf:"bytes,2,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                            //Уникальный идентификатор позиции.
-	Ticker                string                `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                         //Тикер инструмента.
-	ClassCode             string                `protobuf:"bytes,4,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                                  //Класс-код.
-	BasicAssetPositionUid string                `protobuf:"bytes,5,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3" json:"basic_asset_position_uid,omitempty"`                                          //Уникальный идентификатор позиции основного инструмента.
-	TradingStatus         SecurityTradingStatus `protobuf:"varint,21,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`   //Текущий режим торгов инструмента.
-	RealExchange          RealExchange          `protobuf:"varint,31,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`               //Реальная площадка исполнения расчетов (биржа).
-	Direction             OptionDirection       `protobuf:"varint,41,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionDirection" json:"direction,omitempty"`                                      //Направление опциона.
-	PaymentType           OptionPaymentType     `protobuf:"varint,42,opt,name=payment_type,json=paymentType,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionPaymentType" json:"payment_type,omitempty"`             //Тип расчетов по опциону.
-	Style                 OptionStyle           `protobuf:"varint,43,opt,name=style,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionStyle" json:"style,omitempty"`                                                  //Стиль опциона.
-	SettlementType        OptionSettlementType  `protobuf:"varint,44,opt,name=settlement_type,json=settlementType,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionSettlementType" json:"settlement_type,omitempty"` //Способ исполнения опциона.
-	Name                  string                `protobuf:"bytes,101,opt,name=name,proto3" json:"name,omitempty"`                                                                                                           //Название инструмента.
-	Currency              string                `protobuf:"bytes,111,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                   //Валюта.
-	SettlementCurrency    string                `protobuf:"bytes,112,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`                                                     //Валюта, в которой оценивается контракт.
-	AssetType             string                `protobuf:"bytes,131,opt,name=asset_type,json=assetType,proto3" json:"asset_type,omitempty"`                                                                                //Тип актива.
-	BasicAsset            string                `protobuf:"bytes,132,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                                             //Основной актив.
+	Uid                   string                `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                               // Уникальный идентификатор инструмента.
+	PositionUid           string                `protobuf:"bytes,2,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                            // Уникальный идентификатор позиции.
+	Ticker                string                `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                         // Тикер инструмента.
+	ClassCode             string                `protobuf:"bytes,4,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                                  // Класс-код.
+	BasicAssetPositionUid string                `protobuf:"bytes,5,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3" json:"basic_asset_position_uid,omitempty"`                                          // Уникальный идентификатор позиции основного инструмента.
+	TradingStatus         SecurityTradingStatus `protobuf:"varint,21,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`   // Текущий режим торгов инструмента.
+	RealExchange          RealExchange          `protobuf:"varint,31,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`               // Реальная площадка исполнения расчетов (биржа).
+	Direction             OptionDirection       `protobuf:"varint,41,opt,name=direction,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionDirection" json:"direction,omitempty"`                                      // Направление опциона.
+	PaymentType           OptionPaymentType     `protobuf:"varint,42,opt,name=payment_type,json=paymentType,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionPaymentType" json:"payment_type,omitempty"`             // Тип расчетов по опциону.
+	Style                 OptionStyle           `protobuf:"varint,43,opt,name=style,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionStyle" json:"style,omitempty"`                                                  // Стиль опциона.
+	SettlementType        OptionSettlementType  `protobuf:"varint,44,opt,name=settlement_type,json=settlementType,proto3,enum=tinkoff.public.invest.api.contract.v1.OptionSettlementType" json:"settlement_type,omitempty"` // Способ исполнения опциона.
+	Name                  string                `protobuf:"bytes,101,opt,name=name,proto3" json:"name,omitempty"`                                                                                                           // Название инструмента.
+	Currency              string                `protobuf:"bytes,111,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                                   // Валюта.
+	SettlementCurrency    string                `protobuf:"bytes,112,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`                                                     // Валюта, в которой оценивается контракт.
+	AssetType             string                `protobuf:"bytes,131,opt,name=asset_type,json=assetType,proto3" json:"asset_type,omitempty"`                                                                                // Тип актива.
+	BasicAsset            string                `protobuf:"bytes,132,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                                             // Основной актив.
 	Exchange              string                `protobuf:"bytes,141,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                   // Tорговая площадка (секция биржи).
-	CountryOfRisk         string                `protobuf:"bytes,151,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                  //Код страны рисков.
-	CountryOfRiskName     string                `protobuf:"bytes,152,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                    //Наименование страны рисков.
-	Sector                string                `protobuf:"bytes,161,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                       //Сектор экономики.
+	CountryOfRisk         string                `protobuf:"bytes,151,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                  // Код страны рисков.
+	CountryOfRiskName     string                `protobuf:"bytes,152,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                    // Наименование страны рисков.
+	Sector                string                `protobuf:"bytes,161,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                       // Сектор экономики.
 	Brand                 *BrandData            `protobuf:"bytes,162,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                         // Информация о бренде.
-	Lot                   int32                 `protobuf:"varint,201,opt,name=lot,proto3" json:"lot,omitempty"`                                                                                                            //Количество бумаг в лоте.
-	BasicAssetSize        *Quotation            `protobuf:"bytes,211,opt,name=basic_asset_size,json=basicAssetSize,proto3" json:"basic_asset_size,omitempty"`                                                               //Размер основного актива.
+	Lot                   int32                 `protobuf:"varint,201,opt,name=lot,proto3" json:"lot,omitempty"`                                                                                                            // Количество бумаг в лоте.
+	BasicAssetSize        *Quotation            `protobuf:"bytes,211,opt,name=basic_asset_size,json=basicAssetSize,proto3" json:"basic_asset_size,omitempty"`                                                               // Размер основного актива.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,221,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,221,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,222,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                 //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,223,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                   //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,224,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                 //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin              *Quotation             `protobuf:"bytes,225,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                             //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,226,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                          //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,231,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                //Минимальный шаг цены.
-	StrikePrice           *MoneyValue            `protobuf:"bytes,241,opt,name=strike_price,json=strikePrice,proto3" json:"strike_price,omitempty"`                                    //Цена страйка.
-	DlongClient           *Quotation             `protobuf:"bytes,290,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                    //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,291,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                 //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ExpirationDate        *timestamppb.Timestamp `protobuf:"bytes,301,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`                           //Дата истечения срока в формате UTC.
-	FirstTradeDate        *timestamppb.Timestamp `protobuf:"bytes,311,opt,name=first_trade_date,json=firstTradeDate,proto3" json:"first_trade_date,omitempty"`                         //Дата начала обращения контракта в формате UTC.
-	LastTradeDate         *timestamppb.Timestamp `protobuf:"bytes,312,opt,name=last_trade_date,json=lastTradeDate,proto3" json:"last_trade_date,omitempty"`                            //Дата исполнения в формате UTC.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,321,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`        //Дата первой минутной свечи в формате UTC.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,322,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`        //Дата первой дневной свечи в формате UTC.
-	ShortEnabledFlag      bool                   `protobuf:"varint,401,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                  //Признак доступности для операций шорт.
-	ForIisFlag            bool                   `protobuf:"varint,402,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                    //Возможность покупки или продажи на ИИС.
-	OtcFlag               bool                   `protobuf:"varint,403,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                               //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,404,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                  //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,405,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`               //Признак доступности для продажи.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,406,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`       //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,407,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                   //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,408,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                        //Флаг заблокированного ТКС.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,409,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"` //Возможность торговать инструментом через API.
-	RequiredTests         []string               `protobuf:"bytes,410,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                              //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	Kshort                *Quotation             `protobuf:"bytes,222,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                 // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,223,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                   // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,224,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                 // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin              *Quotation             `protobuf:"bytes,225,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                             // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin             *Quotation             `protobuf:"bytes,226,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                          // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,231,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                // Минимальный шаг цены.
+	StrikePrice           *MoneyValue            `protobuf:"bytes,241,opt,name=strike_price,json=strikePrice,proto3" json:"strike_price,omitempty"`                                    // Цена страйка.
+	DlongClient           *Quotation             `protobuf:"bytes,290,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                    // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,291,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                 // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ExpirationDate        *timestamppb.Timestamp `protobuf:"bytes,301,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`                           // Дата истечения срока в формате UTC.
+	FirstTradeDate        *timestamppb.Timestamp `protobuf:"bytes,311,opt,name=first_trade_date,json=firstTradeDate,proto3" json:"first_trade_date,omitempty"`                         // Дата начала обращения контракта в формате UTC.
+	LastTradeDate         *timestamppb.Timestamp `protobuf:"bytes,312,opt,name=last_trade_date,json=lastTradeDate,proto3" json:"last_trade_date,omitempty"`                            // Дата исполнения в формате UTC.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,321,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`        // Дата первой минутной свечи в формате UTC.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,322,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`        // Дата первой дневной свечи в формате UTC.
+	ShortEnabledFlag      bool                   `protobuf:"varint,401,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                  // Признак доступности для операций шорт.
+	ForIisFlag            bool                   `protobuf:"varint,402,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                    // Возможность покупки или продажи на ИИС.
+	OtcFlag               bool                   `protobuf:"varint,403,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                               // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,404,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                  // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,405,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`               // Признак доступности для продажи.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,406,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`       // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,407,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                   // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,408,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                        // Флаг заблокированного ТКС.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,409,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"` // Возможность торговать инструментом через API.
+	RequiredTests         []string               `protobuf:"bytes,410,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                              // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
 }
 
 func (x *Option) Reset() {
@@ -2749,7 +2750,7 @@ type SharesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*Share `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив акций.
+	Instruments []*Share `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив акций.
 }
 
 func (x *SharesResponse) Reset() {
@@ -2797,65 +2798,65 @@ type Bond struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код (секция торгов).
-	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            //ISIN-идентификатор инструмента.
-	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
-	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код (секция торгов).
+	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            // ISIN-идентификатор инструмента.
+	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
+	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       //Признак доступности для операций в шорт.
-	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          //Название инструмента.
-	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  //Tорговая площадка (секция биржи).
-	CouponQuantityPerYear int32                  `protobuf:"varint,17,opt,name=coupon_quantity_per_year,json=couponQuantityPerYear,proto3" json:"coupon_quantity_per_year,omitempty"`                                      //Количество выплат по купонам в год.
-	MaturityDate          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                                                      //Дата погашения облигации по UTC.
-	Nominal               *MoneyValue            `protobuf:"bytes,19,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                    //Номинал облигации.
-	InitialNominal        *MoneyValue            `protobuf:"bytes,20,opt,name=initial_nominal,json=initialNominal,proto3" json:"initial_nominal,omitempty"`                                                                //Первоначальный номинал облигации.
-	StateRegDate          *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=state_reg_date,json=stateRegDate,proto3" json:"state_reg_date,omitempty"`                                                                    //Дата выпуска облигации по UTC.
-	PlacementDate         *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                                                                   //Дата размещения по UTC.
-	PlacementPrice        *MoneyValue            `protobuf:"bytes,23,opt,name=placement_price,json=placementPrice,proto3" json:"placement_price,omitempty"`                                                                //Цена размещения.
-	AciValue              *MoneyValue            `protobuf:"bytes,24,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                                                  //Значение НКД (накопленного купонного дохода) на дату.
-	CountryOfRisk         string                 `protobuf:"bytes,25,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName     string                 `protobuf:"bytes,26,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	Sector                string                 `protobuf:"bytes,27,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                      //Сектор экономики.
-	IssueKind             string                 `protobuf:"bytes,28,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                                               //Форма выпуска. Возможные значения: <br/>**documentary** — документарная; <br/>**non_documentary** — бездокументарная.
-	IssueSize             int64                  `protobuf:"varint,29,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                                              //Размер выпуска.
-	IssueSizePlan         int64                  `protobuf:"varint,30,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                                                //Плановый размер выпуска.
-	TradingStatus         SecurityTradingStatus  `protobuf:"varint,31,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Текущий режим торгов инструмента.
-	OtcFlag               bool                   `protobuf:"varint,32,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,33,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,34,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    //Признак доступности для продажи.
-	FloatingCouponFlag    bool                   `protobuf:"varint,35,opt,name=floating_coupon_flag,json=floatingCouponFlag,proto3" json:"floating_coupon_flag,omitempty"`                                                 //Признак облигации с плавающим купоном.
-	PerpetualFlag         bool                   `protobuf:"varint,36,opt,name=perpetual_flag,json=perpetualFlag,proto3" json:"perpetual_flag,omitempty"`                                                                  //Признак бессрочной облигации.
-	AmortizationFlag      bool                   `protobuf:"varint,37,opt,name=amortization_flag,json=amortizationFlag,proto3" json:"amortization_flag,omitempty"`                                                         //Признак облигации с амортизацией долга.
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,38,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     //Шаг цены.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,39,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      //Параметр указывает на возможность торговать инструментом через API.
-	Uid                   string                 `protobuf:"bytes,40,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange          RealExchange           `protobuf:"varint,41,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             //Реальная площадка исполнения расчетов. (биржа)
-	PositionUid           string                 `protobuf:"bytes,42,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         //Уникальный идентификатор позиции инструмента.
-	AssetUid              string                 `protobuf:"bytes,43,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                  //Уникальный идентификатор актива.
-	RequiredTests         []string               `protobuf:"bytes,44,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag            bool                   `protobuf:"varint,51,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,52,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,53,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,54,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             //Флаг заблокированного ТКС.
-	SubordinatedFlag      bool                   `protobuf:"varint,55,opt,name=subordinated_flag,json=subordinatedFlag,proto3" json:"subordinated_flag,omitempty"`                                                         //Признак субординированной облигации.
-	LiquidityFlag         bool                   `protobuf:"varint,56,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                  //Флаг достаточной ликвидности.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,61,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,62,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             //Дата первой дневной свечи.
-	RiskLevel             RiskLevel              `protobuf:"varint,63,opt,name=risk_level,json=riskLevel,proto3,enum=tinkoff.public.invest.api.contract.v1.RiskLevel" json:"risk_level,omitempty"`                         //Уровень риска.
+	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       // Признак доступности для операций в шорт.
+	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          // Название инструмента.
+	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  // Tорговая площадка (секция биржи).
+	CouponQuantityPerYear int32                  `protobuf:"varint,17,opt,name=coupon_quantity_per_year,json=couponQuantityPerYear,proto3" json:"coupon_quantity_per_year,omitempty"`                                      // Количество выплат по купонам в год.
+	MaturityDate          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                                                      // Дата погашения облигации по UTC.
+	Nominal               *MoneyValue            `protobuf:"bytes,19,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                    // Номинал облигации.
+	InitialNominal        *MoneyValue            `protobuf:"bytes,20,opt,name=initial_nominal,json=initialNominal,proto3" json:"initial_nominal,omitempty"`                                                                // Первоначальный номинал облигации.
+	StateRegDate          *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=state_reg_date,json=stateRegDate,proto3" json:"state_reg_date,omitempty"`                                                                    // Дата выпуска облигации по UTC.
+	PlacementDate         *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                                                                   // Дата размещения по UTC.
+	PlacementPrice        *MoneyValue            `protobuf:"bytes,23,opt,name=placement_price,json=placementPrice,proto3" json:"placement_price,omitempty"`                                                                // Цена размещения.
+	AciValue              *MoneyValue            `protobuf:"bytes,24,opt,name=aci_value,json=aciValue,proto3" json:"aci_value,omitempty"`                                                                                  // Значение НКД (накопленного купонного дохода) на дату.
+	CountryOfRisk         string                 `protobuf:"bytes,25,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName     string                 `protobuf:"bytes,26,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	Sector                string                 `protobuf:"bytes,27,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                      // Сектор экономики.
+	IssueKind             string                 `protobuf:"bytes,28,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                                               // Форма выпуска. Возможные значения: <br/>**documentary** — документарная; <br/>**non_documentary** — бездокументарная.
+	IssueSize             int64                  `protobuf:"varint,29,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                                              // Размер выпуска.
+	IssueSizePlan         int64                  `protobuf:"varint,30,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                                                // Плановый размер выпуска.
+	TradingStatus         SecurityTradingStatus  `protobuf:"varint,31,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Текущий режим торгов инструмента.
+	OtcFlag               bool                   `protobuf:"varint,32,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,33,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,34,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    // Признак доступности для продажи.
+	FloatingCouponFlag    bool                   `protobuf:"varint,35,opt,name=floating_coupon_flag,json=floatingCouponFlag,proto3" json:"floating_coupon_flag,omitempty"`                                                 // Признак облигации с плавающим купоном.
+	PerpetualFlag         bool                   `protobuf:"varint,36,opt,name=perpetual_flag,json=perpetualFlag,proto3" json:"perpetual_flag,omitempty"`                                                                  // Признак бессрочной облигации.
+	AmortizationFlag      bool                   `protobuf:"varint,37,opt,name=amortization_flag,json=amortizationFlag,proto3" json:"amortization_flag,omitempty"`                                                         // Признак облигации с амортизацией долга.
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,38,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     // Шаг цены.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,39,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      // Параметр указывает на возможность торговать инструментом через API.
+	Uid                   string                 `protobuf:"bytes,40,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange          RealExchange           `protobuf:"varint,41,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             // Реальная площадка исполнения расчетов. (биржа)
+	PositionUid           string                 `protobuf:"bytes,42,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         // Уникальный идентификатор позиции инструмента.
+	AssetUid              string                 `protobuf:"bytes,43,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                  // Уникальный идентификатор актива.
+	RequiredTests         []string               `protobuf:"bytes,44,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag            bool                   `protobuf:"varint,51,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,52,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,53,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,54,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             // Флаг заблокированного ТКС.
+	SubordinatedFlag      bool                   `protobuf:"varint,55,opt,name=subordinated_flag,json=subordinatedFlag,proto3" json:"subordinated_flag,omitempty"`                                                         // Признак субординированной облигации.
+	LiquidityFlag         bool                   `protobuf:"varint,56,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                  // Флаг достаточной ликвидности.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,61,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,62,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             // Дата первой дневной свечи.
+	RiskLevel             RiskLevel              `protobuf:"varint,63,opt,name=risk_level,json=riskLevel,proto3,enum=tinkoff.public.invest.api.contract.v1.RiskLevel" json:"risk_level,omitempty"`                         // Уровень риска.
 	Brand                 *BrandData             `protobuf:"bytes,64,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                        // Информация о бренде.
 	BondType              BondType               `protobuf:"varint,65,opt,name=bond_type,json=bondType,proto3,enum=tinkoff.public.invest.api.contract.v1.BondType" json:"bond_type,omitempty"`                             // Тип облигации.
 	CallDate              *timestamppb.Timestamp `protobuf:"bytes,69,opt,name=call_date,json=callDate,proto3" json:"call_date,omitempty"`                                                                                  // Дата погашения облигации.
-	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Bond) Reset() {
@@ -3297,46 +3298,46 @@ type Currency struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код (секция торгов).
-	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            //ISIN-идентификатор инструмента.
-	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
-	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код (секция торгов).
+	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            // ISIN-идентификатор инструмента.
+	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
+	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       //Признак доступности для операций в шорт.
-	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          //Название инструмента.
-	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  //Tорговая площадка (секция биржи).
-	Nominal               *MoneyValue            `protobuf:"bytes,17,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                    //Номинал.
-	CountryOfRisk         string                 `protobuf:"bytes,18,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName     string                 `protobuf:"bytes,19,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	TradingStatus         SecurityTradingStatus  `protobuf:"varint,20,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Текущий режим торгов инструмента.
-	OtcFlag               bool                   `protobuf:"varint,21,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,22,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,23,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    //Признак доступности для продажи.
-	IsoCurrencyName       string                 `protobuf:"bytes,24,opt,name=iso_currency_name,json=isoCurrencyName,proto3" json:"iso_currency_name,omitempty"`                                                           //Строковый ISO-код валюты.
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,25,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     //Шаг цены.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,26,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      //Параметр указывает на возможность торговать инструментом через API.
-	Uid                   string                 `protobuf:"bytes,27,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange          RealExchange           `protobuf:"varint,28,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             //Реальная площадка исполнения расчетов (биржа).
-	PositionUid           string                 `protobuf:"bytes,29,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         //Уникальный идентификатор позиции инструмента.
-	RequiredTests         []string               `protobuf:"bytes,30,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag            bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,52,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,53,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,54,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             //Флаг заблокированного ТКС.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             //Дата первой дневной свечи.
+	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       // Признак доступности для операций в шорт.
+	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          // Название инструмента.
+	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  // Tорговая площадка (секция биржи).
+	Nominal               *MoneyValue            `protobuf:"bytes,17,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                    // Номинал.
+	CountryOfRisk         string                 `protobuf:"bytes,18,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName     string                 `protobuf:"bytes,19,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	TradingStatus         SecurityTradingStatus  `protobuf:"varint,20,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Текущий режим торгов инструмента.
+	OtcFlag               bool                   `protobuf:"varint,21,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,22,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,23,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    // Признак доступности для продажи.
+	IsoCurrencyName       string                 `protobuf:"bytes,24,opt,name=iso_currency_name,json=isoCurrencyName,proto3" json:"iso_currency_name,omitempty"`                                                           // Строковый ISO-код валюты.
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,25,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     // Шаг цены.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,26,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      // Параметр указывает на возможность торговать инструментом через API.
+	Uid                   string                 `protobuf:"bytes,27,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange          RealExchange           `protobuf:"varint,28,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             // Реальная площадка исполнения расчетов (биржа).
+	PositionUid           string                 `protobuf:"bytes,29,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         // Уникальный идентификатор позиции инструмента.
+	RequiredTests         []string               `protobuf:"bytes,30,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag            bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,52,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,53,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,54,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             // Флаг заблокированного ТКС.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             // Дата первой дневной свечи.
 	Brand                 *BrandData             `protobuf:"bytes,60,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                        // Информация о бренде.
-	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Currency) Reset() {
@@ -3645,53 +3646,53 @@ type Etf struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код (секция торгов).
-	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            //ISIN-идентификатор инструмента.
-	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
-	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код (секция торгов).
+	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            // ISIN-идентификатор инструмента.
+	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
+	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                                      //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                                  //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                                       //Признак доступности для операций в шорт.
-	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                          //Название инструмента.
-	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                  //Tорговая площадка (секция биржи).
-	FixedCommission       *Quotation             `protobuf:"bytes,17,opt,name=fixed_commission,json=fixedCommission,proto3" json:"fixed_commission,omitempty"`                                                                             //Размер фиксированной комиссии фонда.
-	FocusType             string                 `protobuf:"bytes,18,opt,name=focus_type,json=focusType,proto3" json:"focus_type,omitempty"`                                                                                               //Возможные значения: <br/>**equity** — акции;<br/>**fixed_income** — облигации;<br/>**mixed_allocation** — смешанный;<br/>**money_market** — денежный рынок;<br/>**real_estate** — недвижимость;<br/>**commodity** — товары;<br/>**specialty** — специальный;<br/>**private_equity** — private equity;<br/>**alternative_investment** — альтернативные инвестиции.
-	ReleasedDate          *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=released_date,json=releasedDate,proto3" json:"released_date,omitempty"`                                                                                      //Дата выпуска по UTC.
-	NumShares             *Quotation             `protobuf:"bytes,20,opt,name=num_shares,json=numShares,proto3" json:"num_shares,omitempty"`                                                                                               //Количество паев фонда в обращении.
-	CountryOfRisk         string                 `protobuf:"bytes,21,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName     string                 `protobuf:"bytes,22,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	Sector                string                 `protobuf:"bytes,23,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                                      //Сектор экономики.
-	RebalancingFreq       string                 `protobuf:"bytes,24,opt,name=rebalancing_freq,json=rebalancingFreq,proto3" json:"rebalancing_freq,omitempty"`                                                                             //Частота ребалансировки.
-	TradingStatus         SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`                 //Текущий режим торгов инструмента.
-	OtcFlag               bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                                       //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                                    //Признак доступности для продажи.
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,29,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                                     //Шаг цены.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,30,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                                      //Параметр указывает на возможность торговать инструментом через API.
-	Uid                   string                 `protobuf:"bytes,31,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange          RealExchange           `protobuf:"varint,32,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`                             //Реальная площадка исполнения расчетов (биржа).
-	PositionUid           string                 `protobuf:"bytes,33,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                                         //Уникальный идентификатор позиции инструмента.
-	AssetUid              string                 `protobuf:"bytes,34,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                                  //Уникальный идентификатор актива.
-	InstrumentExchange    InstrumentExchangeType `protobuf:"varint,35,opt,name=instrument_exchange,json=instrumentExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentExchangeType" json:"instrument_exchange,omitempty"` //Тип площадки торговли.
-	RequiredTests         []string               `protobuf:"bytes,36,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag            bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,42,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,43,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                                        //ФлагФлаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,44,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                                             //Флаг заблокированного ТКС.
-	LiquidityFlag         bool                   `protobuf:"varint,45,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                                  //Флаг достаточной ликвидности.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                                             //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                                             //Дата первой дневной свечи.
+	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                                      // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                                       // Признак доступности для операций в шорт.
+	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                          // Название инструмента.
+	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                  // Tорговая площадка (секция биржи).
+	FixedCommission       *Quotation             `protobuf:"bytes,17,opt,name=fixed_commission,json=fixedCommission,proto3" json:"fixed_commission,omitempty"`                                                                             // Размер фиксированной комиссии фонда.
+	FocusType             string                 `protobuf:"bytes,18,opt,name=focus_type,json=focusType,proto3" json:"focus_type,omitempty"`                                                                                               // Возможные значения: <br/>**equity** — акции;<br/>**fixed_income** — облигации;<br/>**mixed_allocation** — смешанный;<br/>**money_market** — денежный рынок;<br/>**real_estate** — недвижимость;<br/>**commodity** — товары;<br/>**specialty** — специальный;<br/>**private_equity** — private equity;<br/>**alternative_investment** — альтернативные инвестиции.
+	ReleasedDate          *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=released_date,json=releasedDate,proto3" json:"released_date,omitempty"`                                                                                      // Дата выпуска по UTC.
+	NumShares             *Quotation             `protobuf:"bytes,20,opt,name=num_shares,json=numShares,proto3" json:"num_shares,omitempty"`                                                                                               // Количество паев фонда в обращении.
+	CountryOfRisk         string                 `protobuf:"bytes,21,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName     string                 `protobuf:"bytes,22,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	Sector                string                 `protobuf:"bytes,23,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                                      // Сектор экономики.
+	RebalancingFreq       string                 `protobuf:"bytes,24,opt,name=rebalancing_freq,json=rebalancingFreq,proto3" json:"rebalancing_freq,omitempty"`                                                                             // Частота ребалансировки.
+	TradingStatus         SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`                 // Текущий режим торгов инструмента.
+	OtcFlag               bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                                       // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                                    // Признак доступности для продажи.
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,29,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                                     // Шаг цены.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,30,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                                      // Параметр указывает на возможность торговать инструментом через API.
+	Uid                   string                 `protobuf:"bytes,31,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange          RealExchange           `protobuf:"varint,32,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`                             // Реальная площадка исполнения расчетов (биржа).
+	PositionUid           string                 `protobuf:"bytes,33,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                                         // Уникальный идентификатор позиции инструмента.
+	AssetUid              string                 `protobuf:"bytes,34,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                                  // Уникальный идентификатор актива.
+	InstrumentExchange    InstrumentExchangeType `protobuf:"varint,35,opt,name=instrument_exchange,json=instrumentExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentExchangeType" json:"instrument_exchange,omitempty"` // Тип площадки торговли.
+	RequiredTests         []string               `protobuf:"bytes,36,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag            bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,42,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,43,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                                        // ФлагФлаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,44,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                                             // Флаг заблокированного ТКС.
+	LiquidityFlag         bool                   `protobuf:"varint,45,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                                  // Флаг достаточной ликвидности.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                                             // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                                             // Дата первой дневной свечи.
 	Brand                 *BrandData             `protobuf:"bytes,60,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                                        // Информация о бренде.
-	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                                         //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                                      //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                                         // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                                      // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Etf) Reset() {
@@ -4049,55 +4050,55 @@ type Future struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код (секция торгов).
-	Lot       int32  `protobuf:"varint,4,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
-	Currency  string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код (секция торгов).
+	Lot       int32  `protobuf:"varint,4,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
+	Currency  string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,6,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,6,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                  *Quotation             `protobuf:"bytes,7,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                   *Quotation             `protobuf:"bytes,8,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                  *Quotation             `protobuf:"bytes,9,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                       //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin                *Quotation             `protobuf:"bytes,10,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin               *Quotation             `protobuf:"bytes,11,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag        bool                   `protobuf:"varint,12,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       //Признак доступности для операций шорт.
-	Name                    string                 `protobuf:"bytes,13,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          //Название инструмента.
-	Exchange                string                 `protobuf:"bytes,14,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  //Tорговая площадка (секция биржи).
-	FirstTradeDate          *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=first_trade_date,json=firstTradeDate,proto3" json:"first_trade_date,omitempty"`                                                              //Дата начала обращения контракта по UTC.
-	LastTradeDate           *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=last_trade_date,json=lastTradeDate,proto3" json:"last_trade_date,omitempty"`                                                                 //Дата по UTC, до которой возможно проведение операций с фьючерсом.
-	FuturesType             string                 `protobuf:"bytes,17,opt,name=futures_type,json=futuresType,proto3" json:"futures_type,omitempty"`                                                                         //Тип фьючерса. Возможные значения: <br/>**physical_delivery** — физические поставки; <br/>**cash_settlement** — денежный эквивалент.
-	AssetType               string                 `protobuf:"bytes,18,opt,name=asset_type,json=assetType,proto3" json:"asset_type,omitempty"`                                                                               //Тип актива. Возможные значения: <br/>**commodity** — товар; <br/>**currency** — валюта; <br/>**security** — ценная бумага; <br/>**index** — индекс.
-	BasicAsset              string                 `protobuf:"bytes,19,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                                            //Основной актив.
-	BasicAssetSize          *Quotation             `protobuf:"bytes,20,opt,name=basic_asset_size,json=basicAssetSize,proto3" json:"basic_asset_size,omitempty"`                                                              //Размер основного актива.
-	CountryOfRisk           string                 `protobuf:"bytes,21,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName       string                 `protobuf:"bytes,22,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	Sector                  string                 `protobuf:"bytes,23,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                      //Сектор экономики.
-	ExpirationDate          *timestamppb.Timestamp `protobuf:"bytes,24,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`                                                                //Дата истечения срока в часов поясе UTC.
-	TradingStatus           SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Текущий режим торгов инструмента.
-	OtcFlag                 bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag        bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       //Признак доступности для покупки.
-	SellAvailableFlag       bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    //Признак доступности для продажи.
-	MinPriceIncrement       *Quotation             `protobuf:"bytes,29,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     //Шаг цены.
-	ApiTradeAvailableFlag   bool                   `protobuf:"varint,30,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      //Параметр указывает на возможность торговать инструментом через API.
-	Uid                     string                 `protobuf:"bytes,31,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange            RealExchange           `protobuf:"varint,32,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             //Реальная площадка исполнения расчетов (биржа).
-	PositionUid             string                 `protobuf:"bytes,33,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         //Уникальный идентификатор позиции инструмента.
-	BasicAssetPositionUid   string                 `protobuf:"bytes,34,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3" json:"basic_asset_position_uid,omitempty"`                                       //Уникальный идентификатор позиции основного инструмента.
-	RequiredTests           []string               `protobuf:"bytes,35,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag              bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag     bool                   `protobuf:"varint,42,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag             bool                   `protobuf:"varint,43,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag          bool                   `protobuf:"varint,44,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             //Флаг заблокированного ТКС.
-	First_1MinCandleDate    *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             //Дата первой минутной свечи.
-	First_1DayCandleDate    *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             //Дата первой дневной свечи.
-	InitialMarginOnBuy      *MoneyValue            `protobuf:"bytes,61,opt,name=initial_margin_on_buy,json=initialMarginOnBuy,proto3" json:"initial_margin_on_buy,omitempty"`                                                //Гарантийное обеспечение при покупке.
-	InitialMarginOnSell     *MoneyValue            `protobuf:"bytes,62,opt,name=initial_margin_on_sell,json=initialMarginOnSell,proto3" json:"initial_margin_on_sell,omitempty"`                                             //Гарантийное обеспечение при продаже.
-	MinPriceIncrementAmount *Quotation             `protobuf:"bytes,63,opt,name=min_price_increment_amount,json=minPriceIncrementAmount,proto3" json:"min_price_increment_amount,omitempty"`                                 //Стоимость шага цены.
+	Kshort                  *Quotation             `protobuf:"bytes,7,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                   *Quotation             `protobuf:"bytes,8,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                  *Quotation             `protobuf:"bytes,9,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                       // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin                *Quotation             `protobuf:"bytes,10,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin               *Quotation             `protobuf:"bytes,11,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag        bool                   `protobuf:"varint,12,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       // Признак доступности для операций шорт.
+	Name                    string                 `protobuf:"bytes,13,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          // Название инструмента.
+	Exchange                string                 `protobuf:"bytes,14,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  // Tорговая площадка (секция биржи).
+	FirstTradeDate          *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=first_trade_date,json=firstTradeDate,proto3" json:"first_trade_date,omitempty"`                                                              // Дата начала обращения контракта по UTC.
+	LastTradeDate           *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=last_trade_date,json=lastTradeDate,proto3" json:"last_trade_date,omitempty"`                                                                 // Дата по UTC, до которой возможно проведение операций с фьючерсом.
+	FuturesType             string                 `protobuf:"bytes,17,opt,name=futures_type,json=futuresType,proto3" json:"futures_type,omitempty"`                                                                         // Тип фьючерса. Возможные значения: <br/>**physical_delivery** — физические поставки; <br/>**cash_settlement** — денежный эквивалент.
+	AssetType               string                 `protobuf:"bytes,18,opt,name=asset_type,json=assetType,proto3" json:"asset_type,omitempty"`                                                                               // Тип актива. Возможные значения: <br/>**commodity** — товар; <br/>**currency** — валюта; <br/>**security** — ценная бумага; <br/>**index** — индекс.
+	BasicAsset              string                 `protobuf:"bytes,19,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                                            // Основной актив.
+	BasicAssetSize          *Quotation             `protobuf:"bytes,20,opt,name=basic_asset_size,json=basicAssetSize,proto3" json:"basic_asset_size,omitempty"`                                                              // Размер основного актива.
+	CountryOfRisk           string                 `protobuf:"bytes,21,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName       string                 `protobuf:"bytes,22,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	Sector                  string                 `protobuf:"bytes,23,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                      // Сектор экономики.
+	ExpirationDate          *timestamppb.Timestamp `protobuf:"bytes,24,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`                                                                // Дата истечения срока в часов поясе UTC.
+	TradingStatus           SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Текущий режим торгов инструмента.
+	OtcFlag                 bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag        bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       // Признак доступности для покупки.
+	SellAvailableFlag       bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    // Признак доступности для продажи.
+	MinPriceIncrement       *Quotation             `protobuf:"bytes,29,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     // Шаг цены.
+	ApiTradeAvailableFlag   bool                   `protobuf:"varint,30,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      // Параметр указывает на возможность торговать инструментом через API.
+	Uid                     string                 `protobuf:"bytes,31,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange            RealExchange           `protobuf:"varint,32,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             // Реальная площадка исполнения расчетов (биржа).
+	PositionUid             string                 `protobuf:"bytes,33,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         // Уникальный идентификатор позиции инструмента.
+	BasicAssetPositionUid   string                 `protobuf:"bytes,34,opt,name=basic_asset_position_uid,json=basicAssetPositionUid,proto3" json:"basic_asset_position_uid,omitempty"`                                       // Уникальный идентификатор позиции основного инструмента.
+	RequiredTests           []string               `protobuf:"bytes,35,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag              bool                   `protobuf:"varint,41,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag     bool                   `protobuf:"varint,42,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag             bool                   `protobuf:"varint,43,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag          bool                   `protobuf:"varint,44,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             // Флаг заблокированного ТКС.
+	First_1MinCandleDate    *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             // Дата первой минутной свечи.
+	First_1DayCandleDate    *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             // Дата первой дневной свечи.
+	InitialMarginOnBuy      *MoneyValue            `protobuf:"bytes,61,opt,name=initial_margin_on_buy,json=initialMarginOnBuy,proto3" json:"initial_margin_on_buy,omitempty"`                                                // Гарантийное обеспечение при покупке.
+	InitialMarginOnSell     *MoneyValue            `protobuf:"bytes,62,opt,name=initial_margin_on_sell,json=initialMarginOnSell,proto3" json:"initial_margin_on_sell,omitempty"`                                             // Гарантийное обеспечение при продаже.
+	MinPriceIncrementAmount *Quotation             `protobuf:"bytes,63,opt,name=min_price_increment_amount,json=minPriceIncrementAmount,proto3" json:"min_price_increment_amount,omitempty"`                                 // Стоимость шага цены.
 	Brand                   *BrandData             `protobuf:"bytes,64,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                        // Информация о бренде.
-	DlongClient             *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient            *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient             *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                         // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient            *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                      // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Future) Reset() {
@@ -4469,54 +4470,54 @@ type Share struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код (секция торгов).
-	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            //ISIN-идентификатор инструмента.
-	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)
-	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код (секция торгов).
+	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            // ISIN-идентификатор инструмента.
+	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)
+	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                                      //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                                  //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                                       //Признак доступности для операций в шорт.
-	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                          //Название инструмента.
-	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                  //Tорговая площадка (секция биржи).
-	IpoDate               *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=ipo_date,json=ipoDate,proto3" json:"ipo_date,omitempty"`                                                                                                     //Дата IPO акции по UTC.
-	IssueSize             int64                  `protobuf:"varint,18,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                                                              //Размер выпуска.
-	CountryOfRisk         string                 `protobuf:"bytes,19,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName     string                 `protobuf:"bytes,20,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	Sector                string                 `protobuf:"bytes,21,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                                      //Сектор экономики.
-	IssueSizePlan         int64                  `protobuf:"varint,22,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                                                                //Плановый размер выпуска.
-	Nominal               *MoneyValue            `protobuf:"bytes,23,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                                    //Номинал.
-	TradingStatus         SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`                 //Текущий режим торгов инструмента.
-	OtcFlag               bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                                       //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                                    //Признак доступности для продажи.
-	DivYieldFlag          bool                   `protobuf:"varint,29,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                                                                                   //Признак наличия дивидендной доходности.
-	ShareType             ShareType              `protobuf:"varint,30,opt,name=share_type,json=shareType,proto3,enum=tinkoff.public.invest.api.contract.v1.ShareType" json:"share_type,omitempty"`                                         //Тип акции. Возможные значения — `[ShareType](./instruments#sharetype)`.
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,31,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                                     //Шаг цены.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,32,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                                      //Возможность торговать инструментом через API.
-	Uid                   string                 `protobuf:"bytes,33,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange          RealExchange           `protobuf:"varint,34,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`                             //Реальная площадка исполнения расчетов (биржа).
-	PositionUid           string                 `protobuf:"bytes,35,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                                         //Уникальный идентификатор позиции инструмента.
-	AssetUid              string                 `protobuf:"bytes,36,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                                  //Уникальный идентификатор актива.
-	InstrumentExchange    InstrumentExchangeType `protobuf:"varint,37,opt,name=instrument_exchange,json=instrumentExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentExchangeType" json:"instrument_exchange,omitempty"` //Тип площадки торговли.
-	RequiredTests         []string               `protobuf:"bytes,38,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag            bool                   `protobuf:"varint,46,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,47,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,48,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                                        //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,49,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                                             //Флаг заблокированного ТКС.
-	LiquidityFlag         bool                   `protobuf:"varint,50,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                                  //Флаг достаточной ликвидности.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                                             //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                                             //Дата первой дневной свечи.
+	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                                      // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                                       // Признак доступности для операций в шорт.
+	Name                  string                 `protobuf:"bytes,15,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                          // Название инструмента.
+	Exchange              string                 `protobuf:"bytes,16,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                                  // Tорговая площадка (секция биржи).
+	IpoDate               *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=ipo_date,json=ipoDate,proto3" json:"ipo_date,omitempty"`                                                                                                     // Дата IPO акции по UTC.
+	IssueSize             int64                  `protobuf:"varint,18,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                                                              // Размер выпуска.
+	CountryOfRisk         string                 `protobuf:"bytes,19,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName     string                 `protobuf:"bytes,20,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	Sector                string                 `protobuf:"bytes,21,opt,name=sector,proto3" json:"sector,omitempty"`                                                                                                                      // Сектор экономики.
+	IssueSizePlan         int64                  `protobuf:"varint,22,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                                                                // Плановый размер выпуска.
+	Nominal               *MoneyValue            `protobuf:"bytes,23,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                                                                    // Номинал.
+	TradingStatus         SecurityTradingStatus  `protobuf:"varint,25,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"`                 // Текущий режим торгов инструмента.
+	OtcFlag               bool                   `protobuf:"varint,26,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,27,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                                       // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,28,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                                    // Признак доступности для продажи.
+	DivYieldFlag          bool                   `protobuf:"varint,29,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                                                                                   // Признак наличия дивидендной доходности.
+	ShareType             ShareType              `protobuf:"varint,30,opt,name=share_type,json=shareType,proto3,enum=tinkoff.public.invest.api.contract.v1.ShareType" json:"share_type,omitempty"`                                         // Тип акции. Возможные значения — `[ShareType](./instruments#sharetype)`.
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,31,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                                     // Шаг цены.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,32,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                                      // Возможность торговать инструментом через API.
+	Uid                   string                 `protobuf:"bytes,33,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange          RealExchange           `protobuf:"varint,34,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`                             // Реальная площадка исполнения расчетов (биржа).
+	PositionUid           string                 `protobuf:"bytes,35,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                                         // Уникальный идентификатор позиции инструмента.
+	AssetUid              string                 `protobuf:"bytes,36,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                                  // Уникальный идентификатор актива.
+	InstrumentExchange    InstrumentExchangeType `protobuf:"varint,37,opt,name=instrument_exchange,json=instrumentExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentExchangeType" json:"instrument_exchange,omitempty"` // Тип площадки торговли.
+	RequiredTests         []string               `protobuf:"bytes,38,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag            bool                   `protobuf:"varint,46,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,47,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,48,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                                        // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,49,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                                             // Флаг заблокированного ТКС.
+	LiquidityFlag         bool                   `protobuf:"varint,50,opt,name=liquidity_flag,json=liquidityFlag,proto3" json:"liquidity_flag,omitempty"`                                                                                  // Флаг достаточной ликвидности.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                                             // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                                             // Дата первой дневной свечи.
 	Brand                 *BrandData             `protobuf:"bytes,60,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                                        // Информация о бренде.
-	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                                         //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                                      //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient           *Quotation             `protobuf:"bytes,90,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                                         // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,91,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                                      // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Share) Reset() {
@@ -4882,10 +4883,10 @@ type GetAccruedInterestsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //FIGI-идентификатор инструмента.
-	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                     //Начало запрашиваемого периода по UTC.
-	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                         //Окончание запрашиваемого периода по UTC.
-	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента — `figi` или `instrument_uid`.
+	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // FIGI-идентификатор инструмента.
+	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                     // Начало запрашиваемого периода по UTC.
+	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                         // Окончание запрашиваемого периода по UTC.
+	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента — `figi` или `instrument_uid`.
 }
 
 func (x *GetAccruedInterestsRequest) Reset() {
@@ -4955,7 +4956,7 @@ type GetAccruedInterestsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccruedInterests []*AccruedInterest `protobuf:"bytes,1,rep,name=accrued_interests,json=accruedInterests,proto3" json:"accrued_interests,omitempty"` //Массив операций начисления купонов.
+	AccruedInterests []*AccruedInterest `protobuf:"bytes,1,rep,name=accrued_interests,json=accruedInterests,proto3" json:"accrued_interests,omitempty"` // Массив операций начисления купонов.
 }
 
 func (x *GetAccruedInterestsResponse) Reset() {
@@ -5003,10 +5004,10 @@ type AccruedInterest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Date         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`                                     //Дата и время выплаты по UTC.
-	Value        *Quotation             `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`                                   //Величина выплаты.
-	ValuePercent *Quotation             `protobuf:"bytes,3,opt,name=value_percent,json=valuePercent,proto3" json:"value_percent,omitempty"` //Величина выплаты в процентах от номинала.
-	Nominal      *Quotation             `protobuf:"bytes,4,opt,name=nominal,proto3" json:"nominal,omitempty"`                               //Номинал облигации.
+	Date         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`                                     // Дата и время выплаты по UTC.
+	Value        *Quotation             `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`                                   // Величина выплаты.
+	ValuePercent *Quotation             `protobuf:"bytes,3,opt,name=value_percent,json=valuePercent,proto3" json:"value_percent,omitempty"` // Величина выплаты в процентах от номинала.
+	Nominal      *Quotation             `protobuf:"bytes,4,opt,name=nominal,proto3" json:"nominal,omitempty"`                               // Номинал облигации.
 }
 
 func (x *AccruedInterest) Reset() {
@@ -5077,7 +5078,7 @@ type GetFuturesMarginRequest struct {
 
 	// Deprecated: Marked as deprecated in instruments.proto.
 	Figi         string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // Идентификатор инструмента.
-	InstrumentId string `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента — `figi` или `instrument_uid`.
+	InstrumentId string `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента — `figi` или `instrument_uid`.
 }
 
 func (x *GetFuturesMarginRequest) Reset() {
@@ -5133,10 +5134,10 @@ type GetFuturesMarginResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InitialMarginOnBuy      *MoneyValue `protobuf:"bytes,1,opt,name=initial_margin_on_buy,json=initialMarginOnBuy,proto3" json:"initial_margin_on_buy,omitempty"`                //Гарантийное обеспечение при покупке.
-	InitialMarginOnSell     *MoneyValue `protobuf:"bytes,2,opt,name=initial_margin_on_sell,json=initialMarginOnSell,proto3" json:"initial_margin_on_sell,omitempty"`             //Гарантийное обеспечение при продаже.
-	MinPriceIncrement       *Quotation  `protobuf:"bytes,3,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                     //Шаг цены.
-	MinPriceIncrementAmount *Quotation  `protobuf:"bytes,4,opt,name=min_price_increment_amount,json=minPriceIncrementAmount,proto3" json:"min_price_increment_amount,omitempty"` //Стоимость шага цены.
+	InitialMarginOnBuy      *MoneyValue `protobuf:"bytes,1,opt,name=initial_margin_on_buy,json=initialMarginOnBuy,proto3" json:"initial_margin_on_buy,omitempty"`                // Гарантийное обеспечение при покупке.
+	InitialMarginOnSell     *MoneyValue `protobuf:"bytes,2,opt,name=initial_margin_on_sell,json=initialMarginOnSell,proto3" json:"initial_margin_on_sell,omitempty"`             // Гарантийное обеспечение при продаже.
+	MinPriceIncrement       *Quotation  `protobuf:"bytes,3,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                     // Шаг цены.
+	MinPriceIncrementAmount *Quotation  `protobuf:"bytes,4,opt,name=min_price_increment_amount,json=minPriceIncrementAmount,proto3" json:"min_price_increment_amount,omitempty"` // Стоимость шага цены.
 }
 
 func (x *GetFuturesMarginResponse) Reset() {
@@ -5253,47 +5254,47 @@ type Instrument struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            //FIGI-идентификатор инструмента.
-	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        //Тикер инструмента.
-	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` //Класс-код инструмента.
-	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            //ISIN-идентификатор инструмента.
-	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             //Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
-	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    //Валюта расчетов.
+	Figi      string `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                            // FIGI-идентификатор инструмента.
+	Ticker    string `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                        // Тикер инструмента.
+	ClassCode string `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"` // Класс-код инструмента.
+	Isin      string `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                            // ISIN-идентификатор инструмента.
+	Lot       int32  `protobuf:"varint,5,opt,name=lot,proto3" json:"lot,omitempty"`                             // Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot).
+	Currency  string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                    // Валюта расчетов.
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` //Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Klong *Quotation `protobuf:"bytes,7,opt,name=klong,proto3" json:"klong,omitempty"` // Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       //Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
-	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         //Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      //Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  //Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               //Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       //Признак доступности для операций в шорт.
-	Name                  string                 `protobuf:"bytes,14,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          //Название инструмента.
-	Exchange              string                 `protobuf:"bytes,15,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  //Tорговая площадка (секция биржи).
-	CountryOfRisk         string                 `protobuf:"bytes,16,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 //Код страны риска — то есть страны, в которой компания ведет основной бизнес.
-	CountryOfRiskName     string                 `protobuf:"bytes,17,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   //Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
-	InstrumentType        string                 `protobuf:"bytes,18,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                                //Тип инструмента.
-	TradingStatus         SecurityTradingStatus  `protobuf:"varint,19,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` //Текущий режим торгов инструмента.
-	OtcFlag               bool                   `protobuf:"varint,20,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	BuyAvailableFlag      bool                   `protobuf:"varint,21,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       //Признак доступности для покупки.
-	SellAvailableFlag     bool                   `protobuf:"varint,22,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    //Признак доступности для продажи.
-	MinPriceIncrement     *Quotation             `protobuf:"bytes,23,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     //Шаг цены.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,24,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      //Параметр указывает на возможность торговать инструментом через API.
-	Uid                   string                 `protobuf:"bytes,25,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            //Уникальный идентификатор инструмента.
-	RealExchange          RealExchange           `protobuf:"varint,26,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             //Реальная площадка исполнения расчетов (биржа).
-	PositionUid           string                 `protobuf:"bytes,27,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         //Уникальный идентификатор позиции инструмента.
-	AssetUid              string                 `protobuf:"bytes,28,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                  //Уникальный идентификатор актива.
-	RequiredTests         []string               `protobuf:"bytes,29,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   //Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
-	ForIisFlag            bool                   `protobuf:"varint,36,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         //Признак доступности для ИИС.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,37,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,38,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,39,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             //Флаг заблокированного ТКС.
-	InstrumentKind        InstrumentType         `protobuf:"varint,40,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"`     //Тип инструмента.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             //Дата первой дневной свечи.
+	Kshort                *Quotation             `protobuf:"bytes,8,opt,name=kshort,proto3" json:"kshort,omitempty"`                                                                                                       // Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР).
+	Dlong                 *Quotation             `protobuf:"bytes,9,opt,name=dlong,proto3" json:"dlong,omitempty"`                                                                                                         // Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	Dshort                *Quotation             `protobuf:"bytes,10,opt,name=dshort,proto3" json:"dshort,omitempty"`                                                                                                      // Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongMin              *Quotation             `protobuf:"bytes,11,opt,name=dlong_min,json=dlongMin,proto3" json:"dlong_min,omitempty"`                                                                                  // Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortMin             *Quotation             `protobuf:"bytes,12,opt,name=dshort_min,json=dshortMin,proto3" json:"dshort_min,omitempty"`                                                                               // Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	ShortEnabledFlag      bool                   `protobuf:"varint,13,opt,name=short_enabled_flag,json=shortEnabledFlag,proto3" json:"short_enabled_flag,omitempty"`                                                       // Признак доступности для операций в шорт.
+	Name                  string                 `protobuf:"bytes,14,opt,name=name,proto3" json:"name,omitempty"`                                                                                                          // Название инструмента.
+	Exchange              string                 `protobuf:"bytes,15,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                                  // Tорговая площадка (секция биржи).
+	CountryOfRisk         string                 `protobuf:"bytes,16,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`                                                                 // Код страны риска — то есть страны, в которой компания ведет основной бизнес.
+	CountryOfRiskName     string                 `protobuf:"bytes,17,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"`                                                   // Наименование страны риска — то есть страны, в которой компания ведет основной бизнес.
+	InstrumentType        string                 `protobuf:"bytes,18,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                                // Тип инструмента.
+	TradingStatus         SecurityTradingStatus  `protobuf:"varint,19,opt,name=trading_status,json=tradingStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.SecurityTradingStatus" json:"trading_status,omitempty"` // Текущий режим торгов инструмента.
+	OtcFlag               bool                   `protobuf:"varint,20,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                    // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	BuyAvailableFlag      bool                   `protobuf:"varint,21,opt,name=buy_available_flag,json=buyAvailableFlag,proto3" json:"buy_available_flag,omitempty"`                                                       // Признак доступности для покупки.
+	SellAvailableFlag     bool                   `protobuf:"varint,22,opt,name=sell_available_flag,json=sellAvailableFlag,proto3" json:"sell_available_flag,omitempty"`                                                    // Признак доступности для продажи.
+	MinPriceIncrement     *Quotation             `protobuf:"bytes,23,opt,name=min_price_increment,json=minPriceIncrement,proto3" json:"min_price_increment,omitempty"`                                                     // Шаг цены.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,24,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                      // Параметр указывает на возможность торговать инструментом через API.
+	Uid                   string                 `protobuf:"bytes,25,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                            // Уникальный идентификатор инструмента.
+	RealExchange          RealExchange           `protobuf:"varint,26,opt,name=real_exchange,json=realExchange,proto3,enum=tinkoff.public.invest.api.contract.v1.RealExchange" json:"real_exchange,omitempty"`             // Реальная площадка исполнения расчетов (биржа).
+	PositionUid           string                 `protobuf:"bytes,27,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                         // Уникальный идентификатор позиции инструмента.
+	AssetUid              string                 `protobuf:"bytes,28,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                                  // Уникальный идентификатор актива.
+	RequiredTests         []string               `protobuf:"bytes,29,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                                                                   // Тесты, которые необходимо пройти клиенту, чтобы совершать сделки по инструменту.
+	ForIisFlag            bool                   `protobuf:"varint,36,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                         // Признак доступности для ИИС.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,37,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                            // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,38,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                        // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,39,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                             // Флаг заблокированного ТКС.
+	InstrumentKind        InstrumentType         `protobuf:"varint,40,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"`     // Тип инструмента.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,56,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                             // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,57,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                             // Дата первой дневной свечи.
 	Brand                 *BrandData             `protobuf:"bytes,60,opt,name=brand,proto3" json:"brand,omitempty"`                                                                                                        // Информация о бренде.
-	DlongClient           *Quotation             `protobuf:"bytes,490,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                        //Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
-	DshortClient          *Quotation             `protobuf:"bytes,491,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                     //Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DlongClient           *Quotation             `protobuf:"bytes,490,opt,name=dlong_client,json=dlongClient,proto3" json:"dlong_client,omitempty"`                                                                        // Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
+	DshortClient          *Quotation             `protobuf:"bytes,491,opt,name=dshort_client,json=dshortClient,proto3" json:"dshort_client,omitempty"`                                                                     // Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5).
 }
 
 func (x *Instrument) Reset() {
@@ -5610,10 +5611,10 @@ type GetDividendsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     //FIGI-идентификатор инструмента.
-	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               //Начало запрашиваемого периода по UTC. Фильтрация происходит по параметру `record_date` — дата фиксации реестра.
-	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   //Окончание запрашиваемого периода по UTC. Фильтрация происходит по параметру `record_date` — дата фиксации реестра.
-	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента — `figi` или `instrument_uid`.
+	Figi         string                 `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                     // FIGI-идентификатор инструмента.
+	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               // Начало запрашиваемого периода по UTC. Фильтрация происходит по параметру `record_date` — дата фиксации реестра.
+	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   // Окончание запрашиваемого периода по UTC. Фильтрация происходит по параметру `record_date` — дата фиксации реестра.
+	InstrumentId string                 `protobuf:"bytes,4,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента — `figi` или `instrument_uid`.
 }
 
 func (x *GetDividendsRequest) Reset() {
@@ -5731,16 +5732,16 @@ type Dividend struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DividendNet  *MoneyValue            `protobuf:"bytes,1,opt,name=dividend_net,json=dividendNet,proto3" json:"dividend_net,omitempty"`    //Величина дивиденда на 1 ценную бумагу (включая валюту).
-	PaymentDate  *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=payment_date,json=paymentDate,proto3" json:"payment_date,omitempty"`    //Дата фактических выплат по UTC.
-	DeclaredDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=declared_date,json=declaredDate,proto3" json:"declared_date,omitempty"` //Дата объявления дивидендов по UTC.
-	LastBuyDate  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_buy_date,json=lastBuyDate,proto3" json:"last_buy_date,omitempty"`  //Последний день (включительно) покупки для получения выплаты по UTC.
-	DividendType string                 `protobuf:"bytes,5,opt,name=dividend_type,json=dividendType,proto3" json:"dividend_type,omitempty"` //Тип выплаты. Возможные значения: `Regular Cash` – регулярные выплаты, `Cancelled` – выплата отменена, `Daily Accrual` – ежедневное начисление, `Return of Capital` – возврат капитала, прочие типы выплат.
-	RecordDate   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=record_date,json=recordDate,proto3" json:"record_date,omitempty"`       //Дата фиксации реестра по UTC.
-	Regularity   string                 `protobuf:"bytes,7,opt,name=regularity,proto3" json:"regularity,omitempty"`                         //Регулярность выплаты. Возможные значения: `Annual` – ежегодная, `Semi-Anl` – каждые полгода, прочие типы выплат.
-	ClosePrice   *MoneyValue            `protobuf:"bytes,8,opt,name=close_price,json=closePrice,proto3" json:"close_price,omitempty"`       //Цена закрытия инструмента на момент `ex_dividend_date`.
-	YieldValue   *Quotation             `protobuf:"bytes,9,opt,name=yield_value,json=yieldValue,proto3" json:"yield_value,omitempty"`       //Величина доходности.
-	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`         //Дата и время создания записи по UTC.
+	DividendNet  *MoneyValue            `protobuf:"bytes,1,opt,name=dividend_net,json=dividendNet,proto3" json:"dividend_net,omitempty"`    // Величина дивиденда на 1 ценную бумагу (включая валюту).
+	PaymentDate  *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=payment_date,json=paymentDate,proto3" json:"payment_date,omitempty"`    // Дата фактических выплат по UTC.
+	DeclaredDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=declared_date,json=declaredDate,proto3" json:"declared_date,omitempty"` // Дата объявления дивидендов по UTC.
+	LastBuyDate  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_buy_date,json=lastBuyDate,proto3" json:"last_buy_date,omitempty"`  // Последний день (включительно) покупки для получения выплаты по UTC.
+	DividendType string                 `protobuf:"bytes,5,opt,name=dividend_type,json=dividendType,proto3" json:"dividend_type,omitempty"` // Тип выплаты. Возможные значения: `Regular Cash` – регулярные выплаты, `Cancelled` – выплата отменена, `Daily Accrual` – ежедневное начисление, `Return of Capital` – возврат капитала, прочие типы выплат.
+	RecordDate   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=record_date,json=recordDate,proto3" json:"record_date,omitempty"`       // Дата фиксации реестра по UTC.
+	Regularity   string                 `protobuf:"bytes,7,opt,name=regularity,proto3" json:"regularity,omitempty"`                         // Регулярность выплаты. Возможные значения: `Annual` – ежегодная, `Semi-Anl` – каждые полгода, прочие типы выплат.
+	ClosePrice   *MoneyValue            `protobuf:"bytes,8,opt,name=close_price,json=closePrice,proto3" json:"close_price,omitempty"`       // Цена закрытия инструмента на момент `ex_dividend_date`.
+	YieldValue   *Quotation             `protobuf:"bytes,9,opt,name=yield_value,json=yieldValue,proto3" json:"yield_value,omitempty"`       // Величина доходности.
+	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`         // Дата и время создания записи по UTC.
 }
 
 func (x *Dividend) Reset() {
@@ -5851,7 +5852,7 @@ type AssetRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` //UID-идентификатор актива.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // UID-идентификатор актива.
 }
 
 func (x *AssetRequest) Reset() {
@@ -5899,7 +5900,7 @@ type AssetResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Asset *AssetFull `protobuf:"bytes,1,opt,name=asset,proto3" json:"asset,omitempty"` //Актив.
+	Asset *AssetFull `protobuf:"bytes,1,opt,name=asset,proto3" json:"asset,omitempty"` // Актив.
 }
 
 func (x *AssetResponse) Reset() {
@@ -5948,7 +5949,7 @@ type AssetsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	InstrumentType   *InstrumentType   `protobuf:"varint,1,opt,name=instrument_type,json=instrumentType,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType,oneof" json:"instrument_type,omitempty"`
-	InstrumentStatus *InstrumentStatus `protobuf:"varint,2,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` //Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
+	InstrumentStatus *InstrumentStatus `protobuf:"varint,2,opt,name=instrument_status,json=instrumentStatus,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentStatus,oneof" json:"instrument_status,omitempty"` // Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus).
 }
 
 func (x *AssetsRequest) Reset() {
@@ -6003,7 +6004,7 @@ type AssetsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Assets []*Asset `protobuf:"bytes,1,rep,name=assets,proto3" json:"assets,omitempty"` //Активы.
+	Assets []*Asset `protobuf:"bytes,1,rep,name=assets,proto3" json:"assets,omitempty"` // Активы.
 }
 
 func (x *AssetsResponse) Reset() {
@@ -6050,27 +6051,27 @@ type AssetFull struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid           string                 `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                         //Уникальный идентификатор актива.
-	Type          AssetType              `protobuf:"varint,2,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"type,omitempty"` //Тип актива.
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                       //Наименование актива.
-	NameBrief     string                 `protobuf:"bytes,4,opt,name=name_brief,json=nameBrief,proto3" json:"name_brief,omitempty"`                            //Короткое наименование актива.
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`                                         //Описание актива.
-	DeletedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`                            //Дата и время удаления актива.
-	RequiredTests []string               `protobuf:"bytes,7,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                //Тестирование клиентов.
+	Uid           string                 `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                         // Уникальный идентификатор актива.
+	Type          AssetType              `protobuf:"varint,2,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"type,omitempty"` // Тип актива.
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                       // Наименование актива.
+	NameBrief     string                 `protobuf:"bytes,4,opt,name=name_brief,json=nameBrief,proto3" json:"name_brief,omitempty"`                            // Короткое наименование актива.
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`                                         // Описание актива.
+	DeletedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`                            // Дата и время удаления актива.
+	RequiredTests []string               `protobuf:"bytes,7,rep,name=required_tests,json=requiredTests,proto3" json:"required_tests,omitempty"`                // Тестирование клиентов.
 	// Types that are assignable to Ext:
 	//
 	//	*AssetFull_Currency
 	//	*AssetFull_Security
 	Ext         isAssetFull_Ext        `protobuf_oneof:"ext"`
-	GosRegCode  string                 `protobuf:"bytes,10,opt,name=gos_reg_code,json=gosRegCode,proto3" json:"gos_reg_code,omitempty"` //Номер государственной регистрации.
-	Cfi         string                 `protobuf:"bytes,11,opt,name=cfi,proto3" json:"cfi,omitempty"`                                   //Код CFI.
-	CodeNsd     string                 `protobuf:"bytes,12,opt,name=code_nsd,json=codeNsd,proto3" json:"code_nsd,omitempty"`            //Код НРД инструмента.
-	Status      string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`                             //Статус актива.
-	Brand       *Brand                 `protobuf:"bytes,14,opt,name=brand,proto3" json:"brand,omitempty"`                               //Бренд.
-	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`      //Дата и время последнего обновления записи.
-	BrCode      string                 `protobuf:"bytes,16,opt,name=br_code,json=brCode,proto3" json:"br_code,omitempty"`               //Код типа ц.б. по классификации Банка России.
-	BrCodeName  string                 `protobuf:"bytes,17,opt,name=br_code_name,json=brCodeName,proto3" json:"br_code_name,omitempty"` //Наименование кода типа ц.б. по классификации Банка России.
-	Instruments []*AssetInstrument     `protobuf:"bytes,18,rep,name=instruments,proto3" json:"instruments,omitempty"`                   //Массив идентификаторов инструментов.
+	GosRegCode  string                 `protobuf:"bytes,10,opt,name=gos_reg_code,json=gosRegCode,proto3" json:"gos_reg_code,omitempty"` // Номер государственной регистрации.
+	Cfi         string                 `protobuf:"bytes,11,opt,name=cfi,proto3" json:"cfi,omitempty"`                                   // Код CFI.
+	CodeNsd     string                 `protobuf:"bytes,12,opt,name=code_nsd,json=codeNsd,proto3" json:"code_nsd,omitempty"`            // Код НРД инструмента.
+	Status      string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`                             // Статус актива.
+	Brand       *Brand                 `protobuf:"bytes,14,opt,name=brand,proto3" json:"brand,omitempty"`                               // Бренд.
+	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`      // Дата и время последнего обновления записи.
+	BrCode      string                 `protobuf:"bytes,16,opt,name=br_code,json=brCode,proto3" json:"br_code,omitempty"`               // Код типа ц.б. по классификации Банка России.
+	BrCodeName  string                 `protobuf:"bytes,17,opt,name=br_code_name,json=brCodeName,proto3" json:"br_code_name,omitempty"` // Наименование кода типа ц.б. по классификации Банка России.
+	Instruments []*AssetInstrument     `protobuf:"bytes,18,rep,name=instruments,proto3" json:"instruments,omitempty"`                   // Массив идентификаторов инструментов.
 }
 
 func (x *AssetFull) Reset() {
@@ -6243,11 +6244,11 @@ type isAssetFull_Ext interface {
 }
 
 type AssetFull_Currency struct {
-	Currency *AssetCurrency `protobuf:"bytes,8,opt,name=currency,proto3,oneof"` //Валюта. Обязательно и заполняется только для `type = ASSET_TYPE_CURRENCY`.
+	Currency *AssetCurrency `protobuf:"bytes,8,opt,name=currency,proto3,oneof"` // Валюта. Обязательно и заполняется только для `type = ASSET_TYPE_CURRENCY`.
 }
 
 type AssetFull_Security struct {
-	Security *AssetSecurity `protobuf:"bytes,9,opt,name=security,proto3,oneof"` //Ценная бумага. Обязательно и заполняется только для `type = ASSET_TYPE_SECURITY`.
+	Security *AssetSecurity `protobuf:"bytes,9,opt,name=security,proto3,oneof"` // Ценная бумага. Обязательно и заполняется только для `type = ASSET_TYPE_SECURITY`.
 }
 
 func (*AssetFull_Currency) isAssetFull_Ext() {}
@@ -6260,10 +6261,10 @@ type Asset struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid         string             `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                         //Уникальный идентификатор актива.
-	Type        AssetType          `protobuf:"varint,2,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"type,omitempty"` //Тип актива.
-	Name        string             `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                       //Наименование актива.
-	Instruments []*AssetInstrument `protobuf:"bytes,4,rep,name=instruments,proto3" json:"instruments,omitempty"`                                         //Массив идентификаторов инструментов.
+	Uid         string             `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                         // Уникальный идентификатор актива.
+	Type        AssetType          `protobuf:"varint,2,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"type,omitempty"` // Тип актива.
+	Name        string             `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                       // Наименование актива.
+	Instruments []*AssetInstrument `protobuf:"bytes,4,rep,name=instruments,proto3" json:"instruments,omitempty"`                                         // Массив идентификаторов инструментов.
 }
 
 func (x *Asset) Reset() {
@@ -6332,7 +6333,7 @@ type AssetCurrency struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BaseCurrency string `protobuf:"bytes,1,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"` //ISO-код валюты.
+	BaseCurrency string `protobuf:"bytes,1,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"` // ISO-код валюты.
 }
 
 func (x *AssetCurrency) Reset() {
@@ -6380,9 +6381,9 @@ type AssetSecurity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Isin           string         `protobuf:"bytes,1,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       //ISIN-идентификатор ценной бумаги.
-	Type           string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`                                                                                                       //Тип ценной бумаги.
-	InstrumentKind InstrumentType `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
+	Isin           string         `protobuf:"bytes,1,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       // ISIN-идентификатор ценной бумаги.
+	Type           string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`                                                                                                       // Тип ценной бумаги.
+	InstrumentKind InstrumentType `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
 	// Types that are assignable to Ext:
 	//
 	//	*AssetSecurity_Share
@@ -6493,15 +6494,15 @@ type isAssetSecurity_Ext interface {
 }
 
 type AssetSecurity_Share struct {
-	Share *AssetShare `protobuf:"bytes,3,opt,name=share,proto3,oneof"` //Акция. Заполняется только для акций — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = share`.
+	Share *AssetShare `protobuf:"bytes,3,opt,name=share,proto3,oneof"` // Акция. Заполняется только для акций — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = share`.
 }
 
 type AssetSecurity_Bond struct {
-	Bond *AssetBond `protobuf:"bytes,4,opt,name=bond,proto3,oneof"` //Облигация. Заполняется только для облигаций — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = bond`.
+	Bond *AssetBond `protobuf:"bytes,4,opt,name=bond,proto3,oneof"` // Облигация. Заполняется только для облигаций — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = bond`.
 }
 
 type AssetSecurity_Sp struct {
-	Sp *AssetStructuredProduct `protobuf:"bytes,5,opt,name=sp,proto3,oneof"` //Структурная нота. Заполняется только для структурных продуктов — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = sp`.
+	Sp *AssetStructuredProduct `protobuf:"bytes,5,opt,name=sp,proto3,oneof"` // Структурная нота. Заполняется только для структурных продуктов — тип актива `asset.type = ASSET_TYPE_SECURITY` и `security.type = sp`.
 }
 
 type AssetSecurity_Etf struct {
@@ -6528,21 +6529,21 @@ type AssetShare struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type               ShareType              `protobuf:"varint,1,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.ShareType" json:"type,omitempty"`   //Тип акции.
-	IssueSize          *Quotation             `protobuf:"bytes,2,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                              //Объем выпуска (шт.).
-	Nominal            *Quotation             `protobuf:"bytes,3,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                   //Номинал.
-	NominalCurrency    string                 `protobuf:"bytes,4,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`            //Валюта номинала.
-	PrimaryIndex       string                 `protobuf:"bytes,5,opt,name=primary_index,json=primaryIndex,proto3" json:"primary_index,omitempty"`                     //Индекс (Bloomberg).
-	DividendRate       *Quotation             `protobuf:"bytes,6,opt,name=dividend_rate,json=dividendRate,proto3" json:"dividend_rate,omitempty"`                     //Ставка дивиденда (для привилегированных акций).
-	PreferredShareType string                 `protobuf:"bytes,7,opt,name=preferred_share_type,json=preferredShareType,proto3" json:"preferred_share_type,omitempty"` //Тип привилегированных акций.
-	IpoDate            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=ipo_date,json=ipoDate,proto3" json:"ipo_date,omitempty"`                                    //Дата IPO.
-	RegistryDate       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=registry_date,json=registryDate,proto3" json:"registry_date,omitempty"`                     //Дата регистрации.
-	DivYieldFlag       bool                   `protobuf:"varint,10,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                 //Признак наличия дивидендной доходности.
-	IssueKind          string                 `protobuf:"bytes,11,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                             //Форма выпуска ФИ.
-	PlacementDate      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                 //Дата размещения акции.
-	RepresIsin         string                 `protobuf:"bytes,13,opt,name=repres_isin,json=represIsin,proto3" json:"repres_isin,omitempty"`                          //ISIN базового актива.
-	IssueSizePlan      *Quotation             `protobuf:"bytes,14,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`               //Объявленное количество, шт.
-	TotalFloat         *Quotation             `protobuf:"bytes,15,opt,name=total_float,json=totalFloat,proto3" json:"total_float,omitempty"`                          //Количество акций в свободном обращении.
+	Type               ShareType              `protobuf:"varint,1,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.ShareType" json:"type,omitempty"`   // Тип акции.
+	IssueSize          *Quotation             `protobuf:"bytes,2,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                              // Объем выпуска (шт.).
+	Nominal            *Quotation             `protobuf:"bytes,3,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                   // Номинал.
+	NominalCurrency    string                 `protobuf:"bytes,4,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`            // Валюта номинала.
+	PrimaryIndex       string                 `protobuf:"bytes,5,opt,name=primary_index,json=primaryIndex,proto3" json:"primary_index,omitempty"`                     // Индекс (Bloomberg).
+	DividendRate       *Quotation             `protobuf:"bytes,6,opt,name=dividend_rate,json=dividendRate,proto3" json:"dividend_rate,omitempty"`                     // Ставка дивиденда (для привилегированных акций).
+	PreferredShareType string                 `protobuf:"bytes,7,opt,name=preferred_share_type,json=preferredShareType,proto3" json:"preferred_share_type,omitempty"` // Тип привилегированных акций.
+	IpoDate            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=ipo_date,json=ipoDate,proto3" json:"ipo_date,omitempty"`                                    // Дата IPO.
+	RegistryDate       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=registry_date,json=registryDate,proto3" json:"registry_date,omitempty"`                     // Дата регистрации.
+	DivYieldFlag       bool                   `protobuf:"varint,10,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                 // Признак наличия дивидендной доходности.
+	IssueKind          string                 `protobuf:"bytes,11,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                             // Форма выпуска ФИ.
+	PlacementDate      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                 // Дата размещения акции.
+	RepresIsin         string                 `protobuf:"bytes,13,opt,name=repres_isin,json=represIsin,proto3" json:"repres_isin,omitempty"`                          // ISIN базового актива.
+	IssueSizePlan      *Quotation             `protobuf:"bytes,14,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`               // Объявленное количество, шт.
+	TotalFloat         *Quotation             `protobuf:"bytes,15,opt,name=total_float,json=totalFloat,proto3" json:"total_float,omitempty"`                          // Количество акций в свободном обращении.
 }
 
 func (x *AssetShare) Reset() {
@@ -6688,27 +6689,27 @@ type AssetBond struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CurrentNominal        *Quotation             `protobuf:"bytes,1,opt,name=current_nominal,json=currentNominal,proto3" json:"current_nominal,omitempty"`                           //Текущий номинал.
-	BorrowName            string                 `protobuf:"bytes,2,opt,name=borrow_name,json=borrowName,proto3" json:"borrow_name,omitempty"`                                       //Наименование заемщика.
-	IssueSize             *Quotation             `protobuf:"bytes,3,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                          //Объем эмиссии облигации (стоимость).
-	Nominal               *Quotation             `protobuf:"bytes,4,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                               //Номинал облигации.
-	NominalCurrency       string                 `protobuf:"bytes,5,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                        //Валюта номинала.
-	IssueKind             string                 `protobuf:"bytes,6,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                          //Форма выпуска облигации.
-	InterestKind          string                 `protobuf:"bytes,7,opt,name=interest_kind,json=interestKind,proto3" json:"interest_kind,omitempty"`                                 //Форма дохода облигации.
-	CouponQuantityPerYear int32                  `protobuf:"varint,8,opt,name=coupon_quantity_per_year,json=couponQuantityPerYear,proto3" json:"coupon_quantity_per_year,omitempty"` //Количество выплат в год.
-	IndexedNominalFlag    bool                   `protobuf:"varint,9,opt,name=indexed_nominal_flag,json=indexedNominalFlag,proto3" json:"indexed_nominal_flag,omitempty"`            //Признак облигации с индексируемым номиналом.
-	SubordinatedFlag      bool                   `protobuf:"varint,10,opt,name=subordinated_flag,json=subordinatedFlag,proto3" json:"subordinated_flag,omitempty"`                   //Признак субординированной облигации.
-	CollateralFlag        bool                   `protobuf:"varint,11,opt,name=collateral_flag,json=collateralFlag,proto3" json:"collateral_flag,omitempty"`                         //Признак обеспеченной облигации.
-	TaxFreeFlag           bool                   `protobuf:"varint,12,opt,name=tax_free_flag,json=taxFreeFlag,proto3" json:"tax_free_flag,omitempty"`                                //Признак показывает, что купоны облигации не облагаются налогом — для mass market.
-	AmortizationFlag      bool                   `protobuf:"varint,13,opt,name=amortization_flag,json=amortizationFlag,proto3" json:"amortization_flag,omitempty"`                   //Признак облигации с амортизацией долга.
-	FloatingCouponFlag    bool                   `protobuf:"varint,14,opt,name=floating_coupon_flag,json=floatingCouponFlag,proto3" json:"floating_coupon_flag,omitempty"`           //Признак облигации с плавающим купоном.
-	PerpetualFlag         bool                   `protobuf:"varint,15,opt,name=perpetual_flag,json=perpetualFlag,proto3" json:"perpetual_flag,omitempty"`                            //Признак бессрочной облигации.
-	MaturityDate          *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                //Дата погашения облигации.
-	ReturnCondition       string                 `protobuf:"bytes,17,opt,name=return_condition,json=returnCondition,proto3" json:"return_condition,omitempty"`                       //Описание и условия получения дополнительного дохода.
-	StateRegDate          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=state_reg_date,json=stateRegDate,proto3" json:"state_reg_date,omitempty"`                              //Дата выпуска облигации.
-	PlacementDate         *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                             //Дата размещения облигации.
-	PlacementPrice        *Quotation             `protobuf:"bytes,20,opt,name=placement_price,json=placementPrice,proto3" json:"placement_price,omitempty"`                          //Цена размещения облигации.
-	IssueSizePlan         *Quotation             `protobuf:"bytes,21,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                           //Объявленное количество, шт.
+	CurrentNominal        *Quotation             `protobuf:"bytes,1,opt,name=current_nominal,json=currentNominal,proto3" json:"current_nominal,omitempty"`                           // Текущий номинал.
+	BorrowName            string                 `protobuf:"bytes,2,opt,name=borrow_name,json=borrowName,proto3" json:"borrow_name,omitempty"`                                       // Наименование заемщика.
+	IssueSize             *Quotation             `protobuf:"bytes,3,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                          // Объем эмиссии облигации (стоимость).
+	Nominal               *Quotation             `protobuf:"bytes,4,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                               // Номинал облигации.
+	NominalCurrency       string                 `protobuf:"bytes,5,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                        // Валюта номинала.
+	IssueKind             string                 `protobuf:"bytes,6,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                          // Форма выпуска облигации.
+	InterestKind          string                 `protobuf:"bytes,7,opt,name=interest_kind,json=interestKind,proto3" json:"interest_kind,omitempty"`                                 // Форма дохода облигации.
+	CouponQuantityPerYear int32                  `protobuf:"varint,8,opt,name=coupon_quantity_per_year,json=couponQuantityPerYear,proto3" json:"coupon_quantity_per_year,omitempty"` // Количество выплат в год.
+	IndexedNominalFlag    bool                   `protobuf:"varint,9,opt,name=indexed_nominal_flag,json=indexedNominalFlag,proto3" json:"indexed_nominal_flag,omitempty"`            // Признак облигации с индексируемым номиналом.
+	SubordinatedFlag      bool                   `protobuf:"varint,10,opt,name=subordinated_flag,json=subordinatedFlag,proto3" json:"subordinated_flag,omitempty"`                   // Признак субординированной облигации.
+	CollateralFlag        bool                   `protobuf:"varint,11,opt,name=collateral_flag,json=collateralFlag,proto3" json:"collateral_flag,omitempty"`                         // Признак обеспеченной облигации.
+	TaxFreeFlag           bool                   `protobuf:"varint,12,opt,name=tax_free_flag,json=taxFreeFlag,proto3" json:"tax_free_flag,omitempty"`                                // Признак показывает, что купоны облигации не облагаются налогом — для mass market.
+	AmortizationFlag      bool                   `protobuf:"varint,13,opt,name=amortization_flag,json=amortizationFlag,proto3" json:"amortization_flag,omitempty"`                   // Признак облигации с амортизацией долга.
+	FloatingCouponFlag    bool                   `protobuf:"varint,14,opt,name=floating_coupon_flag,json=floatingCouponFlag,proto3" json:"floating_coupon_flag,omitempty"`           // Признак облигации с плавающим купоном.
+	PerpetualFlag         bool                   `protobuf:"varint,15,opt,name=perpetual_flag,json=perpetualFlag,proto3" json:"perpetual_flag,omitempty"`                            // Признак бессрочной облигации.
+	MaturityDate          *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                // Дата погашения облигации.
+	ReturnCondition       string                 `protobuf:"bytes,17,opt,name=return_condition,json=returnCondition,proto3" json:"return_condition,omitempty"`                       // Описание и условия получения дополнительного дохода.
+	StateRegDate          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=state_reg_date,json=stateRegDate,proto3" json:"state_reg_date,omitempty"`                              // Дата выпуска облигации.
+	PlacementDate         *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                             // Дата размещения облигации.
+	PlacementPrice        *Quotation             `protobuf:"bytes,20,opt,name=placement_price,json=placementPrice,proto3" json:"placement_price,omitempty"`                          // Цена размещения облигации.
+	IssueSizePlan         *Quotation             `protobuf:"bytes,21,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                           // Объявленное количество, шт.
 }
 
 func (x *AssetBond) Reset() {
@@ -6896,19 +6897,19 @@ type AssetStructuredProduct struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BorrowName      string                 `protobuf:"bytes,1,opt,name=borrow_name,json=borrowName,proto3" json:"borrow_name,omitempty"`                                                    //Наименование заемщика.
-	Nominal         *Quotation             `protobuf:"bytes,2,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                            //Номинал.
-	NominalCurrency string                 `protobuf:"bytes,3,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                                     //Валюта номинала.
-	Type            StructuredProductType  `protobuf:"varint,4,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.StructuredProductType" json:"type,omitempty"`                //Тип структурной ноты.
-	LogicPortfolio  string                 `protobuf:"bytes,5,opt,name=logic_portfolio,json=logicPortfolio,proto3" json:"logic_portfolio,omitempty"`                                        //Стратегия портфеля.
-	AssetType       AssetType              `protobuf:"varint,6,opt,name=asset_type,json=assetType,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"asset_type,omitempty"` //Тип базового актива.
-	BasicAsset      string                 `protobuf:"bytes,7,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                    //Вид базового актива в зависимости от типа базового актива.
-	SafetyBarrier   *Quotation             `protobuf:"bytes,8,opt,name=safety_barrier,json=safetyBarrier,proto3" json:"safety_barrier,omitempty"`                                           //Барьер сохранности в процентах.
-	MaturityDate    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                              //Дата погашения.
-	IssueSizePlan   *Quotation             `protobuf:"bytes,10,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                        //Объявленное количество, шт.
-	IssueSize       *Quotation             `protobuf:"bytes,11,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                      //Объем размещения.
-	PlacementDate   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                                          //Дата размещения ноты.
-	IssueKind       string                 `protobuf:"bytes,13,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                      //Форма выпуска.
+	BorrowName      string                 `protobuf:"bytes,1,opt,name=borrow_name,json=borrowName,proto3" json:"borrow_name,omitempty"`                                                    // Наименование заемщика.
+	Nominal         *Quotation             `protobuf:"bytes,2,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                            // Номинал.
+	NominalCurrency string                 `protobuf:"bytes,3,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                                     // Валюта номинала.
+	Type            StructuredProductType  `protobuf:"varint,4,opt,name=type,proto3,enum=tinkoff.public.invest.api.contract.v1.StructuredProductType" json:"type,omitempty"`                // Тип структурной ноты.
+	LogicPortfolio  string                 `protobuf:"bytes,5,opt,name=logic_portfolio,json=logicPortfolio,proto3" json:"logic_portfolio,omitempty"`                                        // Стратегия портфеля.
+	AssetType       AssetType              `protobuf:"varint,6,opt,name=asset_type,json=assetType,proto3,enum=tinkoff.public.invest.api.contract.v1.AssetType" json:"asset_type,omitempty"` // Тип базового актива.
+	BasicAsset      string                 `protobuf:"bytes,7,opt,name=basic_asset,json=basicAsset,proto3" json:"basic_asset,omitempty"`                                                    // Вид базового актива в зависимости от типа базового актива.
+	SafetyBarrier   *Quotation             `protobuf:"bytes,8,opt,name=safety_barrier,json=safetyBarrier,proto3" json:"safety_barrier,omitempty"`                                           // Барьер сохранности в процентах.
+	MaturityDate    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=maturity_date,json=maturityDate,proto3" json:"maturity_date,omitempty"`                                              // Дата погашения.
+	IssueSizePlan   *Quotation             `protobuf:"bytes,10,opt,name=issue_size_plan,json=issueSizePlan,proto3" json:"issue_size_plan,omitempty"`                                        // Объявленное количество, шт.
+	IssueSize       *Quotation             `protobuf:"bytes,11,opt,name=issue_size,json=issueSize,proto3" json:"issue_size,omitempty"`                                                      // Объем размещения.
+	PlacementDate   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=placement_date,json=placementDate,proto3" json:"placement_date,omitempty"`                                          // Дата размещения ноты.
+	IssueKind       string                 `protobuf:"bytes,13,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                      // Форма выпуска.
 }
 
 func (x *AssetStructuredProduct) Reset() {
@@ -7040,37 +7041,37 @@ type AssetEtf struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TotalExpense              *Quotation               `protobuf:"bytes,1,opt,name=total_expense,json=totalExpense,proto3" json:"total_expense,omitempty"`                                             //Суммарные расходы фонда в процентах.
-	HurdleRate                *Quotation               `protobuf:"bytes,2,opt,name=hurdle_rate,json=hurdleRate,proto3" json:"hurdle_rate,omitempty"`                                                   //Барьерная ставка доходности, после которой фонд имеет право на perfomance fee — в процентах.
-	PerformanceFee            *Quotation               `protobuf:"bytes,3,opt,name=performance_fee,json=performanceFee,proto3" json:"performance_fee,omitempty"`                                       //Комиссия за успешные результаты фонда в процентах.
-	FixedCommission           *Quotation               `protobuf:"bytes,4,opt,name=fixed_commission,json=fixedCommission,proto3" json:"fixed_commission,omitempty"`                                    //Фиксированная комиссия за управление в процентах.
-	PaymentType               string                   `protobuf:"bytes,5,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`                                                //Тип распределения доходов от выплат по бумагам.
-	WatermarkFlag             bool                     `protobuf:"varint,6,opt,name=watermark_flag,json=watermarkFlag,proto3" json:"watermark_flag,omitempty"`                                         //Признак необходимости выхода фонда в плюс для получения комиссии.
-	BuyPremium                *Quotation               `protobuf:"bytes,7,opt,name=buy_premium,json=buyPremium,proto3" json:"buy_premium,omitempty"`                                                   //Премия (надбавка к цене) при покупке доли в фонде — в процентах.
-	SellDiscount              *Quotation               `protobuf:"bytes,8,opt,name=sell_discount,json=sellDiscount,proto3" json:"sell_discount,omitempty"`                                             //Ставка дисконта (вычет из цены) при продаже доли в фонде — в процентах.
-	RebalancingFlag           bool                     `protobuf:"varint,9,opt,name=rebalancing_flag,json=rebalancingFlag,proto3" json:"rebalancing_flag,omitempty"`                                   //Признак ребалансируемости портфеля фонда.
-	RebalancingFreq           string                   `protobuf:"bytes,10,opt,name=rebalancing_freq,json=rebalancingFreq,proto3" json:"rebalancing_freq,omitempty"`                                   //Периодичность ребалансировки.
-	ManagementType            string                   `protobuf:"bytes,11,opt,name=management_type,json=managementType,proto3" json:"management_type,omitempty"`                                      //Тип управления.
-	PrimaryIndex              string                   `protobuf:"bytes,12,opt,name=primary_index,json=primaryIndex,proto3" json:"primary_index,omitempty"`                                            //Индекс, который реплицирует (старается копировать) фонд.
-	FocusType                 string                   `protobuf:"bytes,13,opt,name=focus_type,json=focusType,proto3" json:"focus_type,omitempty"`                                                     //База ETF.
-	LeveragedFlag             bool                     `protobuf:"varint,14,opt,name=leveraged_flag,json=leveragedFlag,proto3" json:"leveraged_flag,omitempty"`                                        //Признак использования заемных активов (плечо).
-	NumShare                  *Quotation               `protobuf:"bytes,15,opt,name=num_share,json=numShare,proto3" json:"num_share,omitempty"`                                                        //Количество акций в обращении.
-	UcitsFlag                 bool                     `protobuf:"varint,16,opt,name=ucits_flag,json=ucitsFlag,proto3" json:"ucits_flag,omitempty"`                                                    //Признак обязательства по отчетности перед регулятором.
-	ReleasedDate              *timestamppb.Timestamp   `protobuf:"bytes,17,opt,name=released_date,json=releasedDate,proto3" json:"released_date,omitempty"`                                            //Дата выпуска.
-	Description               string                   `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`                                                                  //Описание фонда.
-	PrimaryIndexDescription   string                   `protobuf:"bytes,19,opt,name=primary_index_description,json=primaryIndexDescription,proto3" json:"primary_index_description,omitempty"`         //Описание индекса, за которым следует фонд.
-	PrimaryIndexCompany       string                   `protobuf:"bytes,20,opt,name=primary_index_company,json=primaryIndexCompany,proto3" json:"primary_index_company,omitempty"`                     //Основные компании, в которые вкладывается фонд.
-	IndexRecoveryPeriod       *Quotation               `protobuf:"bytes,21,opt,name=index_recovery_period,json=indexRecoveryPeriod,proto3" json:"index_recovery_period,omitempty"`                     //Срок восстановления индекса после просадки.
-	InavCode                  string                   `protobuf:"bytes,22,opt,name=inav_code,json=inavCode,proto3" json:"inav_code,omitempty"`                                                        //IVAV-код.
-	DivYieldFlag              bool                     `protobuf:"varint,23,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                                         //Признак наличия дивидендной доходности.
-	ExpenseCommission         *Quotation               `protobuf:"bytes,24,opt,name=expense_commission,json=expenseCommission,proto3" json:"expense_commission,omitempty"`                             //Комиссия на покрытие расходов фонда в процентах.
-	PrimaryIndexTrackingError *Quotation               `protobuf:"bytes,25,opt,name=primary_index_tracking_error,json=primaryIndexTrackingError,proto3" json:"primary_index_tracking_error,omitempty"` //Ошибка следования за индексом в процентах.
-	RebalancingPlan           string                   `protobuf:"bytes,26,opt,name=rebalancing_plan,json=rebalancingPlan,proto3" json:"rebalancing_plan,omitempty"`                                   //Плановая ребалансировка портфеля.
-	TaxRate                   string                   `protobuf:"bytes,27,opt,name=tax_rate,json=taxRate,proto3" json:"tax_rate,omitempty"`                                                           //Ставки налогообложения дивидендов и купонов.
-	RebalancingDates          []*timestamppb.Timestamp `protobuf:"bytes,28,rep,name=rebalancing_dates,json=rebalancingDates,proto3" json:"rebalancing_dates,omitempty"`                                //Даты ребалансировок.
-	IssueKind                 string                   `protobuf:"bytes,29,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                     //Форма выпуска.
-	Nominal                   *Quotation               `protobuf:"bytes,30,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                          //Номинал.
-	NominalCurrency           string                   `protobuf:"bytes,31,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                                   //Валюта номинала.
+	TotalExpense              *Quotation               `protobuf:"bytes,1,opt,name=total_expense,json=totalExpense,proto3" json:"total_expense,omitempty"`                                             // Суммарные расходы фонда в процентах.
+	HurdleRate                *Quotation               `protobuf:"bytes,2,opt,name=hurdle_rate,json=hurdleRate,proto3" json:"hurdle_rate,omitempty"`                                                   // Барьерная ставка доходности, после которой фонд имеет право на perfomance fee — в процентах.
+	PerformanceFee            *Quotation               `protobuf:"bytes,3,opt,name=performance_fee,json=performanceFee,proto3" json:"performance_fee,omitempty"`                                       // Комиссия за успешные результаты фонда в процентах.
+	FixedCommission           *Quotation               `protobuf:"bytes,4,opt,name=fixed_commission,json=fixedCommission,proto3" json:"fixed_commission,omitempty"`                                    // Фиксированная комиссия за управление в процентах.
+	PaymentType               string                   `protobuf:"bytes,5,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`                                                // Тип распределения доходов от выплат по бумагам.
+	WatermarkFlag             bool                     `protobuf:"varint,6,opt,name=watermark_flag,json=watermarkFlag,proto3" json:"watermark_flag,omitempty"`                                         // Признак необходимости выхода фонда в плюс для получения комиссии.
+	BuyPremium                *Quotation               `protobuf:"bytes,7,opt,name=buy_premium,json=buyPremium,proto3" json:"buy_premium,omitempty"`                                                   // Премия (надбавка к цене) при покупке доли в фонде — в процентах.
+	SellDiscount              *Quotation               `protobuf:"bytes,8,opt,name=sell_discount,json=sellDiscount,proto3" json:"sell_discount,omitempty"`                                             // Ставка дисконта (вычет из цены) при продаже доли в фонде — в процентах.
+	RebalancingFlag           bool                     `protobuf:"varint,9,opt,name=rebalancing_flag,json=rebalancingFlag,proto3" json:"rebalancing_flag,omitempty"`                                   // Признак ребалансируемости портфеля фонда.
+	RebalancingFreq           string                   `protobuf:"bytes,10,opt,name=rebalancing_freq,json=rebalancingFreq,proto3" json:"rebalancing_freq,omitempty"`                                   // Периодичность ребалансировки.
+	ManagementType            string                   `protobuf:"bytes,11,opt,name=management_type,json=managementType,proto3" json:"management_type,omitempty"`                                      // Тип управления.
+	PrimaryIndex              string                   `protobuf:"bytes,12,opt,name=primary_index,json=primaryIndex,proto3" json:"primary_index,omitempty"`                                            // Индекс, который реплицирует (старается копировать) фонд.
+	FocusType                 string                   `protobuf:"bytes,13,opt,name=focus_type,json=focusType,proto3" json:"focus_type,omitempty"`                                                     // База ETF.
+	LeveragedFlag             bool                     `protobuf:"varint,14,opt,name=leveraged_flag,json=leveragedFlag,proto3" json:"leveraged_flag,omitempty"`                                        // Признак использования заемных активов (плечо).
+	NumShare                  *Quotation               `protobuf:"bytes,15,opt,name=num_share,json=numShare,proto3" json:"num_share,omitempty"`                                                        // Количество акций в обращении.
+	UcitsFlag                 bool                     `protobuf:"varint,16,opt,name=ucits_flag,json=ucitsFlag,proto3" json:"ucits_flag,omitempty"`                                                    // Признак обязательства по отчетности перед регулятором.
+	ReleasedDate              *timestamppb.Timestamp   `protobuf:"bytes,17,opt,name=released_date,json=releasedDate,proto3" json:"released_date,omitempty"`                                            // Дата выпуска.
+	Description               string                   `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`                                                                  // Описание фонда.
+	PrimaryIndexDescription   string                   `protobuf:"bytes,19,opt,name=primary_index_description,json=primaryIndexDescription,proto3" json:"primary_index_description,omitempty"`         // Описание индекса, за которым следует фонд.
+	PrimaryIndexCompany       string                   `protobuf:"bytes,20,opt,name=primary_index_company,json=primaryIndexCompany,proto3" json:"primary_index_company,omitempty"`                     // Основные компании, в которые вкладывается фонд.
+	IndexRecoveryPeriod       *Quotation               `protobuf:"bytes,21,opt,name=index_recovery_period,json=indexRecoveryPeriod,proto3" json:"index_recovery_period,omitempty"`                     // Срок восстановления индекса после просадки.
+	InavCode                  string                   `protobuf:"bytes,22,opt,name=inav_code,json=inavCode,proto3" json:"inav_code,omitempty"`                                                        // IVAV-код.
+	DivYieldFlag              bool                     `protobuf:"varint,23,opt,name=div_yield_flag,json=divYieldFlag,proto3" json:"div_yield_flag,omitempty"`                                         // Признак наличия дивидендной доходности.
+	ExpenseCommission         *Quotation               `protobuf:"bytes,24,opt,name=expense_commission,json=expenseCommission,proto3" json:"expense_commission,omitempty"`                             // Комиссия на покрытие расходов фонда в процентах.
+	PrimaryIndexTrackingError *Quotation               `protobuf:"bytes,25,opt,name=primary_index_tracking_error,json=primaryIndexTrackingError,proto3" json:"primary_index_tracking_error,omitempty"` // Ошибка следования за индексом в процентах.
+	RebalancingPlan           string                   `protobuf:"bytes,26,opt,name=rebalancing_plan,json=rebalancingPlan,proto3" json:"rebalancing_plan,omitempty"`                                   // Плановая ребалансировка портфеля.
+	TaxRate                   string                   `protobuf:"bytes,27,opt,name=tax_rate,json=taxRate,proto3" json:"tax_rate,omitempty"`                                                           // Ставки налогообложения дивидендов и купонов.
+	RebalancingDates          []*timestamppb.Timestamp `protobuf:"bytes,28,rep,name=rebalancing_dates,json=rebalancingDates,proto3" json:"rebalancing_dates,omitempty"`                                // Даты ребалансировок.
+	IssueKind                 string                   `protobuf:"bytes,29,opt,name=issue_kind,json=issueKind,proto3" json:"issue_kind,omitempty"`                                                     // Форма выпуска.
+	Nominal                   *Quotation               `protobuf:"bytes,30,opt,name=nominal,proto3" json:"nominal,omitempty"`                                                                          // Номинал.
+	NominalCurrency           string                   `protobuf:"bytes,31,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"`                                   // Валюта номинала.
 }
 
 func (x *AssetEtf) Reset() {
@@ -7328,8 +7329,8 @@ type AssetClearingCertificate struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Nominal         *Quotation `protobuf:"bytes,1,opt,name=nominal,proto3" json:"nominal,omitempty"`                                        //Номинал.
-	NominalCurrency string     `protobuf:"bytes,2,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"` //Валюта номинала.
+	Nominal         *Quotation `protobuf:"bytes,1,opt,name=nominal,proto3" json:"nominal,omitempty"`                                        // Номинал.
+	NominalCurrency string     `protobuf:"bytes,2,opt,name=nominal_currency,json=nominalCurrency,proto3" json:"nominal_currency,omitempty"` // Валюта номинала.
 }
 
 func (x *AssetClearingCertificate) Reset() {
@@ -7384,14 +7385,14 @@ type Brand struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid               string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                          //UID-идентификатор бренда.
-	Name              string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                        //Наименование бренда.
-	Description       string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                          //Описание.
-	Info              string `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`                                                        //Информация о бренде.
-	Company           string `protobuf:"bytes,5,opt,name=company,proto3" json:"company,omitempty"`                                                  //Компания.
-	Sector            string `protobuf:"bytes,6,opt,name=sector,proto3" json:"sector,omitempty"`                                                    //Сектор.
-	CountryOfRisk     string `protobuf:"bytes,7,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`               //Код страны риска.
-	CountryOfRiskName string `protobuf:"bytes,8,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"` //Наименование страны риска.
+	Uid               string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                          // UID-идентификатор бренда.
+	Name              string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                        // Наименование бренда.
+	Description       string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                          // Описание.
+	Info              string `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`                                                        // Информация о бренде.
+	Company           string `protobuf:"bytes,5,opt,name=company,proto3" json:"company,omitempty"`                                                  // Компания.
+	Sector            string `protobuf:"bytes,6,opt,name=sector,proto3" json:"sector,omitempty"`                                                    // Сектор.
+	CountryOfRisk     string `protobuf:"bytes,7,opt,name=country_of_risk,json=countryOfRisk,proto3" json:"country_of_risk,omitempty"`               // Код страны риска.
+	CountryOfRiskName string `protobuf:"bytes,8,opt,name=country_of_risk_name,json=countryOfRiskName,proto3" json:"country_of_risk_name,omitempty"` // Наименование страны риска.
 }
 
 func (x *Brand) Reset() {
@@ -7488,14 +7489,14 @@ type AssetInstrument struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid            string            `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                         //UID-идентификатор инструмента.
-	Figi           string            `protobuf:"bytes,2,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       //FIGI-идентификатор инструмента.
-	InstrumentType string            `protobuf:"bytes,3,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                             //Тип инструмента.
-	Ticker         string            `protobuf:"bytes,4,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   //Тикер инструмента.
-	ClassCode      string            `protobuf:"bytes,5,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            //Класс-код (секция торгов).
-	Links          []*InstrumentLink `protobuf:"bytes,6,rep,name=links,proto3" json:"links,omitempty"`                                                                                                     //Массив связанных инструментов.
-	InstrumentKind InstrumentType    `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
-	PositionUid    string            `protobuf:"bytes,11,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                     //ID позиции.
+	Uid            string            `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                         // UID-идентификатор инструмента.
+	Figi           string            `protobuf:"bytes,2,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       // FIGI-идентификатор инструмента.
+	InstrumentType string            `protobuf:"bytes,3,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                             // Тип инструмента.
+	Ticker         string            `protobuf:"bytes,4,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   // Тикер инструмента.
+	ClassCode      string            `protobuf:"bytes,5,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            // Класс-код (секция торгов).
+	Links          []*InstrumentLink `protobuf:"bytes,6,rep,name=links,proto3" json:"links,omitempty"`                                                                                                     // Массив связанных инструментов.
+	InstrumentKind InstrumentType    `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
+	PositionUid    string            `protobuf:"bytes,11,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                     // ID позиции.
 }
 
 func (x *AssetInstrument) Reset() {
@@ -7592,8 +7593,8 @@ type InstrumentLink struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type          string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`                                        //Тип связи.
-	InstrumentUid string `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` //UID-идентификатор связанного инструмента.
+	Type          string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`                                        // Тип связи.
+	InstrumentUid string `protobuf:"bytes,2,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"` // UID-идентификатор связанного инструмента.
 }
 
 func (x *InstrumentLink) Reset() {
@@ -7648,7 +7649,7 @@ type GetFavoritesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId *string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"` //Уникальный идентификатор группы.
+	GroupId *string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"` // Уникальный идентификатор группы.
 }
 
 func (x *GetFavoritesRequest) Reset() {
@@ -7696,8 +7697,8 @@ type GetFavoritesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FavoriteInstruments []*FavoriteInstrument `protobuf:"bytes,1,rep,name=favorite_instruments,json=favoriteInstruments,proto3" json:"favorite_instruments,omitempty"` //Массив инструментов.
-	GroupId             *string               `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                               //Уникальный идентификатор группы.
+	FavoriteInstruments []*FavoriteInstrument `protobuf:"bytes,1,rep,name=favorite_instruments,json=favoriteInstruments,proto3" json:"favorite_instruments,omitempty"` // Массив инструментов.
+	GroupId             *string               `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                               // Уникальный идентификатор группы.
 }
 
 func (x *GetFavoritesResponse) Reset() {
@@ -7752,16 +7753,16 @@ type FavoriteInstrument struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Figi                  string         `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       //FIGI-идентификатор инструмента.
-	Ticker                string         `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   //Тикер инструмента.
-	ClassCode             string         `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            //Класс-код инструмента.
-	Isin                  string         `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       //ISIN-идентификатор инструмента.
-	InstrumentType        string         `protobuf:"bytes,11,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                            //Тип инструмента.
-	Name                  string         `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                                                                                                      //Название инструмента.
-	Uid                   string         `protobuf:"bytes,13,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                        //Уникальный идентификатор инструмента.
-	OtcFlag               bool           `protobuf:"varint,16,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                //Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
-	ApiTradeAvailableFlag bool           `protobuf:"varint,17,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                  //Возможность торговать инструментом через API.
-	InstrumentKind        InstrumentType `protobuf:"varint,18,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
+	Figi                  string         `protobuf:"bytes,1,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       // FIGI-идентификатор инструмента.
+	Ticker                string         `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   // Тикер инструмента.
+	ClassCode             string         `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            // Класс-код инструмента.
+	Isin                  string         `protobuf:"bytes,4,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       // ISIN-идентификатор инструмента.
+	InstrumentType        string         `protobuf:"bytes,11,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                            // Тип инструмента.
+	Name                  string         `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                                                                                                      // Название инструмента.
+	Uid                   string         `protobuf:"bytes,13,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                        // Уникальный идентификатор инструмента.
+	OtcFlag               bool           `protobuf:"varint,16,opt,name=otc_flag,json=otcFlag,proto3" json:"otc_flag,omitempty"`                                                                                // Флаг, используемый ранее для определения внебиржевых инструментов. На данный момент не используется для торгуемых через API инструментов. Может использоваться как фильтр для операций, совершавшихся некоторое время назад на ОТС площадке.
+	ApiTradeAvailableFlag bool           `protobuf:"varint,17,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                  // Возможность торговать инструментом через API.
+	InstrumentKind        InstrumentType `protobuf:"varint,18,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
 }
 
 func (x *FavoriteInstrument) Reset() {
@@ -7872,9 +7873,9 @@ type EditFavoritesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*EditFavoritesRequestInstrument `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                     //Массив инструментов.
-	ActionType  EditFavoritesActionType           `protobuf:"varint,6,opt,name=action_type,json=actionType,proto3,enum=tinkoff.public.invest.api.contract.v1.EditFavoritesActionType" json:"action_type,omitempty"` //Тип действия со списком.
-	GroupId     *string                           `protobuf:"bytes,7,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                                                                        //Уникальный идентификатор группы.
+	Instruments []*EditFavoritesRequestInstrument `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"`                                                                                     // Массив инструментов.
+	ActionType  EditFavoritesActionType           `protobuf:"varint,6,opt,name=action_type,json=actionType,proto3,enum=tinkoff.public.invest.api.contract.v1.EditFavoritesActionType" json:"action_type,omitempty"` // Тип действия со списком.
+	GroupId     *string                           `protobuf:"bytes,7,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                                                                        // Уникальный идентификатор группы.
 }
 
 func (x *EditFavoritesRequest) Reset() {
@@ -7937,8 +7938,8 @@ type EditFavoritesRequestInstrument struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Deprecated: Marked as deprecated in instruments.proto.
-	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                               //FIGI-идентификатор инструмента.
-	InstrumentId string  `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента — `figi` или `instrument_uid`.
+	Figi         *string `protobuf:"bytes,1,opt,name=figi,proto3,oneof" json:"figi,omitempty"`                               // FIGI-идентификатор инструмента.
+	InstrumentId string  `protobuf:"bytes,2,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента — `figi` или `instrument_uid`.
 }
 
 func (x *EditFavoritesRequestInstrument) Reset() {
@@ -7994,8 +7995,8 @@ type EditFavoritesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FavoriteInstruments []*FavoriteInstrument `protobuf:"bytes,1,rep,name=favorite_instruments,json=favoriteInstruments,proto3" json:"favorite_instruments,omitempty"` //Массив инструментов.
-	GroupId             *string               `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                               //Уникальный идентификатор группы.
+	FavoriteInstruments []*FavoriteInstrument `protobuf:"bytes,1,rep,name=favorite_instruments,json=favoriteInstruments,proto3" json:"favorite_instruments,omitempty"` // Массив инструментов.
+	GroupId             *string               `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`                               // Уникальный идентификатор группы.
 }
 
 func (x *EditFavoritesResponse) Reset() {
@@ -8050,9 +8051,9 @@ type CreateFavoriteGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupName  string  `protobuf:"bytes,1,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`    //Название группы, не более 255 символов.
-	GroupColor string  `protobuf:"bytes,2,opt,name=group_color,json=groupColor,proto3" json:"group_color,omitempty"` //Цвет группы. Принимает значения в HEX-формате, от "000000" до "FFFFFF"
-	Note       *string `protobuf:"bytes,3,opt,name=note,proto3,oneof" json:"note,omitempty"`                         //Описание
+	GroupName  string  `protobuf:"bytes,1,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`    // Название группы, не более 255 символов.
+	GroupColor string  `protobuf:"bytes,2,opt,name=group_color,json=groupColor,proto3" json:"group_color,omitempty"` // Цвет группы. Принимает значения в HEX-формате, от "000000" до "FFFFFF"
+	Note       *string `protobuf:"bytes,3,opt,name=note,proto3,oneof" json:"note,omitempty"`                         // Описание
 }
 
 func (x *CreateFavoriteGroupRequest) Reset() {
@@ -8113,8 +8114,8 @@ type CreateFavoriteGroupResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId   string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`       //Уникальный идентификатор группы.
-	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"` //Название группы.
+	GroupId   string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`       // Уникальный идентификатор группы.
+	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"` // Название группы.
 }
 
 func (x *CreateFavoriteGroupResponse) Reset() {
@@ -8169,7 +8170,7 @@ type DeleteFavoriteGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"` //Уникальный идентификатор группы.
+	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"` // Уникальный идентификатор группы.
 }
 
 func (x *DeleteFavoriteGroupRequest) Reset() {
@@ -8255,8 +8256,8 @@ type GetFavoriteGroupsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId    []string `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`            //Массив идентификаторов инструментов. Принимает значение `figi` или `instrument_uid`. Если в группе будет хотя бы один из инструментов массива, то в ответе у группы вернется признак `containsInstrument = true`.
-	ExcludedGroupId []string `protobuf:"bytes,2,rep,name=excluded_group_id,json=excludedGroupId,proto3" json:"excluded_group_id,omitempty"` //Массив идентификаторов групп, которые необходимо исключить из ответа.
+	InstrumentId    []string `protobuf:"bytes,1,rep,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"`            // Массив идентификаторов инструментов. Принимает значение `figi` или `instrument_uid`. Если в группе будет хотя бы один из инструментов массива, то в ответе у группы вернется признак `containsInstrument = true`.
+	ExcludedGroupId []string `protobuf:"bytes,2,rep,name=excluded_group_id,json=excludedGroupId,proto3" json:"excluded_group_id,omitempty"` // Массив идентификаторов групп, которые необходимо исключить из ответа.
 }
 
 func (x *GetFavoriteGroupsRequest) Reset() {
@@ -8311,7 +8312,7 @@ type GetFavoriteGroupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Groups []*GetFavoriteGroupsResponse_FavoriteGroup `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"` //Массив групп избранных списков инструментов.
+	Groups []*GetFavoriteGroupsResponse_FavoriteGroup `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"` // Массив групп избранных списков инструментов.
 }
 
 func (x *GetFavoriteGroupsResponse) Reset() {
@@ -8398,7 +8399,7 @@ type GetCountriesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Countries []*CountryResponse `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"` //Массив стран.
+	Countries []*CountryResponse `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"` // Массив стран.
 }
 
 func (x *GetCountriesResponse) Reset() {
@@ -8537,7 +8538,7 @@ type IndicativeResponse struct {
 	Ticker            string         `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   // Тикер инструмента.
 	ClassCode         string         `protobuf:"bytes,3,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            // Класс-код инструмента.
 	Currency          string         `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                               // Валюта расчетов.
-	InstrumentKind    InstrumentType `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
+	InstrumentKind    InstrumentType `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
 	Name              string         `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                                                                                                      // Название инструмента.
 	Exchange          string         `protobuf:"bytes,13,opt,name=exchange,proto3" json:"exchange,omitempty"`                                                                                              // Tорговая площадка (секция биржи).
 	Uid               string         `protobuf:"bytes,14,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                        // Уникальный идентификатор инструмента.
@@ -8653,10 +8654,10 @@ type CountryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AlfaTwo   string `protobuf:"bytes,1,opt,name=alfa_two,json=alfaTwo,proto3" json:"alfa_two,omitempty"`       //Двухбуквенный код страны.
-	AlfaThree string `protobuf:"bytes,2,opt,name=alfa_three,json=alfaThree,proto3" json:"alfa_three,omitempty"` //Трехбуквенный код страны.
-	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                            //Наименование страны.
-	NameBrief string `protobuf:"bytes,4,opt,name=name_brief,json=nameBrief,proto3" json:"name_brief,omitempty"` //Краткое наименование страны.
+	AlfaTwo   string `protobuf:"bytes,1,opt,name=alfa_two,json=alfaTwo,proto3" json:"alfa_two,omitempty"`       // Двухбуквенный код страны.
+	AlfaThree string `protobuf:"bytes,2,opt,name=alfa_three,json=alfaThree,proto3" json:"alfa_three,omitempty"` // Трехбуквенный код страны.
+	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                            // Наименование страны.
+	NameBrief string `protobuf:"bytes,4,opt,name=name_brief,json=nameBrief,proto3" json:"name_brief,omitempty"` // Краткое наименование страны.
 }
 
 func (x *CountryResponse) Reset() {
@@ -8725,9 +8726,9 @@ type FindInstrumentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Query                 string          `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                                                                                                          //Строка поиска.
-	InstrumentKind        *InstrumentType `protobuf:"varint,2,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType,oneof" json:"instrument_kind,omitempty"` //Фильтр по типу инструмента.
-	ApiTradeAvailableFlag *bool           `protobuf:"varint,3,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3,oneof" json:"api_trade_available_flag,omitempty"`                                  //Фильтр для отображения только торговых инструментов.
+	Query                 string          `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                                                                                                          // Строка поиска.
+	InstrumentKind        *InstrumentType `protobuf:"varint,2,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType,oneof" json:"instrument_kind,omitempty"` // Фильтр по типу инструмента.
+	ApiTradeAvailableFlag *bool           `protobuf:"varint,3,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3,oneof" json:"api_trade_available_flag,omitempty"`                                  // Фильтр для отображения только торговых инструментов.
 }
 
 func (x *FindInstrumentRequest) Reset() {
@@ -8789,7 +8790,7 @@ type FindInstrumentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instruments []*InstrumentShort `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` //Массив инструментов, удовлетворяющих условиям поиска.
+	Instruments []*InstrumentShort `protobuf:"bytes,1,rep,name=instruments,proto3" json:"instruments,omitempty"` // Массив инструментов, удовлетворяющих условиям поиска.
 }
 
 func (x *FindInstrumentResponse) Reset() {
@@ -8837,23 +8838,23 @@ type InstrumentShort struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Isin                  string                 `protobuf:"bytes,1,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       //ISIN инструмента.
-	Figi                  string                 `protobuf:"bytes,2,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       //FIGI инструмента.
-	Ticker                string                 `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   //Ticker инструмента.
-	ClassCode             string                 `protobuf:"bytes,4,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            //ClassCode инструмента.
-	InstrumentType        string                 `protobuf:"bytes,5,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                             //Тип инструмента.
-	Name                  string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`                                                                                                       //Название инструмента.
-	Uid                   string                 `protobuf:"bytes,7,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                         //Уникальный идентификатор инструмента.
-	PositionUid           string                 `protobuf:"bytes,8,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                      //Уникальный идентификатор позиции инструмента.
-	InstrumentKind        InstrumentType         `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` //Тип инструмента.
-	ApiTradeAvailableFlag bool                   `protobuf:"varint,11,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                  //Возможность торговать инструментом через API.
-	ForIisFlag            bool                   `protobuf:"varint,12,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                     //Признак доступности для ИИС.
-	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,26,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                         //Дата первой минутной свечи.
-	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                         //Дата первой дневной свечи.
-	ForQualInvestorFlag   bool                   `protobuf:"varint,28,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                        //Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-	WeekendFlag           bool                   `protobuf:"varint,29,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                    //Флаг, отображающий доступность торговли инструментом по выходным.
-	BlockedTcaFlag        bool                   `protobuf:"varint,30,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                         //Флаг заблокированного ТКС.
-	Lot                   int32                  `protobuf:"varint,31,opt,name=lot,proto3" json:"lot,omitempty"`                                                                                                       //Количество бумаг в лоте.
+	Isin                  string                 `protobuf:"bytes,1,opt,name=isin,proto3" json:"isin,omitempty"`                                                                                                       // ISIN инструмента.
+	Figi                  string                 `protobuf:"bytes,2,opt,name=figi,proto3" json:"figi,omitempty"`                                                                                                       // FIGI инструмента.
+	Ticker                string                 `protobuf:"bytes,3,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                                                   // Ticker инструмента.
+	ClassCode             string                 `protobuf:"bytes,4,opt,name=class_code,json=classCode,proto3" json:"class_code,omitempty"`                                                                            // ClassCode инструмента.
+	InstrumentType        string                 `protobuf:"bytes,5,opt,name=instrument_type,json=instrumentType,proto3" json:"instrument_type,omitempty"`                                                             // Тип инструмента.
+	Name                  string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`                                                                                                       // Название инструмента.
+	Uid                   string                 `protobuf:"bytes,7,opt,name=uid,proto3" json:"uid,omitempty"`                                                                                                         // Уникальный идентификатор инструмента.
+	PositionUid           string                 `protobuf:"bytes,8,opt,name=position_uid,json=positionUid,proto3" json:"position_uid,omitempty"`                                                                      // Уникальный идентификатор позиции инструмента.
+	InstrumentKind        InstrumentType         `protobuf:"varint,10,opt,name=instrument_kind,json=instrumentKind,proto3,enum=tinkoff.public.invest.api.contract.v1.InstrumentType" json:"instrument_kind,omitempty"` // Тип инструмента.
+	ApiTradeAvailableFlag bool                   `protobuf:"varint,11,opt,name=api_trade_available_flag,json=apiTradeAvailableFlag,proto3" json:"api_trade_available_flag,omitempty"`                                  // Возможность торговать инструментом через API.
+	ForIisFlag            bool                   `protobuf:"varint,12,opt,name=for_iis_flag,json=forIisFlag,proto3" json:"for_iis_flag,omitempty"`                                                                     // Признак доступности для ИИС.
+	First_1MinCandleDate  *timestamppb.Timestamp `protobuf:"bytes,26,opt,name=first_1min_candle_date,json=first1minCandleDate,proto3" json:"first_1min_candle_date,omitempty"`                                         // Дата первой минутной свечи.
+	First_1DayCandleDate  *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=first_1day_candle_date,json=first1dayCandleDate,proto3" json:"first_1day_candle_date,omitempty"`                                         // Дата первой дневной свечи.
+	ForQualInvestorFlag   bool                   `protobuf:"varint,28,opt,name=for_qual_investor_flag,json=forQualInvestorFlag,proto3" json:"for_qual_investor_flag,omitempty"`                                        // Флаг, отображающий доступность торговли инструментом только для квалифицированных инвесторов.
+	WeekendFlag           bool                   `protobuf:"varint,29,opt,name=weekend_flag,json=weekendFlag,proto3" json:"weekend_flag,omitempty"`                                                                    // Флаг, отображающий доступность торговли инструментом по выходным.
+	BlockedTcaFlag        bool                   `protobuf:"varint,30,opt,name=blocked_tca_flag,json=blockedTcaFlag,proto3" json:"blocked_tca_flag,omitempty"`                                                         // Флаг заблокированного ТКС.
+	Lot                   int32                  `protobuf:"varint,31,opt,name=lot,proto3" json:"lot,omitempty"`                                                                                                       // Количество бумаг в лоте.
 }
 
 func (x *InstrumentShort) Reset() {
@@ -9013,7 +9014,7 @@ type GetBrandsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paging *Page `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"` //Настройки пагинации.
+	Paging *Page `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"` // Настройки пагинации.
 }
 
 func (x *GetBrandsRequest) Reset() {
@@ -9061,7 +9062,7 @@ type GetBrandRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` //UID-идентификатор бренда.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // UID-идентификатор бренда.
 }
 
 func (x *GetBrandRequest) Reset() {
@@ -9109,8 +9110,8 @@ type GetBrandsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Brands []*Brand      `protobuf:"bytes,1,rep,name=brands,proto3" json:"brands,omitempty"` //Массив брендов.
-	Paging *PageResponse `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"` //Данные по пагинации.
+	Brands []*Brand      `protobuf:"bytes,1,rep,name=brands,proto3" json:"brands,omitempty"` // Массив брендов.
+	Paging *PageResponse `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"` // Данные по пагинации.
 }
 
 func (x *GetBrandsResponse) Reset() {
@@ -9165,7 +9166,7 @@ type GetAssetFundamentalsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Assets []string `protobuf:"bytes,1,rep,name=assets,proto3" json:"assets,omitempty"` //Массив идентификаторов активов, не более 100 шт.
+	Assets []string `protobuf:"bytes,1,rep,name=assets,proto3" json:"assets,omitempty"` // Массив идентификаторов активов, не более 100 шт.
 }
 
 func (x *GetAssetFundamentalsRequest) Reset() {
@@ -9261,9 +9262,9 @@ type GetAssetReportsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstrumentId string                 `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` //Идентификатор инструмента в формате UID.
-	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               //Начало запрашиваемого периода по UTC.
-	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   //Окончание запрашиваемого периода по UTC.
+	InstrumentId string                 `protobuf:"bytes,1,opt,name=instrument_id,json=instrumentId,proto3" json:"instrument_id,omitempty"` // Идентификатор инструмента в формате UID.
+	From         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`                               // Начало запрашиваемого периода по UTC.
+	To           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3,oneof" json:"to,omitempty"`                                   // Окончание запрашиваемого периода по UTC.
 }
 
 func (x *GetAssetReportsRequest) Reset() {
@@ -9373,7 +9374,7 @@ type GetConsensusForecastsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paging *Page `protobuf:"bytes,1,opt,name=paging,proto3,oneof" json:"paging,omitempty"` //Настройки пагинации.
+	Paging *Page `protobuf:"bytes,1,opt,name=paging,proto3,oneof" json:"paging,omitempty"` // Настройки пагинации.
 }
 
 func (x *GetConsensusForecastsRequest) Reset() {
@@ -9422,7 +9423,7 @@ type GetConsensusForecastsResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	Items []*GetConsensusForecastsResponse_ConsensusForecastsItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"` // Массив прогнозов.
-	Page  *PageResponse                                           `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`   //Данные по пагинации.
+	Page  *PageResponse                                           `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`   // Данные по пагинации.
 }
 
 func (x *GetConsensusForecastsResponse) Reset() {
@@ -9525,7 +9526,7 @@ type GetForecastResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Targets   []*GetForecastResponse_TargetItem  `protobuf:"bytes,1,rep,name=targets,proto3" json:"targets,omitempty"`     //Массив прогнозов.
+	Targets   []*GetForecastResponse_TargetItem  `protobuf:"bytes,1,rep,name=targets,proto3" json:"targets,omitempty"`     // Массив прогнозов.
 	Consensus *GetForecastResponse_ConsensusItem `protobuf:"bytes,2,opt,name=consensus,proto3" json:"consensus,omitempty"` // Согласованный прогноз.
 }
 
@@ -9676,8 +9677,8 @@ type TradingInterval struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type     string                        `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`         //Название интервала.
-	Interval *TradingInterval_TimeInterval `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"` //Интервал.
+	Type     string                        `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`         // Название интервала.
+	Interval *TradingInterval_TimeInterval `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"` // Интервал.
 }
 
 func (x *TradingInterval) Reset() {
@@ -10059,11 +10060,11 @@ type GetFavoriteGroupsResponse_FavoriteGroup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId            string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`                                         //Уникальный идентификатор группы.
-	GroupName          string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`                                   //Название группы.
-	Color              string `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`                                                            //Цвет группы в HEX-формате.
-	Size               int32  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`                                                             //Количество инструментов в группе.
-	ContainsInstrument *bool  `protobuf:"varint,5,opt,name=contains_instrument,json=containsInstrument,proto3,oneof" json:"contains_instrument,omitempty"` //Признак наличия в группе хотя бы одного инструмента из запроса.
+	GroupId            string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`                                         // Уникальный идентификатор группы.
+	GroupName          string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`                                   // Название группы.
+	Color              string `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`                                                            // Цвет группы в HEX-формате.
+	Size               int32  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`                                                             // Количество инструментов в группе.
+	ContainsInstrument *bool  `protobuf:"varint,5,opt,name=contains_instrument,json=containsInstrument,proto3,oneof" json:"contains_instrument,omitempty"` // Признак наличия в группе хотя бы одного инструмента из запроса.
 }
 
 func (x *GetFavoriteGroupsResponse_FavoriteGroup) Reset() {
@@ -10139,62 +10140,62 @@ type GetAssetFundamentalsResponse_StatisticResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AssetUid                         string                 `protobuf:"bytes,1,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                       //Идентификатор актива.
-	Currency                         string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                       //Валюта.
-	MarketCapitalization             float64                `protobuf:"fixed64,3,opt,name=market_capitalization,json=marketCapitalization,proto3" json:"market_capitalization,omitempty"`                                 //Рыночная капитализация.
-	HighPriceLast_52Weeks            float64                `protobuf:"fixed64,4,opt,name=high_price_last_52_weeks,json=highPriceLast52Weeks,proto3" json:"high_price_last_52_weeks,omitempty"`                           //Максимум за год.
-	LowPriceLast_52Weeks             float64                `protobuf:"fixed64,5,opt,name=low_price_last_52_weeks,json=lowPriceLast52Weeks,proto3" json:"low_price_last_52_weeks,omitempty"`                              //Минимум за год.
-	AverageDailyVolumeLast_10Days    float64                `protobuf:"fixed64,6,opt,name=average_daily_volume_last_10_days,json=averageDailyVolumeLast10Days,proto3" json:"average_daily_volume_last_10_days,omitempty"` //Средний объем торгов за 10 дней.
-	AverageDailyVolumeLast_4Weeks    float64                `protobuf:"fixed64,7,opt,name=average_daily_volume_last_4_weeks,json=averageDailyVolumeLast4Weeks,proto3" json:"average_daily_volume_last_4_weeks,omitempty"` //Средний объем торгов за месяц.
+	AssetUid                         string                 `protobuf:"bytes,1,opt,name=asset_uid,json=assetUid,proto3" json:"asset_uid,omitempty"`                                                                       // Идентификатор актива.
+	Currency                         string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                       // Валюта.
+	MarketCapitalization             float64                `protobuf:"fixed64,3,opt,name=market_capitalization,json=marketCapitalization,proto3" json:"market_capitalization,omitempty"`                                 // Рыночная капитализация.
+	HighPriceLast_52Weeks            float64                `protobuf:"fixed64,4,opt,name=high_price_last_52_weeks,json=highPriceLast52Weeks,proto3" json:"high_price_last_52_weeks,omitempty"`                           // Максимум за год.
+	LowPriceLast_52Weeks             float64                `protobuf:"fixed64,5,opt,name=low_price_last_52_weeks,json=lowPriceLast52Weeks,proto3" json:"low_price_last_52_weeks,omitempty"`                              // Минимум за год.
+	AverageDailyVolumeLast_10Days    float64                `protobuf:"fixed64,6,opt,name=average_daily_volume_last_10_days,json=averageDailyVolumeLast10Days,proto3" json:"average_daily_volume_last_10_days,omitempty"` // Средний объем торгов за 10 дней.
+	AverageDailyVolumeLast_4Weeks    float64                `protobuf:"fixed64,7,opt,name=average_daily_volume_last_4_weeks,json=averageDailyVolumeLast4Weeks,proto3" json:"average_daily_volume_last_4_weeks,omitempty"` // Средний объем торгов за месяц.
 	Beta                             float64                `protobuf:"fixed64,8,opt,name=beta,proto3" json:"beta,omitempty"`
-	FreeFloat                        float64                `protobuf:"fixed64,9,opt,name=free_float,json=freeFloat,proto3" json:"free_float,omitempty"`                                                                               //Доля акций в свободном обращении.
-	ForwardAnnualDividendYield       float64                `protobuf:"fixed64,10,opt,name=forward_annual_dividend_yield,json=forwardAnnualDividendYield,proto3" json:"forward_annual_dividend_yield,omitempty"`                       //Процент форвардной дивидендной доходности по отношению к цене акций.
-	SharesOutstanding                float64                `protobuf:"fixed64,11,opt,name=shares_outstanding,json=sharesOutstanding,proto3" json:"shares_outstanding,omitempty"`                                                      //Количество акций в обращении.
-	RevenueTtm                       float64                `protobuf:"fixed64,12,opt,name=revenue_ttm,json=revenueTtm,proto3" json:"revenue_ttm,omitempty"`                                                                           //Выручка.
-	EbitdaTtm                        float64                `protobuf:"fixed64,13,opt,name=ebitda_ttm,json=ebitdaTtm,proto3" json:"ebitda_ttm,omitempty"`                                                                              //EBITDA — прибыль до вычета процентов, налогов, износа и амортизации.
-	NetIncomeTtm                     float64                `protobuf:"fixed64,14,opt,name=net_income_ttm,json=netIncomeTtm,proto3" json:"net_income_ttm,omitempty"`                                                                   //Чистая прибыль.
-	EpsTtm                           float64                `protobuf:"fixed64,15,opt,name=eps_ttm,json=epsTtm,proto3" json:"eps_ttm,omitempty"`                                                                                       //EPS — величина чистой прибыли компании, которая приходится на каждую обыкновенную акцию.
-	DilutedEpsTtm                    float64                `protobuf:"fixed64,16,opt,name=diluted_eps_ttm,json=dilutedEpsTtm,proto3" json:"diluted_eps_ttm,omitempty"`                                                                //EPS компании с допущением, что все конвертируемые ценные бумаги компании были сконвертированы в обыкновенные акции.
-	FreeCashFlowTtm                  float64                `protobuf:"fixed64,17,opt,name=free_cash_flow_ttm,json=freeCashFlowTtm,proto3" json:"free_cash_flow_ttm,omitempty"`                                                        //Свободный денежный поток.
-	FiveYearAnnualRevenueGrowthRate  float64                `protobuf:"fixed64,18,opt,name=five_year_annual_revenue_growth_rate,json=fiveYearAnnualRevenueGrowthRate,proto3" json:"five_year_annual_revenue_growth_rate,omitempty"`    //Среднегодовой  рocт выручки за 5 лет.
-	ThreeYearAnnualRevenueGrowthRate float64                `protobuf:"fixed64,19,opt,name=three_year_annual_revenue_growth_rate,json=threeYearAnnualRevenueGrowthRate,proto3" json:"three_year_annual_revenue_growth_rate,omitempty"` //Среднегодовой  рocт выручки за 3 года.
-	PeRatioTtm                       float64                `protobuf:"fixed64,20,opt,name=pe_ratio_ttm,json=peRatioTtm,proto3" json:"pe_ratio_ttm,omitempty"`                                                                         //Соотношение рыночной капитализации компании к ее чистой прибыли.
-	PriceToSalesTtm                  float64                `protobuf:"fixed64,21,opt,name=price_to_sales_ttm,json=priceToSalesTtm,proto3" json:"price_to_sales_ttm,omitempty"`                                                        //Соотношение рыночной капитализации компании к ее выручке.
-	PriceToBookTtm                   float64                `protobuf:"fixed64,22,opt,name=price_to_book_ttm,json=priceToBookTtm,proto3" json:"price_to_book_ttm,omitempty"`                                                           //Соотношение рыночной капитализации компании к ее балансовой стоимости.
-	PriceToFreeCashFlowTtm           float64                `protobuf:"fixed64,23,opt,name=price_to_free_cash_flow_ttm,json=priceToFreeCashFlowTtm,proto3" json:"price_to_free_cash_flow_ttm,omitempty"`                               //Соотношение рыночной капитализации компании к ее свободному денежному потоку.
-	TotalEnterpriseValueMrq          float64                `protobuf:"fixed64,24,opt,name=total_enterprise_value_mrq,json=totalEnterpriseValueMrq,proto3" json:"total_enterprise_value_mrq,omitempty"`                                //Рыночная стоимость компании.
-	EvToEbitdaMrq                    float64                `protobuf:"fixed64,25,opt,name=ev_to_ebitda_mrq,json=evToEbitdaMrq,proto3" json:"ev_to_ebitda_mrq,omitempty"`                                                              //Соотношение EV и EBITDA.
-	NetMarginMrq                     float64                `protobuf:"fixed64,26,opt,name=net_margin_mrq,json=netMarginMrq,proto3" json:"net_margin_mrq,omitempty"`                                                                   //Маржа чистой прибыли.
-	NetInterestMarginMrq             float64                `protobuf:"fixed64,27,opt,name=net_interest_margin_mrq,json=netInterestMarginMrq,proto3" json:"net_interest_margin_mrq,omitempty"`                                         //Рентабельность чистой прибыли.
-	Roe                              float64                `protobuf:"fixed64,28,opt,name=roe,proto3" json:"roe,omitempty"`                                                                                                           //Рентабельность собственного капитала.
-	Roa                              float64                `protobuf:"fixed64,29,opt,name=roa,proto3" json:"roa,omitempty"`                                                                                                           //Рентабельность активов.
-	Roic                             float64                `protobuf:"fixed64,30,opt,name=roic,proto3" json:"roic,omitempty"`                                                                                                         //Рентабельность активов.
-	TotalDebtMrq                     float64                `protobuf:"fixed64,31,opt,name=total_debt_mrq,json=totalDebtMrq,proto3" json:"total_debt_mrq,omitempty"`                                                                   //Сумма краткосрочных и долгосрочных обязательств компании.
-	TotalDebtToEquityMrq             float64                `protobuf:"fixed64,32,opt,name=total_debt_to_equity_mrq,json=totalDebtToEquityMrq,proto3" json:"total_debt_to_equity_mrq,omitempty"`                                       //Соотношение долга к собственному капиталу.
-	TotalDebtToEbitdaMrq             float64                `protobuf:"fixed64,33,opt,name=total_debt_to_ebitda_mrq,json=totalDebtToEbitdaMrq,proto3" json:"total_debt_to_ebitda_mrq,omitempty"`                                       //Total Debt/EBITDA.
-	FreeCashFlowToPrice              float64                `protobuf:"fixed64,34,opt,name=free_cash_flow_to_price,json=freeCashFlowToPrice,proto3" json:"free_cash_flow_to_price,omitempty"`                                          //Отношение свободногоо кэша к стоимости.
-	NetDebtToEbitda                  float64                `protobuf:"fixed64,35,opt,name=net_debt_to_ebitda,json=netDebtToEbitda,proto3" json:"net_debt_to_ebitda,omitempty"`                                                        //Отношение чистого долга к EBITDA.
-	CurrentRatioMrq                  float64                `protobuf:"fixed64,36,opt,name=current_ratio_mrq,json=currentRatioMrq,proto3" json:"current_ratio_mrq,omitempty"`                                                          //Коэффициент текущей ликвидности.
-	FixedChargeCoverageRatioFy       float64                `protobuf:"fixed64,37,opt,name=fixed_charge_coverage_ratio_fy,json=fixedChargeCoverageRatioFy,proto3" json:"fixed_charge_coverage_ratio_fy,omitempty"`                     //Коэффициент покрытия фиксированных платежей — FCCR.
-	DividendYieldDailyTtm            float64                `protobuf:"fixed64,38,opt,name=dividend_yield_daily_ttm,json=dividendYieldDailyTtm,proto3" json:"dividend_yield_daily_ttm,omitempty"`                                      //Дивидендная доходность за 12 месяцев.
-	DividendRateTtm                  float64                `protobuf:"fixed64,39,opt,name=dividend_rate_ttm,json=dividendRateTtm,proto3" json:"dividend_rate_ttm,omitempty"`                                                          //Выплаченные дивиденды за 12 месяцев.
-	DividendsPerShare                float64                `protobuf:"fixed64,40,opt,name=dividends_per_share,json=dividendsPerShare,proto3" json:"dividends_per_share,omitempty"`                                                    //Значение дивидендов на акцию.
-	FiveYearsAverageDividendYield    float64                `protobuf:"fixed64,41,opt,name=five_years_average_dividend_yield,json=fiveYearsAverageDividendYield,proto3" json:"five_years_average_dividend_yield,omitempty"`            //Средняя дивидендная доходность за 5 лет.
-	FiveYearAnnualDividendGrowthRate float64                `protobuf:"fixed64,42,opt,name=five_year_annual_dividend_growth_rate,json=fiveYearAnnualDividendGrowthRate,proto3" json:"five_year_annual_dividend_growth_rate,omitempty"` //Среднегодовой рост дивидендов за 5 лет.
-	DividendPayoutRatioFy            float64                `protobuf:"fixed64,43,opt,name=dividend_payout_ratio_fy,json=dividendPayoutRatioFy,proto3" json:"dividend_payout_ratio_fy,omitempty"`                                      //Процент чистой прибыли, уходящий на выплату дивидендов.
-	BuyBackTtm                       float64                `protobuf:"fixed64,44,opt,name=buy_back_ttm,json=buyBackTtm,proto3" json:"buy_back_ttm,omitempty"`                                                                         //Деньги, потраченные на обратный выкуп акций.
-	OneYearAnnualRevenueGrowthRate   float64                `protobuf:"fixed64,45,opt,name=one_year_annual_revenue_growth_rate,json=oneYearAnnualRevenueGrowthRate,proto3" json:"one_year_annual_revenue_growth_rate,omitempty"`       //Рост выручки за 1 год.
-	DomicileIndicatorCode            string                 `protobuf:"bytes,46,opt,name=domicile_indicator_code,json=domicileIndicatorCode,proto3" json:"domicile_indicator_code,omitempty"`                                          //Код страны.
-	AdrToCommonShareRatio            float64                `protobuf:"fixed64,47,opt,name=adr_to_common_share_ratio,json=adrToCommonShareRatio,proto3" json:"adr_to_common_share_ratio,omitempty"`                                    //Соотношение депозитарной расписки к акциям.
-	NumberOfEmployees                float64                `protobuf:"fixed64,48,opt,name=number_of_employees,json=numberOfEmployees,proto3" json:"number_of_employees,omitempty"`                                                    //Количество сотрудников.
+	FreeFloat                        float64                `protobuf:"fixed64,9,opt,name=free_float,json=freeFloat,proto3" json:"free_float,omitempty"`                                                                               // Доля акций в свободном обращении.
+	ForwardAnnualDividendYield       float64                `protobuf:"fixed64,10,opt,name=forward_annual_dividend_yield,json=forwardAnnualDividendYield,proto3" json:"forward_annual_dividend_yield,omitempty"`                       // Процент форвардной дивидендной доходности по отношению к цене акций.
+	SharesOutstanding                float64                `protobuf:"fixed64,11,opt,name=shares_outstanding,json=sharesOutstanding,proto3" json:"shares_outstanding,omitempty"`                                                      // Количество акций в обращении.
+	RevenueTtm                       float64                `protobuf:"fixed64,12,opt,name=revenue_ttm,json=revenueTtm,proto3" json:"revenue_ttm,omitempty"`                                                                           // Выручка.
+	EbitdaTtm                        float64                `protobuf:"fixed64,13,opt,name=ebitda_ttm,json=ebitdaTtm,proto3" json:"ebitda_ttm,omitempty"`                                                                              // EBITDA — прибыль до вычета процентов, налогов, износа и амортизации.
+	NetIncomeTtm                     float64                `protobuf:"fixed64,14,opt,name=net_income_ttm,json=netIncomeTtm,proto3" json:"net_income_ttm,omitempty"`                                                                   // Чистая прибыль.
+	EpsTtm                           float64                `protobuf:"fixed64,15,opt,name=eps_ttm,json=epsTtm,proto3" json:"eps_ttm,omitempty"`                                                                                       // EPS — величина чистой прибыли компании, которая приходится на каждую обыкновенную акцию.
+	DilutedEpsTtm                    float64                `protobuf:"fixed64,16,opt,name=diluted_eps_ttm,json=dilutedEpsTtm,proto3" json:"diluted_eps_ttm,omitempty"`                                                                // EPS компании с допущением, что все конвертируемые ценные бумаги компании были сконвертированы в обыкновенные акции.
+	FreeCashFlowTtm                  float64                `protobuf:"fixed64,17,opt,name=free_cash_flow_ttm,json=freeCashFlowTtm,proto3" json:"free_cash_flow_ttm,omitempty"`                                                        // Свободный денежный поток.
+	FiveYearAnnualRevenueGrowthRate  float64                `protobuf:"fixed64,18,opt,name=five_year_annual_revenue_growth_rate,json=fiveYearAnnualRevenueGrowthRate,proto3" json:"five_year_annual_revenue_growth_rate,omitempty"`    // Среднегодовой  рocт выручки за 5 лет.
+	ThreeYearAnnualRevenueGrowthRate float64                `protobuf:"fixed64,19,opt,name=three_year_annual_revenue_growth_rate,json=threeYearAnnualRevenueGrowthRate,proto3" json:"three_year_annual_revenue_growth_rate,omitempty"` // Среднегодовой  рocт выручки за 3 года.
+	PeRatioTtm                       float64                `protobuf:"fixed64,20,opt,name=pe_ratio_ttm,json=peRatioTtm,proto3" json:"pe_ratio_ttm,omitempty"`                                                                         // Соотношение рыночной капитализации компании к ее чистой прибыли.
+	PriceToSalesTtm                  float64                `protobuf:"fixed64,21,opt,name=price_to_sales_ttm,json=priceToSalesTtm,proto3" json:"price_to_sales_ttm,omitempty"`                                                        // Соотношение рыночной капитализации компании к ее выручке.
+	PriceToBookTtm                   float64                `protobuf:"fixed64,22,opt,name=price_to_book_ttm,json=priceToBookTtm,proto3" json:"price_to_book_ttm,omitempty"`                                                           // Соотношение рыночной капитализации компании к ее балансовой стоимости.
+	PriceToFreeCashFlowTtm           float64                `protobuf:"fixed64,23,opt,name=price_to_free_cash_flow_ttm,json=priceToFreeCashFlowTtm,proto3" json:"price_to_free_cash_flow_ttm,omitempty"`                               // Соотношение рыночной капитализации компании к ее свободному денежному потоку.
+	TotalEnterpriseValueMrq          float64                `protobuf:"fixed64,24,opt,name=total_enterprise_value_mrq,json=totalEnterpriseValueMrq,proto3" json:"total_enterprise_value_mrq,omitempty"`                                // Рыночная стоимость компании.
+	EvToEbitdaMrq                    float64                `protobuf:"fixed64,25,opt,name=ev_to_ebitda_mrq,json=evToEbitdaMrq,proto3" json:"ev_to_ebitda_mrq,omitempty"`                                                              // Соотношение EV и EBITDA.
+	NetMarginMrq                     float64                `protobuf:"fixed64,26,opt,name=net_margin_mrq,json=netMarginMrq,proto3" json:"net_margin_mrq,omitempty"`                                                                   // Маржа чистой прибыли.
+	NetInterestMarginMrq             float64                `protobuf:"fixed64,27,opt,name=net_interest_margin_mrq,json=netInterestMarginMrq,proto3" json:"net_interest_margin_mrq,omitempty"`                                         // Рентабельность чистой прибыли.
+	Roe                              float64                `protobuf:"fixed64,28,opt,name=roe,proto3" json:"roe,omitempty"`                                                                                                           // Рентабельность собственного капитала.
+	Roa                              float64                `protobuf:"fixed64,29,opt,name=roa,proto3" json:"roa,omitempty"`                                                                                                           // Рентабельность активов.
+	Roic                             float64                `protobuf:"fixed64,30,opt,name=roic,proto3" json:"roic,omitempty"`                                                                                                         // Рентабельность активов.
+	TotalDebtMrq                     float64                `protobuf:"fixed64,31,opt,name=total_debt_mrq,json=totalDebtMrq,proto3" json:"total_debt_mrq,omitempty"`                                                                   // Сумма краткосрочных и долгосрочных обязательств компании.
+	TotalDebtToEquityMrq             float64                `protobuf:"fixed64,32,opt,name=total_debt_to_equity_mrq,json=totalDebtToEquityMrq,proto3" json:"total_debt_to_equity_mrq,omitempty"`                                       // Соотношение долга к собственному капиталу.
+	TotalDebtToEbitdaMrq             float64                `protobuf:"fixed64,33,opt,name=total_debt_to_ebitda_mrq,json=totalDebtToEbitdaMrq,proto3" json:"total_debt_to_ebitda_mrq,omitempty"`                                       // Total Debt/EBITDA.
+	FreeCashFlowToPrice              float64                `protobuf:"fixed64,34,opt,name=free_cash_flow_to_price,json=freeCashFlowToPrice,proto3" json:"free_cash_flow_to_price,omitempty"`                                          // Отношение свободногоо кэша к стоимости.
+	NetDebtToEbitda                  float64                `protobuf:"fixed64,35,opt,name=net_debt_to_ebitda,json=netDebtToEbitda,proto3" json:"net_debt_to_ebitda,omitempty"`                                                        // Отношение чистого долга к EBITDA.
+	CurrentRatioMrq                  float64                `protobuf:"fixed64,36,opt,name=current_ratio_mrq,json=currentRatioMrq,proto3" json:"current_ratio_mrq,omitempty"`                                                          // Коэффициент текущей ликвидности.
+	FixedChargeCoverageRatioFy       float64                `protobuf:"fixed64,37,opt,name=fixed_charge_coverage_ratio_fy,json=fixedChargeCoverageRatioFy,proto3" json:"fixed_charge_coverage_ratio_fy,omitempty"`                     // Коэффициент покрытия фиксированных платежей — FCCR.
+	DividendYieldDailyTtm            float64                `protobuf:"fixed64,38,opt,name=dividend_yield_daily_ttm,json=dividendYieldDailyTtm,proto3" json:"dividend_yield_daily_ttm,omitempty"`                                      // Дивидендная доходность за 12 месяцев.
+	DividendRateTtm                  float64                `protobuf:"fixed64,39,opt,name=dividend_rate_ttm,json=dividendRateTtm,proto3" json:"dividend_rate_ttm,omitempty"`                                                          // Выплаченные дивиденды за 12 месяцев.
+	DividendsPerShare                float64                `protobuf:"fixed64,40,opt,name=dividends_per_share,json=dividendsPerShare,proto3" json:"dividends_per_share,omitempty"`                                                    // Значение дивидендов на акцию.
+	FiveYearsAverageDividendYield    float64                `protobuf:"fixed64,41,opt,name=five_years_average_dividend_yield,json=fiveYearsAverageDividendYield,proto3" json:"five_years_average_dividend_yield,omitempty"`            // Средняя дивидендная доходность за 5 лет.
+	FiveYearAnnualDividendGrowthRate float64                `protobuf:"fixed64,42,opt,name=five_year_annual_dividend_growth_rate,json=fiveYearAnnualDividendGrowthRate,proto3" json:"five_year_annual_dividend_growth_rate,omitempty"` // Среднегодовой рост дивидендов за 5 лет.
+	DividendPayoutRatioFy            float64                `protobuf:"fixed64,43,opt,name=dividend_payout_ratio_fy,json=dividendPayoutRatioFy,proto3" json:"dividend_payout_ratio_fy,omitempty"`                                      // Процент чистой прибыли, уходящий на выплату дивидендов.
+	BuyBackTtm                       float64                `protobuf:"fixed64,44,opt,name=buy_back_ttm,json=buyBackTtm,proto3" json:"buy_back_ttm,omitempty"`                                                                         // Деньги, потраченные на обратный выкуп акций.
+	OneYearAnnualRevenueGrowthRate   float64                `protobuf:"fixed64,45,opt,name=one_year_annual_revenue_growth_rate,json=oneYearAnnualRevenueGrowthRate,proto3" json:"one_year_annual_revenue_growth_rate,omitempty"`       // Рост выручки за 1 год.
+	DomicileIndicatorCode            string                 `protobuf:"bytes,46,opt,name=domicile_indicator_code,json=domicileIndicatorCode,proto3" json:"domicile_indicator_code,omitempty"`                                          // Код страны.
+	AdrToCommonShareRatio            float64                `protobuf:"fixed64,47,opt,name=adr_to_common_share_ratio,json=adrToCommonShareRatio,proto3" json:"adr_to_common_share_ratio,omitempty"`                                    // Соотношение депозитарной расписки к акциям.
+	NumberOfEmployees                float64                `protobuf:"fixed64,48,opt,name=number_of_employees,json=numberOfEmployees,proto3" json:"number_of_employees,omitempty"`                                                    // Количество сотрудников.
 	ExDividendDate                   *timestamppb.Timestamp `protobuf:"bytes,49,opt,name=ex_dividend_date,json=exDividendDate,proto3" json:"ex_dividend_date,omitempty"`
-	FiscalPeriodStartDate            *timestamppb.Timestamp `protobuf:"bytes,50,opt,name=fiscal_period_start_date,json=fiscalPeriodStartDate,proto3" json:"fiscal_period_start_date,omitempty"`              //Начало фискального периода.
-	FiscalPeriodEndDate              *timestamppb.Timestamp `protobuf:"bytes,51,opt,name=fiscal_period_end_date,json=fiscalPeriodEndDate,proto3" json:"fiscal_period_end_date,omitempty"`                    //Окончание фискального периода.
-	RevenueChangeFiveYears           float64                `protobuf:"fixed64,53,opt,name=revenue_change_five_years,json=revenueChangeFiveYears,proto3" json:"revenue_change_five_years,omitempty"`         //Изменение общего дохода за 5 лет.
-	EpsChangeFiveYears               float64                `protobuf:"fixed64,54,opt,name=eps_change_five_years,json=epsChangeFiveYears,proto3" json:"eps_change_five_years,omitempty"`                     //Изменение EPS за 5 лет.
-	EbitdaChangeFiveYears            float64                `protobuf:"fixed64,55,opt,name=ebitda_change_five_years,json=ebitdaChangeFiveYears,proto3" json:"ebitda_change_five_years,omitempty"`            //Изменение EBIDTA за 5 лет.
-	TotalDebtChangeFiveYears         float64                `protobuf:"fixed64,56,opt,name=total_debt_change_five_years,json=totalDebtChangeFiveYears,proto3" json:"total_debt_change_five_years,omitempty"` //Изменение общей задолжности за 5 лет.
-	EvToSales                        float64                `protobuf:"fixed64,57,opt,name=ev_to_sales,json=evToSales,proto3" json:"ev_to_sales,omitempty"`                                                  //Отношение EV к выручке.
+	FiscalPeriodStartDate            *timestamppb.Timestamp `protobuf:"bytes,50,opt,name=fiscal_period_start_date,json=fiscalPeriodStartDate,proto3" json:"fiscal_period_start_date,omitempty"`              // Начало фискального периода.
+	FiscalPeriodEndDate              *timestamppb.Timestamp `protobuf:"bytes,51,opt,name=fiscal_period_end_date,json=fiscalPeriodEndDate,proto3" json:"fiscal_period_end_date,omitempty"`                    // Окончание фискального периода.
+	RevenueChangeFiveYears           float64                `protobuf:"fixed64,53,opt,name=revenue_change_five_years,json=revenueChangeFiveYears,proto3" json:"revenue_change_five_years,omitempty"`         // Изменение общего дохода за 5 лет.
+	EpsChangeFiveYears               float64                `protobuf:"fixed64,54,opt,name=eps_change_five_years,json=epsChangeFiveYears,proto3" json:"eps_change_five_years,omitempty"`                     // Изменение EPS за 5 лет.
+	EbitdaChangeFiveYears            float64                `protobuf:"fixed64,55,opt,name=ebitda_change_five_years,json=ebitdaChangeFiveYears,proto3" json:"ebitda_change_five_years,omitempty"`            // Изменение EBIDTA за 5 лет.
+	TotalDebtChangeFiveYears         float64                `protobuf:"fixed64,56,opt,name=total_debt_change_five_years,json=totalDebtChangeFiveYears,proto3" json:"total_debt_change_five_years,omitempty"` // Изменение общей задолжности за 5 лет.
+	EvToSales                        float64                `protobuf:"fixed64,57,opt,name=ev_to_sales,json=evToSales,proto3" json:"ev_to_sales,omitempty"`                                                  // Отношение EV к выручке.
 }
 
 func (x *GetAssetFundamentalsResponse_StatisticResponse) Reset() {
@@ -10855,7 +10856,7 @@ type GetForecastResponse_TargetItem struct {
 	Ticker             string                 `protobuf:"bytes,2,opt,name=ticker,proto3" json:"ticker,omitempty"`                                                                            // Тикер инструмента.
 	Company            string                 `protobuf:"bytes,3,opt,name=company,proto3" json:"company,omitempty"`                                                                          // Название компании, давшей прогноз.
 	Recommendation     Recommendation         `protobuf:"varint,4,opt,name=recommendation,proto3,enum=tinkoff.public.invest.api.contract.v1.Recommendation" json:"recommendation,omitempty"` // Прогноз.
-	RecommendationDate *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=recommendation_date,json=recommendationDate,proto3" json:"recommendation_date,omitempty"`                          //Дата прогноза.
+	RecommendationDate *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=recommendation_date,json=recommendationDate,proto3" json:"recommendation_date,omitempty"`                          // Дата прогноза.
 	Currency           string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                                                                        // Валюта.
 	CurrentPrice       *Quotation             `protobuf:"bytes,7,opt,name=current_price,json=currentPrice,proto3" json:"current_price,omitempty"`                                            // Текущая цена.
 	TargetPrice        *Quotation             `protobuf:"bytes,8,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`                                               // Прогнозируемая цена.
@@ -11101,8 +11102,8 @@ type RiskRatesResponse_RiskRateResult struct {
 	InstrumentUid  string                        `protobuf:"bytes,1,opt,name=instrument_uid,json=instrumentUid,proto3" json:"instrument_uid,omitempty"`
 	ShortRiskRate  *RiskRatesResponse_RiskRate   `protobuf:"bytes,2,opt,name=short_risk_rate,json=shortRiskRate,proto3,oneof" json:"short_risk_rate,omitempty"` // Ставка риска пользователя  в шорт
 	LongRiskRate   *RiskRatesResponse_RiskRate   `protobuf:"bytes,3,opt,name=long_risk_rate,json=longRiskRate,proto3,oneof" json:"long_risk_rate,omitempty"`    // Ставка риска пользователя в лонг
-	ShortRiskRates []*RiskRatesResponse_RiskRate `protobuf:"bytes,5,rep,name=short_risk_rates,json=shortRiskRates,proto3" json:"short_risk_rates,omitempty"`    //Доступные ставки риска в шорт
-	LongRiskRates  []*RiskRatesResponse_RiskRate `protobuf:"bytes,6,rep,name=long_risk_rates,json=longRiskRates,proto3" json:"long_risk_rates,omitempty"`       //Доступные ставки риска в лонг
+	ShortRiskRates []*RiskRatesResponse_RiskRate `protobuf:"bytes,5,rep,name=short_risk_rates,json=shortRiskRates,proto3" json:"short_risk_rates,omitempty"`    // Доступные ставки риска в шорт
+	LongRiskRates  []*RiskRatesResponse_RiskRate `protobuf:"bytes,6,rep,name=long_risk_rates,json=longRiskRates,proto3" json:"long_risk_rates,omitempty"`       // Доступные ставки риска в лонг
 	Error          *string                       `protobuf:"bytes,9,opt,name=error,proto3,oneof" json:"error,omitempty"`                                        // Ошибка.
 }
 
@@ -11306,7 +11307,7 @@ type GetInsiderDealsResponse_InsiderDeal struct {
 	InvestorName      string                                 `protobuf:"bytes,9,opt,name=investor_name,json=investorName,proto3" json:"investor_name,omitempty"`                                                          // Имя инвестора.
 	InvestorPosition  string                                 `protobuf:"bytes,10,opt,name=investor_position,json=investorPosition,proto3" json:"investor_position,omitempty"`                                             // Какое отношение покупатель/продавец имеет к эмитенту
 	Percentage        float32                                `protobuf:"fixed32,11,opt,name=percentage,proto3" json:"percentage,omitempty"`                                                                               // Купленный/проданный объём от общего количества ценных бумаг на рынке
-	IsOptionExecution bool                                   `protobuf:"varint,12,opt,name=is_option_execution,json=isOptionExecution,proto3" json:"is_option_execution,omitempty"`                                       //Признак является ли сделка реализацией опциона
+	IsOptionExecution bool                                   `protobuf:"varint,12,opt,name=is_option_execution,json=isOptionExecution,proto3" json:"is_option_execution,omitempty"`                                       // Признак является ли сделка реализацией опциона
 	DisclosureDate    *timestamppb.Timestamp                 `protobuf:"bytes,13,opt,name=disclosure_date,json=disclosureDate,proto3" json:"disclosure_date,omitempty"`                                                   // Дата раскрытия сделки.
 }
 
@@ -14835,141 +14836,144 @@ func file_instruments_proto_rawDescGZIP() []byte {
 	return file_instruments_proto_rawDescData
 }
 
-var file_instruments_proto_enumTypes = make([]protoimpl.EnumInfo, 17)
-var file_instruments_proto_msgTypes = make([]protoimpl.MessageInfo, 104)
-var file_instruments_proto_goTypes = []interface{}{
-	(CouponType)(0),                     // 0: tinkoff.public.invest.api.contract.v1.CouponType
-	(OptionDirection)(0),                // 1: tinkoff.public.invest.api.contract.v1.OptionDirection
-	(OptionPaymentType)(0),              // 2: tinkoff.public.invest.api.contract.v1.OptionPaymentType
-	(OptionStyle)(0),                    // 3: tinkoff.public.invest.api.contract.v1.OptionStyle
-	(OptionSettlementType)(0),           // 4: tinkoff.public.invest.api.contract.v1.OptionSettlementType
-	(InstrumentIdType)(0),               // 5: tinkoff.public.invest.api.contract.v1.InstrumentIdType
-	(ShareType)(0),                      // 6: tinkoff.public.invest.api.contract.v1.ShareType
-	(AssetType)(0),                      // 7: tinkoff.public.invest.api.contract.v1.AssetType
-	(StructuredProductType)(0),          // 8: tinkoff.public.invest.api.contract.v1.StructuredProductType
-	(EditFavoritesActionType)(0),        // 9: tinkoff.public.invest.api.contract.v1.EditFavoritesActionType
-	(Recommendation)(0),                 // 10: tinkoff.public.invest.api.contract.v1.Recommendation
-	(RiskLevel)(0),                      // 11: tinkoff.public.invest.api.contract.v1.RiskLevel
-	(BondType)(0),                       // 12: tinkoff.public.invest.api.contract.v1.BondType
-	(InstrumentExchangeType)(0),         // 13: tinkoff.public.invest.api.contract.v1.InstrumentExchangeType
-	(GetBondEventsRequest_EventType)(0), // 14: tinkoff.public.invest.api.contract.v1.GetBondEventsRequest.EventType
-	(GetAssetReportsResponse_AssetReportPeriodType)(0),           // 15: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse.AssetReportPeriodType
-	(GetInsiderDealsResponse_TradeDirection)(0),                  // 16: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse.TradeDirection
-	(*TradingSchedulesRequest)(nil),                              // 17: tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest
-	(*TradingSchedulesResponse)(nil),                             // 18: tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse
-	(*TradingSchedule)(nil),                                      // 19: tinkoff.public.invest.api.contract.v1.TradingSchedule
-	(*TradingDay)(nil),                                           // 20: tinkoff.public.invest.api.contract.v1.TradingDay
-	(*InstrumentRequest)(nil),                                    // 21: tinkoff.public.invest.api.contract.v1.InstrumentRequest
-	(*InstrumentsRequest)(nil),                                   // 22: tinkoff.public.invest.api.contract.v1.InstrumentsRequest
-	(*FilterOptionsRequest)(nil),                                 // 23: tinkoff.public.invest.api.contract.v1.FilterOptionsRequest
-	(*BondResponse)(nil),                                         // 24: tinkoff.public.invest.api.contract.v1.BondResponse
-	(*BondsResponse)(nil),                                        // 25: tinkoff.public.invest.api.contract.v1.BondsResponse
-	(*GetBondCouponsRequest)(nil),                                // 26: tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest
-	(*GetBondCouponsResponse)(nil),                               // 27: tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse
-	(*GetBondEventsRequest)(nil),                                 // 28: tinkoff.public.invest.api.contract.v1.GetBondEventsRequest
-	(*GetBondEventsResponse)(nil),                                // 29: tinkoff.public.invest.api.contract.v1.GetBondEventsResponse
-	(*Coupon)(nil),                                               // 30: tinkoff.public.invest.api.contract.v1.Coupon
-	(*CurrencyResponse)(nil),                                     // 31: tinkoff.public.invest.api.contract.v1.CurrencyResponse
-	(*CurrenciesResponse)(nil),                                   // 32: tinkoff.public.invest.api.contract.v1.CurrenciesResponse
-	(*EtfResponse)(nil),                                          // 33: tinkoff.public.invest.api.contract.v1.EtfResponse
-	(*EtfsResponse)(nil),                                         // 34: tinkoff.public.invest.api.contract.v1.EtfsResponse
-	(*FutureResponse)(nil),                                       // 35: tinkoff.public.invest.api.contract.v1.FutureResponse
-	(*FuturesResponse)(nil),                                      // 36: tinkoff.public.invest.api.contract.v1.FuturesResponse
-	(*OptionResponse)(nil),                                       // 37: tinkoff.public.invest.api.contract.v1.OptionResponse
-	(*OptionsResponse)(nil),                                      // 38: tinkoff.public.invest.api.contract.v1.OptionsResponse
-	(*Option)(nil),                                               // 39: tinkoff.public.invest.api.contract.v1.Option
-	(*ShareResponse)(nil),                                        // 40: tinkoff.public.invest.api.contract.v1.ShareResponse
-	(*SharesResponse)(nil),                                       // 41: tinkoff.public.invest.api.contract.v1.SharesResponse
-	(*Bond)(nil),                                                 // 42: tinkoff.public.invest.api.contract.v1.Bond
-	(*Currency)(nil),                                             // 43: tinkoff.public.invest.api.contract.v1.Currency
-	(*Etf)(nil),                                                  // 44: tinkoff.public.invest.api.contract.v1.Etf
-	(*Future)(nil),                                               // 45: tinkoff.public.invest.api.contract.v1.Future
-	(*Share)(nil),                                                // 46: tinkoff.public.invest.api.contract.v1.Share
-	(*GetAccruedInterestsRequest)(nil),                           // 47: tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest
-	(*GetAccruedInterestsResponse)(nil),                          // 48: tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse
-	(*AccruedInterest)(nil),                                      // 49: tinkoff.public.invest.api.contract.v1.AccruedInterest
-	(*GetFuturesMarginRequest)(nil),                              // 50: tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest
-	(*GetFuturesMarginResponse)(nil),                             // 51: tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse
-	(*InstrumentResponse)(nil),                                   // 52: tinkoff.public.invest.api.contract.v1.InstrumentResponse
-	(*Instrument)(nil),                                           // 53: tinkoff.public.invest.api.contract.v1.Instrument
-	(*GetDividendsRequest)(nil),                                  // 54: tinkoff.public.invest.api.contract.v1.GetDividendsRequest
-	(*GetDividendsResponse)(nil),                                 // 55: tinkoff.public.invest.api.contract.v1.GetDividendsResponse
-	(*Dividend)(nil),                                             // 56: tinkoff.public.invest.api.contract.v1.Dividend
-	(*AssetRequest)(nil),                                         // 57: tinkoff.public.invest.api.contract.v1.AssetRequest
-	(*AssetResponse)(nil),                                        // 58: tinkoff.public.invest.api.contract.v1.AssetResponse
-	(*AssetsRequest)(nil),                                        // 59: tinkoff.public.invest.api.contract.v1.AssetsRequest
-	(*AssetsResponse)(nil),                                       // 60: tinkoff.public.invest.api.contract.v1.AssetsResponse
-	(*AssetFull)(nil),                                            // 61: tinkoff.public.invest.api.contract.v1.AssetFull
-	(*Asset)(nil),                                                // 62: tinkoff.public.invest.api.contract.v1.Asset
-	(*AssetCurrency)(nil),                                        // 63: tinkoff.public.invest.api.contract.v1.AssetCurrency
-	(*AssetSecurity)(nil),                                        // 64: tinkoff.public.invest.api.contract.v1.AssetSecurity
-	(*AssetShare)(nil),                                           // 65: tinkoff.public.invest.api.contract.v1.AssetShare
-	(*AssetBond)(nil),                                            // 66: tinkoff.public.invest.api.contract.v1.AssetBond
-	(*AssetStructuredProduct)(nil),                               // 67: tinkoff.public.invest.api.contract.v1.AssetStructuredProduct
-	(*AssetEtf)(nil),                                             // 68: tinkoff.public.invest.api.contract.v1.AssetEtf
-	(*AssetClearingCertificate)(nil),                             // 69: tinkoff.public.invest.api.contract.v1.AssetClearingCertificate
-	(*Brand)(nil),                                                // 70: tinkoff.public.invest.api.contract.v1.Brand
-	(*AssetInstrument)(nil),                                      // 71: tinkoff.public.invest.api.contract.v1.AssetInstrument
-	(*InstrumentLink)(nil),                                       // 72: tinkoff.public.invest.api.contract.v1.InstrumentLink
-	(*GetFavoritesRequest)(nil),                                  // 73: tinkoff.public.invest.api.contract.v1.GetFavoritesRequest
-	(*GetFavoritesResponse)(nil),                                 // 74: tinkoff.public.invest.api.contract.v1.GetFavoritesResponse
-	(*FavoriteInstrument)(nil),                                   // 75: tinkoff.public.invest.api.contract.v1.FavoriteInstrument
-	(*EditFavoritesRequest)(nil),                                 // 76: tinkoff.public.invest.api.contract.v1.EditFavoritesRequest
-	(*EditFavoritesRequestInstrument)(nil),                       // 77: tinkoff.public.invest.api.contract.v1.EditFavoritesRequestInstrument
-	(*EditFavoritesResponse)(nil),                                // 78: tinkoff.public.invest.api.contract.v1.EditFavoritesResponse
-	(*CreateFavoriteGroupRequest)(nil),                           // 79: tinkoff.public.invest.api.contract.v1.CreateFavoriteGroupRequest
-	(*CreateFavoriteGroupResponse)(nil),                          // 80: tinkoff.public.invest.api.contract.v1.CreateFavoriteGroupResponse
-	(*DeleteFavoriteGroupRequest)(nil),                           // 81: tinkoff.public.invest.api.contract.v1.DeleteFavoriteGroupRequest
-	(*DeleteFavoriteGroupResponse)(nil),                          // 82: tinkoff.public.invest.api.contract.v1.DeleteFavoriteGroupResponse
-	(*GetFavoriteGroupsRequest)(nil),                             // 83: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsRequest
-	(*GetFavoriteGroupsResponse)(nil),                            // 84: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsResponse
-	(*GetCountriesRequest)(nil),                                  // 85: tinkoff.public.invest.api.contract.v1.GetCountriesRequest
-	(*GetCountriesResponse)(nil),                                 // 86: tinkoff.public.invest.api.contract.v1.GetCountriesResponse
-	(*IndicativesRequest)(nil),                                   // 87: tinkoff.public.invest.api.contract.v1.IndicativesRequest
-	(*IndicativesResponse)(nil),                                  // 88: tinkoff.public.invest.api.contract.v1.IndicativesResponse
-	(*IndicativeResponse)(nil),                                   // 89: tinkoff.public.invest.api.contract.v1.IndicativeResponse
-	(*CountryResponse)(nil),                                      // 90: tinkoff.public.invest.api.contract.v1.CountryResponse
-	(*FindInstrumentRequest)(nil),                                // 91: tinkoff.public.invest.api.contract.v1.FindInstrumentRequest
-	(*FindInstrumentResponse)(nil),                               // 92: tinkoff.public.invest.api.contract.v1.FindInstrumentResponse
-	(*InstrumentShort)(nil),                                      // 93: tinkoff.public.invest.api.contract.v1.InstrumentShort
-	(*GetBrandsRequest)(nil),                                     // 94: tinkoff.public.invest.api.contract.v1.GetBrandsRequest
-	(*GetBrandRequest)(nil),                                      // 95: tinkoff.public.invest.api.contract.v1.GetBrandRequest
-	(*GetBrandsResponse)(nil),                                    // 96: tinkoff.public.invest.api.contract.v1.GetBrandsResponse
-	(*GetAssetFundamentalsRequest)(nil),                          // 97: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsRequest
-	(*GetAssetFundamentalsResponse)(nil),                         // 98: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsResponse
-	(*GetAssetReportsRequest)(nil),                               // 99: tinkoff.public.invest.api.contract.v1.GetAssetReportsRequest
-	(*GetAssetReportsResponse)(nil),                              // 100: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse
-	(*GetConsensusForecastsRequest)(nil),                         // 101: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsRequest
-	(*GetConsensusForecastsResponse)(nil),                        // 102: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsResponse
-	(*GetForecastRequest)(nil),                                   // 103: tinkoff.public.invest.api.contract.v1.GetForecastRequest
-	(*GetForecastResponse)(nil),                                  // 104: tinkoff.public.invest.api.contract.v1.GetForecastResponse
-	(*RiskRatesRequest)(nil),                                     // 105: tinkoff.public.invest.api.contract.v1.RiskRatesRequest
-	(*RiskRatesResponse)(nil),                                    // 106: tinkoff.public.invest.api.contract.v1.RiskRatesResponse
-	(*TradingInterval)(nil),                                      // 107: tinkoff.public.invest.api.contract.v1.TradingInterval
-	(*GetInsiderDealsRequest)(nil),                               // 108: tinkoff.public.invest.api.contract.v1.GetInsiderDealsRequest
-	(*GetInsiderDealsResponse)(nil),                              // 109: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse
-	(*GetBondEventsResponse_BondEvent)(nil),                      // 110: tinkoff.public.invest.api.contract.v1.GetBondEventsResponse.BondEvent
-	(*GetFavoriteGroupsResponse_FavoriteGroup)(nil),              // 111: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsResponse.FavoriteGroup
-	(*GetAssetFundamentalsResponse_StatisticResponse)(nil),       // 112: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsResponse.StatisticResponse
-	(*GetAssetReportsResponse_GetAssetReportsEvent)(nil),         // 113: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse.GetAssetReportsEvent
-	(*GetConsensusForecastsResponse_ConsensusForecastsItem)(nil), // 114: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsResponse.ConsensusForecastsItem
-	(*GetForecastResponse_TargetItem)(nil),                       // 115: tinkoff.public.invest.api.contract.v1.GetForecastResponse.TargetItem
-	(*GetForecastResponse_ConsensusItem)(nil),                    // 116: tinkoff.public.invest.api.contract.v1.GetForecastResponse.ConsensusItem
-	(*RiskRatesResponse_RiskRateResult)(nil),                     // 117: tinkoff.public.invest.api.contract.v1.RiskRatesResponse.RiskRateResult
-	(*RiskRatesResponse_RiskRate)(nil),                           // 118: tinkoff.public.invest.api.contract.v1.RiskRatesResponse.RiskRate
-	(*TradingInterval_TimeInterval)(nil),                         // 119: tinkoff.public.invest.api.contract.v1.TradingInterval.TimeInterval
-	(*GetInsiderDealsResponse_InsiderDeal)(nil),                  // 120: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse.InsiderDeal
-	(*timestamppb.Timestamp)(nil),                                // 121: google.protobuf.Timestamp
-	(InstrumentStatus)(0),                                        // 122: tinkoff.public.invest.api.contract.v1.InstrumentStatus
-	(*MoneyValue)(nil),                                           // 123: tinkoff.public.invest.api.contract.v1.MoneyValue
-	(SecurityTradingStatus)(0),                                   // 124: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
-	(RealExchange)(0),                                            // 125: tinkoff.public.invest.api.contract.v1.RealExchange
-	(*BrandData)(nil),                                            // 126: tinkoff.public.invest.api.contract.v1.BrandData
-	(*Quotation)(nil),                                            // 127: tinkoff.public.invest.api.contract.v1.Quotation
-	(InstrumentType)(0),                                          // 128: tinkoff.public.invest.api.contract.v1.InstrumentType
-	(*Page)(nil),                                                 // 129: tinkoff.public.invest.api.contract.v1.Page
-	(*PageResponse)(nil),                                         // 130: tinkoff.public.invest.api.contract.v1.PageResponse
-}
+var (
+	file_instruments_proto_enumTypes = make([]protoimpl.EnumInfo, 17)
+	file_instruments_proto_msgTypes  = make([]protoimpl.MessageInfo, 104)
+	file_instruments_proto_goTypes   = []interface{}{
+		(CouponType)(0),                     // 0: tinkoff.public.invest.api.contract.v1.CouponType
+		(OptionDirection)(0),                // 1: tinkoff.public.invest.api.contract.v1.OptionDirection
+		(OptionPaymentType)(0),              // 2: tinkoff.public.invest.api.contract.v1.OptionPaymentType
+		(OptionStyle)(0),                    // 3: tinkoff.public.invest.api.contract.v1.OptionStyle
+		(OptionSettlementType)(0),           // 4: tinkoff.public.invest.api.contract.v1.OptionSettlementType
+		(InstrumentIdType)(0),               // 5: tinkoff.public.invest.api.contract.v1.InstrumentIdType
+		(ShareType)(0),                      // 6: tinkoff.public.invest.api.contract.v1.ShareType
+		(AssetType)(0),                      // 7: tinkoff.public.invest.api.contract.v1.AssetType
+		(StructuredProductType)(0),          // 8: tinkoff.public.invest.api.contract.v1.StructuredProductType
+		(EditFavoritesActionType)(0),        // 9: tinkoff.public.invest.api.contract.v1.EditFavoritesActionType
+		(Recommendation)(0),                 // 10: tinkoff.public.invest.api.contract.v1.Recommendation
+		(RiskLevel)(0),                      // 11: tinkoff.public.invest.api.contract.v1.RiskLevel
+		(BondType)(0),                       // 12: tinkoff.public.invest.api.contract.v1.BondType
+		(InstrumentExchangeType)(0),         // 13: tinkoff.public.invest.api.contract.v1.InstrumentExchangeType
+		(GetBondEventsRequest_EventType)(0), // 14: tinkoff.public.invest.api.contract.v1.GetBondEventsRequest.EventType
+		(GetAssetReportsResponse_AssetReportPeriodType)(0),           // 15: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse.AssetReportPeriodType
+		(GetInsiderDealsResponse_TradeDirection)(0),                  // 16: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse.TradeDirection
+		(*TradingSchedulesRequest)(nil),                              // 17: tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest
+		(*TradingSchedulesResponse)(nil),                             // 18: tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse
+		(*TradingSchedule)(nil),                                      // 19: tinkoff.public.invest.api.contract.v1.TradingSchedule
+		(*TradingDay)(nil),                                           // 20: tinkoff.public.invest.api.contract.v1.TradingDay
+		(*InstrumentRequest)(nil),                                    // 21: tinkoff.public.invest.api.contract.v1.InstrumentRequest
+		(*InstrumentsRequest)(nil),                                   // 22: tinkoff.public.invest.api.contract.v1.InstrumentsRequest
+		(*FilterOptionsRequest)(nil),                                 // 23: tinkoff.public.invest.api.contract.v1.FilterOptionsRequest
+		(*BondResponse)(nil),                                         // 24: tinkoff.public.invest.api.contract.v1.BondResponse
+		(*BondsResponse)(nil),                                        // 25: tinkoff.public.invest.api.contract.v1.BondsResponse
+		(*GetBondCouponsRequest)(nil),                                // 26: tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest
+		(*GetBondCouponsResponse)(nil),                               // 27: tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse
+		(*GetBondEventsRequest)(nil),                                 // 28: tinkoff.public.invest.api.contract.v1.GetBondEventsRequest
+		(*GetBondEventsResponse)(nil),                                // 29: tinkoff.public.invest.api.contract.v1.GetBondEventsResponse
+		(*Coupon)(nil),                                               // 30: tinkoff.public.invest.api.contract.v1.Coupon
+		(*CurrencyResponse)(nil),                                     // 31: tinkoff.public.invest.api.contract.v1.CurrencyResponse
+		(*CurrenciesResponse)(nil),                                   // 32: tinkoff.public.invest.api.contract.v1.CurrenciesResponse
+		(*EtfResponse)(nil),                                          // 33: tinkoff.public.invest.api.contract.v1.EtfResponse
+		(*EtfsResponse)(nil),                                         // 34: tinkoff.public.invest.api.contract.v1.EtfsResponse
+		(*FutureResponse)(nil),                                       // 35: tinkoff.public.invest.api.contract.v1.FutureResponse
+		(*FuturesResponse)(nil),                                      // 36: tinkoff.public.invest.api.contract.v1.FuturesResponse
+		(*OptionResponse)(nil),                                       // 37: tinkoff.public.invest.api.contract.v1.OptionResponse
+		(*OptionsResponse)(nil),                                      // 38: tinkoff.public.invest.api.contract.v1.OptionsResponse
+		(*Option)(nil),                                               // 39: tinkoff.public.invest.api.contract.v1.Option
+		(*ShareResponse)(nil),                                        // 40: tinkoff.public.invest.api.contract.v1.ShareResponse
+		(*SharesResponse)(nil),                                       // 41: tinkoff.public.invest.api.contract.v1.SharesResponse
+		(*Bond)(nil),                                                 // 42: tinkoff.public.invest.api.contract.v1.Bond
+		(*Currency)(nil),                                             // 43: tinkoff.public.invest.api.contract.v1.Currency
+		(*Etf)(nil),                                                  // 44: tinkoff.public.invest.api.contract.v1.Etf
+		(*Future)(nil),                                               // 45: tinkoff.public.invest.api.contract.v1.Future
+		(*Share)(nil),                                                // 46: tinkoff.public.invest.api.contract.v1.Share
+		(*GetAccruedInterestsRequest)(nil),                           // 47: tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest
+		(*GetAccruedInterestsResponse)(nil),                          // 48: tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse
+		(*AccruedInterest)(nil),                                      // 49: tinkoff.public.invest.api.contract.v1.AccruedInterest
+		(*GetFuturesMarginRequest)(nil),                              // 50: tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest
+		(*GetFuturesMarginResponse)(nil),                             // 51: tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse
+		(*InstrumentResponse)(nil),                                   // 52: tinkoff.public.invest.api.contract.v1.InstrumentResponse
+		(*Instrument)(nil),                                           // 53: tinkoff.public.invest.api.contract.v1.Instrument
+		(*GetDividendsRequest)(nil),                                  // 54: tinkoff.public.invest.api.contract.v1.GetDividendsRequest
+		(*GetDividendsResponse)(nil),                                 // 55: tinkoff.public.invest.api.contract.v1.GetDividendsResponse
+		(*Dividend)(nil),                                             // 56: tinkoff.public.invest.api.contract.v1.Dividend
+		(*AssetRequest)(nil),                                         // 57: tinkoff.public.invest.api.contract.v1.AssetRequest
+		(*AssetResponse)(nil),                                        // 58: tinkoff.public.invest.api.contract.v1.AssetResponse
+		(*AssetsRequest)(nil),                                        // 59: tinkoff.public.invest.api.contract.v1.AssetsRequest
+		(*AssetsResponse)(nil),                                       // 60: tinkoff.public.invest.api.contract.v1.AssetsResponse
+		(*AssetFull)(nil),                                            // 61: tinkoff.public.invest.api.contract.v1.AssetFull
+		(*Asset)(nil),                                                // 62: tinkoff.public.invest.api.contract.v1.Asset
+		(*AssetCurrency)(nil),                                        // 63: tinkoff.public.invest.api.contract.v1.AssetCurrency
+		(*AssetSecurity)(nil),                                        // 64: tinkoff.public.invest.api.contract.v1.AssetSecurity
+		(*AssetShare)(nil),                                           // 65: tinkoff.public.invest.api.contract.v1.AssetShare
+		(*AssetBond)(nil),                                            // 66: tinkoff.public.invest.api.contract.v1.AssetBond
+		(*AssetStructuredProduct)(nil),                               // 67: tinkoff.public.invest.api.contract.v1.AssetStructuredProduct
+		(*AssetEtf)(nil),                                             // 68: tinkoff.public.invest.api.contract.v1.AssetEtf
+		(*AssetClearingCertificate)(nil),                             // 69: tinkoff.public.invest.api.contract.v1.AssetClearingCertificate
+		(*Brand)(nil),                                                // 70: tinkoff.public.invest.api.contract.v1.Brand
+		(*AssetInstrument)(nil),                                      // 71: tinkoff.public.invest.api.contract.v1.AssetInstrument
+		(*InstrumentLink)(nil),                                       // 72: tinkoff.public.invest.api.contract.v1.InstrumentLink
+		(*GetFavoritesRequest)(nil),                                  // 73: tinkoff.public.invest.api.contract.v1.GetFavoritesRequest
+		(*GetFavoritesResponse)(nil),                                 // 74: tinkoff.public.invest.api.contract.v1.GetFavoritesResponse
+		(*FavoriteInstrument)(nil),                                   // 75: tinkoff.public.invest.api.contract.v1.FavoriteInstrument
+		(*EditFavoritesRequest)(nil),                                 // 76: tinkoff.public.invest.api.contract.v1.EditFavoritesRequest
+		(*EditFavoritesRequestInstrument)(nil),                       // 77: tinkoff.public.invest.api.contract.v1.EditFavoritesRequestInstrument
+		(*EditFavoritesResponse)(nil),                                // 78: tinkoff.public.invest.api.contract.v1.EditFavoritesResponse
+		(*CreateFavoriteGroupRequest)(nil),                           // 79: tinkoff.public.invest.api.contract.v1.CreateFavoriteGroupRequest
+		(*CreateFavoriteGroupResponse)(nil),                          // 80: tinkoff.public.invest.api.contract.v1.CreateFavoriteGroupResponse
+		(*DeleteFavoriteGroupRequest)(nil),                           // 81: tinkoff.public.invest.api.contract.v1.DeleteFavoriteGroupRequest
+		(*DeleteFavoriteGroupResponse)(nil),                          // 82: tinkoff.public.invest.api.contract.v1.DeleteFavoriteGroupResponse
+		(*GetFavoriteGroupsRequest)(nil),                             // 83: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsRequest
+		(*GetFavoriteGroupsResponse)(nil),                            // 84: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsResponse
+		(*GetCountriesRequest)(nil),                                  // 85: tinkoff.public.invest.api.contract.v1.GetCountriesRequest
+		(*GetCountriesResponse)(nil),                                 // 86: tinkoff.public.invest.api.contract.v1.GetCountriesResponse
+		(*IndicativesRequest)(nil),                                   // 87: tinkoff.public.invest.api.contract.v1.IndicativesRequest
+		(*IndicativesResponse)(nil),                                  // 88: tinkoff.public.invest.api.contract.v1.IndicativesResponse
+		(*IndicativeResponse)(nil),                                   // 89: tinkoff.public.invest.api.contract.v1.IndicativeResponse
+		(*CountryResponse)(nil),                                      // 90: tinkoff.public.invest.api.contract.v1.CountryResponse
+		(*FindInstrumentRequest)(nil),                                // 91: tinkoff.public.invest.api.contract.v1.FindInstrumentRequest
+		(*FindInstrumentResponse)(nil),                               // 92: tinkoff.public.invest.api.contract.v1.FindInstrumentResponse
+		(*InstrumentShort)(nil),                                      // 93: tinkoff.public.invest.api.contract.v1.InstrumentShort
+		(*GetBrandsRequest)(nil),                                     // 94: tinkoff.public.invest.api.contract.v1.GetBrandsRequest
+		(*GetBrandRequest)(nil),                                      // 95: tinkoff.public.invest.api.contract.v1.GetBrandRequest
+		(*GetBrandsResponse)(nil),                                    // 96: tinkoff.public.invest.api.contract.v1.GetBrandsResponse
+		(*GetAssetFundamentalsRequest)(nil),                          // 97: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsRequest
+		(*GetAssetFundamentalsResponse)(nil),                         // 98: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsResponse
+		(*GetAssetReportsRequest)(nil),                               // 99: tinkoff.public.invest.api.contract.v1.GetAssetReportsRequest
+		(*GetAssetReportsResponse)(nil),                              // 100: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse
+		(*GetConsensusForecastsRequest)(nil),                         // 101: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsRequest
+		(*GetConsensusForecastsResponse)(nil),                        // 102: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsResponse
+		(*GetForecastRequest)(nil),                                   // 103: tinkoff.public.invest.api.contract.v1.GetForecastRequest
+		(*GetForecastResponse)(nil),                                  // 104: tinkoff.public.invest.api.contract.v1.GetForecastResponse
+		(*RiskRatesRequest)(nil),                                     // 105: tinkoff.public.invest.api.contract.v1.RiskRatesRequest
+		(*RiskRatesResponse)(nil),                                    // 106: tinkoff.public.invest.api.contract.v1.RiskRatesResponse
+		(*TradingInterval)(nil),                                      // 107: tinkoff.public.invest.api.contract.v1.TradingInterval
+		(*GetInsiderDealsRequest)(nil),                               // 108: tinkoff.public.invest.api.contract.v1.GetInsiderDealsRequest
+		(*GetInsiderDealsResponse)(nil),                              // 109: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse
+		(*GetBondEventsResponse_BondEvent)(nil),                      // 110: tinkoff.public.invest.api.contract.v1.GetBondEventsResponse.BondEvent
+		(*GetFavoriteGroupsResponse_FavoriteGroup)(nil),              // 111: tinkoff.public.invest.api.contract.v1.GetFavoriteGroupsResponse.FavoriteGroup
+		(*GetAssetFundamentalsResponse_StatisticResponse)(nil),       // 112: tinkoff.public.invest.api.contract.v1.GetAssetFundamentalsResponse.StatisticResponse
+		(*GetAssetReportsResponse_GetAssetReportsEvent)(nil),         // 113: tinkoff.public.invest.api.contract.v1.GetAssetReportsResponse.GetAssetReportsEvent
+		(*GetConsensusForecastsResponse_ConsensusForecastsItem)(nil), // 114: tinkoff.public.invest.api.contract.v1.GetConsensusForecastsResponse.ConsensusForecastsItem
+		(*GetForecastResponse_TargetItem)(nil),                       // 115: tinkoff.public.invest.api.contract.v1.GetForecastResponse.TargetItem
+		(*GetForecastResponse_ConsensusItem)(nil),                    // 116: tinkoff.public.invest.api.contract.v1.GetForecastResponse.ConsensusItem
+		(*RiskRatesResponse_RiskRateResult)(nil),                     // 117: tinkoff.public.invest.api.contract.v1.RiskRatesResponse.RiskRateResult
+		(*RiskRatesResponse_RiskRate)(nil),                           // 118: tinkoff.public.invest.api.contract.v1.RiskRatesResponse.RiskRate
+		(*TradingInterval_TimeInterval)(nil),                         // 119: tinkoff.public.invest.api.contract.v1.TradingInterval.TimeInterval
+		(*GetInsiderDealsResponse_InsiderDeal)(nil),                  // 120: tinkoff.public.invest.api.contract.v1.GetInsiderDealsResponse.InsiderDeal
+		(*timestamppb.Timestamp)(nil),                                // 121: google.protobuf.Timestamp
+		(InstrumentStatus)(0),                                        // 122: tinkoff.public.invest.api.contract.v1.InstrumentStatus
+		(*MoneyValue)(nil),                                           // 123: tinkoff.public.invest.api.contract.v1.MoneyValue
+		(SecurityTradingStatus)(0),                                   // 124: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus
+		(RealExchange)(0),                                            // 125: tinkoff.public.invest.api.contract.v1.RealExchange
+		(*BrandData)(nil),                                            // 126: tinkoff.public.invest.api.contract.v1.BrandData
+		(*Quotation)(nil),                                            // 127: tinkoff.public.invest.api.contract.v1.Quotation
+		(InstrumentType)(0),                                          // 128: tinkoff.public.invest.api.contract.v1.InstrumentType
+		(*Page)(nil),                                                 // 129: tinkoff.public.invest.api.contract.v1.Page
+		(*PageResponse)(nil),                                         // 130: tinkoff.public.invest.api.contract.v1.PageResponse
+	}
+)
+
 var file_instruments_proto_depIdxs = []int32{
 	121, // 0: tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest.from:type_name -> google.protobuf.Timestamp
 	121, // 1: tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest.to:type_name -> google.protobuf.Timestamp
