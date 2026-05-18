@@ -38,6 +38,9 @@ type Config struct {
 	TLSCACertFile string `yaml:"TLSCACertFile"`
 	// InsecureSkipVerify - Пропустить проверку сертификата сервера (не рекомендуется для продакшена)
 	InsecureSkipVerify bool `yaml:"InsecureSkipVerify"`
+	// Канал для уведомлений о Resource Exhausted.
+	// Внешний пакет сам решает, делать его буферизированным или нет.
+	ResourceExhaustedChan chan<- ResourceExhaustedEvent
 }
 
 // LoadConfig - загрузка конфигурации для сдк из .yaml файла

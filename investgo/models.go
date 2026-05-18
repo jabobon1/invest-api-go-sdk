@@ -52,6 +52,11 @@ type PostOrderAsyncRequest struct {
 	PriceType    pb.PriceType
 }
 
+type ResourceExhaustedEvent struct {
+	Attempt uint
+	Err     error
+}
+
 type PostOrderResponse struct {
 	*pb.PostOrderResponse
 	Header metadata.MD
