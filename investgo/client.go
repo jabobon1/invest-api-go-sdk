@@ -51,6 +51,18 @@ func NewClient(ctx context.Context, conf Config, l Logger, dialOpts ...grpc.Dial
 		retry.WithMax(conf.MaxRetries),
 		retry.WithOnRetryCallback(func(ctx context.Context, attempt uint, err error) {
 			l.Infof("Resource Exhausted, sleep for %vs...", attempt)
+
+			// Проверяем, передан ли канал во внешний пакет
+			if conf.ResourceExhaustedChan != nil {
+				select {
+				case conf.ResourceExhaustedChan <- ResourceExhaustedEvent{Attempt: attempt, Err: err}:
+					// Успешно отправлено
+				default:
+					// Канал полон или никто не читает, логируем, чтобы не терять инфу
+					l.Errorf("ResourceExhaustedChan is full or has no reader. Event dropped.")
+				}
+			}
+
 		}),
 	}
 
