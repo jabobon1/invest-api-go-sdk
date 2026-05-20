@@ -16,11 +16,17 @@ type TradesStream struct {
 	cancel context.CancelFunc
 
 	trades chan *pb.OrderTrades
+	pings  chan *pb.Ping
 }
 
 // Trades - Метод возвращает канал для чтения информации о торговых поручениях
 func (t *TradesStream) Trades() <-chan *pb.OrderTrades {
 	return t.trades
+}
+
+// Pings - Метод возвращает канал для чтения информации о пинге
+func (t *TradesStream) Pings() <-chan *pb.Ping {
+	return t.pings
 }
 
 // Listen - метод начинает слушать стрим и отправлять информацию в канал, для получения канала: Trades()
@@ -44,6 +50,15 @@ func (t *TradesStream) Listen() error {
 				switch resp.GetPayload().(type) {
 				case *pb.TradesStreamResponse_OrderTrades:
 					t.trades <- resp.GetOrderTrades()
+					select {
+					case t.pings <- resp.GetPing():
+					default:
+					}
+				case *pb.TradesStreamResponse_Ping:
+					select {
+					case t.pings <- resp.GetPing():
+					default:
+					}
 				default:
 					t.ordersClient.logger.Infof("info from Trades stream %v", resp.String())
 				}
@@ -59,6 +74,7 @@ func (t *TradesStream) restart(_ context.Context, attempt uint, err error) {
 func (t *TradesStream) shutdown() {
 	t.ordersClient.logger.Infof("close trades stream")
 	close(t.trades)
+	close(t.pings)
 }
 
 // Stop - Завершение работы стрима

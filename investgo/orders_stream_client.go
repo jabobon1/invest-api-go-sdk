@@ -24,6 +24,7 @@ func (o *OrdersStreamClient) TradesStream(accounts []string, pingDelayMs *int32)
 		stream:       nil,
 		ordersClient: o,
 		trades:       make(chan *pb.OrderTrades),
+		pings:        make(chan *pb.Ping),
 		ctx:          ctx,
 		cancel:       cancel,
 	}

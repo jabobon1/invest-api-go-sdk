@@ -313,7 +313,10 @@ func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 	case *pb.MarketDataResponse_Orderbook:
 		mds.orderBook <- resp.GetOrderbook()
 		// имитируем пинг, внутри nil
-		mds.pings <- resp.GetPing()
+		select {
+		case mds.pings <- resp.GetPing():
+		default:
+		}
 	case *pb.MarketDataResponse_Trade:
 		mds.trade <- resp.GetTrade()
 	case *pb.MarketDataResponse_LastPrice:
@@ -321,7 +324,10 @@ func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 	case *pb.MarketDataResponse_TradingStatus:
 		mds.tradingStatus <- resp.GetTradingStatus()
 	case *pb.MarketDataResponse_Ping:
-		mds.pings <- resp.GetPing()
+		select {
+		case mds.pings <- resp.GetPing():
+		default:
+		}
 	default:
 		// mds.tech <- resp
 		mds.mdsClient.logger.Infof("info from MD stream %v", resp.String())

@@ -50,10 +50,16 @@ func (s *OrderStateStream) Listen() error {
 				switch resp.GetPayload().(type) {
 				case *pb.OrderStateStreamResponse_OrderState_:
 					s.states <- resp.GetOrderState()
-					s.pings <- resp.GetPing()
+					select {
+					case s.pings <- resp.GetPing():
+					default:
+					}
 				case *pb.OrderStateStreamResponse_Ping:
 					s.ordersClient.logger.Infof("Ping received")
-					s.pings <- resp.GetPing()
+					select {
+					case s.pings <- resp.GetPing():
+					default:
+					}
 				default:
 					s.ordersClient.logger.Infof("info from order state stream %v", resp.String())
 				}
