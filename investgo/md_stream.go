@@ -330,6 +330,11 @@ func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 		}
 	default:
 		// mds.tech <- resp
+		// Имитируем пинг
+		select {
+		case mds.pings <- nil:
+		default:
+		}
 		mds.mdsClient.logger.Infof("info from MD stream %v", resp.String())
 	}
 }

@@ -49,9 +49,10 @@ func (s *OrderStateStream) Listen() error {
 			} else {
 				switch resp.GetPayload().(type) {
 				case *pb.OrderStateStreamResponse_OrderState_:
+					// Имитируем пинг
 					s.states <- resp.GetOrderState()
 					select {
-					case s.pings <- resp.GetPing():
+					case s.pings <- nil:
 					default:
 					}
 				case *pb.OrderStateStreamResponse_Ping:
@@ -67,6 +68,11 @@ func (s *OrderStateStream) Listen() error {
 					}
 				default:
 					s.ordersClient.logger.Infof("info from order state stream %v", resp.String())
+					// Имитируем пинг
+					select {
+					case s.pings <- nil:
+					default:
+					}
 				}
 			}
 		}
