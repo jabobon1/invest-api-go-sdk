@@ -17,3 +17,7 @@ main
 *_test.go
 .golangci.yaml
 /proto/google/
+
+
+#Other
+.DS_Store

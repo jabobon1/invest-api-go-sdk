@@ -285,7 +285,7 @@ func (mds *MarketDataStream) Listen() error {
 	for {
 		select {
 		case <-mds.ctx.Done():
-			mds.mdsClient.logger.Infof("stop listening market data stream")
+			mds.mdsClient.logger.Infof("stop listening market data stream by context")
 			return nil
 		default:
 			resp, err := mds.stream.Recv()
@@ -293,7 +293,7 @@ func (mds *MarketDataStream) Listen() error {
 				// если ошибка связана с завершением контекста, обрабатываем ее
 				switch {
 				case status.Code(err) == codes.Canceled:
-					mds.mdsClient.logger.Infof("stop listening market data stream")
+					mds.mdsClient.logger.Infof("stop listening market data stream resp: %s err:%v", resp.String(), err)
 					return nil
 				default:
 					return err

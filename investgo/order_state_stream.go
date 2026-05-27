@@ -41,7 +41,7 @@ func (s *OrderStateStream) Listen() error {
 			if err != nil {
 				switch {
 				case status.Code(err) == codes.Canceled:
-					s.ordersClient.logger.Infof("stop listening order state stream")
+					s.ordersClient.logger.Infof("stop listening order state stream resp: %s err:%v", resp.String(), err)
 					return nil
 				default:
 					return err
@@ -55,9 +55,14 @@ func (s *OrderStateStream) Listen() error {
 					default:
 					}
 				case *pb.OrderStateStreamResponse_Ping:
-					s.ordersClient.logger.Infof("Ping received")
+					p := resp.GetPing()
+					if p != nil {
+						s.ordersClient.logger.Infof("[OrderStream] Ping received time:%v streamID:%s", p.Time, p.StreamId)
+					} else {
+						s.ordersClient.logger.Infof("[OrderStream] Ping received")
+					}
 					select {
-					case s.pings <- resp.GetPing():
+					case s.pings <- p:
 					default:
 					}
 				default:
